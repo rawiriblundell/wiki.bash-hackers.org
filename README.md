@@ -5,8 +5,8 @@ This is targeting pages that have been captured by the Wayback Machine that spec
 
 See the incomplete script "archive_crawler" to see my working.
 
-TODO: Second crawl
-TODO: Filter out all the non-markdown garbage.
+- TODO: Second crawl
+- TODO: Filter out all the non-markdown garbage.  It looks like everything up to `<div class="editBox" role="application">`, and everything after `</div><!-- /content --></div>` is a good first cull.
 
 # LICENSE
 
