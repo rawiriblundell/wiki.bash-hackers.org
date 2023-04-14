@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" class="no-js">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=TPXmWR5s" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("http://web.archive.org/web");
+  __wm.wombat("https://wiki.bash-hackers.org/syntax/pe?do=edit","20230316102937","http://web.archive.org/","web","/_static/",
+	      "1678962577");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+    <meta charset="UTF-8"/>
+    <title>Parameter expansion [Bash Hackers Wiki]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="/web/20230316102937im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/web/20230316102937im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/apple-touch-icon.png"/>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link type="text/css" rel="stylesheet" href="/web/20230316102937cs_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/default/bootstrap.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20230316102937/https://wiki.bash-hackers.org/lib/exe/opensearch.php" title="Bash Hackers Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/syntax/pe?do=index" title="Sitemap"/>
+<link rel="manifest" href="/web/20230316102937/https://wiki.bash-hackers.org/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/web/20230316102937/https://wiki.bash-hackers.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/web/20230316102937/https://wiki.bash-hackers.org/feed.php?mode=list&amp;ns=syntax"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/web/20230316102937/https://wiki.bash-hackers.org/_export/xhtml/syntax/pe"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/web/20230316102937/https://wiki.bash-hackers.org/_export/raw/syntax/pe"/>
+<link rel="stylesheet" type="text/css" href="/web/20230316102937cs_/https://wiki.bash-hackers.org/lib/exe/css.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='syntax';var JSINFO = {"updatable":1,"userreplace":1,"default_macro_string":"","plugins":{"edittable":{"default columnwidth":""}},"move_renameokay":false,"isadmin":0,"isauth":0,"bootstrap3":{"mode":"source","toc":[],"config":{"collapsibleSections":0,"fixedTopNavbar":1,"showSemanticPopup":0,"sidebarOnNavbar":0,"tagsOnTop":1,"tocAffix":1,"tocCollapseOnScroll":1,"tocCollapsed":0,"tocLayout":"default","useAnchorJS":1,"useAlternativeToolbarIcons":1}},"id":"syntax:pe","namespace":"syntax","ACT":"source","useHeadingNavigation":1,"useHeadingContent":1};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/exe/js.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"></script>
+<script type="text/javascript">/*<![CDATA[*/if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '/lib/tpl/bootstrap3/iconify.php?prefix={prefix}&icons={icons}' } }
+/*!]]>*/</script>
+<script type="text/javascript" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/anchorjs/anchor.min.js"></script>
+<script type="text/javascript" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/iconify.min.js"></script>
+<script type="text/javascript" src="/web/20230316102937js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/plugins/fa.js"></script>
+<!--<![endif]-->
+<style type="text/css">@media screen { body { margin-top: 65px; }  #dw__toc.affix { top: 55px; position: fixed !important; }  #dw__toc .nav .nav .nav { display: none; } }</style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="default dokuwiki mode_source tpl_bootstrap3 dw-page-on-panel dw-fluid-container" data-page-id="syntax:pe"><div class="dokuwiki">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container-fluid mx-5">
+    <!-- navbar -->
+<nav id="dw__navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="dw-container container-fluid mx-5">
+
+        <div class="navbar-header">
+
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand d-flex align-items-center" href="/web/20230316102937/https://wiki.bash-hackers.org/start" accesskey="h" title="Bash Hackers Wiki"><img id="dw__logo" class="pull-left h-100 mr-4" alt="Bash Hackers Wiki" src="/web/20230316102937im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png"/><div class="pull-right"><div id="dw__title">Bash Hackers Wiki</div></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+
+            
+            
+            
+            <div class="navbar-right" id="dw__navbar_items">
+
+                
+<!-- navbar-searchform -->
+<form action="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search">
+    <div class="input-group">
+        <input id="qsearch" autocomplete="off" type="search" placeholder="Search" value="" accesskey="f" name="q" class="form-control" title="[F]"/>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" title="Search">
+                <span class="iconify" data-icon="mdi:magnify"></span>            </button>
+        </div>
+
+    </div>
+    <input type="hidden" name="do" value="search"/>
+</form>
+<!-- /navbar-searchform -->
+<!-- tools-menu -->
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
+
+    
+    <li class="dropdown">
+
+        <a href="" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="iconify" data-icon="mdi:wrench"></span> <span class="hidden-lg hidden-md hidden-sm">Tools</span> <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu tools" role="menu">
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:account"></span> User Tools            </li>
+
+            <li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=register" title="Register" rel="nofollow" class="menuitem register"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span>Register</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span>Log In</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:toolbox"></span> Site Tools            </li>
+
+            <li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=recent" title="Recent Changes [r]" rel="nofollow" accesskey="r" class="menuitem recent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69V13m4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67V8M5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H5m11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85z"/></svg><span>Recent Changes</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=media&amp;ns=syntax" title="Media Manager" rel="nofollow" class="menuitem media"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7 15l4.5-6 3.5 4.5 2.5-3L21 15m1-11h-8l-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M2 6H0v14a2 2 0 0 0 2 2h18v-2H2V6z"/></svg><span>Media Manager</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=index" title="Sitemap [x]" rel="nofollow" accesskey="x" class="menuitem index"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2z"/></svg><span>Sitemap</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:file-document-outline"></span> Page Tools            </li>
+
+            <li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>
+            
+                </ul>
+    </li>
+
+    
+</ul>
+<!-- /tools-menu -->
+
+                <ul class="nav navbar-nav">
+
+                    
+                                        <li>
+                        <span class="dw__actions dw-action-icon">
+                        <a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=register" title="Register" rel="nofollow" class="menuitem register btn btn-success navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span class=""> Register</span></a><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login btn btn-default navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span class=""> Log In</span></a>                        </span>
+                    </li>
+                    
+                </ul>
+
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->
+<div align="center">
+<script async src="//web.archive.org/web/20230316102937js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+    </header>
+
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container-fluid mx-5">
+
+        <div id="dokuwiki__pageheader">
+
+            
+            <!-- breadcrumbs -->
+<nav id="dw__breadcrumbs" class="small">
+
+    <hr/>
+
+        <div class="dw__youarehere">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><li>You are here</li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/web/20230316102937/https://wiki.bash-hackers.org/start" itemprop="item" title="start"><span itemprop="name"><span class="iconify" data-icon="mdi:home"></span></span></a></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/start" class="wikilink1" title="syntax:start">Syntax</a></li><li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name"><a itemprop="item" href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe" class="wikilink1" title="syntax:pe">Parameter expansion</a></span></li></ol>    </div>
+    
+        <div class="dw__breadcrumbs hidden-print">
+        <ol class="breadcrumb"><li>Trace</li>    </div>
+    
+    <hr/>
+
+</nav>
+<!-- /breadcrumbs -->
+
+            <p class="text-right">
+                <span class="pageId ml-1 label label-primary">syntax:pe</span>            </p>
+
+            <div id="dw__msgarea" class="small">
+                            </div>
+
+        </div>
+
+        <div class="row">
+
+            
+            <article id="dokuwiki__content" class="col-sm-12 col-md-12 " itemscope itemtype="http://schema.org/Article" itemref="dw__license">
+
+                
+<!-- page-tools -->
+<nav id="dw__pagetools" class="hidden-print">
+    <div class="tools panel panel-default">
+        <ul class="nav nav-stacked nav-pills text-muted">
+            <li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20230316102937/https://wiki.bash-hackers.org/syntax/pe?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>        </ul>
+    </div>
+</nav>
+<!-- /page-tools -->
+
+                <div class="panel panel-default px-3 py-2" itemprop="articleBody">
+                    <div class="page panel-body">
+
+                        
+<div class="dw-content-page "><!-- content --><div class="dw-content"><p>
+This page is read only. You can view the source, but not change it. Ask your administrator if you think this is wrong.
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="syntax:pe"/><input type="hidden" name="rev" value="0"/><input type="hidden" name="date" value="0"/><input type="hidden" name="prefix" value="."/><input type="hidden" name="suffix" value=""/><input type="hidden" name="changecheck" value="7b72fa287a86bf91e21995805046e059"/><input type="hidden" name="target" value="section"/><textarea name="wikitext" id="wiki__text" dir="auto" class="edit form-control" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== Parameter expansion ======
+
+{{keywords&gt;bash shell scripting expansion substitution text variable parameter mangle substitute change check defined null array arrays}}
+
+
+===== Introduction =====
+
+One core functionality of Bash is to manage **parameters**. A parameter is an entity that stores values and is referenced by a **name**, a **number** or a **special symbol**.
+  * parameters referenced by a name are called **variables** (this also applies to [[syntax:arrays|arrays]])
+  * parameters referenced by a number are called **positional parameters** and reflect the arguments given to a shell
+  * parameters referenced by a **special symbol** are auto-set parameters that have different special meanings and uses
+
+**Parameter expansion** is the procedure to get the value from the referenced entity, like expanding a variable to print its value. On expansion time you can do very nasty things with the parameter or its value. These things are described here.
+
+**If you saw** some parameter expansion syntax somewhere, and need to check what it can be, try the overview section below!
+
+**Arrays** can be special cases for parameter expansion, every applicable description mentions arrays below. Please also see the [[syntax:arrays|article about arrays]].
+
+For a more technical view what a parameter is and which types exist, [[dict:terms:parameter | see the dictionary entry for &quot;parameter&quot;]].
+
+===== Overview =====
+Looking for a specific syntax you saw, without knowing the name?
+  * [[#simple_usage | Simple usage]]
+    * ''$PARAMETER''
+    * ''${PARAMETER}''
+  * [[#indirection | Indirection]]
+    * ''${!PARAMETER}''
+  * [[#case_modification | Case modification ]]
+    * ''${PARAMETER^}''
+    * ''${PARAMETER^^}''
+    * ''${PARAMETER,}''
+    * ''${PARAMETER,,}''
+    * ''${PARAMETER~}''
+    * ''${PARAMETER~~}''
+  * [[#variable_name_expansion | Variable name expansion]]
+    * ''${!PREFIX*}''
+    * ''${!PREFIX@}''
+  * [[#substring_removal | Substring removal]] (also for **filename manipulation**!)
+    * ''${PARAMETER#PATTERN}''
+    * ''${PARAMETER##PATTERN}''
+    * ''${PARAMETER%PATTERN}''
+    * ''&lt;nowiki&gt;${PARAMETER%%PATTERN}&lt;/nowiki&gt;''
+  * [[#search_and_replace | Search and replace]]
+    * ''${PARAMETER/PATTERN/STRING}''
+    * ''&lt;nowiki&gt;${PARAMETER//PATTERN/STRING}&lt;/nowiki&gt;''
+    * ''${PARAMETER/PATTERN}''
+    * ''&lt;nowiki&gt;${PARAMETER//PATTERN}&lt;/nowiki&gt;''
+  * [[#string_length | String length ]]
+    * ''${#PARAMETER}''
+  * [[#substring_expansion | Substring expansion]]
+    * ''${PARAMETER:OFFSET}''
+    * ''${PARAMETER:OFFSET:LENGTH}''
+  * [[#use_a_default_value | Use a default value]]
+    * ''${PARAMETER:-WORD}''
+    * ''${PARAMETER-WORD}''
+  * [[#assign_a_default_value | Assign a default value]]
+    * ''${PARAMETER:=WORD}''
+    * ''${PARAMETER=WORD}''
+  * [[#use_an_alternate_value | Use an alternate value]]
+    * ''${PARAMETER:+WORD}''
+    * ''${PARAMETER+WORD}''
+  * [[#display_error_if_null_or_unset | Display error if null or unset]]
+    * ''${PARAMETER:?WORD}''
+    * ''${PARAMETER?WORD}''
+
+===== Simple usage =====
+''$PARAMETER''
+
+''${PARAMETER}''
+
+The easiest form is to just use a parameter's name within braces. This is identical to using ''$FOO'' like you see it everywhere, but has the advantage that it can be immediately followed by characters that would be interpreted as part of the parameter name otherwise. Compare these two expressions (''WORD=&quot;car&quot;'' for example), where we want to print a word with a trailing &quot;s&quot;:
+
+&lt;code&gt;
+echo &quot;The plural of $WORD is most likely $WORDs&quot;
+echo &quot;The plural of $WORD is most likely ${WORD}s&quot;
+&lt;/code&gt;
+
+__Why does the first one fail?__ It prints nothing, because a parameter (variable) named &quot;''WORDs''&quot; is undefined and thus printed as &quot;&quot; (//nothing//). Without using braces for parameter expansion, Bash will interpret the sequence of all valid characters from the introducing &quot;''$''&quot; up to the last valid character as name of the parameter. When using braces you just force Bash to **only interpret the name inside your braces**.
+
+Also, please remember, that **parameter names are** (like nearly everything in UNIX(r)) **case sensitive!**
+
+The second form with the curly braces is also needed to access positional parameters (arguments to a script) beyond ''$9'':
+&lt;code&gt;
+echo &quot;Argument  1 is: $1&quot;
+echo &quot;Argument 10 is: ${10}&quot;
+&lt;/code&gt;
+
+==== Simple usage: Arrays ====
+
+See also the [[syntax:arrays|article about general array syntax]]
+
+For arrays you always need the braces. The arrays are expanded by individual indexes or mass arguments. An individual index behaves like a normal parameter, for the mass expansion, please read the article about arrays linked above.
+
+  * ${array[5]}
+  * ${array[*]}
+  * ${array[@]}
+
+===== Indirection =====
+
+''${!PARAMETER}''
+
+In some cases, like for example
+
+&lt;code&gt;
+${PARAMETER}
+
+${PARAMETER:0:3}
+&lt;/code&gt;
+
+you can instead use the form
+
+&lt;code&gt;${!PARAMETER}&lt;/code&gt;
+
+to enter a level of indirection. The referenced parameter is not ''PARAMETER'' itself, but the parameter whose name is stored as the value of ''PARAMETER''. If the parameter ''PARAMETER'' has the value &quot;''TEMP''&quot;, then ''${!PARAMETER}'' will expand to the value of the parameter named ''TEMP'':
+&lt;code&gt;
+read -rep 'Which variable do you want to inspect? ' look_var
+
+printf 'The value of &quot;%s&quot; is: &quot;%s&quot;\n' &quot;$look_var&quot; &quot;${!look_var}&quot; 
+&lt;/code&gt;
+
+Of course the indirection also works with special variables:
+
+&lt;code&gt;
+# set some fake positional parameters
+set one two three four
+
+# get the LAST argument (&quot;#&quot; stores the number of arguments, so &quot;!#&quot; will reference the LAST argument)
+echo ${!#}
+&lt;/code&gt;
+
+You can think of this mechanism as being roughly equivalent to taking any parameter expansion that begins with the parameter name, and substituting the ''!PARAMETER'' part with the value of PARAMETER.
+
+&lt;code&gt;
+echo &quot;${!var^^}&quot;
+# ...is equivalent to
+eval 'echo &quot;${'&quot;$var&quot;'^^}&quot;'
+&lt;/code&gt;
+
+It was an unfortunate design decision to use the ''!'' prefix for indirection, as it introduces parsing ambiguity with other parameter expansions that begin with ''!''. Indirection is not possible in combination with any parameter expansion whose modifier requires a prefix to the parameter name. Specifically, indirection isn't possible on the ''${!var@}'', ''${!var*}'', ''${!var[@]}'', ''${!var[*]}'', and ''${#var}'' forms. This means the ''!'' prefix can't be used to retrieve the indices of an array, the length of a string, or number of elements in an array indirectly (see [[syntax/arrays#indirection]] for workarounds). Additionally, the ''!''-prefixed parameter expansion conflicts with ksh-like shells which have the more powerful &quot;name-reference&quot; form of indirection, where the exact same syntax is used to expand to the name of the variable being referenced.
+
+Indirect references to [[syntax:arrays|array names]] are also possible since the Bash 3 series (exact version unknown), but undocumented. See [[syntax/arrays#indirection]] for details.
+
+Chet has added an initial implementation of the ksh ''nameref'' declaration command to the git devel branch. (''declare -n'', ''local -n'', etc, will be supported). This will finally address many issues around passing and returning complex datatypes to/from functions.
+
+===== Case modification =====
+
+''${PARAMETER^}''
+
+''${PARAMETER^^}''
+
+''${PARAMETER,}''
+
+''${PARAMETER,,}''
+
+''${PARAMETER~}''
+
+''${PARAMETER~~}''
+
+These expansion operators modify the case of the letters in the expanded text.
+
+The ''^'' operator modifies the first character to uppercase, the '','' operator to lowercase. When using the double-form (''^^'' and '',,''), all characters are converted.
+
+&lt;wrap center round info 60%&gt;
+
+The (**currently undocumented**) operators ''~'' and ''~~'' reverse the case of the given text (in ''PARAMETER'').''~'' reverses the case of first letter of words in the variable while ''~~'' reverses case for all.  Thanks to ''Bushmills'' and ''geirha'' on the Freenode IRC channel for this finding.
+
+&lt;/wrap&gt;
+
+
+__**Example: Rename all ''*.txt'' filenames to lowercase**__
+&lt;code&gt;
+for file in *.txt; do
+  mv &quot;$file&quot; &quot;${file,,}&quot;
+done
+&lt;/code&gt;
+
+__**Note:**__  Case modification is a handy feature you can apply to a name or a title.   Or is it?  Case modification was an important aspect of the Bash 4 release. Bash version 4, RC1 would perform word splitting, and then case modification, resulting in title case (where every word is capitalized).  It was decided to apply case modification to values, not words, for the Bash 4 release.  Thanks Chet.
+
+
+==== Case modification: Arrays ====
+
+Case modification can be used to create the proper capitalization for names or titles.  Just assign it to an array:
+
+''declare -a title=(my hello world john smith)''
+
+For [[syntax:arrays|array]] expansion, the case modification applies to **every expanded element, no matter if you expand an individual index or mass-expand** the whole array using ''@'' or ''*'' subscripts. Some examples:
+
+Assume: ''array=(This is some Text)''
+
+  * ''echo &quot;${array[@],}&quot;''
+    * =&gt; ''this is some text''
+  * ''echo &quot;${array[@],,}&quot;''
+    * =&gt; ''this is some text''
+  * ''echo &quot;${array[@]^}&quot;''
+    * =&gt; ''This Is Some Text''
+  * ''echo &quot;${array[@]^^}&quot;''
+    * =&gt; ''THIS IS SOME TEXT''
+   * ''echo &quot;${array[2]^^}&quot;''
+     * =&gt; ''SOME''
+
+===== Variable name expansion =====
+
+''${!PREFIX*}''
+
+''${!PREFIX@}''
+
+This expands to a list of all set **variable names** beginning with the string ''PREFIX''. The elements of the list are separated by the first character in the ''IFS''-variable (&lt;space&gt; by default).
+
+This will show all defined variable names (not values!) beginning with &quot;BASH&quot;:
+&lt;code&gt;
+$ echo ${!BASH*}
+BASH BASH_ARGC BASH_ARGV BASH_COMMAND BASH_LINENO BASH_SOURCE BASH_SUBSHELL BASH_VERSINFO BASH_VERSION
+&lt;/code&gt;
+
+This list will also include [[syntax:arrays|array names]].
+
+===== Substring removal =====
+''${PARAMETER#PATTERN}''
+
+''${PARAMETER##PATTERN}''
+
+''${PARAMETER%PATTERN}''
+
+''&lt;nowiki&gt;${PARAMETER%%PATTERN}&lt;/nowiki&gt;''
+
+This one can **expand only a part** of a parameter's value, **given a pattern to describe what to remove** from the string. The pattern is interpreted just like a pattern to describe a filename to match (globbing). See [[syntax:pattern | Pattern matching]] for more.
+
+Example string (//just a quote from a big man//):
+&lt;code&gt;
+MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
+&lt;/code&gt;
+
+
+==== From the beginning ====
+''${PARAMETER#PATTERN}'' and ''${PARAMETER##PATTERN}''
+
+This form is to remove the described [[syntax:pattern | pattern]] trying to **match it from the beginning of the string**.
+The operator &quot;''#''&quot; will try to remove the shortest text matching the pattern, while &quot;''##''&quot; tries to do it with the longest text matching. Look at the following examples to get the idea (matched text &lt;del&gt;marked striked&lt;/del&gt;, remember it will be removed!):
+^Syntax^Result^
+|''${MYSTRING#*in}''|&lt;del&gt;Be liberal in&lt;/del&gt; what you accept, and conservative in what you send|
+|''${MYSTRING##*in}''|&lt;del&gt;Be liberal in what you accept, and conservative in&lt;/del&gt; what you send|
+
+==== From the end ====
+''${PARAMETER%PATTERN}'' and ''&lt;nowiki&gt;${PARAMETER%%PATTERN}&lt;/nowiki&gt;''
+
+In the second form everything will be the same, except that Bash now tries to match the pattern from the end of the string:
+^ Syntax                                 ^ Result                                                                          ^
+| ''${MYSTRING%in*}''                    | Be liberal in what you accept, and conservative &lt;del&gt;in what you send&lt;/del&gt;  |
+| ''&lt;nowiki&gt;${MYSTRING%%in*}&lt;/nowiki&gt;''  | Be liberal &lt;del&gt;in what you accept, and conservative in what you send&lt;/del&gt;  |
+
+The second form nullifies variables that begin with ''in'', by working from the end.
+==== Common use ====
+__**How the heck does that help to make my life easier?**__
+
+Well, maybe the most common use for it is to **extract parts of a filename**. Just look at the following list with examples:
+
+  * **Get name without extension**
+    * ''${FILENAME%.*}''
+    * =&gt; ''bash_hackers&lt;del&gt;.txt&lt;/del&gt;''
+  * **Get extension**
+    * ''${FILENAME##*.}''
+    * =&gt; ''&lt;del&gt;bash_hackers.&lt;/del&gt;txt''
+  * **Get directory name**
+    * ''${PATHNAME%/*}''
+    * =&gt; ''/home/bash&lt;del&gt;/bash_hackers.txt&lt;/del&gt;''
+  * **Get filename**
+    * ''${PATHNAME##*/}''
+    * =&gt; ''&lt;del&gt;/home/bash/&lt;/del&gt;bash_hackers.txt''
+
+These are the syntaxes for filenames with a single extension. Depending on your needs, you might need to adjust shortest/longest match.
+
+==== Substring removal: Arrays ====
+
+As for most parameter expansion features, working on [[syntax:arrays|arrays]] **will handle each expanded element**, for individual expansion and also for mass expansion.
+
+Simple example, removing a trailing ''is'' from all array elements (on expansion):
+
+Assume: ''array=(This is a text)''
+
+  * ''echo &quot;${array[@]%is}&quot;''
+    * =&gt; ''Th  a text''
+    * (it was: ''Th&lt;del&gt;is&lt;/del&gt; &lt;del&gt;is&lt;/del&gt; a text'')
+
+All other variants of this expansion behave the same.
+
+
+
+===== Search and replace =====
+''${PARAMETER/PATTERN/STRING}''
+
+''&lt;nowiki&gt;${PARAMETER//PATTERN/STRING}&lt;/nowiki&gt;''
+
+''&lt;nowiki&gt;${PARAMETER/PATTERN}&lt;/nowiki&gt;''
+
+''&lt;nowiki&gt;${PARAMETER//PATTERN}&lt;/nowiki&gt;''
+
+This one can substitute (//replace//) a substring [[syntax:pattern | matched by a pattern]], on expansion time. The matched substring will be entirely removed and the given string will be inserted. Again some example string for the tests:
+&lt;code&gt;
+MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
+&lt;/code&gt;
+
+The two main forms only differ in **the number of slashes** after the parameter name: ''${PARAMETER/PATTERN/STRING}'' and ''&lt;nowiki&gt;${PARAMETER//PATTERN/STRING}&lt;/nowiki&gt;''
+
+The first one (//one slash//) is to only substitute **the first occurrence** of the given pattern, the second one (//two slashes//) is to substitute **all occurrences** of the pattern.
+
+First, let's try to say &quot;happy&quot; instead of &quot;conservative&quot; in our example string:
+&lt;code&gt;
+${MYSTRING//conservative/happy}
+&lt;/code&gt;
+=&gt; ''Be liberal in what you accept, and &lt;del&gt;conservative&lt;/del&gt;happy in what you send''
+
+Since there is only one &quot;conservative&quot; in that example, it really doesn't matter which of the two forms we use.
+
+Let's play with the word &quot;in&quot;, I don't know if it makes any sense, but let's substitute it with &quot;by&quot;.
+
+__**First form: Substitute first occurrence**__
+&lt;code&gt;${MYSTRING/in/by}&lt;/code&gt;
+=&gt; ''Be liberal &lt;del&gt;in&lt;/del&gt;by what you accept, and conservative in what you send''
+
+__**Second form: Substitute all occurrences**__
+&lt;code&gt;${MYSTRING//in/by}&lt;/code&gt;
+=&gt; ''Be liberal &lt;del&gt;in&lt;/del&gt;by what you accept, and conservative &lt;del&gt;in&lt;/del&gt;by what you send''
+
+__**Anchoring**__
+Additionally you can &quot;anchor&quot; an expression:
+A ''#'' (hashmark) will indicate that your expression is matched against the beginning portion of the string, a ''%'' (percent-sign) will do it for the end portion.
+
+&lt;code&gt;MYSTRING=xxxxxxxxxx
+echo ${MYSTRING/#x/y}  # RESULT: yxxxxxxxxx
+echo ${MYSTRING/%x/y}  # RESULT: xxxxxxxxxy&lt;/code&gt;
+
+If the replacement part is completely omitted, the matches are replaced by the nullstring, i.e., they are removed. This is equivalent to specifying an empty replacement:
+&lt;code&gt;
+echo ${MYSTRING//conservative/}
+# is equivalent to
+echo ${MYSTRING//conservative}
+&lt;/code&gt;
+
+
+==== Search and replace: Arrays ====
+
+This parameter expansion type applied to [[syntax:arrays|arrays]] **applies to all expanded elements**, no matter if an individual element is expanded, or all elements using the mass expansion syntaxes.
+
+A simple example, changing the (lowercase) letter ''t'' to ''d'':
+
+Assume: ''array=(This is a text)''
+
+  * ''echo &quot;${array[@]/t/d}&quot;''
+    * =&gt; ''This is a dext''
+  * ''echo &quot;${array[@]&lt;nowiki&gt;//&lt;/nowiki&gt;t/d}&quot;''
+    * =&gt; ''This is a dexd''
+
+===== String length =====
+''${#PARAMETER}''
+
+When you use this form, the length of the parameter's value is expanded. Again, a quote from a big man, to have a test text:
+
+&lt;code&gt;MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;&lt;/code&gt;
+
+Using echo ''${#MYSTRING}''...
+
+=&gt; ''64''
+
+The length is reported in characters, not in bytes. Depending on your environment this may not always be the same (multibyte-characters, like in UTF8 encoding).
+
+There's not much to say about it, mh?
+
+==== (String) length: Arrays ====
+
+For  [[syntax:arrays|arrays]], this expansion type has two meanings:
+  * For **individual** elements, it reports the string length of the element (as for every &quot;normal&quot; parameter)
+  * For the **mass subscripts** ''@'' and ''*'' it reports the number of set elements in the array
+
+Example:
+
+Assume: ''array=(This is a text)''
+
+  * ''echo ${#array[1]}''
+    * =&gt; 2 (the word &quot;is&quot; has a length of 2)
+  * ''echo ${#array[@]}''
+    * =&gt; 4 (the array contains 4 elements)
+
+__**Attention:**__ The number of used elements does not need to conform to the highest index. Sparse arrays are possible in Bash, that means you can have 4 elements, but with indexes 1, 7, 20, 31. **You can't loop through such an array with a counter loop based on the number of elements!**
+
+===== Substring expansion =====
+''${PARAMETER:OFFSET}''
+
+''${PARAMETER:OFFSET:LENGTH}''
+
+This one can expand only a **part** of a parameter's value, given a **position to start** and maybe a **length**. If ''LENGTH'' is omitted, the parameter will be expanded up to the end of the string. If ''LENGTH'' is negative, it's taken as a second offset into the string, counting from the end of the string.
+
+''OFFSET'' and ''LENGTH'' can be **any** [[syntax:arith_expr | arithmetic expression]]. **Take care:** The ''OFFSET'' starts at 0, not at 1!
+
+Example string (a quote from a big man):
+''MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;''
+
+==== Using only Offset ====
+In the first form, the expansion is used without a length value, note that the offset 0 is the first character:
+&lt;code&gt;echo ${MYSTRING:35}&lt;/code&gt;
+=&gt; ''&lt;del&gt;Be liberal in what you accept, and &lt;/del&gt;conservative in what you send''
+
+==== Using Offset and Length ====
+In the second form we also give a length value:
+&lt;code&gt;echo ${MYSTRING:35:12}&lt;/code&gt;
+=&gt; ''&lt;del&gt;Be liberal in what you accept, and &lt;/del&gt;conservative&lt;del&gt; in what you send&lt;/del&gt;''
+
+==== Negative Offset Value ====
+If the given offset is negative, it's counted from the end of the string, i.e. an offset of -1 is the last character. In that case, the length still counts forward, of course. One special thing is to do when using a negative offset: You need to separate the (negative) number from the colon:
+&lt;code&gt;
+${MYSTRING: -10:5}
+${MYSTRING:(-10):5}
+&lt;/code&gt;
+Why? Because it's interpreted as the parameter expansion syntax to [[syntax:pe#use_a_default_value | use a default value]].
+
+==== Negative Length Value ====
+If the ''LENGTH'' value is negative, it's used as offset from the end of the string. The expansion happens from the first to the second offset then:
+&lt;code&gt;
+echo &quot;${MYSTRING:11:-17}&quot;
+&lt;/code&gt;
+=&gt; ''&lt;del&gt;Be liberal &lt;/del&gt;in what you accept, and conservative&lt;del&gt; in what you send&lt;/del&gt;''
+
+This works since Bash 4.2-alpha, see also [[scripting:bashchanges]].
+
+
+
+==== Substring/Element expansion: Arrays ====
+
+For [[syntax:arrays|arrays]], this expansion type has again 2 meanings:
+  * For **individual** elements, it expands to the specified substring (as for every “normal” parameter)
+  * For the **mass subscripts** ''@'' and ''*'' it mass-expands individual array elements denoted by the 2 numbers given (//starting element//, //number of elements//)
+
+Example:
+
+Assume: ''array=(This is a text)''
+
+  * ''echo ${array[0]:2:2}''
+    * =&gt; ''is'' (the &quot;is&quot; in &quot;This&quot;, array element 0)
+  * ''echo ${array[@]:1:2}''
+    * =&gt; ''is a'' (from element 1 inclusive, 2 elements are expanded, i.e. element 1 and 2)
+
+===== Use a default value =====
+
+''${PARAMETER:-WORD}''
+
+''${PARAMETER-WORD}''
+
+If the parameter ''PARAMETER'' is unset (never was defined) or null (empty), this one expands to ''WORD'', otherwise it expands to the value of ''PARAMETER'', as if it just was ''${PARAMETER}''. If you omit the '':'' (colon), like shown in the second form, the default value is only used when the parameter was **unset**, not when it was empty.
+
+&lt;code&gt;
+echo &quot;Your home directory is: ${HOME:-/home/$USER}.&quot;
+echo &quot;${HOME:-/home/$USER} will be used to store your personal data.&quot;
+&lt;/code&gt;
+
+If ''HOME'' is unset or empty, everytime you want to print something useful, you need to put that parameter syntax in.
+
+&lt;code&gt;
+#!/bin/bash
+
+read -p &quot;Enter your gender (just press ENTER to not tell us): &quot; GENDER
+echo &quot;Your gender is ${GENDER:-a secret}.&quot;
+&lt;/code&gt;
+
+It will print &quot;Your gender is a secret.&quot; when you don't enter the gender. Note that the default value is **used on expansion time**, it is **not assigned to the parameter**.
+
+
+==== Use a default value: Arrays ====
+
+For [[syntax:arrays|arrays]], the behaviour is very similar. Again, you have to make a difference between expanding an individual element by a given index and mass-expanding the array using the ''@'' and ''*'' subscripts.
+
+  * For individual elements, it's the very same: If the expanded element is ''NULL'' or unset (watch the '':-'' and ''-'' variants), the default text is expanded
+  * For mass-expansion syntax, the default text is expanded if the array
+    * contains no element or is unset (the '':-'' and ''-'' variants mean the **same** here)
+    * contains only elements that are the nullstring (the '':-'' variant)
+
+In other words: The basic meaning of this expansion type is applied as consistent as possible to arrays.
+
+Example code (please try the example cases yourself):
+
+&lt;code&gt;
+
+####
+# Example cases for unset/empty arrays and nullstring elements
+####
+
+
+### CASE 1: Unset array (no array)
+
+# make sure we have no array at all
+unset array
+
+echo ${array[@]:-This array is NULL or unset}
+echo ${array[@]-This array is NULL or unset}
+
+### CASE 2: Set but empty array (no elements)
+
+# declare an empty array
+array=()
+
+echo ${array[@]:-This array is NULL or unset}
+echo ${array[@]-This array is NULL or unset}
+
+
+### CASE 3: An array with only one element, a nullstring
+array=(&quot;&quot;)
+
+echo ${array[@]:-This array is NULL or unset}
+echo ${array[@]-This array is NULL or unset}
+
+
+### CASE 4: An array with only two elements, a nullstring and a normal word
+array=(&quot;&quot; word)
+
+echo ${array[@]:-This array is NULL or unset}
+echo ${array[@]-This array is NULL or unset}
+&lt;/code&gt;
+
+===== Assign a default value =====
+
+''${PARAMETER:=WORD}''
+
+''${PARAMETER=WORD}''
+
+This one works like the [[syntax:pe#use_a_default_value | using default values]], but the default text you give is not only expanded, but also **assigned** to the parameter, if it was unset or null. Equivalent to using a default value, when you omit the '':'' (colon), as shown in the second form, the default value will only be assigned when the parameter was **unset**.
+
+&lt;code&gt;
+echo &quot;Your home directory is: ${HOME:=/home/$USER}.&quot;
+echo &quot;$HOME will be used to store your personal data.&quot;
+&lt;/code&gt;
+
+After the first expansion here (''${HOME:=/home/$USER}''), ''HOME'' is set and usable.
+
+Let's change our code example from above:
+
+&lt;code&gt;
+#!/bin/bash
+
+read -p &quot;Enter your gender (just press ENTER to not tell us): &quot; GENDER
+echo &quot;Your gender is ${GENDER:=a secret}.&quot;
+echo &quot;Ah, in case you forgot, your gender is really: $GENDER&quot;
+&lt;/code&gt;
+
+==== Assign a default value: Arrays ====
+
+For [[syntax:arrays|arrays]] this expansion type is limited. For an individual index, it behaves like for a &quot;normal&quot; parameter, the default value is assigned to this one element. The mass-expansion subscripts ''@'' and ''*'' **can not be used here** because it's not possible to assign to them!
+
+===== Use an alternate value =====
+
+''${PARAMETER:+WORD}''
+
+''${PARAMETER+WORD}''
+
+This form expands to nothing if the parameter is unset or empty. If it is set, it does not expand to the parameter's value, **but to some text you can specify**:
+&lt;code&gt;
+echo &quot;The Java application was installed and can be started.${JAVAPATH:+ NOTE: JAVAPATH seems to be set}&quot;
+&lt;/code&gt;
+The above code will simply add a warning if ''JAVAPATH'' is set (because it could influence the startup behaviour of that imaginary application).
+
+Some more unrealistic example... Ask for some flags (for whatever reason), and then, if they were set, print a warning and also print the flags:
+&lt;code&gt;
+#!/bin/bash
+
+read -p &quot;If you want to use special flags, enter them now: &quot; SPECIAL_FLAGS
+echo &quot;The installation of the application is finished${SPECIAL_FLAGS:+ (NOTE: there are special flags set: $SPECIAL_FLAGS)}.&quot;
+&lt;/code&gt;
+
+If you omit the colon, as shown in the second form (''${PARAMETER+WORD}''), the alternate value will be used if the parameter is set (and it can be empty)! You can use it, for example, to complain if variables you need (and that can be empty) are undefined:
+&lt;code&gt;
+# test that with the three stages:
+
+# unset foo
+# foo=&quot;&quot;
+# foo=&quot;something&quot;
+
+if [[ ${foo+isset} = isset ]]; then
+  echo &quot;foo is set...&quot;
+else
+  echo &quot;foo is not set...&quot;
+fi
+&lt;/code&gt;
+
+==== Use an alternate value: Arrays ====
+
+Similar to the cases for [[syntax:arrays|arrays]] to expand to a default value, this expansion behaves like for a &quot;normal&quot; parameter when using individual array elements by index, but reacts differently when using the mass-expansion subscripts ''@'' and ''*'':
+
+    * For individual elements, it's the very same: If the expanded element is **not** NULL or unset (watch the :+ and + variants), the alternate text is expanded
+    * For mass-expansion syntax, the alternate text is expanded if the array
+      * contains elements where min. one element is **not** a nullstring (the :+ and + variants mean the same here)
+      * contains **only** elements that are **not** the nullstring (the :+ variant)
+
+For some cases to play with, please see the code examples in the [[#use_a_default_valuearrays|description for using a default value]].
+
+===== Display error if null or unset =====
+
+''${PARAMETER:?WORD}''
+
+''${PARAMETER?WORD}''
+
+If the parameter ''PARAMETER'' is set/non-null, this form will simply expand it. Otherwise, the expansion of ''WORD'' will be used as appendix for an error message:
+&lt;code&gt;
+$ echo &quot;The unset parameter is: ${p_unset?not set}&quot;
+bash: p_unset: not set
+&lt;/code&gt;
+
+After printing this message,
+  * an interactive shell has ''$?'' to a non-zero value
+  * a non-interactive shell exits with a non-zero exit code
+
+The meaning of the colon ('':'') is the same as for the other parameter expansion syntaxes: It specifies if
+  * only unset or
+  * unset and empty parameters
+are taken into account.
+
+
+===== Code examples =====
+
+==== Substring removal ====
+
+Removing the first 6 characters from a text string:
+&lt;code&gt;
+STRING=&quot;Hello world&quot;
+
+# only print 'Hello'
+echo &quot;${STRING%??????}&quot;
+
+# only print 'world'
+echo &quot;${STRING#??????}&quot;
+
+# store it into the same variable
+STRING=${STRING#??????}
+&lt;/code&gt;
+
+===== Bugs and Portability considerations =====
+
+  * **Fixed in 4.2.36** ([[ftp://ftp.cwru.edu/pub/bash/bash-4.2-patches/bash42-036 | patch]]). Bash doesn't follow either POSIX or its own documentation when expanding either a quoted ''&quot;$@&quot;'' or ''&quot;${arr[@]}&quot;'' with an adjacent expansion. ''&quot;$@$x&quot;'' expands in the same way as ''&quot;$*$x&quot;'' - i.e. all parameters plus the adjacent expansion are concatenated into a single argument. As a workaround, each expansion needs to be quoted separately. Unfortunately, this bug took a very long time to notice.&lt;code&gt;
+~ $ set -- a b c; x=foo; printf '&lt;%s&gt; ' &quot;$@$x&quot; &quot;$*&quot;&quot;$x&quot; &quot;$@&quot;&quot;$x&quot;
+&lt;a b cfoo&gt; &lt;a b cfoo&gt; &lt;a&gt; &lt;b&gt; &lt;cfoo&gt;
+&lt;/code&gt;
+
+  * Almost all shells disagree about the treatment of an unquoted ''$@'', ''${arr[@]}'', ''$*'', and ''${arr[*]}'' when [[http://mywiki.wooledge.org/IFS | IFS]] is set to null. POSIX is unclear about the expected behavior. A null IFS causes both [[syntax:expansion:wordsplit | word splitting]] and [[syntax:expansion:globs | pathname expansion]] to behave randomly. Since there are few good reasons to leave ''IFS'' set to null for more than the duration of a command or two, and even fewer to expand ''$@'' and ''$*'' unquoted, this should be a rare issue. **Always quote them**!&lt;code&gt;
+touch x 'y z'
+for sh in bb {{d,b}a,{m,}k,z}sh; do
+    echo &quot;$sh&quot;
+    &quot;$sh&quot; -s a 'b c' d \* &lt;/dev/fd/0
+done &lt;&lt;\EOF
+${ZSH_VERSION+:} false &amp;&amp; emulate sh
+IFS=
+printf '&lt;%s&gt; ' $*
+echo
+printf &quot;&lt;%s&gt; &quot; $@
+echo
+EOF
+&lt;/code&gt;&lt;code&gt;
+bb
+&lt;ab cd*&gt;
+&lt;ab cd*&gt;
+dash
+&lt;ab cd*&gt;
+&lt;ab cd*&gt;
+bash
+&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+mksh
+&lt;a b c d *&gt;
+&lt;a b c d *&gt;
+ksh
+&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+zsh
+&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+&lt;/code&gt;When ''IFS'' is set to a non-null value, or unset, all shells behave the same - first expanding into separate args, then applying pathname expansion and word-splitting to the results, except for zsh, which doesn't do pathname expansion in its default mode.
+
+  * Additionally, shells disagree about various wordsplitting behaviors, the behavior of inserting delimiter characters from IFS in ''$*'', and the way adjacent arguments are concatenated, when IFS is modified in the middle of expansion through side-effects.&lt;code&gt;
+for sh in bb {{d,b}a,po,{m,}k,z}sh; do
+    printf '%-4s: ' &quot;$sh&quot;
+    &quot;$sh&quot; &lt;/dev/fd/0
+done &lt;&lt;\EOF
+${ZSH_VERSION+:} false &amp;&amp; emulate sh
+set -f -- a b c
+unset -v IFS
+printf '&lt;%s&gt; ' ${*}${IFS=}${*}${IFS:=-}&quot;${*}&quot;
+echo
+EOF
+&lt;/code&gt;&lt;code&gt;
+bb  : &lt;a b cabc&gt; &lt;a-b-c&gt;
+dash: &lt;a b cabc&gt; &lt;a-b-c&gt;
+bash: &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c-a b c&gt;
+posh: &lt;a&gt; &lt;b&gt; &lt;ca b c&gt; &lt;a-b-c&gt;
+mksh: &lt;a&gt; &lt;b&gt; &lt;ca b c&gt; &lt;a-b-c&gt;
+ksh : &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c&gt; &lt;a b c&gt;
+zsh : &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c&gt; &lt;a-b-c&gt;
+&lt;/code&gt;ksh93 and mksh can additionally achieve this side effect (and others) via the ''${ cmds;}'' expansion. I haven't yet tested every possible side-effect that can affect expansion halfway through expansion that way.
+
+  * As previously mentioned, the Bash form of indirection by prefixing a parameter expansion with a ''!'' conflicts with the same syntax used by mksh, zsh, and ksh93 for a different purpose. Bash will &quot;slightly&quot; modify this expansion in the next version with the addition of namerefs.
+
+  * Bash (and most other shells) don't allow .'s in identifiers. In ksh93, dots in variable names are used to reference methods (i.e. &quot;Discipline Functions&quot;), attributes, special shell variables, and to define the &quot;real value&quot; of an instance of a class.
+
+  * In ksh93, the ''_'' parameter has even more uses. It is used in the same way as ''self'' in some object-oriented languages; as a placeholder for some data local to a class; and also as the mechanism for class inheritance. In most other contexts, ''_'' is compatible with Bash.
+
+  * Bash only evaluates the subscripts of the slice expansion (''${x:y:z}'') if the parameter is set (for both nested expansions and arithmetic). For ranges, Bash evaluates as little as possible, i.e., if the first part is out of range, the second won't be evaluated. ksh93 and mksh always evaluate the subscript parts even if the parameter is unset. &lt;code&gt;
+ $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=(); echo &quot;${x[@]:n,6:m}&quot;' # No output
+ $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=([5]=hi); echo &quot;${x[@]:n,6:m}&quot;'
+yo
+ $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=([6]=hi); echo &quot;${x[@]:n,6:m}&quot;'
+yojo
+ $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=12345; echo &quot;${x:n,5:m}&quot;'
+yojo
+ $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=12345; echo &quot;${x:n,6:m}&quot;'
+yo
+&lt;/code&gt;
+
+==== Quote Nesting ====
+
+  * In most shells, when dealing with an &quot;alternate&quot; parameter expansion that expands to multiple words, and nesting such expansions, not all combinations of nested quoting are possible.
+&lt;code&gt;
+# Bash
+ $ typeset -a a=(meh bleh blerg) b
+ $ IFS=e
+ $ printf &quot;&lt;%s&gt; &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot;; echo # The entire PE is quoted so Bash considers the inner quotes redundant.
+&lt;meh&gt; &lt;bleh&gt; &lt;blerg meh&gt; &lt;bleh&gt; &lt;blerg&gt;
+ $ printf &quot;&lt;%s&gt; &quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # The outer quotes cause the inner expansions to be considered quoted.
+&lt;meh&gt; &lt;bleh&gt; &lt;blerg meh&gt; &lt;bleh&gt; &lt;blerg&gt;
+ $ b=(meep beep)
+ $ printf &quot;&lt;%s&gt; &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # Again no surprises. Outer quotes quote everything recursively.
+&lt;meep&gt; &lt;beep&gt; &lt;meep&gt; &lt;beep&gt;
+&lt;/code&gt;
+
+Now lets see what can happen if we leave the outside unquoted.
+&lt;code&gt;
+# Bash
+ $ typeset -a a=(meh bleh blerg) b
+ $ IFS=e
+ $ printf &quot;&lt;%s&gt; &quot; ${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}; echo # Inner quotes make inner expansions quoted.
+&lt;meh&gt; &lt;bleh&gt; &lt;blerg meh&gt; &lt;bleh&gt; &lt;blerg&gt;
+ $ printf &quot;&lt;%s&gt; &quot; ${b[@]-${a[@]} ${a[@]}}; echo' # No quotes at all wordsplits / globs, like you'd expect.
+&lt;m&gt; &lt;h&gt; &lt;bl&gt; &lt;h&gt; &lt;bl&gt; &lt;rg m&gt; &lt;h&gt; &lt;bl&gt; &lt;h&gt; &lt;bl&gt; &lt;rg&gt;
+&lt;/code&gt;
+
+This all might be intuitive, and is the most common implementation, but this design sucks for a number of reasons. For one, it means Bash makes it absolutely impossible to expand any part of the inner region //unquoted// while leaving the outer region quoted. Quoting the outer forces quoting of the inner regions recursively (except nested command substitutions of course). Word-splitting is necessary to split words of the inner region, which cannot be done together with outer quoting. Consider the following (only slightly far-fetched) code:
+
+&lt;code&gt;
+# Bash (non-working example)
+
+unset -v IFS # make sure we have a default IFS
+
+if some crap; then
+    typeset -a someCmd=(myCmd arg1 'arg2 yay!' 'third*arg*' 4)
+fi
+
+someOtherCmd=mycommand
+typeset -a otherArgs=(arg3 arg4)
+
+# What do you think the programmer expected to happen here?
+# What do you think will actually happen...
+
+&quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5
+&lt;/code&gt;
+
+This final line is perhaps not the most obvious, but I've run into cases were this type of logic can be desirable and realistic. We can deduce what was intended:
+
+  * If ''someCmd'' is set, then the resulting expansion should run the command: ''&quot;myCmd&quot; &quot;arg1&quot; &quot;arg2 yay!&quot; &quot;third*arg*&quot; &quot;4&quot; &quot;arg5&quot;''
+  * Otherwise, if ''someCmd'' is not set, expand ''$someOtherCmd'' and the inner args, to run a different command: ''&quot;mycommand&quot; &quot;arg2&quot; &quot;arg3&quot; &quot;arg4&quot; &quot;arg5&quot;''.
+
+Unfortunately, it is impossible to get the intended result in Bash (and most other shells) without taking a considerably different approach. The only way to split the literal inner parts is through word-splitting, which requires that the PE be unquoted. But, the only way to expand the outer expansion correctly without word-splitting or globbing is to quote it. Bash will actually expand the command as one of these:
+
+&lt;code&gt;
+# The quoted PE produces a correct result here...
+ $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
+&lt;myCmd&gt; &lt;arg1&gt; &lt;arg2 yay!&gt; &lt;third*arg*&gt; &lt;4&gt; &lt;arg5&gt;
+
+# ...but in the opposite case the first 3 arguments are glued together. There are no workarounds.
+ $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
+&lt;mycommand arg2 arg3&gt; &lt;arg4&gt; &lt;arg5&gt;
+
+# UNLESS! we unquote the outer expansion allowing the inner quotes to
+# affect the necessary parts while allowing word-splitting to split the literals:
+ $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;&lt;%s&gt; &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
+&lt;mycommand&gt; &lt;arg2&gt; &lt;arg3&gt; &lt;arg4&gt; &lt;arg5&gt;
+
+# Success!!!
+ $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;&lt;%s&gt; &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
+&lt;myCmd&gt; &lt;arg1&gt; &lt;arg2&gt; &lt;yay!&gt; &lt;third*arg*&gt; &lt;4&gt; &lt;arg5&gt;
+
+# ...Ah f^^k. (again, no workaround possible.)
+&lt;/code&gt;
+
+=== The ksh93 exception ===
+To the best of my knowledge, ksh93 is the only shell that acts differently. Rather than forcing nested expansions into quoting, a quote at the beginning and end of the nested region will cause the quote state to reverse itself within the nested part. I have no idea whether it's an intentional or documented effect, but it does solve the problem and consequently adds a lot of potential power to these expansions.
+
+All we need to do is add two extra double-quotes:
+&lt;code&gt;
+# ksh93 passing the two failed tests from above:
+
+ $ ksh -c 'otherArgs=(arg3 arg4); someOtherCmd=&quot;mycommand&quot;; printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
+&lt;mycommand&gt; &lt;arg2&gt; &lt;arg3&gt; &lt;arg4&gt; &lt;arg5&gt;
+
+ $ ksh -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
+&lt;myCmd&gt; &lt;arg1&gt; &lt;arg2 yay!&gt; &lt;third*arg*&gt; &lt;4&gt; &lt;arg5&gt;
+&lt;/code&gt;
+
+This can be used to control the quote state of any part of any expansion to an arbitrary depth. Sadly, it is the only shell that does this and the difference may introduce a possible compatibility problem.
+===== See also =====
+  * Internal: [[syntax:expansion:intro | Introduction to expansion and substitution]]
+  * Internal: [[syntax:arrays|Arrays]]
+  * Dictionary, internal: [[dict:terms:parameter]]</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+</div><!-- /content --></div>
+                    </div>
+                </div>
+
+                <div class="small text-right">
+
+                                        <span class="docInfo">
+                        <ul class="list-inline"><li><span class="iconify text-muted" data-icon="mdi:file-document-outline"></span> <span title="syntax/pe.txt">syntax/pe.txt</span></li><li><span class="iconify text-muted" data-icon="mdi:calendar"></span> Last modified: <span title="2021/12/10 08:12">2021/12/10 08:12</span></li><li class="text-muted">by <bdi>ajrou</bdi></li></ul>                    </span>
+                    
+                    
+                </div>
+
+            </article>
+
+            
+        </div>
+
+    </main>
+
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container-fluid">
+        <hr/>
+<div align="center">
+<h3><a target="_blank" href="http://web.archive.org/web/20230316102937/http://www.performing-databases.com/">This site is supported by Performing Databases - your experts for database administration</a></h3>
+</div>
+<hr/>
+<div align="center">
+<script async src="//web.archive.org/web/20230316102937js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- footer -->
+<div class="dw-container small container-fluid mx-5">
+
+    
+    <div class="footer-dw-title">
+                <div class="media">
+            <div class="media-left">
+                <img src="/web/20230316102937im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png" alt="Bash Hackers Wiki" class="media-object" style="height:32px"/>
+            </div>
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4 class="media-heading">Bash Hackers Wiki</h4>
+                        <p>
+                                                    </p>
+                    </div>
+                    <div class="col-sm-10">
+                                            </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+
+    <div class="footer-license row">
+        <hr/>
+        <div id="dw__license" class="col-sm-6">
+                        <p>
+                <a href="http://web.archive.org/web/20230316102937/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license"><img src="/web/20230316102937im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/license/gnufdl.png" width="24" height="24" alt="gnufdl"/> </a>            </p>
+            <p class="small">
+                Except where otherwise noted, content on this wiki is licensed under the following license:<br/><a href="http://web.archive.org/web/20230316102937/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license">GNU Free Documentation License 1.3</a>            </p>
+                    </div>
+
+        <div class="col-sm-6">
+                    </div>
+
+    </div>
+
+</div>
+<!-- /footer -->
+    </footer>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="skip to content" accesskey="t">
+        <span class="iconify" data-icon="mdi:chevron-up"></span>    </a>
+
+    <div id="screen__mode">        <span class="visible-xs-block"></span>
+        <span class="visible-sm-block"></span>
+        <span class="visible-md-block"></span>
+        <span class="visible-lg-block"></span>
+    </div>
+
+    <img src="/web/20230316102937im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=syntax%3Ape&amp;1678962580" width="2" height="1" alt=""/>
+</div>
+
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 10:29:37 Mar 16, 2023 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:36:41 Apr 14, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 201.204
+  exclusion.robots: 0.141
+  exclusion.robots.policy: 0.126
+  RedisCDXSource: 0.715
+  esindex: 0.008
+  LoadShardBlock: 182.078 (3)
+  PetaboxLoader3.datanode: 207.177 (4)
+  load_resource: 219.007
+  PetaboxLoader3.resolve: 148.511
+-->

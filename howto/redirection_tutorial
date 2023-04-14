@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" class="no-js">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=TPXmWR5s" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("http://web.archive.org/web");
+  __wm.wombat("https://wiki.bash-hackers.org/howto/redirection_tutorial?do=edit","20230315170628","http://web.archive.org/","web","/_static/",
+	      "1678899988");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+    <meta charset="UTF-8"/>
+    <title>Illustrated Redirection Tutorial [Bash Hackers Wiki]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="/web/20230315170628im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/web/20230315170628im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/apple-touch-icon.png"/>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link type="text/css" rel="stylesheet" href="/web/20230315170628cs_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/default/bootstrap.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20230315170628/https://wiki.bash-hackers.org/lib/exe/opensearch.php" title="Bash Hackers Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/howto/redirection_tutorial?do=index" title="Sitemap"/>
+<link rel="manifest" href="/web/20230315170628/https://wiki.bash-hackers.org/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/web/20230315170628/https://wiki.bash-hackers.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/web/20230315170628/https://wiki.bash-hackers.org/feed.php?mode=list&amp;ns=howto"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/web/20230315170628/https://wiki.bash-hackers.org/_export/xhtml/howto/redirection_tutorial"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/web/20230315170628/https://wiki.bash-hackers.org/_export/raw/howto/redirection_tutorial"/>
+<link rel="stylesheet" type="text/css" href="/web/20230315170628cs_/https://wiki.bash-hackers.org/lib/exe/css.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='howto';var JSINFO = {"updatable":1,"userreplace":1,"default_macro_string":"","plugins":{"edittable":{"default columnwidth":""}},"move_renameokay":false,"isadmin":0,"isauth":0,"bootstrap3":{"mode":"source","toc":[],"config":{"collapsibleSections":0,"fixedTopNavbar":1,"showSemanticPopup":0,"sidebarOnNavbar":0,"tagsOnTop":1,"tocAffix":1,"tocCollapseOnScroll":1,"tocCollapsed":0,"tocLayout":"default","useAnchorJS":1,"useAlternativeToolbarIcons":1}},"id":"howto:redirection_tutorial","namespace":"howto","ACT":"source","useHeadingNavigation":1,"useHeadingContent":1};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/exe/js.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"></script>
+<script type="text/javascript">/*<![CDATA[*/if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '/lib/tpl/bootstrap3/iconify.php?prefix={prefix}&icons={icons}' } }
+/*!]]>*/</script>
+<script type="text/javascript" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/anchorjs/anchor.min.js"></script>
+<script type="text/javascript" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/iconify.min.js"></script>
+<script type="text/javascript" src="/web/20230315170628js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/plugins/fa.js"></script>
+<!--<![endif]-->
+<style type="text/css">@media screen { body { margin-top: 65px; }  #dw__toc.affix { top: 55px; position: fixed !important; }  #dw__toc .nav .nav .nav { display: none; } }</style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="default dokuwiki mode_source tpl_bootstrap3 dw-page-on-panel dw-fluid-container" data-page-id="howto:redirection_tutorial"><div class="dokuwiki">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container-fluid mx-5">
+    <!-- navbar -->
+<nav id="dw__navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="dw-container container-fluid mx-5">
+
+        <div class="navbar-header">
+
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand d-flex align-items-center" href="/web/20230315170628/https://wiki.bash-hackers.org/start" accesskey="h" title="Bash Hackers Wiki"><img id="dw__logo" class="pull-left h-100 mr-4" alt="Bash Hackers Wiki" src="/web/20230315170628im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png"/><div class="pull-right"><div id="dw__title">Bash Hackers Wiki</div></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+
+            
+            
+            
+            <div class="navbar-right" id="dw__navbar_items">
+
+                
+<!-- navbar-searchform -->
+<form action="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search">
+    <div class="input-group">
+        <input id="qsearch" autocomplete="off" type="search" placeholder="Search" value="" accesskey="f" name="q" class="form-control" title="[F]"/>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" title="Search">
+                <span class="iconify" data-icon="mdi:magnify"></span>            </button>
+        </div>
+
+    </div>
+    <input type="hidden" name="do" value="search"/>
+</form>
+<!-- /navbar-searchform -->
+<!-- tools-menu -->
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
+
+    
+    <li class="dropdown">
+
+        <a href="" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="iconify" data-icon="mdi:wrench"></span> <span class="hidden-lg hidden-md hidden-sm">Tools</span> <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu tools" role="menu">
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:account"></span> User Tools            </li>
+
+            <li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=register" title="Register" rel="nofollow" class="menuitem register"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span>Register</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span>Log In</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:toolbox"></span> Site Tools            </li>
+
+            <li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=recent" title="Recent Changes [r]" rel="nofollow" accesskey="r" class="menuitem recent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69V13m4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67V8M5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H5m11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85z"/></svg><span>Recent Changes</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=media&amp;ns=howto" title="Media Manager" rel="nofollow" class="menuitem media"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7 15l4.5-6 3.5 4.5 2.5-3L21 15m1-11h-8l-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M2 6H0v14a2 2 0 0 0 2 2h18v-2H2V6z"/></svg><span>Media Manager</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=index" title="Sitemap [x]" rel="nofollow" accesskey="x" class="menuitem index"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2z"/></svg><span>Sitemap</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:file-document-outline"></span> Page Tools            </li>
+
+            <li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>
+            
+                </ul>
+    </li>
+
+    
+</ul>
+<!-- /tools-menu -->
+
+                <ul class="nav navbar-nav">
+
+                    
+                                        <li>
+                        <span class="dw__actions dw-action-icon">
+                        <a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=register" title="Register" rel="nofollow" class="menuitem register btn btn-success navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span class=""> Register</span></a><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login btn btn-default navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span class=""> Log In</span></a>                        </span>
+                    </li>
+                    
+                </ul>
+
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->
+<div align="center">
+<script async src="//web.archive.org/web/20230315170628js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+    </header>
+
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container-fluid mx-5">
+
+        <div id="dokuwiki__pageheader">
+
+            
+            <!-- breadcrumbs -->
+<nav id="dw__breadcrumbs" class="small">
+
+    <hr/>
+
+        <div class="dw__youarehere">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><li>You are here</li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/web/20230315170628/https://wiki.bash-hackers.org/start" itemprop="item" title="start"><span itemprop="name"><span class="iconify" data-icon="mdi:home"></span></span></a></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/web/20230315170628/https://wiki.bash-hackers.org/howto/start" class="wikilink1" title="howto:start">HOWTO</a></li><li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name"><a itemprop="item" href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial" class="wikilink1" title="howto:redirection_tutorial">Illustrated Redirection Tutorial</a></span></li></ol>    </div>
+    
+        <div class="dw__breadcrumbs hidden-print">
+        <ol class="breadcrumb"><li>Trace</li>    </div>
+    
+    <hr/>
+
+</nav>
+<!-- /breadcrumbs -->
+
+            <p class="text-right">
+                <span class="pageId ml-1 label label-primary">howto:redirection_tutorial</span>            </p>
+
+            <div id="dw__msgarea" class="small">
+                            </div>
+
+        </div>
+
+        <div class="row">
+
+            
+            <article id="dokuwiki__content" class="col-sm-12 col-md-12 " itemscope itemtype="http://schema.org/Article" itemref="dw__license">
+
+                
+<!-- page-tools -->
+<nav id="dw__pagetools" class="hidden-print">
+    <div class="tools panel panel-default">
+        <ul class="nav nav-stacked nav-pills text-muted">
+            <li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20230315170628/https://wiki.bash-hackers.org/howto/redirection_tutorial?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>        </ul>
+    </div>
+</nav>
+<!-- /page-tools -->
+
+                <div class="panel panel-default px-3 py-2" itemprop="articleBody">
+                    <div class="page panel-body">
+
+                        
+<div class="dw-content-page "><!-- content --><div class="dw-content"><p>
+This page is read only. You can view the source, but not change it. Ask your administrator if you think this is wrong.
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="howto:redirection_tutorial"/><input type="hidden" name="rev" value="0"/><input type="hidden" name="date" value="0"/><input type="hidden" name="prefix" value="."/><input type="hidden" name="suffix" value=""/><input type="hidden" name="changecheck" value="4250b1c1e2c360a4ac9a8b2c4f1ba58c"/><input type="hidden" name="target" value="section"/><textarea name="wikitext" id="wiki__text" dir="auto" class="edit form-control" cols="80" rows="10" tabindex="1" readonly="readonly">
+
+
+====== Illustrated Redirection Tutorial ======
+
+{{keywords&gt;bash shell scripting tutorial redirection redirect file descriptor}}
+
+This tutorial is not a complete guide to redirection, it will not
+cover here docs, here strings, name pipes etc... I just hope it'll help
+you to understand what things like ''3&gt;&amp;2'', ''2&gt;&amp;1'' or ''1&gt;&amp;3-'' do.
+
+
+====== stdin, stdout, stderr ======
+
+When Bash starts, normally, 3 file descriptors are opened, ''0'', ''1'' and ''2''
+also known as standard input (''stdin''), standard output (''stdout'') and
+standard error (''stderr'').
+
+For example, with Bash running in a Linux terminal emulator, you'll see:
+
+&lt;code&gt;
+# lsof +f g -ap $BASHPID -d 0,1,2
+COMMAND   PID USER   FD   TYPE FILE-FLAG DEVICE SIZE/OFF NODE NAME
+bash    12135 root    0u   CHR     RW,LG 136,13      0t0   16 /dev/pts/5
+bash    12135 root    1u   CHR     RW,LG 136,13      0t0   16 /dev/pts/5
+bash    12135 root    2u   CHR     RW,LG 136,13      0t0   16 /dev/pts/5
+&lt;/code&gt;
+
+This ''/dev/pts/5'' is a pseudo terminal used to emulate a real
+terminal. Bash reads (''stdin'') from this terminal and prints
+via ''stdout'' and ''stderr'' to this terminal.
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+When a command, a compound command, a subshell etc. is executed, it inherits
+these file descriptors. For instance ''echo foo'' will send the text ''foo'' to the file
+descriptor ''1'' inherited from the shell, which is connected to ''/dev/pts/5''.
+
+====== Simple Redirections ======
+===== Output Redirection &quot;n&gt; file&quot; =====
+
+''&gt;'' is probably the simplest redirection.
+
+''echo foo &gt; file''
+
+the ''&gt; file'' after the command alters the file descriptors belonging to the
+command ''echo''. It changes the file descriptor ''1'' (''&gt; file'' is the same as
+''1&gt;file'') so that it points to the file ''file''. They will look like:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+Now characters written by our command, ''echo'', that are sent to the
+standard output, i.e., the file descriptor ''1'', end up in the file
+named ''file''.
+
+In the same way, command ''2&gt; file'' will change the standard error and
+will make it point to ''file''. Standard error is used by applications to print errors.
+
+What will ''command 3&gt; file'' do? It will open a new file descriptor
+pointing to ''file''. The command will then start with:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+new descriptor   ( 3 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+What will the command do with this descriptor?  It depends. Often nothing.
+We will see later why we might want other file descriptors.
+
+===== Input Redirection &quot;n&lt; file&quot; =====
+
+When you run a commandusing ''command &lt; file'', it changes the
+file descriptor ''0'' so that it looks like:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) &lt;----| file                  |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+If the command reads from ''stdin'', it now will read from ''file'' and not
+from the console.
+
+As with ''&gt;'', ''&lt;'' can be used to open a new file descriptor for reading,
+''command 3&lt;file''. Later we will see how this can be useful.
+
+
+===== Pipes | =====
+
+What does this ''|'' do? Among other things, it connects the standard output of
+the command on the left to the standard input of the command on the right.
+That is, it creates a special file, a pipe, which is opened as a write destinaton
+for the left command, and as a read source for the right command.
+
+&lt;code&gt;
+           echo foo               |                cat
+
+ ---       +--------------+               ---       +--------------+
+( 0 ) ----&gt;| /dev/pts/5   |     ------&gt;  ( 0 ) ----&gt;|pipe (read)   |
+ ---       +--------------+    /          ---       +--------------+
+                              /
+ ---       +--------------+  /            ---       +--------------+
+( 1 ) ----&gt;| pipe (write) | /            ( 1 ) ----&gt;| /dev/pts     |
+ ---       +--------------+               ---       +--------------+
+
+ ---       +--------------+               ---       +--------------+
+( 2 ) ----&gt;| /dev/pts/5   |              ( 2 ) ----&gt;| /dev/pts/    |
+ ---       +--------------+               ---       +--------------+
+
+&lt;/code&gt;
+
+This is possible because the redirections are set up by the shell
+**before** the commands are executed, and the commands inherit the file
+descriptors.
+
+====== More On File Descriptors ======
+===== Duplicating File Descriptor 2&gt;&amp;1 =====
+
+We have seen how to open (or redirect) file descriptors. Let us see
+how to duplicate them, starting with the classic ''2&gt;&amp;1''.  What does this
+mean? That something written on the file descriptor ''2'' will go where
+file descriptor ''1'' goes. In a shell ''command 2&gt;&amp;1'' is not a very
+interesting example so we will use ''ls /tmp/ doesnotexist 2&gt;&amp;1 | less''
+
+&lt;code&gt;
+   ls /tmp/ doesnotexist 2&gt;&amp;1     |                   less
+
+ ---       +--------------+              ---       +--------------+
+( 0 ) ----&gt;| /dev/pts/5   |     ------&gt; ( 0 ) ----&gt;|from the pipe |
+ ---       +--------------+    /   ---&gt;  ---       +--------------+
+                              /   /
+ ---       +--------------+  /   /       ---       +--------------+
+( 1 ) ----&gt;| to the pipe  | /   /       ( 1 ) ----&gt;|  /dev/pts    |
+ ---       +--------------+    /         ---       +--------------+
+      	       	       	      /
+ ---       +--------------+  /           ---       +--------------+
+( 2 ) ----&gt;|  to the pipe | /           ( 2 ) ----&gt;| /dev/pts/    |
+ ---       +--------------+              ---       +--------------+
+&lt;/code&gt;
+
+Why is it called //duplicating//? Because after ''2&gt;&amp;1'', we have 2 file
+descriptors pointing to the same file. Take care not to call this
+&quot;File Descriptor Aliasing&quot;; if we redirect ''stdout'' after ''2&gt;&amp;1'' to a
+file ''B'', file descriptor ''2'' will still be opened on the file ''A'' where it was.  This is
+often misunderstood by people wanting to redirect both standard input
+and standard output to the file. Continue reading for more on this.
+
+So if you have two file descriptors ''s'' and ''t'' like:
+&lt;code&gt;
+                  ---       +-----------------------+
+ a descriptor    ( s ) ----&gt;| /some/file            |
+                  ---       +-----------------------+
+                  ---       +-----------------------+
+ a descriptor    ( t ) ----&gt;| /another/file         |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+Using a ''t&gt;&amp;s'' (where ''t'' and ''s'' are numbers) it means: 
+
+&gt; Copy whatever file descriptor ''s'' contains into file descriptor ''t''
+
+So you got a copy of this descriptor:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+ a descriptor    ( s ) ----&gt;| /some/file            |
+                  ---       +-----------------------+
+                  ---       +-----------------------+
+ a descriptor    ( t ) ----&gt;| /some/file            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+Internally each of these is represented by a file descriptor opened by the operating system's ''fopen'' calls, and is likely just a pointer to the file which has been opened for reading (''stdin'' or file descriptor ''0'') or writing (''stdout'' /''stderr''). 
+
+Note that the file reading or writing positions are also duplicated. If you have already
+read a line of ''s'', then after ''t&gt;&amp;s'' if you read a line from ''t'', you will
+get the second line of the file. 
+
+Similarly for output file descriptors, writing a line to file descriptor ''s'' will append a line to a file as will writing a line to file descriptor ''t''.
+
+&lt;note tip&gt;The syntax is somewhat confusing in that you would think that the arrow would point in the direction of the copy, but it's reversed. So it's ''target&gt;&amp;source'' effectively.&lt;/note&gt;
+
+So, as a simple example (albeit slightly contrived), is the following:
+
+&lt;code&gt;
+exec 3&gt;&amp;1         # Copy 1 into 3
+exec 1&gt; logfile   # Make 1 opened to write to logfile
+lotsa_stdout      # Outputs to fd 1, which writes to logfile
+exec 1&gt;&amp;3         # Copy 3 back into 1
+echo Done         # Output to original stdout
+&lt;/code&gt;
+
+
+===== Order Of Redirection, i.e., &quot;&gt; file 2&gt;&amp;1&quot; vs. &quot;2&gt;&amp;1 &gt;file&quot; =====
+
+While it doesn't matter where the redirections appears on the command
+line, their order does matter. They are set up from left to right.
+
+  * ''2&gt;&amp;1 &gt;file''
+
+A common error, is to do ''command 2&gt;&amp;1 &gt; file'' to redirect both ''stderr''
+and ''stdout'' to ''file''. Let's see what's going on. First we type the
+command in our terminal, the descriptors look like this:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+Then our shell, Bash sees ''2&gt;&amp;1'' so it duplicates 1, and the file
+descriptor look like this:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+That's right, nothing has changed, 2 was already pointing to the same
+place as 1. Now Bash sees ''&gt; file'' and thus changes ''stdout'':
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+And that's not what we want.
+
+  * ''&gt;file 2&gt;&amp;1''
+
+Now let's look at the correct ''command &gt;file 2&gt;&amp;1''. We start as in the
+previous example, and Bash sees ''&gt; file'':
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+Then it sees our duplication ''2&gt;&amp;1'':
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+And voila, both ''1'' and ''2'' are redirected to file.
+
+===== Why sed 's/foo/bar/' file &gt;file Doesn't Work =====
+
+This is a common error, we want to modify a file using something that
+reads from a file and writes the result to ''stdout''. To do this, we redirect stdout
+to the file we want to modify. The problem here is that, as we
+have seen, the redirections are setup before the command is actually
+executed.
+
+So **BEFORE** sed starts, standard output has already been redirected, with
+the additional side effect that, because we used &gt;, &quot;file&quot; gets truncated. When ''sed'' starts to
+read the file, it contains nothing.
+
+
+===== exec =====
+
+In Bash the ''exec'' built-in replaces the shell with the specified
+program. So what does this have to do with redirection?
+''exec'' also allow us to manipulate the file descriptors.
+If you don't specify a program, the redirection after ''exec'' modifies the
+file descriptors of the current shell.
+
+For example, all the commands after ''exec 2&gt;file'' will have file
+descriptors like:
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| file	            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+All the the errors sent to ''stderr'' by the commands after the ''exec 2&gt;file''
+will go to the file, just as if you had the command in a script and
+ran ''myscript 2&gt;file''.
+
+''exec'' can be used, if, for instance, you want to log the errors the
+commands in your script produce, just add ''exec 2&gt;myscript.errors'' at
+the beginning of your script.
+
+Let's see another use case. We want to read a file line by line, this
+is easy, we just do:
+
+&lt;code&gt;
+ while read -r line;do echo &quot;$line&quot;;done &lt; file
+&lt;/code&gt;
+
+Now, we want, after printing each line, to do a pause, waiting for
+the user to press a key:
+
+&lt;code&gt;
+ while read -r line;do echo &quot;$line&quot;; read -p &quot;Press any key&quot; -n 1;done &lt; file
+&lt;/code&gt;
+
+And, surprise this doesn't work. Why? because the shell descriptor of
+the while loop looks like:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+and our read inherits these descriptors, and our command (''read -p &quot;Press any key&quot; -n 1'')
+inherits them, and thus reads from file and not from our terminal.
+
+A quick look at ''help read'' tells us that we can specify a file
+descriptor from which ''read'' should read. Cool. Now let's use ''exec'' to
+get another descriptor:
+
+&lt;code&gt;
+ exec 3&lt;file
+ while read -u 3 line;do echo &quot;$line&quot;; read -p &quot;Press any key&quot; -n 1;done
+&lt;/code&gt;
+
+Now the file descriptors look like:
+
+&lt;code&gt;
+                  ---       +-----------------------+
+standard input   ( 0 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard output  ( 1 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+standard error   ( 2 ) ----&gt;| /dev/pts/5            |
+                  ---       +-----------------------+
+
+                  ---       +-----------------------+
+new descriptor   ( 3 ) ----&gt;| file                  |
+                  ---       +-----------------------+
+&lt;/code&gt;
+
+and it works.
+
+
+===== Closing The File Descriptors =====
+
+Closing a file through a file descriptor is easy, just make it a duplicate of  -.
+For instance, let's close ''stdin &lt;&amp;-'' and ''stderr 2&gt;&amp;-'':
+
+&lt;code&gt;
+ bash -c '{ lsof -a -p $$ -d0,1,2 ;} &lt;&amp;- 2&gt;&amp;-'
+ COMMAND   PID USER   FD   TYPE DEVICE SIZE NODE NAME
+ bash    10668 pgas    1u   CHR  136,2         4 /dev/pts/2
+&lt;/code&gt;
+we see that inside the ''{}'' that only ''1'' is still here.
+
+Though the OS will probably clean up the mess, it is perhaps a
+good idea to close the file descriptors you open. For instance, if you
+open a file descriptor with ''exec 3&gt;file'', all the commands afterwards
+will inherit it. It's probably better to do something like:
+
+&lt;code&gt;
+exec 3&gt;file
+.....
+#commands that uses 3
+.....
+exec 3&gt;&amp;-
+
+#we don't need 3 any more
+&lt;/code&gt;
+
+I've seen some people using this as a way to discard, say stderr, using something like: command 2&gt;&amp;-.
+Though it might work, I'm not sure if you can expect all applications to behave correctly with a closed stderr.
+
+When in doubt, I use 2&gt;/dev/null.
+ 
+
+====== An Example ======
+
+This example comes from [[http://groups.google.com/group/comp.unix.shell/browse_thread/thread/64206d154894a4ef/ffe4c2e382034ed9#ffe4c2e382034ed9|this post (ffe4c2e382034ed9)]] on the comp.unix.shell group:
+
+&lt;code&gt;
+{
+  {
+    cmd1 3&gt;&amp;- |
+      cmd2 2&gt;&amp;3 3&gt;&amp;-
+  } 2&gt;&amp;1 &gt;&amp;4 4&gt;&amp;- |
+    cmd3 3&gt;&amp;- 4&gt;&amp;-
+
+} 3&gt;&amp;2 4&gt;&amp;1
+&lt;/code&gt;
+
+The redirections are processed from left to right, but as the file
+descriptors are inherited we will also have to work from the outer to
+the inner contexts. We will assume that we run this command in a
+terminal. Let's start with the outer ''{ } 3&gt;&amp;2 4&gt;&amp;1''.
+
+&lt;code&gt;
+ ---       +-------------+    ---       +-------------+
+( 0 ) ----&gt;| /dev/pts/5  |   ( 3 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+    ---       +-------------+
+
+ ---       +-------------+    ---       +-------------+
+( 1 ) ----&gt;| /dev/pts/5  |   ( 4 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+    ---       +-------------+
+
+ ---       +-------------+
+( 2 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+&lt;/code&gt;
+
+We only made 2 copies of ''stderr'' and ''stdout''. ''3&gt;&amp;1 4&gt;&amp;1'' would have
+produced the same result here because we ran the command in a terminal
+and thus ''1'' and ''2'' go to the terminal. As an exercise, you can start
+with ''1'' pointing to ''file.stdout'' and 2 pointing to ''file.stderr'', you will
+see why these redirections are very nice.
+
+Let's continue with the right part of the second pipe: ''| cmd3 3&gt;&amp;- 4&gt;&amp;-''
+
+&lt;code&gt;
+ ---       +-------------+
+( 0 ) ----&gt;| 2nd pipe    |
+ ---       +-------------+
+
+ ---       +-------------+
+( 1 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+
+ ---       +-------------+
+( 2 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+&lt;/code&gt;
+
+It inherits the previous file descriptors, closes 3 and 4 and sets up a pipe
+for reading. Now for the left part of the second pipe ''{...}  2&gt;&amp;1 &gt;&amp;4 4&gt;&amp;- |''
+
+&lt;code&gt;
+ ---       +-------------+  ---       +-------------+
+( 0 ) ----&gt;| /dev/pts/5  | ( 3 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+  ---       +-------------+
+
+ ---       +-------------+
+( 1 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+
+ ---       +-------------+
+( 2 ) ----&gt;| 2nd pipe    |
+ ---       +-------------+
+&lt;/code&gt;
+
+First, The file descriptor ''1'' is connected to the pipe (''|''), then ''2'' is
+made a copy of ''1'' and thus is made an fd to the pipe (''2&gt;&amp;1''), then ''1'' is
+made a copy of ''4'' (''&gt;&amp;4''), then ''4'' is closed. These are the file
+descriptors of the inner ''{}''. Lcet's go inside and have a look at the
+right part of the first pipe: ''| cmd2 2&gt;&amp;3 3&gt;&amp;-''
+
+&lt;code&gt;
+ ---       +-------------+
+( 0 ) ----&gt;| 1st pipe    |
+ ---       +-------------+
+
+ ---       +-------------+
+( 1 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+
+ ---       +-------------+
+( 2 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+&lt;/code&gt;
+
+It inherits the previous file descriptors, connects 0 to the 1st pipe,
+the file descriptor 2 is made a copy of 3, and 3 is closed. Finally, for the left
+part of the pipe:
+
+&lt;code&gt;
+ ---       +-------------+
+( 0 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+
+
+ ---       +-------------+
+( 1 ) ----&gt;| 1st pipe    |
+ ---       +-------------+
+
+ ---       +-------------+
+( 2 ) ----&gt;| 2nd pipe    |
+ ---       +-------------+
+&lt;/code&gt;
+
+It also inherits the file descriptor of the left part of the 2nd
+pipe, file descriptor ''1'' is connected to the first pipe, ''3'' is closed.
+
+The purpose of all this becomes clear if we take only the commands:
+
+&lt;code&gt;
+                                                   cmd2
+
+                                           ---       +-------------+
+				       --&gt;( 0 ) ----&gt;| 1st pipe    |
+				      /	   ---       +-------------+
+				     /
+                                    /	   ---       +-------------+
+         cmd 1                	   /	  ( 1 ) ----&gt;| /dev/pts/5  |
+				  /	   ---       +-------------+
+				 /
+ ---       +-------------+	/	   ---       +-------------+
+( 0 ) ----&gt;| /dev/pts/5  |     /	  ( 2 ) ----&gt;| /dev/pts/5  |
+ ---       +-------------+    /		   ---       +-------------+
+			     /
+ ---       +-------------+  /                       cmd3
+( 1 ) ----&gt;| 1st pipe    | /
+ ---       +-------------+                 ---       +-------------+
+			     ------------&gt;( 0 ) ----&gt;| 2nd pipe    |
+ ---       +-------------+ /               ---       +-------------+
+( 2 ) ----&gt;| 2nd pipe    |/
+ ---       +-------------+                 ---       +-------------+
+			      	    	  ( 1 ) ----&gt;| /dev/pts/5  |
+			       	    	   ---       +-------------+
+
+				    	   ---       +-------------+
+				       	  ( 2 ) ----&gt;| /dev/pts/5  |
+				  	   ---       +-------------+
+
+&lt;/code&gt;
+
+
+As said previously, as an exercise, you can start with ''1'' open on a file
+and ''2'' open on another file to see how the ''stdin'' from ''cmd2'' and ''cmd3'' goes
+to the original ''stdin'' and how the ''stderr'' goes to the original ''stderr''.
+
+
+====== Syntax ======
+
+I used to have trouble choosing between ''0&amp;&lt;3'' ''3&amp;&gt;1'' ''3&gt;&amp;1'' ''&lt;nowiki&gt;-&gt;2&lt;/nowiki&gt;'' ''-&lt;&amp;0'' ''&amp;-&lt;0''
+''0&lt;&amp;-'' etc... (I think probably because the syntax is more representative of the result, i.e., the redirection, than
+what is done, i.e., opening, closing, or duplicating file descriptors).
+
+If this fits your situation, then maybe the following &quot;rules&quot; will help
+you, a redirection is always like the following:
+
+&lt;code&gt;
+ lhs op rhs
+&lt;/code&gt;
+
+  * ''lhs'' is always a file description, i.e., a number:
+    * Either we want to open, duplicate, move or we want to close. If the op is ''&lt;'' then there is an implicit 0, if it's ''&gt;'' or ''&lt;nowiki&gt;&gt;&gt;&lt;/nowiki&gt;'', there is an implicit 1.
+
+
+  * ''op'' is ''&lt;'', ''&gt;'', ''&lt;nowiki&gt;&gt;&gt;&lt;/nowiki&gt;'', ''&gt;|'', or ''&lt;&gt;'':
+    * ''&lt;'' if the file decriptor in ''lhs'' will be read, ''&gt;'' if it will be written, ''&lt;nowiki&gt;&gt;&gt;&lt;/nowiki&gt;'' if data is to be appended to the file, ''&gt;|'' to overwrite an existing file  or ''&lt;&gt;'' if it will be both read and written.
+
+
+  * ''rhs'' is the thing that the file descriptor will describe:
+    * It can be the name of a file, the place where another descriptor goes (''&amp;1''), or, ''&amp;-'', which will close the file descriptor.
+ 
+
+You might not like this description, and find it a bit incomplete or
+inexact, but I think it really helps to easily find that, say ''&lt;nowiki&gt;&amp;-&gt;0&lt;/nowiki&gt;'' is
+incorrect.
+
+==== A note on style ====
+
+The shell is pretty loose about what it considers a valid redirect. While opinions probably differ, this author has some (strong) recommendations:
+
+  * **Always** keep redirections &quot;tightly grouped&quot; -- that is, **do not** include whitespace anywhere within the redirection syntax except within quotes if required on the RHS (e.g. a filename that contains a space). Since shells fundamentally use whitespace to delimit fields in general, it is visually much clearer for each redirection to be separated by whitespace, but grouped in chunks that contain no unnecessary whitespace.
+
+  * **Do** always put a space between each redirection, and between the argument list and the first redirect.
+
+  * **Always** place redirections together at the very end of a command after all arguments. Never precede a command with a redirect. Never put a redirect in the middle of the arguments.
+
+  * **Never** use the Csh ''&amp;&gt;foo'' and ''&gt;&amp;foo'' shorthand redirects. Use the long form ''&gt;foo 2&gt;&amp;1''. (see: [[obsolete]])
+
+&lt;code&gt;
+# Good! This is clearly a simple commmand with two arguments and 4 redirections
+cmd arg1 arg2 &lt;myFile 3&lt;&amp;1 2&gt;/dev/null &gt;&amp;2
+
+# Good!
+{ cmd1 &lt;&lt;&lt;'my input'; cmd2; } &gt;someFile
+
+# Bad. Is the &quot;1&quot; a file descriptor or an argument to cmd? (answer: it's the FD). Is the space after the herestring part of the input data? (answer: No).
+# The redirects are also not delimited in any obvious way.
+cmd 2&gt;&amp; 1 &lt;&lt;&lt; stuff
+
+# Hideously Bad. It's difficult to tell where the redirects are and whether they're even valid redirects.
+# This is in fact one command with one argument, an assignment, and three redirects.
+foo=bar&lt;baz bork&lt;&lt;&lt; blarg&gt;bleh
+&lt;/code&gt;
+
+====== Conclusion ======
+
+I hope this tutorial worked for you.
+
+I lied, I did not explain  ''1&gt;&amp;3-'', go check the manual ;-)
+
+Thanks to Stéphane Chazelas from whom I stole both the intro and the
+example....
+
+The intro is inspired by this introduction, you'll find a nice
+exercise there too:
+
+  *  [[http://tldp.org/LDP/abs/html/ioredirintro.html| A Detailed Introduction to I/O and I/O Redirection]]
+
+The last example comes from this post:
+
+  *  [[http://groups.google.com/group/comp.unix.shell/browse_thread/thread/64206d154894a4ef/ffe4c2e382034ed9#ffe4c2e382034ed9 | comp.unix.shell: piping stdout and stderr to different processes]]
+
+
+====== See also ======
+
+  * Internal: [[syntax:redirection | Redirection syntax overview]]</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+</div><!-- /content --></div>
+                    </div>
+                </div>
+
+                <div class="small text-right">
+
+                                        <span class="docInfo">
+                        <!--
+     FILE ARCHIVED ON 17:06:28 Mar 15, 2023 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:35:50 Apr 14, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 293.631
+  exclusion.robots: 0.14
+  exclusion.robots.policy: 0.129
+  cdx.remote: 0.063
+  esindex: 0.009
+  LoadShardBlock: 265.753 (3)
+  PetaboxLoader3.datanode: 192.459 (4)
+  load_resource: 525.402
+  PetaboxLoader3.resolve: 469.85
+-->

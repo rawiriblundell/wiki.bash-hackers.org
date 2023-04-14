@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" class="no-js">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=TPXmWR5s" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("http://web.archive.org/web");
+  __wm.wombat("https://wiki.bash-hackers.org/scripting/terminalcodes?do=edit","20220615024126","http://web.archive.org/","web","/_static/",
+	      "1655260886");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+    <meta charset="UTF-8"/>
+    <title>Terminal codes (ANSI/VT100) introduction [Bash Hackers Wiki]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="/web/20220615024126im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/web/20220615024126im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/apple-touch-icon.png"/>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link type="text/css" rel="stylesheet" href="/web/20220615024126cs_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/default/bootstrap.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20220615024126/https://wiki.bash-hackers.org/lib/exe/opensearch.php" title="Bash Hackers Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/scripting/terminalcodes?do=index" title="Sitemap"/>
+<link rel="manifest" href="/web/20220615024126/https://wiki.bash-hackers.org/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/web/20220615024126/https://wiki.bash-hackers.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/web/20220615024126/https://wiki.bash-hackers.org/feed.php?mode=list&amp;ns=scripting"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/web/20220615024126/https://wiki.bash-hackers.org/_export/xhtml/scripting/terminalcodes"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/web/20220615024126/https://wiki.bash-hackers.org/_export/raw/scripting/terminalcodes"/>
+<link rel="stylesheet" type="text/css" href="/web/20220615024126cs_/https://wiki.bash-hackers.org/lib/exe/css.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='scripting';var JSINFO = {"updatable":1,"userreplace":1,"default_macro_string":"","plugins":{"edittable":{"default columnwidth":""}},"move_renameokay":false,"isadmin":0,"isauth":0,"bootstrap3":{"mode":"source","toc":[],"config":{"collapsibleSections":0,"fixedTopNavbar":1,"showSemanticPopup":0,"sidebarOnNavbar":0,"tagsOnTop":1,"tocAffix":1,"tocCollapseOnScroll":1,"tocCollapsed":0,"tocLayout":"default","useAnchorJS":1,"useAlternativeToolbarIcons":1}},"id":"scripting:terminalcodes","namespace":"scripting","ACT":"source","useHeadingNavigation":1,"useHeadingContent":1};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/exe/js.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"></script>
+<script type="text/javascript">/*<![CDATA[*/if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '/lib/tpl/bootstrap3/iconify.php?prefix={prefix}&icons={icons}' } }
+/*!]]>*/</script>
+<script type="text/javascript" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/anchorjs/anchor.min.js"></script>
+<script type="text/javascript" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/iconify.min.js"></script>
+<script type="text/javascript" src="/web/20220615024126js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/plugins/fa.js"></script>
+<!--<![endif]-->
+<style type="text/css">@media screen { body { margin-top: 65px; }  #dw__toc.affix { top: 55px; position: fixed !important; }  #dw__toc .nav .nav .nav { display: none; } }</style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="default dokuwiki mode_source tpl_bootstrap3 dw-page-on-panel dw-fluid-container" data-page-id="scripting:terminalcodes"><div class="dokuwiki">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container-fluid mx-5">
+    <!-- navbar -->
+<nav id="dw__navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="dw-container container-fluid mx-5">
+
+        <div class="navbar-header">
+
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand d-flex align-items-center" href="/web/20220615024126/https://wiki.bash-hackers.org/start" accesskey="h" title="Bash Hackers Wiki"><img id="dw__logo" class="pull-left h-100 mr-4" alt="Bash Hackers Wiki" src="/web/20220615024126im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png"/><div class="pull-right"><div id="dw__title">Bash Hackers Wiki</div></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+
+            
+            
+            
+            <div class="navbar-right" id="dw__navbar_items">
+
+                
+<!-- navbar-searchform -->
+<form action="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search">
+    <div class="input-group">
+        <input id="qsearch" autocomplete="off" type="search" placeholder="Search" value="" accesskey="f" name="q" class="form-control" title="[F]"/>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" title="Search">
+                <span class="iconify" data-icon="mdi:magnify"></span>            </button>
+        </div>
+
+    </div>
+    <input type="hidden" name="do" value="search"/>
+</form>
+<!-- /navbar-searchform -->
+<!-- tools-menu -->
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
+
+    
+    <li class="dropdown">
+
+        <a href="" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="iconify" data-icon="mdi:wrench"></span> <span class="hidden-lg hidden-md hidden-sm">Tools</span> <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu tools" role="menu">
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:account"></span> User Tools            </li>
+
+            <li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=register" title="Register" rel="nofollow" class="menuitem register"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span>Register</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span>Log In</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:toolbox"></span> Site Tools            </li>
+
+            <li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=recent" title="Recent Changes [r]" rel="nofollow" accesskey="r" class="menuitem recent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69V13m4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67V8M5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H5m11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85z"/></svg><span>Recent Changes</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=media&amp;ns=scripting" title="Media Manager" rel="nofollow" class="menuitem media"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7 15l4.5-6 3.5 4.5 2.5-3L21 15m1-11h-8l-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M2 6H0v14a2 2 0 0 0 2 2h18v-2H2V6z"/></svg><span>Media Manager</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=index" title="Sitemap [x]" rel="nofollow" accesskey="x" class="menuitem index"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2z"/></svg><span>Sitemap</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:file-document-outline"></span> Page Tools            </li>
+
+            <li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>
+            
+                </ul>
+    </li>
+
+    
+</ul>
+<!-- /tools-menu -->
+
+                <ul class="nav navbar-nav">
+
+                    
+                                        <li>
+                        <span class="dw__actions dw-action-icon">
+                        <a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=register" title="Register" rel="nofollow" class="menuitem register btn btn-success navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span class=""> Register</span></a><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login btn btn-default navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span class=""> Log In</span></a>                        </span>
+                    </li>
+                    
+                </ul>
+
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->
+<div align="center">
+<script async src="//web.archive.org/web/20220615024126js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+    </header>
+
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container-fluid mx-5">
+
+        <div id="dokuwiki__pageheader">
+
+            
+            <!-- breadcrumbs -->
+<nav id="dw__breadcrumbs" class="small">
+
+    <hr/>
+
+        <div class="dw__youarehere">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><li>You are here</li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/web/20220615024126/https://wiki.bash-hackers.org/start" itemprop="item" title="start"><span itemprop="name"><span class="iconify" data-icon="mdi:home"></span></span></a></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/start" class="wikilink2" title="scripting:start" rel="nofollow">scripting</a></li><li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name"><a itemprop="item" href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes" class="wikilink1" title="scripting:terminalcodes">Terminal codes (ANSI/VT100) introduction</a></span></li></ol>    </div>
+    
+        <div class="dw__breadcrumbs hidden-print">
+        <ol class="breadcrumb"><li>Trace</li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/diezelsun" title="diezelsun">diezelsun</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/mac" title="mac">Mac/Apple/OSX</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/meta/snippets" title="meta:snippets">snippets</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/meta/templates/builtin_command" title="meta:templates:builtin_command">The ... builtin command</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/playground/playground" title="playground:playground">PlayGround</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/sandbox3" title="sandbox3">Examples for the Wrap Plugin (test)</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/bashbehaviour" title="scripting:bashbehaviour">Bash&#039;s behaviour</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/newbie_traps" title="scripting:newbie_traps">Beginner Mistakes</a></li><li><a href="/web/20220615024126/https://wiki.bash-hackers.org/commands/classictest" title="commands:classictest">The classic test command</a></li><li class="active"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/basics" title="scripting:basics">The basics of shell scripting</a></li></ol>    </div>
+    
+    <hr/>
+
+</nav>
+<!-- /breadcrumbs -->
+
+            <p class="text-right">
+                <span class="pageId ml-1 label label-primary">scripting:terminalcodes</span>            </p>
+
+            <div id="dw__msgarea" class="small">
+                            </div>
+
+        </div>
+
+        <div class="row">
+
+            
+            <article id="dokuwiki__content" class="col-sm-12 col-md-12 " itemscope itemtype="http://schema.org/Article" itemref="dw__license">
+
+                
+<!-- page-tools -->
+<nav id="dw__pagetools" class="hidden-print">
+    <div class="tools panel panel-default">
+        <ul class="nav nav-stacked nav-pills text-muted">
+            <li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615024126/https://wiki.bash-hackers.org/scripting/terminalcodes?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>        </ul>
+    </div>
+</nav>
+<!-- /page-tools -->
+
+                <div class="panel panel-default px-3 py-2" itemprop="articleBody">
+                    <div class="page panel-body">
+
+                        
+<div class="dw-content-page "><!-- content --><div class="dw-content"><p>
+This page is read only. You can view the source, but not change it. Ask your administrator if you think this is wrong.
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="scripting:terminalcodes"/><input type="hidden" name="rev" value="0"/><input type="hidden" name="date" value="0"/><input type="hidden" name="prefix" value="."/><input type="hidden" name="suffix" value=""/><input type="hidden" name="changecheck" value="1e6f1a18b199e21324e1f7ad5f57dce7"/><input type="hidden" name="target" value="section"/><textarea name="wikitext" id="wiki__text" dir="auto" class="edit form-control" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== Terminal codes (ANSI/VT100) introduction ======
+
+{{keywords&gt;bash shell scripting colors cursor control vt100 ansi}}
+
+Terminal (control) codes are used to issue specific commands to your terminal. This can be related to switching colors or positioning the cursor, i.e. anything that can't be done by the application itself.
+
+
+===== How it technically works =====
+
+A terminal control code is a special sequence of characters that is printed (like any other text). If the terminal understands the code, it won't display the character-sequence, but will perform some action. You can print the codes with a simple ''echo'' command.
+
+__**Note:**__ I see codes referenced as &quot;Bash colors&quot; sometimes (several &quot;Bash tutorials&quot; etc...): That's a completely incorrect definition.
+
+===== The tput command =====
+
+Because there's a large number of different terminal control languages, usually a system has an intermediate communication layer. The real codes are looked up in a database **for the currently detected terminal type** and you give standardized requests to an API or (from the shell) to a command.
+
+One of these commands is ''tput''. Tput accepts a set of acronyms called //capability names// and any parameters, if appropriate, then looks up the correct escape sequences for the detected terminal in the ''terminfo'' database and prints the correct codes (the terminal hopefully understands).
+
+===== The codes =====
+
+In this list I'll focus on ANSI/VT100 control codes for the most common actions - take it as quick reference. The documentation of your terminal or the ''terminfo'' database is always the preferred source when something is unclear! Also the ''tput'' acronyms are usually the ones dedicated for ANSI escapes!
+
+I listed only the most relevant codes, of course, any ANSI terminal understands many more! But let's keep the discussion centered on common shell scripting ;-)
+
+If I couldn't find a matching ANSI escape, you'll see a :?: as  the code. Feel free to mail me or fix it.
+
+The ANSI codes always start with the ESC character. (ASCII 0x1B or octal 033) This isn't part of the list, but **you should avoid using the ANSI codes directly - use the ''tput'' command!**
+
+All codes that can be used with ''tput'' can be found in terminfo(5). (on OpenBSD at least)
+See [[http://www.openbsd.org/cgi-bin/man.cgi?query=terminfo&amp;apropos=0&amp;sektion=5&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html|OpenBSD's terminfo(5)]] under the __Capabilities__ section.  The //cap-name// is the code to use with tput. A description of each code is also provided.
+
+==== General useful ASCII codes ====
+
+The **Ctrl-Key** representation is simply associating the non-printable characters from ASCII code 1 with the printable (letter) characters from ASCII code 65 (&quot;A&quot;). ASCII code 1 would be ''^A'' (Ctrl-A), while ASCII code 7 (BEL) would be ''^G'' (Ctrl-G). This is a common representation (and input method) and historically comes from one of the VT series of terminals.
+
+^Name^decimal^octal^hex^C-escape^Ctrl-Key^Description^
+|''BEL''|7|007|0x07|''\a''|''^G''|Terminal bell|
+|''BS''|8|010|0x08|''\b''|''^H''|Backspace|
+|''HT''|9|011|0x09|''\t''|''^I''|Horizontal TAB|
+|''LF''|10|012|0x0A|''\n''|''^J''|Linefeed (newline)|
+|''VT''|11|013|0x0B|''\v''|''^K''|Vertical TAB|
+|''FF''|12|014|0x0C|''\f''|''^L''|Formfeed (also: New page ''NP'')|
+|''CR''|13|015|0x0D|''\r''|''^M''|Carriage return|
+|''ESC''|27|033|0x1B|''&lt;none&gt;''|''^[''|Escape character|
+|''DEL''|127|177|0x7F|''&lt;none&gt;''|''&lt;none&gt;''|Delete character|
+
+==== Cursor handling ====
+
+^ANSI^terminfo equivalent^Description^
+|''[ &lt;X&gt; ; &lt;Y&gt; H''\\ ''[ &lt;X&gt; ; &lt;Y&gt; f''|''cup &lt;X&gt; &lt;Y&gt;''|Home-positioning to ''X'' and ''Y'' coordinates\\ :!: it seems that ANSI uses 1-1 as home while ''tput'' uses 0-0|
+|''[ H''|''home''|Move cursor to home position (0-0)|
+|''7''|''sc''|Save current cursor position|
+|''8''|''rc''|Restore saved cursor position|
+|:?: most likely a normal code like ''\b''|''cub1''|move left one space (backspace)|
+|VT100 ''[ ? 25 l''|''civis''|make cursor invisible|
+|VT100 ''[ ? 25 h''|''cvvis''|make cursor visible|
+
+==== Erasing text ====
+
+^ ANSI                 ^ terminfo equivalent  ^ Description                                                     ^
+| ''[ K''\\ ''[ 0 K''  | ''el''               | **Clear line** from current cursor position **to end** of line  |
+| ''[ 1 K''            | ''el1''              | **Clear line from beginning** to current cursor position        |
+| ''[ 2 K''            | ''el2'':?:           | **Clear whole line** (cursor position unchanged)                |
+
+==== General text attributes ====
+
+^ANSI^terminfo equivalent^Description^
+|''[ 0 m''|''sgr0''|Reset all attributes|
+|''[ 1 m''|''bold''|Set &quot;bright&quot; attribute|
+|''[ 2 m''|''dim''|Set &quot;dim&quot; attribute|
+|''[ 3 m''|''smso''|Set &quot;standout&quot; attribute|
+|''[ 4 m''|set ''smul'' unset ''rmul'' :?:|Set &quot;underscore&quot; (underlined text) attribute|
+|''[ 5 m''|''blink''|Set &quot;blink&quot; attribute|
+|''[ 7 m''|''rev''|Set &quot;reverse&quot; attribute|
+|''[ 8 m''|''invis''|Set &quot;hidden&quot; attribute|
+
+==== Foreground coloring ====
+
+^ ANSI         ^ terminfo equivalent  ^ Description                                   ^
+| ''[ 3 0 m''  | ''setaf 0''          | Set **foreground** to color #0 - **black**    |
+| ''[ 3 1 m''  | ''setaf 1''          | Set **foreground** to color #1 - **red**      |
+| ''[ 3 2 m''  | ''setaf 2''          | Set **foreground** to color #2 - **green**    |
+| ''[ 3 3 m''  | ''setaf 3''          | Set **foreground** to color #3 - **yellow**   |
+| ''[ 3 4 m''  | ''setaf 4''          | Set **foreground** to color #4 - **blue**     |
+| ''[ 3 5 m''  | ''setaf 5''          | Set **foreground** to color #5 - **magenta**  |
+| ''[ 3 6 m''  | ''setaf 6''          | Set **foreground** to color #6 - **cyan**     |
+| ''[ 3 7 m''  | ''setaf 7''          | Set **foreground** to color #7 - **white**    |
+| ''[ 3 9 m''  | ''setaf 9''          | Set **default** color as foreground color     |
+
+==== Background coloring ====
+
+^ ANSI         ^ terminfo equivalent  ^ Description                                   ^
+| ''[ 4 0 m''  | ''setab 0''          | Set **background** to color #0 - **black**    |
+| ''[ 4 1 m''  | ''setab 1''          | Set **background** to color #1 - **red**      |
+| ''[ 4 2 m''  | ''setab 2''          | Set **background** to color #2 - **green**    |
+| ''[ 4 3 m''  | ''setab 3''          | Set **background** to color #3 - **yellow**   |
+| ''[ 4 4 m''  | ''setab 4''          | Set **background** to color #4 - **blue**     |
+| ''[ 4 5 m''  | ''setab 5''          | Set **background** to color #5 - **magenta**  |
+| ''[ 4 6 m''  | ''setab 6''          | Set **background** to color #6 - **cyan**     |
+| ''[ 4 7 m''  | ''setab 7''          | Set **background** to color #7 - **white**    |
+| ''[ 4 9 m''  | ''setab 9''          | Set **default** color as background color     |
+
+==== Misc codes ====
+
+=== Save/restore screen ===
+
+Used capabilities: ''smcup'', ''rmcup''
+
+You've undoubtedly already encountered programs that restore the terminal contents after they do their work (like ''vim''). This can be done by the following commands:
+&lt;code&gt;
+# save, clear screen
+tput smcup
+clear
+
+# example &quot;application&quot; follows...
+read -n1 -p &quot;Press any key to continue...&quot;
+# example &quot;application&quot; ends here
+
+# restore
+tput rmcup
+&lt;/code&gt;
+
+These features require that certain capabilities exist in your termcap/terminfo.  While ''xterm'' and most of its clones (''rxvt'', ''urxvt'', etc) will support the instructions, your operating system may not include references to them in its default xterm profile.  (FreeBSD, in particular, falls into this category.)  If `tput smcup` appears to do nothing for you, and you don't want to modify your system termcap/terminfo data, and you KNOW that you are using a compatible xterm application, the following may work for you:
+
+&lt;code&gt;
+echo -e '\033[?47h' # save screen
+echo -e '\033[?47l' # restore screen
+&lt;/code&gt;
+
+Certain software uses these codes (via their termcap capabilities) as well. You may have seen the screen save/restore in ''less'', ''vim'', ''top'', ''screen'' and others.  Some of these applications may also provide configuration options to *disable* this behaviour.  For example, ''less'' has a ''-X'' option for this, which can also be set in an environment variable:
+
+&lt;code&gt;
+export LESS=X
+less /path/to/file
+&lt;/code&gt;
+
+Similarly, ''vim'' can be configured not to &quot;restore&quot; the screen by adding the following to your ''~/.vimrc'':
+
+&lt;code&gt;
+set t_ti= t_te=
+&lt;/code&gt;
+
+
+
+=== Additional colors ===
+
+Some terminal emulators support additional colors. The most common extension used by xterm-compatible terminals supports 256 colors. These can be generated by ''tput'' with ''seta{f,b} [0-255]'' when the ''TERM'' value has a ''-256color'' suffix.
+[[https://gist.github.com/XVilka/8346728#now-supporting-truecolour|Some terminals]] also support full 24-bit colors, and any X11 color code can be written directly into a special escape sequence. ([[https://gist.github.com/XVilka/8346728|More infos]]) Only a few programs make use of anything beyond 256 colors, and tput doesn't know about them. Colors beyond 16 usually only apply to modern terminal emulators running in graphical environments.
+
+The Virtual Terminal implemented in the Linux kernel supports only 16 colors, and the usual default terminfo entry for ''TERM=linux'' defines only 8. There is sometimes an alternate &quot;linux-16color&quot; that you can switch to, to get the other 8 colors.
+
+===== Bash examples =====
+
+==== Hardcoded colors ====
+
+&lt;code&gt;
+printf '%b\n' 'It is \033[31mnot\033[39m intelligent to use \033[32mhardcoded ANSI\033[39m codes!'
+&lt;/code&gt;
+
+==== Colors using tput ====
+
+__Directly inside the echo:__
+&lt;code&gt;
+echo &quot;TPUT is a $(tput setaf 2)nice$(tput setaf 9) and $(tput setaf 5)user friendly$(tput setaf 9) terminal capability database.&quot;
+&lt;/code&gt;
+
+__With preset variables:__
+&lt;code&gt;
+COL_NORM=&quot;$(tput setaf 9)&quot;
+COL_RED=&quot;$(tput setaf 1)&quot;
+COL_GREEN=&quot;$(tput setaf 2)&quot;
+echo &quot;It's ${COL_RED}red${COL_NORM} and ${COL_GREEN}green${COL_NORM} - have you seen?&quot;
+&lt;/code&gt;
+
+==== Misc ====
+
+__HOME function__
+&lt;code&gt;
+home() {
+  # yes, actually not much shorter ;-)
+  tput home
+}
+&lt;/code&gt;
+
+==== Silly but nice effect ====
+
+&lt;code&gt;
+#!/bin/bash
+
+DATA[0]=&quot;     _/  _/    _/                            _/    &quot;
+DATA[1]=&quot;  _/_/_/_/_/  _/_/_/      _/_/_/    _/_/_/  _/_/_/ &quot;
+DATA[2]=&quot;   _/  _/    _/    _/  _/    _/  _/_/      _/    _/&quot;
+DATA[3]=&quot;_/_/_/_/_/  _/    _/  _/    _/      _/_/  _/    _/ &quot;
+DATA[4]=&quot; _/  _/    _/_/_/      _/_/_/  _/_/_/    _/    _/  &quot;
+
+# virtual coordinate system is X*Y ${#DATA} * 5
+
+REAL_OFFSET_X=0
+REAL_OFFSET_Y=0
+
+draw_char() {
+  V_COORD_X=$1
+  V_COORD_Y=$2
+
+  tput cup $((REAL_OFFSET_Y + V_COORD_Y)) $((REAL_OFFSET_X + V_COORD_X))
+
+  printf %c ${DATA[V_COORD_Y]:V_COORD_X:1}
+}
+
+
+trap 'exit 1' INT TERM
+trap 'tput setaf 9; tput cvvis; clear' EXIT
+
+tput civis
+clear
+
+while :; do
+
+for ((c=1; c &lt;= 7; c++)); do
+  tput setaf $c
+  for ((x=0; x&lt;${#DATA[0]}; x++)); do
+    for ((y=0; y&lt;=4; y++)); do
+      draw_char $x $y
+    done
+  done
+done
+
+done
+&lt;/code&gt;
+
+==== Mandelbrot set ====
+
+This is a slightly modified version of Charles Cooke's colorful Mandelbrot plot scripts ([[http://earth.gkhs.net/ccooke/shell.html | original w/ screenshot]]) -- ungolfed, optimized a bit, and without hard-coded terminal escapes. The ''colorBox'' function is [[http://en.wikipedia.org/wiki/Memoization | memoized]] to collect ''tput'' output only when required and output a new escape only when a color change is needed. This limits the number of ''tput'' calls to at most 16, and reduces raw output by more than half. The ''doBash'' function uses integer arithmetic, but is still ksh93-compatible (run as e.g. ''bash ./mandelbrot'' to use it). The ksh93-only floating-point ''doKsh'' is almost 10x faster than ''doBash'' (thus the ksh shebang by default), but uses only features that don't make the Bash parser crash.
+
+&lt;code&gt;
+#!/usr/bin/env ksh
+
+# Charles Cooke's 16-color Mandelbrot
+# http://earth.gkhs.net/ccooke/shell.html
+# Combined Bash/ksh93 flavors by Dan Douglas (ormaaj)
+
+function doBash {
+	typeset P Q X Y a b c i v x y 
+	for ((P=10**8,Q=P/100,X=320*Q/cols,Y=210*Q/lines,y=-105*Q,v=-220*Q,x=v;y&lt;105*Q;x=v,y+=Y)); do
+		for ((;x&lt;P;a=b=i=c=0,x+=X)); do
+			for ((;a**2+b**2&lt;4*P**2&amp;&amp;i++&lt;99;a=((c=a)**2-b**2)/P+x,b=2*c*b/P+y)); do :
+			done
+			colorBox $((i&lt;99?i%16:0))
+		done
+		echo
+	done
+}
+
+function doKsh {
+	integer i
+	float a b c x=2.2 y=-1.05 X=3.2/cols Y=2.1/lines 
+	while
+		for ((a=b=i=0;(c=a)**2+b**2&lt;=2&amp;&amp;i++&lt;99&amp;&amp;(a=a**2-b**2+x,b=2*c*b+y);)); do :
+		done
+		. colorBox $((i&lt;99?i%16:0))
+		if ((x&lt;1?!(x+=X):(y+=Y,x=-2.2))); then
+			print
+			((y&lt;1.05)) 
+		fi
+		do :
+	done
+}
+
+function colorBox {
+	(($1==lastclr)) || printf %s &quot;${colrs[lastclr=$1]:=$(tput setaf &quot;$1&quot;)}&quot;
+	printf '\u2588'
+}
+
+unset -v lastclr
+((cols=$(tput cols)-1, lines=$(tput lines)))
+typeset -a colrs
+trap 'tput sgr0; echo' EXIT
+${KSH_VERSION+. doKsh} ${BASH_VERSION+doBash}
+&lt;/code&gt;
+
+A much more sophisticated version by Roland Mainz can be found [[http://svn.nrubsig.org/svn/people/gisburn/scripts/mandelbrotset1.sh | here]]</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+</div><!-- /content --></div>
+                    </div>
+                </div>
+
+                <div class="small text-right">
+
+                                        <span class="docInfo">
+                        <ul class="list-inline"><li><span class="iconify text-muted" data-icon="mdi:file-document-outline"></span> <span title="scripting/terminalcodes.txt">scripting/terminalcodes.txt</span></li><li><span class="iconify text-muted" data-icon="mdi:calendar"></span> Last modified: <span title="2019/08/23 13:22">2019/08/23 13:22</span></li><li class="text-muted">by <bdi>artmieu</bdi></li></ul>                    </span>
+                    
+                    
+                </div>
+
+            </article>
+
+            
+        </div>
+
+    </main>
+
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container-fluid">
+        <hr/>
+<div align="center">
+<h3><a target="_blank" href="http://web.archive.org/web/20220615024126/http://www.performing-databases.com/">This site is supported by Performing Databases - your experts for database administration</a></h3>
+</div>
+<hr/>
+<div align="center">
+<script async src="//web.archive.org/web/20220615024126js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- footer -->
+<div class="dw-container small container-fluid mx-5">
+
+    
+    <div class="footer-dw-title">
+                <div class="media">
+            <div class="media-left">
+                <img src="/web/20220615024126im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png" alt="Bash Hackers Wiki" class="media-object" style="height:32px"/>
+            </div>
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4 class="media-heading">Bash Hackers Wiki</h4>
+                        <p>
+                                                    </p>
+                    </div>
+                    <div class="col-sm-10">
+                                            </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+
+    <div class="footer-license row">
+        <hr/>
+        <div id="dw__license" class="col-sm-6">
+                        <p>
+                <a href="http://web.archive.org/web/20220615024126/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license"><img src="/web/20220615024126im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/license/gnufdl.png" width="24" height="24" alt="gnufdl"/> </a>            </p>
+            <p class="small">
+                Except where otherwise noted, content on this wiki is licensed under the following license:<br/><a href="http://web.archive.org/web/20220615024126/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license">GNU Free Documentation License 1.3</a>            </p>
+                    </div>
+
+        <div class="col-sm-6">
+                    </div>
+
+    </div>
+
+</div>
+<!-- /footer -->
+    </footer>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="skip to content" accesskey="t">
+        <span class="iconify" data-icon="mdi:chevron-up"></span>    </a>
+
+    <div id="screen__mode">        <span class="visible-xs-block"></span>
+        <span class="visible-sm-block"></span>
+        <span class="visible-md-block"></span>
+        <span class="visible-lg-block"></span>
+    </div>
+
+    <img src="/web/20220615024126im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=scripting%3Aterminalcodes&amp;1655260887" width="2" height="1" alt=""/>
+</div>
+
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 02:41:26 Jun 15, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:35:32 Apr 14, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 107.942
+  exclusion.robots: 0.248
+  exclusion.robots.policy: 0.233
+  RedisCDXSource: 3.092
+  esindex: 0.009
+  LoadShardBlock: 76.61 (3)
+  PetaboxLoader3.datanode: 114.848 (4)
+  load_resource: 299.752
+  PetaboxLoader3.resolve: 159.133
+-->

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" class="no-js">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=TPXmWR5s" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("http://web.archive.org/web");
+  __wm.wombat("https://wiki.bash-hackers.org/scripting/tutoriallist?do=edit","20220615024149","http://web.archive.org/","web","/_static/",
+	      "1655260909");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+    <meta charset="UTF-8"/>
+    <title>List of Bash online-tutorials [Bash Hackers Wiki]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="/web/20220615024149im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/web/20220615024149im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/apple-touch-icon.png"/>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link type="text/css" rel="stylesheet" href="/web/20220615024149cs_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/default/bootstrap.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20220615024149/https://wiki.bash-hackers.org/lib/exe/opensearch.php" title="Bash Hackers Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/scripting/tutoriallist?do=index" title="Sitemap"/>
+<link rel="manifest" href="/web/20220615024149/https://wiki.bash-hackers.org/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/web/20220615024149/https://wiki.bash-hackers.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/web/20220615024149/https://wiki.bash-hackers.org/feed.php?mode=list&amp;ns=scripting"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/web/20220615024149/https://wiki.bash-hackers.org/_export/xhtml/scripting/tutoriallist"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/web/20220615024149/https://wiki.bash-hackers.org/_export/raw/scripting/tutoriallist"/>
+<link rel="stylesheet" type="text/css" href="/web/20220615024149cs_/https://wiki.bash-hackers.org/lib/exe/css.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='scripting';var JSINFO = {"updatable":1,"userreplace":1,"default_macro_string":"","plugins":{"edittable":{"default columnwidth":""}},"move_renameokay":false,"isadmin":0,"isauth":0,"bootstrap3":{"mode":"source","toc":[],"config":{"collapsibleSections":0,"fixedTopNavbar":1,"showSemanticPopup":0,"sidebarOnNavbar":0,"tagsOnTop":1,"tocAffix":1,"tocCollapseOnScroll":1,"tocCollapsed":0,"tocLayout":"default","useAnchorJS":1,"useAlternativeToolbarIcons":1}},"id":"scripting:tutoriallist","namespace":"scripting","ACT":"source","useHeadingNavigation":1,"useHeadingContent":1};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/exe/js.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"></script>
+<script type="text/javascript">/*<![CDATA[*/if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '/lib/tpl/bootstrap3/iconify.php?prefix={prefix}&icons={icons}' } }
+/*!]]>*/</script>
+<script type="text/javascript" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/anchorjs/anchor.min.js"></script>
+<script type="text/javascript" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/iconify.min.js"></script>
+<script type="text/javascript" src="/web/20220615024149js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/plugins/fa.js"></script>
+<!--<![endif]-->
+<style type="text/css">@media screen { body { margin-top: 65px; }  #dw__toc.affix { top: 55px; position: fixed !important; }  #dw__toc .nav .nav .nav { display: none; } }</style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="default dokuwiki mode_source tpl_bootstrap3 dw-page-on-panel dw-fluid-container" data-page-id="scripting:tutoriallist"><div class="dokuwiki">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container-fluid mx-5">
+    <!-- navbar -->
+<nav id="dw__navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="dw-container container-fluid mx-5">
+
+        <div class="navbar-header">
+
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand d-flex align-items-center" href="/web/20220615024149/https://wiki.bash-hackers.org/start" accesskey="h" title="Bash Hackers Wiki"><img id="dw__logo" class="pull-left h-100 mr-4" alt="Bash Hackers Wiki" src="/web/20220615024149im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png"/><div class="pull-right"><div id="dw__title">Bash Hackers Wiki</div></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+
+            
+            
+            
+            <div class="navbar-right" id="dw__navbar_items">
+
+                
+<!-- navbar-searchform -->
+<form action="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search">
+    <div class="input-group">
+        <input id="qsearch" autocomplete="off" type="search" placeholder="Search" value="" accesskey="f" name="q" class="form-control" title="[F]"/>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" title="Search">
+                <span class="iconify" data-icon="mdi:magnify"></span>            </button>
+        </div>
+
+    </div>
+    <input type="hidden" name="do" value="search"/>
+</form>
+<!-- /navbar-searchform -->
+<!-- tools-menu -->
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
+
+    
+    <li class="dropdown">
+
+        <a href="" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="iconify" data-icon="mdi:wrench"></span> <span class="hidden-lg hidden-md hidden-sm">Tools</span> <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu tools" role="menu">
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:account"></span> User Tools            </li>
+
+            <li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=register" title="Register" rel="nofollow" class="menuitem register"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span>Register</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span>Log In</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:toolbox"></span> Site Tools            </li>
+
+            <li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=recent" title="Recent Changes [r]" rel="nofollow" accesskey="r" class="menuitem recent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69V13m4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67V8M5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H5m11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85z"/></svg><span>Recent Changes</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=media&amp;ns=scripting" title="Media Manager" rel="nofollow" class="menuitem media"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7 15l4.5-6 3.5 4.5 2.5-3L21 15m1-11h-8l-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M2 6H0v14a2 2 0 0 0 2 2h18v-2H2V6z"/></svg><span>Media Manager</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=index" title="Sitemap [x]" rel="nofollow" accesskey="x" class="menuitem index"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2z"/></svg><span>Sitemap</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:file-document-outline"></span> Page Tools            </li>
+
+            <li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>
+            
+                </ul>
+    </li>
+
+    
+</ul>
+<!-- /tools-menu -->
+
+                <ul class="nav navbar-nav">
+
+                    
+                                        <li>
+                        <span class="dw__actions dw-action-icon">
+                        <a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=register" title="Register" rel="nofollow" class="menuitem register btn btn-success navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span class=""> Register</span></a><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login btn btn-default navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span class=""> Log In</span></a>                        </span>
+                    </li>
+                    
+                </ul>
+
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->
+<div align="center">
+<script async src="//web.archive.org/web/20220615024149js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+    </header>
+
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container-fluid mx-5">
+
+        <div id="dokuwiki__pageheader">
+
+            
+            <!-- breadcrumbs -->
+<nav id="dw__breadcrumbs" class="small">
+
+    <hr/>
+
+        <div class="dw__youarehere">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><li>You are here</li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/web/20220615024149/https://wiki.bash-hackers.org/start" itemprop="item" title="start"><span itemprop="name"><span class="iconify" data-icon="mdi:home"></span></span></a></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/start" class="wikilink2" title="scripting:start" rel="nofollow">scripting</a></li><li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name"><a itemprop="item" href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist" class="wikilink1" title="scripting:tutoriallist">List of Bash online-tutorials</a></span></li></ol>    </div>
+    
+        <div class="dw__breadcrumbs hidden-print">
+        <ol class="breadcrumb"><li>Trace</li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/terms/filename" title="dict:terms:filename">filename</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/terms/interpreter_directive" title="dict:terms:interpreter_directive">Interpreter Directive</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/terms/posix" title="dict:terms:posix">POSIX</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/index" title="dict:index">Small Bash- and commandline-related dictionary</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/terms/ctime" title="dict:terms:ctime">ctime</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/start" title="dict:start">dict</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/dict/terms/return_status" title="dict:terms:return_status">Return Status</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/howto/conffile" title="howto:conffile">Config files for your script</a></li><li><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist/bashguide" title="scripting:tutoriallist:bashguide">Bash guide on Greg&#039;s wiki</a></li><li class="active"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist" title="scripting:tutoriallist">List of Bash online-tutorials</a></li></ol>    </div>
+    
+    <hr/>
+
+</nav>
+<!-- /breadcrumbs -->
+
+            <p class="text-right">
+                <span class="pageId ml-1 label label-primary">scripting:tutoriallist</span>            </p>
+
+            <div id="dw__msgarea" class="small">
+                            </div>
+
+        </div>
+
+        <div class="row">
+
+            
+            <article id="dokuwiki__content" class="col-sm-12 col-md-12 " itemscope itemtype="http://schema.org/Article" itemref="dw__license">
+
+                
+<!-- page-tools -->
+<nav id="dw__pagetools" class="hidden-print">
+    <div class="tools panel panel-default">
+        <ul class="nav nav-stacked nav-pills text-muted">
+            <li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615024149/https://wiki.bash-hackers.org/scripting/tutoriallist?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>        </ul>
+    </div>
+</nav>
+<!-- /page-tools -->
+
+                <div class="panel panel-default px-3 py-2" itemprop="articleBody">
+                    <div class="page panel-body">
+
+                        
+<div class="dw-content-page "><!-- content --><div class="dw-content"><p>
+This page is read only. You can view the source, but not change it. Ask your administrator if you think this is wrong.
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="scripting:tutoriallist"/><input type="hidden" name="rev" value="0"/><input type="hidden" name="date" value="0"/><input type="hidden" name="prefix" value="."/><input type="hidden" name="suffix" value=""/><input type="hidden" name="changecheck" value="8780bedd9ac2384571b12cac9d3a26b0"/><input type="hidden" name="target" value="section"/><textarea name="wikitext" id="wiki__text" dir="auto" class="edit form-control" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== List of Bash online-tutorials ======
+
+{{keywords&gt;bash shell scripting review tutorial list recommendation}}
+
+Here's a list of some Bash tutorials.
+
+The primary purpose of that list is to lead beginners to //good tutorials// and not to the wrong ones. However, the secondary purpose is to provide information to increase quality of the linked tutorials.
+
+My experience shows that nobody is interested when you &quot;just send a mail to the author&quot;, even if he links a big &quot;contact me&quot; in his article(s). This is another try of influencing the Bash world.
+
+
+===== List =====
+
+This is a test for the data plugin. For now, please use the next section.
+
+~~NOCACHE~~
+
+---- datatable tutorial ----
+cols    : %pageid%, recindex
+headers : Short name, Recommendation Index
+sort    : recindex
+filter  : type=tutorial
+----
+===== Recommendations =====
+
+**Note** that these recommendations are my personal opinion.
+Please **contact** me
+  * if you have reviews or new sites
+  * if you're not okay with a recommendation
+  * if you're the author of a mentioned site (remove link, copyright, discussion, ...)
+  * etc...
+
+
+The recommendation-indicator &quot;REC&quot; used below is a number between 1 and 10 visualized as a bar:
+  * &lt;progress=0&gt; Not recommended to read, at best, don't click the link.
+  * ...
+  * &lt;progress=50&gt; Use it with care!
+  * ...
+  * &lt;progress=100&gt; **The perfect godlike tutorial** (I doubt I'll ever find it)
+
+
+
+^ Name (Links to review below)j                                                                                   ^ Weblink\ \ \                                                                                                                                                                                                    ^ REC\\ indicator  ^ Comments                                                                                                                                                                                                                   ^
+| Bash\ guide on Greg's wiki                                                                                      | [[http://mywiki.wooledge.org/BashGuide|click]] ([[http://guide.bash.academy|new revision draft]])                                                                                                               | &lt;progress=90&gt;    | This guide teaches modern stuff and good practises. I recommend learning from it. It was written by the guys in ''#bash''IRC channel on Freenode (mainly ''lhunath''), because there are so many bad tutorials out there.  |
+| Steve Parker's shell scripting guide                                                                            | [[http://steve-parker.org/sh/intro.shtml|click]]                                                                                                                                                                | &lt;progress=90&gt;    | Very good (not only Bash) shell scripting guide. Teaches good practices, gives background information.                                                                                                                     |
+| Bash Guide for Beginners  ([[#rv_bgb|review]])                                                                  | [[http://tldp.org/LDP/Bash-Beginners-Guide/html/|click]]                                                                                                                                                        | &lt;progress=80&gt;    | Good introduction that really requires no previous knowledge, also covers the most important unix utilities                                                                                                                |
+| Advanced\ Bash\ Scripting\ Guide (ABS) ([[#rv_abs|review]])                                                     | [[http://tldp.org/LDP/abs/html/|click]]                                                                                                                                                                         | &lt;progress=50&gt;    | Has a lot of information that is hard to find, is outdated and often unsafe.  To be avoided until you can filter out the good stuff.                                                                                       |
+| IBM developerWorks &quot;Bash\ by\ example&quot;                                                                          | [[http://www.ibm.com/developerworks/library/l-bash.html|click(1)]]\\ [[http://www.ibm.com/developerworks/library/l-bash2.html|click(2)]]\\ [[http://www.ibm.com/developerworks/library/l-bash3.html|click(3)]]  | &lt;progress=80&gt;    | Doesn't teach outdated stuff, doesn't tell you wrong things. A good start, though not that detailed.                                                                                                                       |
+| Deadman's                                                                                                       | [[http://samrowe.com/wordpress/advancing-in-the-bash-shell/|click]]                                                                                                                                             | &lt;progress=70&gt;    | Focus isn't scripting per se. Focus is interactive use and increasing the productivity on the prompt. Teaches some nice features.                                                                                          |
+| Bash Shell Programming in Linux (P. Lutus)                                                                      | [[http://www.arachnoid.com/linux/shell_programming.html|click]]                                                                                                                                                 | &lt;progress=70&gt;    | Good start. Though there are small bugs.                                                                                                                                                                                   |
+| BASH Help at hypexr.org ([[#rv_hypexrorg|review]])                                                              | [[http://www.hypexr.org/bash_tutorial.php|click]]                                                                                                                                                               | &lt;progress=50&gt;    | Shows you some nice stuff and links to other ressources. Not a tutorial to learn Bash, though.                                                                                                                             |
+| Bash Programming Introduction HowTo (TLDP) ([[#rv_bprogintrohowto|review]])                                     | [[http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html|click]]                                                                                                                                                      | &lt;progress=10&gt;    | Absolute crap. Many syntax errors alone.                                                                                                                                                                                   |
+| Quick guide ([[#rv_qguide|review]])                                                                             | [[http://www.panix.com/~elflord/unix/bash-tute.html|click]]                                                                                                                                                     | &lt;progress=50&gt;    | Usable as a start. Doesn't teach wrong stuff, shows you good practices.                                                                                                                                                    |
+| LinuxCommand.org: Writing shell scripts. ([[#rv_linuxcommand|review]]) incomplete, thus ranking isn't complete  | [[http://linuxcommand.org/writing_shell_scripts.php|click]]                                                                                                                                                     | &lt;progress=50&gt;    | Practise oriented, some mistakes/flaws, but sadly it stops in the middle                                                                                                                                                   |
+| Linux\ Shell\ Scripting\ Tutorial\ v2.0 ([[#rv_linuxscriptv2|review]])                                          | [[http://bash.cyberciti.biz/guide/Main_Page|click]]                                                                                                                                                             | &lt;progress=40&gt;    | currently reviewing (the tutorial is also under development)                                                                                                                                                               |
+| linuxconfig.org Bash\ Scripting\ Tutorial ([[#rv_linuxconfig|review]])                                          | [[http://www.linuxconfig.org/Bash_scripting_Tutorial|click]]                                                                                                                                                    | &lt;progress=0&gt;     | Teaches many outdated, unstable, undetailed stuff. You won't learn scripting from there.                                                                                                                                   |
+| Beginner\ Linux\ Tutorial                                                                                       | [[http://linuxtutorial.todolistme.net|click]]                                                                                                                                                                   | &lt;progress=60&gt;    | A comprehensive introduction to the Linux Command Line including ample examples to make learning easy.                                                                                                                     |
+| Beginner\ Bash\ Scripting\ Tutorial                                                                             | [[http://ryanstutorials.net/bash-scripting-tutorial/|click]]                                                                                                                                                    | &lt;progress=60&gt;    | A beginners guide to Bash scripting under Linux.                                                                                                                                                                           |
+| Linuxcommand.org: The\ Linux\ Command\ Line                                                                     | [[http://linuxcommand.org/tlcl.php/|click]]                                                                                                                                                                     | &lt;progress=40&gt;    | A beginners guide to using Bash shell, basic unix utilities, and shell scripting. Shell scripting part is not so good. But good introduction on how to use various utilities in Bash.                                      |
+===== Detailed reviews =====
+
+&lt;BOOKMARK:rv_linuxconfig&gt;
+==== linuxconfig.org Bash Scripting Tutorial ====
+
+Article link: [[http://www.linuxconfig.org/Bash_scripting_Tutorial]]\\
+Discussion link: &lt;nowiki&gt;http://www.linuxconfig.org/Talk:Bash_scripting_Tutorial&lt;/nowiki&gt; UPDATE: Discussion page is gone.
+
+Though the basic idea is nice, using flash terminal sessions and screenshots, there are many bugs or bad constructs.
+
+Some stuff I didn't like there:
+  * uses external, unreliable command ''which'' instead of builtin ''type -p'' to determinate the location of a program
+  * lacks [[syntax:quoting|sane quoting]]
+  * uses ''function SOMENAME'' keyword instead of the common POSIX-compatible variant ''SOMENAME()'' to [[syntax:basicgrammar#shell_function_definitions|define a function]]
+  * uses backticks instead of ''$( ... )'' for [[syntax:expansion:cmdsubst|command substitution]]
+  * incorrectly uses an additional array to store [[scripting:posparams|positional parameters]], disregarding that ''$@'' already is array-like
+  * uses ''echo -e'' and the historical control character ''\c'' instead of modern [[commands:builtin:printf]]
+  * uses ''for a in `seq 1 10`'' instead of a [[syntax:ccmd:c_for|C-like counter loop]] ''for &lt;nowiki&gt;((a=1; a &lt;= 10; a++))&lt;/nowiki&gt;''
+  * the ''if/else'' stuff looks as if the ''test'' (or ''[ ...]'') command is the only thing Bash can execute and check
+  * a ''for'' loop example that **will** explode on [[syntax:expansion:wordsplit|word-splitting]]
+  * arithmetic tests (the while/until loop examples) using the historical &quot;old way&quot; with ''test'', not [[syntax:arith_expr|modern arithmetic components]]
+  * useless [[syntax:quoting|quoting]] of one-word strings (not that it hurts per se, but it shows that the author has no clue when to use quotes)
+  * a weird construct I don't understand (example for stdout/err redirection): ''grep -r hda6 * . 1&gt;&amp;2 stderr.txt''
+
+
+''twkm'' commented some things on their &lt;nowiki&gt;http://www.linuxconfig.org/Talk:Bash_scripting_Tutorial&lt;/nowiki&gt;, I linked //this article// there. UPDATE: Discussion page is gone.
+
+Overall, if the author doesn't change the article, it's unusable from my point of view. At least unusable to teach sane Bash scripting.
+
+
+UPDATE: Discussion is available directly below the article. I linked this page, but waiting for moderator approval.
+&lt;BOOKMARK:rv_qguide&gt;
+
+==== Quick Guide ====
+
+Article link: [[http://www.panix.com/~elflord/unix/bash-tute.html]]\\
+Discussion Link: //not available//
+
+This article is usable as basic introduction into the Bash world. It doesn't teach you wrong things, and it uses correct syntax and explanations nearly everywhere. However, it's not usable as complete learning tutorial - but that is not the goal.
+
+One point (I **have** to criticize **something** ;-) ):
+  * the article says that there are no [[syntax:ccmd:c_for|C-styled for-loops]] in Bash, this is wrong (maybe the article is for a very old (pre ''2.05b'') Bash version)
+
+&lt;BOOKMARK:rv_bprogintrohowto&gt;
+==== Bash Programming Introduction HowTo ====
+
+Article link: [[http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html]]\\
+Discussion link: //not available//; EMail: ''mikkey (AT) dynamo.com.ar''
+
+A few points:
+  * uses ''function SOMENAME'' instead of more common and most portable ''SOMENAME()'' to [[syntax:basicgrammar#shell_function_definitions|define functions]]
+  * wrong description of the [[syntax:ccmd:if_clause|if clause]] (says &quot;the base [...] is ''if [expression];''&quot;, which is wrong)
+  * a [[syntax:ccmd:classic_for|for-loop example]] will explode due to [[syntax:expansion:wordsplit|word splitting]] (''for i in $( ls )'' - evil!)
+  * the mentioned C-like for-loop is not the [[syntax:ccmd:c_for|real C-like for-loop]], it just calls ''seq(1)''+
+  * Many syntax errors: The examples won't even parse correctly
+
+I like the style this article is written in. If the points are fixed, it could be a really usable starting point for newbies. But at the moment it's unusable
+
+&lt;BOOKMARK:rv_hypexrorg&gt;
+
+==== BASH Help at hypexr.org ====
+
+Article link: [[http://www.hypexr.org/bash_tutorial.php]]\\
+Discussion link: //not available//; EMail: scott (AT) hypexr.org
+
+The article is usable to step into the shell world. It's not a tutorial per se, it will tell you some nice CLI-specific things like readline or completion.
+
+Only one point:
+  * confusing description of the dotfiles
+
+&lt;BOOKMARK:rv_abs&gt;
+==== Advanced Bash Scripting guide (ABS) ====
+
+Article link: [[http://tldp.org/LDP/abs/html/]]\\
+Discussion link: //not available//; EMail: thegrendel (AT) theriver.com
+
+The only big problem I see with the ABS is, that the name doesn't match the reality. It doesn't teach //advanced// techniques. That **doesn't mean** the guide isn't good! It's one of the biggest, most complete and interesting Bash guides I've seen.
+
+I don't want to write every point here that disturbs me. In general it's not that important since the mistakes or wrong assumptions it makes are minimal. Also I noticed that mistakes in example scripts vanish with time, the author polishes his work. Thanks Mr. Cooper.
+
+The ABS is definitely worth reading to step deeper into the Bash commandline world of Linux (since many Linux-specific examples are there, they're unusable for Unices).
+
+
+&lt;BOOKMARK:rv_bgb&gt;
+
+==== Bash Guide for Beginners ====
+
+Article link: [[http://tldp.org/LDP/Bash-Beginners-Guide/html/]]\\
+Discussion link: //not available//
+
+Good introduction to bash and shell scripting, the guide is fairly  complete and requires almost no previous knowledge other than be able to type some commands in a shell.
+
+Some advice is a bit strange or outdated &quot;Real Programmers - Most programmers will prefer to use the test built-in command&quot; &quot;Wherever possible, Bash users should try to use the syntax with angular brackets:($[ ])&quot; but all in all a nice tutorial to get a good overview of shell programming starting from 0.
+
+&lt;BOOKMARK:rv_linuxscriptv2&gt;
+==== Linux Shell Scripting Tutorial v2.0 ====
+
+Article link: [[http://bash.cyberciti.biz/guide/Main_Page]]\\
+Discussion link: //use the individual MediaWiki discussion pages//
+
+Additional problem: The author rates his shell skills as &quot;9 of 10&quot; in his CV. After reading this tutorial personally I'd rate him 3/10
+
+This guide has some big problems. It seems to cover a lot of material but has some pretty nasty issues, too. Examples:
+  * &lt;del&gt;When showing how to echo variables, it shows echo ''$var'' and ''echo ${var}'' mostly without quoting.&lt;/del&gt;
+  * Lots of 'test' and not much '['. Not really a &quot;problem&quot; - more a style thing. But...
+  * test and [ and great, but what happened to \[\[? And test == is not used to check if two strings are equal. You use =.
+  * &lt;del&gt;How to deal with case insensitive matching mentions converting to lowercase with tr and doing a pattern like [tT][aA][rR]. I propose a third solution: shopt -o nomasematch&lt;/del&gt;
+  * The for loop examples reads like a how-not-to. for i in &lt;don't do this&gt;: &lt; $(ls /tmp/*)&gt;, &lt;1 2 3 4 5&gt;, &lt;$files&gt;, &lt;$*&gt;. Don't parse ls. Use {1..5}. Use an array for a list of files. Use quotes (and $@).
+  * The infinite-while-loop example has him reimplementing the bash select builtin. Not bad for an exercise, but it ought to acknowledge that bash does it better.
+  * the description for compound commands is wrong: It shows 3 compound commands (grouping with and without subshell) where two of the examples are the same and the reason given for using ( ) applies equally to  { }
+  * &lt;del&gt;the function definition focuses on the &quot;function&quot; keyword, which is the worst way&lt;/del&gt;
+  * The initial example page for pipes seems like a good list of examples of parsing things-you-do-NOT-want-to-parse
+  * &lt;del&gt;the page explaining special parameters misses $@, which is very important&lt;/del&gt;
+  * &lt;del&gt;the page(s) about shell variables and environment doesn't even mention &quot;environment&quot; so far&lt;/del&gt; some improvement.
+  * &lt;del&gt;backticks are **not** a quoting mechanism, they are a substitution mechanism. but that doesn't matter since he doesn't mention all quoting mechanisms anyways&lt;/del&gt; some improvement, but the quoting page is still misleading
+  * &lt;del&gt;another hint that he doesn't know what he's talking about: It's said that command substitution is allowed inside backquotes (where backquotes are a quoting mechanism!) - backquotes are **command substitution!**&lt;/del&gt;
+  * etc. etc. etc. (nearly endless list, sadly)
+
+**Conclusion**
+
+Beside all the bashing (sorry!) above: I think the problem is the following, the author did a lot using the shell, and he knows many things. But he doesn't know and/or understand the underlying concepts of most of the material covered. This - in my personal opinion - disqualifies him as the author of a guide/tutorial for shell scripting.
+
+**But**
+
+The tutorial is under development. It improves here and there. But the code style and robustness problems still remain.
+
+**UPDATE:** Over time, the author fixed a lot of things and created new chapters. From time to time, I'll visit again and re-check it.
+
+
+&lt;BOOKMARK:rv_linuxcommand&gt;
+
+==== LinuxCommand.org: Writing shell scripts. ====
+
+Article link: [[http://linuxcommand.org/writing_shell_scripts.php]]\\
+Discussion link: //not available//
+
+__**Bad:**__
+
+  * Difference between startup files ''.bash_profile'' and ''.bashrc'' is wrong (&quot;Though placing your aliases and shell functions in your .bash_profile will work, it is not considered good form.&quot;)
+  * Reserved words (for the parser) are **not** disallowed as shell variable names (if the variable name is a reserved word, the reserved word takes precedence)
+  * It suggests the ''which'' command, which might be popular here and there, but should not be used for various reasons
+  * It says, variables with ''UPPERCASE'' names are constants, this might be a good style, but it's not a programming feature. Real &quot;constants&quot; are made from read-only variables
+  * Common mistake it shares with many other tutorials: The ANSI C escapes are not recognized by (normal) quoting mechanisms, it's the ''echo'' command that interprets them! On the other hand, it misses the quoting style that makes the shell interpret ANSI C escape sequences.
+  * It suggests the ''function'' keyword to define a function, which is correct, but bad style and unportable
+  * It could use ''getopts'' for positional parameters, at least as an &quot;advanced example&quot;
+  * It uses special parameters that represent positional parameters (''$@'') unquoted, and thus unsafe or buggy
+  * Slightly wrong: ''SIGKILL'' and the process stop signal can't be trapped. But that shouldn't really matter for daily shell coding
+  * &quot;Creating safe temporary files&quot;, which is about creating a unique name, should mention tools like ''mktemp'' or the like
+  * It's far from complete, it &quot;suddenly stops&quot;. Maybe it's still under development?
+
+__**Good:**__
+
+  * Practise oriented
+  * It explains the behaviour of unquoted variable arguments to the ''test'' command in a nice, understandable way
+  * It does not use ''expr'' or ''let'' for arithmetic, good
+</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+</div><!-- /content --></div>
+                    </div>
+                </div>
+
+                <div class="small text-right">
+
+                                        <span class="docInfo">
+                        <ul class="list-inline"><li><span class="iconify text-muted" data-icon="mdi:file-document-outline"></span> <span title="scripting/tutoriallist.txt">scripting/tutoriallist.txt</span></li><li><span class="iconify text-muted" data-icon="mdi:calendar"></span> Last modified: <span title="2019/08/31 10:17">2019/08/31 10:17</span></li><li class="text-muted">by <bdi>ersen</bdi></li></ul>                    </span>
+                    
+                    
+                </div>
+
+            </article>
+
+            
+        </div>
+
+    </main>
+
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container-fluid">
+        <hr/>
+<div align="center">
+<h3><a target="_blank" href="http://web.archive.org/web/20220615024149/http://www.performing-databases.com/">This site is supported by Performing Databases - your experts for database administration</a></h3>
+</div>
+<hr/>
+<div align="center">
+<script async src="//web.archive.org/web/20220615024149js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- footer -->
+<div class="dw-container small container-fluid mx-5">
+
+    
+    <div class="footer-dw-title">
+                <div class="media">
+            <div class="media-left">
+                <img src="/web/20220615024149im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png" alt="Bash Hackers Wiki" class="media-object" style="height:32px"/>
+            </div>
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4 class="media-heading">Bash Hackers Wiki</h4>
+                        <p>
+                                                    </p>
+                    </div>
+                    <div class="col-sm-10">
+                                            </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+
+    <div class="footer-license row">
+        <hr/>
+        <div id="dw__license" class="col-sm-6">
+                        <p>
+                <a href="http://web.archive.org/web/20220615024149/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license"><img src="/web/20220615024149im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/license/gnufdl.png" width="24" height="24" alt="gnufdl"/> </a>            </p>
+            <p class="small">
+                Except where otherwise noted, content on this wiki is licensed under the following license:<br/><a href="http://web.archive.org/web/20220615024149/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license">GNU Free Documentation License 1.3</a>            </p>
+                    </div>
+
+        <div class="col-sm-6">
+                    </div>
+
+    </div>
+
+</div>
+<!-- /footer -->
+    </footer>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="skip to content" accesskey="t">
+        <span class="iconify" data-icon="mdi:chevron-up"></span>    </a>
+
+    <div id="screen__mode">        <span class="visible-xs-block"></span>
+        <span class="visible-sm-block"></span>
+        <span class="visible-md-block"></span>
+        <span class="visible-lg-block"></span>
+    </div>
+
+    <img src="/web/20220615024149im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=scripting%3Atutoriallist&amp;1655260911" width="2" height="1" alt=""/>
+</div>
+
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 02:41:49 Jun 15, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:35:34 Apr 14, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 220.051
+  exclusion.robots: 0.198
+  exclusion.robots.policy: 0.185
+  cdx.remote: 0.083
+  esindex: 0.011
+  LoadShardBlock: 187.799 (3)
+  PetaboxLoader3.datanode: 523.534 (4)
+  load_resource: 542.369
+  PetaboxLoader3.resolve: 136.342
+-->

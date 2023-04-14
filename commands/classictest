@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" class="no-js">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=TPXmWR5s" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("http://web.archive.org/web");
+  __wm.wombat("https://wiki.bash-hackers.org/commands/classictest?do=edit","20220615023229","http://web.archive.org/","web","/_static/",
+	      "1655260349");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+    <meta charset="UTF-8"/>
+    <title>The classic test command [Bash Hackers Wiki]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="/web/20220615023229im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/web/20220615023229im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/apple-touch-icon.png"/>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link type="text/css" rel="stylesheet" href="/web/20220615023229cs_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/default/bootstrap.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20220615023229/https://wiki.bash-hackers.org/lib/exe/opensearch.php" title="Bash Hackers Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/commands/classictest?do=index" title="Sitemap"/>
+<link rel="manifest" href="/web/20220615023229/https://wiki.bash-hackers.org/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/web/20220615023229/https://wiki.bash-hackers.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/web/20220615023229/https://wiki.bash-hackers.org/feed.php?mode=list&amp;ns=commands"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/web/20220615023229/https://wiki.bash-hackers.org/_export/xhtml/commands/classictest"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/web/20220615023229/https://wiki.bash-hackers.org/_export/raw/commands/classictest"/>
+<link rel="stylesheet" type="text/css" href="/web/20220615023229cs_/https://wiki.bash-hackers.org/lib/exe/css.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='commands';var JSINFO = {"updatable":1,"userreplace":1,"default_macro_string":"","plugins":{"edittable":{"default columnwidth":""}},"move_renameokay":false,"isadmin":0,"isauth":0,"bootstrap3":{"mode":"source","toc":[],"config":{"collapsibleSections":0,"fixedTopNavbar":1,"showSemanticPopup":0,"sidebarOnNavbar":0,"tagsOnTop":1,"tocAffix":1,"tocCollapseOnScroll":1,"tocCollapsed":0,"tocLayout":"default","useAnchorJS":1,"useAlternativeToolbarIcons":1}},"id":"commands:classictest","namespace":"commands","ACT":"source","useHeadingNavigation":1,"useHeadingContent":1};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/exe/js.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"></script>
+<script type="text/javascript">/*<![CDATA[*/if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '/lib/tpl/bootstrap3/iconify.php?prefix={prefix}&icons={icons}' } }
+/*!]]>*/</script>
+<script type="text/javascript" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/anchorjs/anchor.min.js"></script>
+<script type="text/javascript" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/iconify.min.js"></script>
+<script type="text/javascript" src="/web/20220615023229js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/plugins/fa.js"></script>
+<!--<![endif]-->
+<style type="text/css">@media screen { body { margin-top: 65px; }  #dw__toc.affix { top: 55px; position: fixed !important; }  #dw__toc .nav .nav .nav { display: none; } }</style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="default dokuwiki mode_source tpl_bootstrap3 dw-page-on-panel dw-fluid-container" data-page-id="commands:classictest"><div class="dokuwiki">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container-fluid mx-5">
+    <!-- navbar -->
+<nav id="dw__navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="dw-container container-fluid mx-5">
+
+        <div class="navbar-header">
+
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand d-flex align-items-center" href="/web/20220615023229/https://wiki.bash-hackers.org/start" accesskey="h" title="Bash Hackers Wiki"><img id="dw__logo" class="pull-left h-100 mr-4" alt="Bash Hackers Wiki" src="/web/20220615023229im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png"/><div class="pull-right"><div id="dw__title">Bash Hackers Wiki</div></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+
+            
+            
+            
+            <div class="navbar-right" id="dw__navbar_items">
+
+                
+<!-- navbar-searchform -->
+<form action="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search">
+    <div class="input-group">
+        <input id="qsearch" autocomplete="off" type="search" placeholder="Search" value="" accesskey="f" name="q" class="form-control" title="[F]"/>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" title="Search">
+                <span class="iconify" data-icon="mdi:magnify"></span>            </button>
+        </div>
+
+    </div>
+    <input type="hidden" name="do" value="search"/>
+</form>
+<!-- /navbar-searchform -->
+<!-- tools-menu -->
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
+
+    
+    <li class="dropdown">
+
+        <a href="" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="iconify" data-icon="mdi:wrench"></span> <span class="hidden-lg hidden-md hidden-sm">Tools</span> <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu tools" role="menu">
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:account"></span> User Tools            </li>
+
+            <li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=register" title="Register" rel="nofollow" class="menuitem register"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span>Register</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span>Log In</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:toolbox"></span> Site Tools            </li>
+
+            <li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=recent" title="Recent Changes [r]" rel="nofollow" accesskey="r" class="menuitem recent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69V13m4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67V8M5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H5m11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85z"/></svg><span>Recent Changes</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=media&amp;ns=commands" title="Media Manager" rel="nofollow" class="menuitem media"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7 15l4.5-6 3.5 4.5 2.5-3L21 15m1-11h-8l-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M2 6H0v14a2 2 0 0 0 2 2h18v-2H2V6z"/></svg><span>Media Manager</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=index" title="Sitemap [x]" rel="nofollow" accesskey="x" class="menuitem index"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2z"/></svg><span>Sitemap</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:file-document-outline"></span> Page Tools            </li>
+
+            <li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>
+            
+                </ul>
+    </li>
+
+    
+</ul>
+<!-- /tools-menu -->
+
+                <ul class="nav navbar-nav">
+
+                    
+                                        <li>
+                        <span class="dw__actions dw-action-icon">
+                        <a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=register" title="Register" rel="nofollow" class="menuitem register btn btn-success navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span class=""> Register</span></a><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login btn btn-default navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span class=""> Log In</span></a>                        </span>
+                    </li>
+                    
+                </ul>
+
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->
+<div align="center">
+<script async src="//web.archive.org/web/20220615023229js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+    </header>
+
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container-fluid mx-5">
+
+        <div id="dokuwiki__pageheader">
+
+            
+            <!-- breadcrumbs -->
+<nav id="dw__breadcrumbs" class="small">
+
+    <hr/>
+
+        <div class="dw__youarehere">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><li>You are here</li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/web/20220615023229/https://wiki.bash-hackers.org/start" itemprop="item" title="start"><span itemprop="name"><span class="iconify" data-icon="mdi:home"></span></span></a></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/web/20220615023229/https://wiki.bash-hackers.org/commands/start" class="wikilink1" title="commands:start">Commands</a></li><li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name"><a itemprop="item" href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest" class="wikilink1" title="commands:classictest">The classic test command</a></span></li></ol>    </div>
+    
+        <div class="dw__breadcrumbs hidden-print">
+        <ol class="breadcrumb"><li>Trace</li><li><a href="/web/20220615023229/https://wiki.bash-hackers.org/bash4" title="bash4">Bash 4 - a rough overview</a></li><li><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/builtin/exec" title="commands:builtin:exec">The exec builtin command</a></li><li><a href="/web/20220615023229/https://wiki.bash-hackers.org/internals/shell_options" title="internals:shell_options">List of shell options</a></li><li class="active"><a href="/web/20220615023229/https://wiki.bash-hackers.org/syntax/pe" title="syntax:pe">Parameter expansion</a></li></ol>    </div>
+    
+    <hr/>
+
+</nav>
+<!-- /breadcrumbs -->
+
+            <p class="text-right">
+                <span class="pageId ml-1 label label-primary">commands:classictest</span>            </p>
+
+            <div id="dw__msgarea" class="small">
+                            </div>
+
+        </div>
+
+        <div class="row">
+
+            
+            <article id="dokuwiki__content" class="col-sm-12 col-md-12 " itemscope itemtype="http://schema.org/Article" itemref="dw__license">
+
+                
+<!-- page-tools -->
+<nav id="dw__pagetools" class="hidden-print">
+    <div class="tools panel panel-default">
+        <ul class="nav nav-stacked nav-pills text-muted">
+            <li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615023229/https://wiki.bash-hackers.org/commands/classictest?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>        </ul>
+    </div>
+</nav>
+<!-- /page-tools -->
+
+                <div class="panel panel-default px-3 py-2" itemprop="articleBody">
+                    <div class="page panel-body">
+
+                        
+<div class="dw-content-page "><!-- content --><div class="dw-content"><p>
+This page is read only. You can view the source, but not change it. Ask your administrator if you think this is wrong.
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="commands:classictest"/><input type="hidden" name="rev" value="0"/><input type="hidden" name="date" value="0"/><input type="hidden" name="prefix" value="."/><input type="hidden" name="suffix" value=""/><input type="hidden" name="changecheck" value="f40df5250223a416637b88248024e9b8"/><input type="hidden" name="target" value="section"/><textarea name="wikitext" id="wiki__text" dir="auto" class="edit form-control" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== The classic test command ======
+
+''test &lt;EXPRESSION&gt;''
+
+''[ &lt;EXPRESSION&gt; ]''
+
+===== General syntax =====
+
+This command allows you to do various tests and sets its exit code to 0 (//TRUE//) or 1 (//FALSE//) whenever such a test succeeds or not. Using this exit code, it's possible to let Bash react on the result of such a test, here by using the command in an if-statement:
+&lt;code&gt;
+#!/bin/bash
+# test if /etc/passwd exists
+
+if test -e /etc/passwd; then
+  echo &quot;Alright man...&quot; &gt;&amp;2
+else
+  echo &quot;Yuck! Where is it??&quot; &gt;&amp;2
+  exit 1
+fi
+&lt;/code&gt;
+
+
+The syntax of the test command is relatively easy. Usually it's the command name &quot;''test''&quot; followed by a test type (here &quot;''-e''&quot; for &quot;file exists&quot;) followed by test-type-specific values (here the filename to check, &quot;''/etc/passwd''&quot;).
+
+There's a second standardized command that does exactly the same: the command &quot;''[''&quot; - the difference just is that it's called &quot;''[''&quot; and the last argument to the command must be a &quot;'']''&quot;: It forms &quot;''**[ &lt;EXPRESSION&gt; ]**''&quot;
+
+Let's rewrite the above example to use it:
+&lt;code&gt;
+#!/bin/bash
+# test if /etc/passwd exists
+
+if [ -e /etc/passwd ]; then
+  echo &quot;Alright man...&quot; &gt;&amp;2
+else
+  echo &quot;Yuck! Where is it??&quot; &gt;&amp;2
+  exit 1
+fi
+&lt;/code&gt;
+One might **think** now that these &quot;[&quot; and &quot;]&quot; belong to the syntax of Bash's if-clause: **No they don't! It's a simple, ordinary command, still!**
+
+Another thing you have to remember is that if the test command wants one parameter for a test, you have to give it one parameter. Let's check for some of your music files:
+&lt;code&gt;
+#!/bin/bash
+
+mymusic=&quot;/data/music/Van Halen/Van Halen - Right Now.mp3&quot;
+
+if [ -e &quot;$mymusic&quot; ]; then
+  echo &quot;Let's rock&quot; &gt;&amp;2
+else
+  echo &quot;No music today, sorry...&quot; &gt;&amp;2
+  exit 1
+fi
+&lt;/code&gt;
+As you definitely noted, the filename contains spaces. Since we call a normal ordinary command (&quot;test&quot; or &quot;[&quot;) the shell will word-split the expansion of the variable ''mymusic'': You need to quote it when you don't want the ''test''-command to complain about too many arguments for this test-type! If you didn't understand it, please read the [[syntax:words | article about words...]]
+
+Please also note that the file-tests want **one filename** to test. Don't give a glob (filename-wildcards) as it can expand to many filenames =&gt; **too many arguments!**
+
+__**Another common mistake**__ is to provide too **few** arguments:
+&lt;code&gt;
+[ &quot;$mystring&quot;!=&quot;test&quot; ]
+&lt;/code&gt;
+This provides exactly **one** test-argument to the command. With one parameter, it defaults to the ''-n'' test: It tests if a provided string is empty (''FALSE'') or not (''TRUE'') - due to the lack of **spaces to separate the arguments** the shown command always ends ''TRUE''!
+
+Well, I addressed several basic rules, now let's see what the test-command can do for you. The Bash test-types can be split into several sections: **file tests**, **string tests**, **arithmetic tests**, **misc tests**.
+ Below, the tests marked with :!: are non-standard tests (i.e. not in SUS/POSIX/etc..).
+
+===== File tests =====
+This section probably holds the most tests, I'll list them in some logical order. Since Bash 4.1, all tests related to permissions respect ACLs, if the underlying filesystem/OS supports them.
+
+^ Operator syntax          ^ Description                                                                                   |   |
+| **-a** &lt;FILE&gt;            | True if &lt;FILE&gt; exists. :!: (not recommended, may collide with ''-a'' for ''AND'', see below)  |   |
+| **-e** &lt;FILE&gt;            | True if &lt;FILE&gt; exists.                                                                        |   |
+| **-f** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **regular** file.                                             |   |
+| **-d** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **directory**.                                                   ||
+| **-c** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **character special** file.                                   |   |
+| **-b** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **block special** file.                                       |   |
+| **-p** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **named pipe** (FIFO).                                        |   |
+| **-S** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **socket** file.                                              |   |
+| **-L** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **symbolic link**.                                            |   |
+| **-h** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **symbolic link**.                                            |   |
+| **-g** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and has **sgid bit** set.                                              |   |
+| **-u** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and has **suid bit** set.                                              |   |
+| **-r** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is **readable**.                                                   |   |
+| **-w** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is **writable**.                                                   |   |
+| **-x** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is **executable**.                                                 |   |
+| **-s** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and has size bigger than 0 (**not empty**).                            |   |
+| **-t** &lt;fd&gt;              | True, if file descriptor &lt;fd&gt; is open and refers to a terminal.                               |   |
+| &lt;FILE1&gt; **-nt** &lt;FILE2&gt;  | True, if &lt;FILE1&gt; is **newer than** &lt;FILE2&gt; (mtime). :!:                                       |   |
+| &lt;FILE1&gt; **-ot** &lt;FILE2&gt;  | True, if &lt;FILE1&gt; is **older than** &lt;FILE2&gt; (mtime). :!:                                       |   |
+| &lt;FILE1&gt; **-ef** &lt;FILE2&gt;  | True, if &lt;FILE1&gt; and &lt;FILE2&gt; refer to the **same device and inode numbers**. :!:              |   |
+
+
+
+===== String tests =====
+^Operator syntax^Description^
+|**-z** &lt;STRING&gt;|True, if &lt;STRING&gt; is **empty**.|
+|**-n** &lt;STRING&gt;|True, if &lt;STRING&gt; is **not empty** (this is the default operation).|
+|&lt;STRING1&gt; **=** &lt;STRING2&gt;|True, if the strings are **equal**.|
+|&lt;STRING1&gt; **!=** &lt;STRING2&gt;|True, if the strings are **not equal**.|
+|&lt;STRING1&gt; **&lt;** &lt;STRING2&gt;|True if &lt;STRING1&gt; sorts **before** &lt;STRING2&gt; lexicographically (pure ASCII, not current locale!). Remember to escape! Use ''\&lt;''|
+|&lt;STRING1&gt; **&gt;** &lt;STRING2&gt;|True if &lt;STRING1&gt; sorts **after** &lt;STRING2&gt; lexicographically (pure ASCII, not current locale!). Remember to escape! Use ''\&gt;''|
+
+===== Arithmetic tests =====
+^Operator syntax^Description^
+|&lt;INTEGER1&gt; **-eq** &lt;INTEGER2&gt;|True, if the integers are **equal**.|
+|&lt;INTEGER1&gt; **-ne** &lt;INTEGER2&gt;|True, if the integers are **NOT equal**.|
+|&lt;INTEGER1&gt; **-le** &lt;INTEGER2&gt;|True, if the first integer is **less than or equal** second one.|
+|&lt;INTEGER1&gt; **-ge** &lt;INTEGER2&gt;|True, if the first integer is **greater than or equal** second one.|
+|&lt;INTEGER1&gt; **-lt** &lt;INTEGER2&gt;|True, if the first integer is **less than** second one.|
+|&lt;INTEGER1&gt; **-gt** &lt;INTEGER2&gt;|True, if the first integer is **greater than** second one.|
+
+===== Misc syntax =====
+^ Operator syntax         ^ Description                                                                                                                                 ^
+| &lt;TEST1&gt; **-a** &lt;TEST2&gt;  | True, if &lt;TEST1&gt; **and** &lt;TEST2&gt; are true (AND). Note that ''-a'' also may be used as a file test (see above)                               |
+| &lt;TEST1&gt; **-o** &lt;TEST2&gt;  | True, if either &lt;TEST1&gt; **or** &lt;TEST2&gt; is true (OR).                                                                                        |
+| **!** &lt;TEST&gt;            | True, if &lt;TEST&gt; is **false** (NOT).                                                                                                         |
+| **(** &lt;TEST&gt; **)**      | Group a test (for precedence). **Attention:** In normal shell-usage, the &quot;(&quot; and &quot;)&quot; must be escaped; use &quot;\(&quot; and &quot;\)&quot;!                    |
+| **-o** &lt;OPTION_NAME&gt;    | True, if the [[internals:shell_options| shell option]] &lt;OPTION_NAME&gt; is set.                                                                |
+| **-v** &lt;VARIABLENAME&gt;   | True if the variable &lt;VARIABLENAME&gt; has been set. Use ''var[n]'' for array elements.  |
+| **-R** &lt;VARIABLENAME&gt;   | True if the variable &lt;VARIABLENAME&gt; has been set and is a nameref variable (since 4.3-alpha)  |
+
+
+
+===== Number of Arguments Rules =====
+
+The ''test'' builtin, especially hidden under its ''['' name, may seem simple but is in fact **causing a lot of trouble sometimes**.
+One of the difficulty is that the behaviour of ''test'' not only depends on its arguments but also on the **number of its arguments**.
+
+Here are the rules taken from the manual (__**Note:**__ This is for the command ''test'', for ''['' the number of arguments is calculated without the final '']'', for example ''[ ]'' follows the &quot;zero arguments&quot; rule):
+
+  * **0 arguments**
+    * The expression is false.
+  * **1 argument**
+    * The expression is true if, and only if, the argument is not null
+  * **2 arguments**
+    * If the first argument is ''!'' (exclamation mark), the expression is true if, and only if, the second argument is null
+    * If the first argument is one of the unary conditional operators listed above under the syntax rules, the expression is true if the unary test is true
+    * If the first argument is not a valid unary conditional operator, the expression is false
+  * **3 arguments**
+    * If the second argument is one of the binary conditional operators listed above under the syntax rules, the result of the expression is the result of the binary test using the first and third arguments as operands
+    * If the first argument is ''!'', the value is the negation of the two-argument test using the second and third arguments
+    * If the first argument is exactly ''('' and the third argument is exactly '')'', the result is the one-argument test of the second argument. Otherwise, the expression is false. The ''-a'' and ''-o'' operators are considered binary operators in this case (**Attention:** This means the operator ''-a'' is not a file operator in this case!)
+  * **4 arguments**
+    * If the first argument is ''!'', the result is the negation of the three-argument expression composed of the remaining arguments. Otherwise, the expression is parsed and evaluated according to precedence using the rules listed above
+  * **5 or more arguments**
+    * The expression is parsed and evaluated according to precedence using the rules listed above
+
+
+These rules may seem complex, but it's not so bad in practice. Knowing them might help you to explain some of the &quot;unexplicable&quot; behaviours you might encounter:
+&lt;code&gt;
+var=&quot;&quot;
+if [ -n $var ]; then echo &quot;var is not empty&quot;; fi
+&lt;/code&gt; 
+
+This code prints &quot;var is not empty&quot;, even though ''-n something'' is supposed to be true if ''$var'' is not empty - **why?**
+
+Here, as ''$var'' is **not quoted**, word splitting occurs and ''$var'' results in actually nothing (Bash removes it from the command's argument list!). So the test is in fact ''[ -n ]'' **and falls into the &quot;one argument&quot; rule**, the only argument is &quot;-n&quot; which is not null and so the test returns true. The solution, as usual, is to **quote the parameter expansion**: ''[ -n &quot;$var&quot; ]'' so that the test has always 2 arguments, even if the second one is the null string.
+
+These rules also explain why, for instance, -a and -o can have several meanings.
+
+=====  AND and OR =====
+
+
+
+
+==== The Prefered Way ====
+
+The way often recommended to logically connect several tests with AND and OR is to use **several single test commands** and to **combine** them with the shell ''&amp;&amp;'' and ''||'' **list control operators**.
+
+See this:
+&lt;code&gt;
+if [ -n &quot;$var&quot;] &amp;&amp; [ -e &quot;$var&quot;]; then
+   echo &quot;\$var is not null and a file named $var exists!&quot;
+fi
+&lt;/code&gt;
+
+The return status of AND and OR lists is the exit status of the last command executed in the list
+  * With ''command1 &amp;&amp; command2'', ''command2'' is executed if, and only if, ''command1'' returns an exit status of zero (true)
+  * With ''command1 ││ command2'', ''command2'' is executed if, and only if, ''command1'' returns a non-zero exit status (false) 
+
+
+
+==== The other way: -a and -o ====
+
+The logical operators AND and OR for the test-command itself are ''-a'' and ''-o'', thus:
+&lt;code&gt;
+if [ -n &quot;$var&quot; -a -e &quot;$var&quot; ] ; then
+   echo &quot;\$var is not null and a file named $var exists&quot;
+fi
+&lt;/code&gt;
+
+They are **not** ''&amp;&amp;'' or ''||'':
+&lt;code&gt;
+$ if [ -n &quot;/tmp&quot; &amp;&amp; -d &quot;/tmp&quot;]; then echo true; fi # DOES NOT WORK
+bash: [: missing `]'
+&lt;/code&gt;
+
+You might find the error message confusing, ''['' does not find the required final '']'', because as seen above ''&amp;&amp;'' is used to write a **list of commands**. The ''if'' statement actually **sees two commands**:
+  * ''[ -n &quot;/tmp&quot;''
+  * ''-d &quot;/tmp&quot; ]''
+...which **must** fail.
+
+
+
+
+==== Why you should avoid using -a and -o ====
+
+=== If portability is a concern ===
+
+POSIX(r)/SUSv3 does **not** specify the behaviour of ''test'' in cases where there are more than 4 arguments. If you write a script that might not be executed by Bash, the behaviour might be different! ((&lt;rant&gt;Of course, one can wonder what is the use of including the parenthesis in the specification without defining the behaviour with more than 4 arguments or how usefull are the examples with 7 or 9 arguments attached to the specification.&lt;/rant&gt;))
+
+=== If you want the cut behaviour ===
+
+Let's say, we want to check the following two things (AND):
+  - if a string is null (empty)
+  - if a command produced an output
+Let's see:
+&lt;code&gt;
+if [ -z &quot;false&quot; -a -z &quot;$(echo I am executed &gt;&amp;2)&quot; ] ; then ... 
+&lt;/code&gt;
+=&gt; The arguments are all expanded **before** ''test'' runs, thus the echo-command **is executed**.
+
+&lt;code&gt;
+if [ -z &quot;false&quot; ] &amp;&amp; [ -z &quot;$(echo I am not executed &gt;&amp;2)&quot; ]; then... 
+&lt;/code&gt;
+
+=&gt; Due to the nature of the ''&amp;&amp;'' list operator, the second test-command runs only if the first test-command returns true, our  echo-command **is not executed**.
+
+__**Note:**__ In my opinion, ''-a'' and ''-o'' are also less readable ''[pgas]''
+
+==== Precedence and Parenthesis ====
+
+Take care if you convert your scripts from using ''-a'' and ''-o'' to use the list way (''&amp;&amp;'' and ''||''):
+  * in the test-command rules, ''-a'' has **precedence over** ''-o''
+  * in the shell grammar rules, ''&amp;&amp;'' and ''||'' have **equal precedence**
+That means, **you can get different results**, depending on the manner of use:
+&lt;code&gt;
+$ if [ &quot;true&quot; ] || [ -e /does/not/exist ] &amp;&amp; [ -e /does/not/exist ]; then echo true; else echo false; fi
+false
+
+$ if [ &quot;true&quot; -o -e /does/not/exist -a -e /does/not/exist ]; then  echo true; else echo false;fi
+true
+&lt;/code&gt;
+As a result you have to think about it a little or add precedence control (parenthesis). 
+
+For ''&amp;&amp;'' and ''||'' parenthesis means (shell-ly) grouping the commands, and since ''( ... )'' introduces a subshell we will use ''{ ... }'' instead:
+&lt;code&gt;
+$ if  [ &quot;true&quot; ] || { [ -e /does/not/exist ]  &amp;&amp; [ -e /does/not/exist ] ;} ; then echo true; else echo false; fi
+true
+&lt;/code&gt;
+
+For the test command, the precedence parenthesis are, as well, ''( )'', but you need to escape or quote them, so that the shell doesn't try to interpret them:
+&lt;code&gt;
+$ if [ \( &quot;true&quot; -o -e /does/not/exist \) -a -e /does/not/exist ]; then  echo true; else echo false; fi
+false
+
+# equivalent, but less readable IMHO:
+$ if [ '(' &quot;true&quot; -o -e /does/not/exist ')' -a -e /does/not/exist ]; then  echo true; else echo false; fi
+false
+&lt;/code&gt;
+
+
+
+=====  NOT =====
+
+As for AND and OR, there are 2 ways to negate a test with the shell keyword ''!'' or passing ''!'' as an argument to ''test''.
+
+
+Here ''!'' negates the exit status of the command ''test'' which is 0 (true), and the else part is executed:
+&lt;code&gt;
+if ! [ -d '/tmp' ]; then echo &quot;/tmp doesn't exists&quot;; else echo &quot;/tmp exists&quot;; fi
+&lt;/code&gt;
+
+Here the ''test'' command itself exits with status 1 (false) and the else is also executed:
+&lt;code&gt;
+if  [ ! -d '/tmp' ]; then echo &quot;/tmp doesn't exists&quot;; else echo &quot;/tmp exists&quot;; fi
+&lt;/code&gt;
+
+Unlike for AND and OR, both methods for NOT have an identical behaviour, at least for doing one single test.
+
+===== Pitfalls summarized =====
+
+In this section you will get all the mentioned (and maybe more) possible pitfalls and problems in a summary.
+
+==== General ====
+
+Here's the copy of a mail on bug-bash list. A user asking a question about using the test command in Bash, **he's talking about a problem, which you may have already had yourself**:
+&lt;code&gt;
+From: (PROTECTED)
+Subject: -d option not working. . .?
+Date: Tue, 11 Sep 2007 21:51:59 -0400
+To: bug-bash@gnu.org
+
+Hi All,
+
+I've got a script that I'm trying to set up, but it keeps telling me  
+that  &quot;[-d command not found&quot;.  Can someone please explain what is  
+wrong with this?:
+
+
+
+
+#!/bin/sh
+
+for i in $*
+do
+{
+	if  [-d $i]
+	then
+		echo &quot;$i is a directory! Yay!&quot;
+	else
+		echo &quot;$i is not a directory!&quot;
+	fi
+}
+done
+
+
+
+Regards
+&lt;/code&gt;
+
+See the problem regarding the used test-command (the other potential problems are not of interest here)?
+&lt;code&gt;
+[-d $i]
+&lt;/code&gt;
+He simply didn't know that ''test'' or ''['' is a normal, simple command. Well, here's the answer he got. I quote it here, because it's a well written text that addresses most of the common issues with the &quot;classic&quot; test command:
+
+&lt;code&gt;
+From: Bob Proulx (EMAIL PROTECTED)
+Subject: Re: -d option not working. . .?
+Date: Wed, 12 Sep 2007 10:32:35 -0600
+To: bug-bash@gnu.org
+
+&gt; (QUOTED TEXT WAS REMOVED)
+
+The shell is first and foremost a way to launch other commands.  The
+syntax is simply &quot;if&quot; followed by a command-list, (e.g. if /some/foo;
+or even if cmd1; cmd2; cmd3; then).  Plus the '( ... )' syntax is
+already taken by the use of starting a subshell.
+
+As I recall in the original shell language the file test operator was
+not built-in.  It was provided by the standalone '/bin/test' command.
+The result was effectively this:
+
+  if /bin/test -d somedir
+
+Although the full path /bin/test was never used.  I showed it that way
+here for emphasis that following the 'if' statement is a command list.
+Normally it would simply have been:
+
+  if test -d somedir
+
+Of course that is fine and for the best portability that style is
+still the recommended way today to use the test command.  But many
+people find that it looks different from other programming languages.
+To make the test operator (note I mention the test operator and not
+the shell language, this is a localized change not affecting the
+language as a whole) look more like other programming languages the
+'test' program was coded to ignore the last argument if it was a ']'.
+Then a copy of the test program could be used as the '[' program.
+
+  ...modify /bin/test to ignore ']' as last argument...
+  cp /bin/test /bin/[
+
+This allows:
+
+  if [ -d somedir ]
+
+Doesn't that look more normal?  People liked it and it caught on.  It
+was so popular that both 'test' and '[' are now shell built-ins.  They
+don't launch an external '/bin/test' program anymore.  But they *used*
+to launch external programs.  Therefore argument parsing is the same
+as if they still did launch an external program.  This affects
+argument parsing.
+
+  it test -f *.txt
+  test: too many arguments
+
+Oops.  I have twenty .txt files and so test got one -f followed by the
+first file followed by the remaining files.  (e.g. test -f 1.txt 2.txt
+3.txt 4.txt)
+
+  if test -d $file
+  test: argument expected
+
+Oops.  I meant to set file.
+
+  file=/path/some/file
+  if test -d $file
+
+If variables such as that are not set then they wlll be expanded by
+the shell before passing them to the (possibly external) command and
+disappear entirely.  This is why test arguments should always be quoted.
+
+  if test -d &quot;$file&quot;
+  if [ -d &quot;$file&quot; ]
+
+Actually today test is defined that if only one argument is given as
+in this case &quot;test FOO&quot; then then test returns true if the argument is
+non-zero in text length.  Because &quot;-d&quot; is non-zero length &quot;test -d&quot; is
+true.  The number of arguments affects how test parses the args.  This
+avoids a case where depending upon the data may look like a test
+operator.
+
+  DATA=&quot;something&quot;
+  if test &quot;$DATA&quot;         # true, $DATA is non-zero length
+
+  DATA=&quot;&quot;
+  if test &quot;$DATA&quot;         # false, $DATA is zero length
+
+But the problem case is how should test handle an argument that looks
+like an operator?  This used to generate errors but now because it is
+only one argument is defined to be the same as test -n $DATA.
+
+  DATA=&quot;-d&quot;
+  if test &quot;$DATA&quot;         # true, $DATA is non-zero length
+  if test -d              # true, same as previous case.
+
+Because test and [ are possibly external commands all of the parts of
+them are chosen to avoid shell metacharacters.  The Fortran operator
+naming was well known at the time (e.g. .gt., .eq., etc.) and was
+pressed into service for the shell test operator too.  Comming from
+Fortran using -gt, -eq, etc. looked very normal.
+
+Incorrect use generating unlikely to be intended results:
+
+  if test 5 &gt; 2    # true, &quot;5&quot; is non-zero length, creates file named &quot;2&quot;
+
+Intended use:
+
+  if test 5 -gt 2  # true (and no shell meta characters needing quoting)
+
+Then much later, sometime in the mid 1980's, the Korn sh decided to
+improve upon this situation.  A new test operator was introduced.
+This one was always a shell built-in and therefore could act upon the
+shell arguments directly.  This is '[[' which is a shell keyword.
+(Keyword, metacharacters, builtins, all are different.)  Because the
+shell processes [[ internally all arguments are known and do not need
+to be quoted.
+
+  if [[ -d $file ]]  # okay
+  if [[ 5 &gt; 2 ]]     # okay
+
+I am sure that I am remembering a detail wrong but hopefully this is
+useful as a gentle introduction and interesting anyway.
+
+Bob
+&lt;/code&gt;
+
+I hope this text protects you a bit from stepping from one pitfall into the next.
+
+I find it very interesting and informative, that's why I quoted it here. Many thanks, Bob, also for the permission to copy the text here!
+
+===== Code examples =====
+
+==== Snipplets ====
+
+Some code snipplets follow, different ways of shell reaction is used.
+
+  * **check if a variable is defined/non-NULL**
+    * ''test &quot;$MYVAR&quot;''
+    * ''[ &quot;$MYVAR&quot; ]''
+    * **Note:** There are possibilities to make a difference if a variable is //undefined// or //NULL// - see [[syntax:pe#use_an_alternate_value|Parameter Expansion - Using an alternate value]]
+  * **check if a directory exists, if not, create it**
+    * ''test ! -d /home/user/foo &amp;&amp; mkdir /home/user/foo''
+    * ''[ ! -d /home/user/foo ] &amp;&amp; mkdir /home/user/foo''
+    * ''if [ ! -d /home/user/foo ]; then mkdir /home/user/foo; fi''
+  * **check if minimum one parameter was given, and that one is &quot;Hello&quot;**
+    * ''test $# -ge 1 -a &quot;$1&quot; = &quot;Hello&quot; || exit 1''
+    * ''[ $# -ge 1 ] &amp;&amp; [ &quot;$1&quot; = &quot;Hello&quot; ] || exit 1'' (see [[syntax:basicgrammar#lists | lists description]])
+
+
+
+==== Listing directories ====
+
+Using a [[syntax:ccmd:classic_for | for-loop]] to iterate through all entries of a directory, if an entry is a directory (''[ -d &quot;$fn&quot; ]''), print its name:
+
+&lt;code&gt;
+for fn in *; do
+  [ -d &quot;$fn&quot; ] &amp;&amp; echo &quot;$fn&quot;
+done
+&lt;/code&gt;
+
+
+===== See also =====
+
+  * Internal: [[syntax:ccmd:conditional_expression | conditional expression]] (aka &quot;the new test command&quot;)
+  * Internal: [[syntax:ccmd:if_clause | the if-clause]]</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+</div><!-- /content --></div>
+                    </div>
+                </div>
+
+                <div class="small text-right">
+
+                                        <span class="docInfo">
+                        <ul class="list-inline"><li><span class="iconify text-muted" data-icon="mdi:file-document-outline"></span> <span title="commands/classictest.txt">commands/classictest.txt</span></li><li><span class="iconify text-muted" data-icon="mdi:calendar"></span> Last modified: <span title="2015/07/30 21:01">2015/07/30 21:01</span></li><li class="text-muted">by <bdi>fgrose</bdi></li></ul>                    </span>
+                    
+                    
+                </div>
+
+            </article>
+
+            
+        </div>
+
+    </main>
+
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container-fluid">
+        <hr/>
+<div align="center">
+<h3><a target="_blank" href="http://web.archive.org/web/20220615023229/http://www.performing-databases.com/">This site is supported by Performing Databases - your experts for database administration</a></h3>
+</div>
+<hr/>
+<div align="center">
+<script async src="//web.archive.org/web/20220615023229js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- footer -->
+<div class="dw-container small container-fluid mx-5">
+
+    
+    <div class="footer-dw-title">
+                <div class="media">
+            <div class="media-left">
+                <img src="/web/20220615023229im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png" alt="Bash Hackers Wiki" class="media-object" style="height:32px"/>
+            </div>
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4 class="media-heading">Bash Hackers Wiki</h4>
+                        <p>
+                                                    </p>
+                    </div>
+                    <div class="col-sm-10">
+                                            </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+
+    <div class="footer-license row">
+        <hr/>
+        <div id="dw__license" class="col-sm-6">
+                        <p>
+                <a href="http://web.archive.org/web/20220615023229/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license"><img src="/web/20220615023229im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/license/gnufdl.png" width="24" height="24" alt="gnufdl"/> </a>            </p>
+            <p class="small">
+                Except where otherwise noted, content on this wiki is licensed under the following license:<br/><a href="http://web.archive.org/web/20220615023229/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license">GNU Free Documentation License 1.3</a>            </p>
+                    </div>
+
+        <div class="col-sm-6">
+                    </div>
+
+    </div>
+
+</div>
+<!-- /footer -->
+    </footer>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="skip to content" accesskey="t">
+        <span class="iconify" data-icon="mdi:chevron-up"></span>    </a>
+
+    <div id="screen__mode">        <span class="visible-xs-block"></span>
+        <span class="visible-sm-block"></span>
+        <span class="visible-md-block"></span>
+        <span class="visible-lg-block"></span>
+    </div>
+
+    <img src="/web/20220615023229im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=commands%3Aclassictest&amp;1655260351" width="2" height="1" alt=""/>
+</div>
+
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 02:32:29 Jun 15, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:37:30 Apr 14, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 170.397
+  exclusion.robots: 0.159
+  exclusion.robots.policy: 0.146
+  cdx.remote: 0.096
+  esindex: 0.011
+  LoadShardBlock: 136.957 (3)
+  PetaboxLoader3.datanode: 175.039 (4)
+  load_resource: 163.564
+  PetaboxLoader3.resolve: 114.713
+-->

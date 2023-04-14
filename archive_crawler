@@ -1,0 +1,95 @@
+#!/bin/bash
+# An incomplete script, more like notes really, for grabbing a
+# copy of wiki.bash-hackers.org from archive.org
+
+# Where are we playing on the local file system?
+basedir="${HOME}/git/wiki.bash-hackers.org"
+
+# Prepend a string e.g.
+# cmd: prepend foo bar
+# out: foobar
+# Also has a delimiter option e.g.
+# cmd: prepend -d ';' foo bar
+# out: foo;bar
+prepend() {
+    local _prepend_delimiter
+    case "${1}" in
+        (-d|--delimiter)
+        _prepend_delimiter="${2}"
+        shift 2
+        ;;
+    esac
+    printf -- '%s\n' "${1}${_prepend_delimiter:-}${2}"
+}
+
+# Call archive.org's 'available' API to see if a site is available
+# This will either return the URL of the most current snapshot, or null
+# e.g.
+# cmd: check_wayback_availability https://wiki.bash-hackers.org/howto/mutex?do=edit
+# out: http://web.archive.org/web/20220615023742/https://wiki.bash-hackers.org/howto/mutex?do=edit
+# vs
+# cmd: check_wayback_availability https://contoso.com/pantsmcgee
+# out: null
+check_wayback_availability() {
+    local remote_target
+    remote_target="https://archive.org/wayback/available?url=${1:?No target specified}"
+    curl -s -X GET "${remote_target}" | jq -r '.archived_snapshots.closest.url'
+}
+
+# Download the given target into a local file structure e.g.
+# http://web.archive.org/web/20220706170849/https://wiki.bash-hackers.org/scripting/bashbehaviour?do=edit
+# Will download into scripting/bashbehaviour
+get_wayback_target() {
+    local remote_target target_path target_dirname
+    remote_target="${1:?No target specified}"
+    # Strip out everything after 'bash-hackers.org' and '?do=edit' e.g.
+    # http://web.archive.org/web/20220615023742/https://wiki.bash-hackers.org/howto/mutex?do=edit -> /howto/mutex
+    target_path="$(sed -n 's/.*bash-hackers.org//p' <<< "${remote_target}" | sed -e 's/?do=edit//')"
+    # Get the dirname e.g. /howto/mutex?do=edit -> /howto
+    target_dirname="$(dirname "${target_path}")"
+    # Create the path, ensuring that we strip the leading slash just-in-case e.g. /howto -> howto
+    mkdir -p "${basedir:?FATAL - basedir unset}/${target_dirname/\//}"
+    # Download the remote target to the local path
+    curl -s -X GET "${remote_target}" > "./${target_path}"
+}
+
+# We want to pull internal-wiki links out of the markdown fragments.  These look like
+# [[path:to:file]]
+# But can be given friendly names like
+# [[path:to:file | friendly name]]
+# The friendly name might have leading spaces around the pipe char or not
+# We start by grep'ing for '[['
+# Then we filter out external links e.g. '[[http://contoso.com]]'
+# Then we grep out just the link substrings
+# Then we filter out friendly names (this could be brutally tidied up, it's late and I'm lazy right now)
+# Then we append "/?do=edit/"
+scrape_targets() {
+    local source_file
+    source_file="${1:?No target specified}"
+    grep "\[\[" "${source_file}" |
+        grep -v "\[\[http" |
+        grep -o "\[\[.*\]\]" |
+        sed -e 's/ | .*\]\]/]]/g' -e 's/| .*\]\]/]]/g' -e 's/|.*\]\]/]]/g' -e 's/\[\[/\//g' -e 's/\]\]/?do=edit/g' |
+        tr ':' '/'
+}
+
+(
+    cd "${basedir}" || exit 1
+
+    # If it's not already here, get the start page
+    if [[ ! -f start ]]; then
+        get_wayback_target https://web.archive.org/web/20220930131429/https://wiki.bash-hackers.org/start?do=edit
+    fi
+
+    while read -r; do
+        prepend https://wiki.bash-hackers.org "${REPLY}"
+    done < <(scrape_targets start) > raw_targets
+
+    while read -r; do
+        check_wayback_availability "${REPLY}"
+    done < raw_targets > waybacktargets
+
+    while read -r; do
+        get_wayback_target "${REPLY}"
+    done < waybacktargets
+)

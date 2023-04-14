@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" class="no-js">
+<head><script type="text/javascript" src="/_static/js/bundle-playback.js?v=TPXmWR5s" charset="utf-8"></script>
+<script type="text/javascript" src="/_static/js/wombat.js?v=txqj7nKC" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("http://web.archive.org/web");
+  __wm.wombat("https://wiki.bash-hackers.org/howto/calculate-dc?do=edit","20220615023700","http://web.archive.org/","web","/_static/",
+	      "1655260620");
+</script>
+<link rel="stylesheet" type="text/css" href="/_static/css/banner-styles.css?v=S1zqJCYt" />
+<link rel="stylesheet" type="text/css" href="/_static/css/iconochive.css?v=qtvMKcIJ" />
+<!-- End Wayback Rewrite JS Include -->
+
+    <meta charset="UTF-8"/>
+    <title>Calculating with dc [Bash Hackers Wiki]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="/web/20220615023700im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/web/20220615023700im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/apple-touch-icon.png"/>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link type="text/css" rel="stylesheet" href="/web/20220615023700cs_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/default/bootstrap.min.css"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/web/20220615023700/https://wiki.bash-hackers.org/lib/exe/opensearch.php" title="Bash Hackers Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/howto/calculate-dc?do=index" title="Sitemap"/>
+<link rel="manifest" href="/web/20220615023700/https://wiki.bash-hackers.org/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/web/20220615023700/https://wiki.bash-hackers.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/web/20220615023700/https://wiki.bash-hackers.org/feed.php?mode=list&amp;ns=howto"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/web/20220615023700/https://wiki.bash-hackers.org/_export/xhtml/howto/calculate-dc"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/web/20220615023700/https://wiki.bash-hackers.org/_export/raw/howto/calculate-dc"/>
+<link rel="stylesheet" type="text/css" href="/web/20220615023700cs_/https://wiki.bash-hackers.org/lib/exe/css.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='howto';var JSINFO = {"updatable":1,"userreplace":1,"default_macro_string":"","plugins":{"edittable":{"default columnwidth":""}},"move_renameokay":false,"isadmin":0,"isauth":0,"bootstrap3":{"mode":"source","toc":[],"config":{"collapsibleSections":0,"fixedTopNavbar":1,"showSemanticPopup":0,"sidebarOnNavbar":0,"tagsOnTop":1,"tocAffix":1,"tocCollapseOnScroll":1,"tocCollapsed":0,"tocLayout":"default","useAnchorJS":1,"useAlternativeToolbarIcons":1}},"id":"howto:calculate-dc","namespace":"howto","ACT":"source","useHeadingNavigation":1,"useHeadingContent":1};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/exe/js.php?t=bootstrap3&amp;tseed=54923c3deda180f2db5bd755cd8fbf1a"></script>
+<script type="text/javascript">/*<![CDATA[*/if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '/lib/tpl/bootstrap3/iconify.php?prefix={prefix}&icons={icons}' } }
+/*!]]>*/</script>
+<script type="text/javascript" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/anchorjs/anchor.min.js"></script>
+<script type="text/javascript" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/typeahead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/iconify.min.js"></script>
+<script type="text/javascript" src="/web/20220615023700js_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/assets/iconify/plugins/fa.js"></script>
+<!--<![endif]-->
+<style type="text/css">@media screen { body { margin-top: 65px; }  #dw__toc.affix { top: 55px; position: fixed !important; }  #dw__toc .nav .nav .nav { display: none; } }</style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="default dokuwiki mode_source tpl_bootstrap3 dw-page-on-panel dw-fluid-container" data-page-id="howto:calculate-dc"><div class="dokuwiki">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container-fluid mx-5">
+    <!-- navbar -->
+<nav id="dw__navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="dw-container container-fluid mx-5">
+
+        <div class="navbar-header">
+
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand d-flex align-items-center" href="/web/20220615023700/https://wiki.bash-hackers.org/start" accesskey="h" title="Bash Hackers Wiki"><img id="dw__logo" class="pull-left h-100 mr-4" alt="Bash Hackers Wiki" src="/web/20220615023700im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png"/><div class="pull-right"><div id="dw__title">Bash Hackers Wiki</div></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+
+            
+            
+            
+            <div class="navbar-right" id="dw__navbar_items">
+
+                
+<!-- navbar-searchform -->
+<form action="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search">
+    <div class="input-group">
+        <input id="qsearch" autocomplete="off" type="search" placeholder="Search" value="" accesskey="f" name="q" class="form-control" title="[F]"/>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" title="Search">
+                <span class="iconify" data-icon="mdi:magnify"></span>            </button>
+        </div>
+
+    </div>
+    <input type="hidden" name="do" value="search"/>
+</form>
+<!-- /navbar-searchform -->
+<!-- tools-menu -->
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
+
+    
+    <li class="dropdown">
+
+        <a href="" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="iconify" data-icon="mdi:wrench"></span> <span class="hidden-lg hidden-md hidden-sm">Tools</span> <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu tools" role="menu">
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:account"></span> User Tools            </li>
+
+            <li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=register" title="Register" rel="nofollow" class="menuitem register"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span>Register</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span>Log In</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:toolbox"></span> Site Tools            </li>
+
+            <li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=recent" title="Recent Changes [r]" rel="nofollow" accesskey="r" class="menuitem recent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69V13m4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67V8M5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H5m11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85z"/></svg><span>Recent Changes</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=media&amp;ns=howto" title="Media Manager" rel="nofollow" class="menuitem media"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7 15l4.5-6 3.5 4.5 2.5-3L21 15m1-11h-8l-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M2 6H0v14a2 2 0 0 0 2 2h18v-2H2V6z"/></svg><span>Media Manager</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=index" title="Sitemap [x]" rel="nofollow" accesskey="x" class="menuitem index"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2z"/></svg><span>Sitemap</span></a></li>
+                        <li class="divider" role="separator"></li>
+            
+        
+            <li class="dropdown-header">
+                <span class="iconify" data-icon="mdi:file-document-outline"></span> Page Tools            </li>
+
+            <li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>
+            
+                </ul>
+    </li>
+
+    
+</ul>
+<!-- /tools-menu -->
+
+                <ul class="nav navbar-nav">
+
+                    
+                                        <li>
+                        <span class="dw__actions dw-action-icon">
+                        <a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=register" title="Register" rel="nofollow" class="menuitem register btn btn-success navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4 4 4 0 0 0-4-4 4 4 0 0 0-4 4 4 4 0 0 0 4 4z"/></svg><span class=""> Register</span></a><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=login&amp;sectok=" title="Log In" rel="nofollow" class="menuitem login btn btn-default navbar-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10 17.25V14H3v-4h7V6.75L15.25 12 10 17.25M8 2h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h2v4h9V4H8v4H6V4a2 2 0 0 1 2-2z"/></svg><span class=""> Log In</span></a>                        </span>
+                    </li>
+                    
+                </ul>
+
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->
+<div align="center">
+<script async src="//web.archive.org/web/20220615023700js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+    </header>
+
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container-fluid mx-5">
+
+        <div id="dokuwiki__pageheader">
+
+            
+            <!-- breadcrumbs -->
+<nav id="dw__breadcrumbs" class="small">
+
+    <hr/>
+
+        <div class="dw__youarehere">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><li>You are here</li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/web/20220615023700/https://wiki.bash-hackers.org/start" itemprop="item" title="start"><span itemprop="name"><span class="iconify" data-icon="mdi:home"></span></span></a></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/web/20220615023700/https://wiki.bash-hackers.org/howto/start" class="wikilink1" title="howto:start">HOWTO</a></li><li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name"><a itemprop="item" href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc" class="wikilink1" title="howto:calculate-dc">Calculating with dc</a></span></li></ol>    </div>
+    
+        <div class="dw__breadcrumbs hidden-print">
+        <ol class="breadcrumb"><li>Trace</li><li><a href="/web/20220615023700/https://wiki.bash-hackers.org/commands/start" title="commands:start">Commands</a></li><li><a href="/web/20220615023700/https://wiki.bash-hackers.org/commands/builtin/start" title="commands:builtin:start">Builtin Commands</a></li><li><a href="/web/20220615023700/https://wiki.bash-hackers.org/commands/builtin/caller" title="commands:builtin:caller">The caller builtin command</a></li><li><a href="/web/20220615023700/https://wiki.bash-hackers.org/commands/builtin/export" title="commands:builtin:export">The export builtin command</a></li><li><a href="/web/20220615023700/https://wiki.bash-hackers.org/commands/builtin/exit" title="commands:builtin:exit">The exit builtin command</a></li><li class="active"><a href="/web/20220615023700/https://wiki.bash-hackers.org/dict/terms/exit_status" title="dict:terms:exit_status">Exit Status</a></li></ol>    </div>
+    
+    <hr/>
+
+</nav>
+<!-- /breadcrumbs -->
+
+            <p class="text-right">
+                <span class="pageId ml-1 label label-primary">howto:calculate-dc</span>            </p>
+
+            <div id="dw__msgarea" class="small">
+                            </div>
+
+        </div>
+
+        <div class="row">
+
+            
+            <article id="dokuwiki__content" class="col-sm-12 col-md-12 " itemscope itemtype="http://schema.org/Article" itemref="dw__license">
+
+                
+<!-- page-tools -->
+<nav id="dw__pagetools" class="hidden-print">
+    <div class="tools panel panel-default">
+        <ul class="nav nav-stacked nav-pills text-muted">
+            <li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=" title="Show page [v]" rel="nofollow" accesskey="v" class="menuitem show"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2h9m3-4v-2H6v2h12z"/></svg><span>Show page</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=revisions" title="Old revisions [o]" rel="nofollow" accesskey="o" class="menuitem revs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M11 7v5.11l4.71 2.79.79-1.28-4-2.37V7m0-5C8.97 2 5.91 3.92 4.27 6.77L2 4.5V11h6.5L5.75 8.25C6.96 5.73 9.5 4 12.5 4a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 0 1-7.5 7.5c-3.27 0-6.03-2.09-7.06-5h-2.1c1.1 4.03 4.77 7 9.16 7 5.24 0 9.5-4.25 9.5-9.5A9.5 9.5 0 0 0 12.5 2z"/></svg><span>Old revisions</span></a></li><li class="action"><a href="/web/20220615023700/https://wiki.bash-hackers.org/howto/calculate-dc?do=backlink" title="Backlinks" rel="nofollow" class="menuitem backlink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg><span>Backlinks</span></a></li><li class="action"><a href="#dokuwiki__top" title="Back to top [t]" rel="nofollow" accesskey="t" class="menuitem top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg><span>Back to top</span></a></li>        </ul>
+    </div>
+</nav>
+<!-- /page-tools -->
+
+                <div class="panel panel-default px-3 py-2" itemprop="articleBody">
+                    <div class="page panel-body">
+
+                        
+<div class="dw-content-page "><!-- content --><div class="dw-content"><p>
+This page is read only. You can view the source, but not change it. Ask your administrator if you think this is wrong.
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="howto:calculate-dc"/><input type="hidden" name="rev" value="0"/><input type="hidden" name="date" value="0"/><input type="hidden" name="prefix" value="."/><input type="hidden" name="suffix" value=""/><input type="hidden" name="changecheck" value="e7daf488331bf9af020089d89a6dee5e"/><input type="hidden" name="target" value="section"/><textarea name="wikitext" id="wiki__text" dir="auto" class="edit form-control" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== Calculating with dc ======
+
+{{keywords&gt;bash shell scripting arithmetic calculate}}
+
+===== Introduction =====
+
+dc(1) is a non standard, but commonly found, reverse-polish Desk
+Calculator. According to Ken Thompson, &quot;dc is the oldest language on
+Unix; it was written on the PDP-7 and ported to the PDP-11 before Unix
+[itself] was ported&quot;.  
+
+Historically the standard bc(1) has been implemented as a //front-end to dc//.
+
+===== Simple calculation =====
+
+In brief, the //reverse polish notation// means the numbers are put
+on the stack first, then an operation is applied to them. Instead
+of writing ''1+1'', you write ''1 1+''.
+
+By default ''dc'', unlike ''bc'', doesn't print anything, the result is pushed on the stack. 
+You have to use the &quot;p&quot; command to print the element at the top of the stack.
+Thus a simple operation looks like:
+
+&lt;code&gt;
+$ dc &lt;&lt;&lt; '1 1+pq'
+2
+&lt;/code&gt;
+I used a &quot;here string&quot; present in bash 3.x, ksh93 and zsh. if your
+shell doesn't support this, you can use ''echo '1 1+p' | dc'' or if you have GNU ''dc'', you can use ''dc -e '1 1 +p'''.
+
+Of course, you can also just run ''dc'' and enter the commands. 
+
+The classic operations are:
+  * addition: ''+''
+  * subtraction: ''-''
+  * division: ''/''
+  * multiplication: ''*''
+  * remainder (modulo): ''%''
+  * exponentiation: ''^''
+  * square root: ''v''
+GNU ''dc'' adds a couple more.
+
+To input a negative number you need to use the ''_'' (underscore) character:
+&lt;code&gt;
+$ dc &lt;&lt;&lt; '1_1-p' 
+2
+&lt;/code&gt;
+
+You can use the //digits// ''0'' to ''9'' and the //letters// ''A'' to ''F'' as numbers, and a dot (''.'') as a decimal point.
+The ''A'' to ''F'' **must** be capital letters in order not to be confused with the commands specified with lower case characters.
+A number with a letter is considered hexadecimal:
+&lt;code&gt;
+dc &lt;&lt;&lt; 'Ap'
+10 
+&lt;/code&gt;  
+The **output** is converted to **base 10** by default 
+
+===== Scale And Base =====
+
+''dc'' is a calulator with abitrary precision, by default this precision is 0. 
+thus ''&lt;nowiki&gt;dc &lt;&lt;&lt; &quot;5 4/p&quot;&lt;/nowiki&gt;'' prints &quot;1&quot;.
+
+We can increase the precision using the ''k'' command. It pops the value at the top of the stack
+and uses it as the precision argument:
+&lt;code&gt;
+dc &lt;&lt;&lt; '2k5 4/p' # prints 1.25
+dc &lt;&lt;&lt; '4k5 4/p' # prints 1.2500
+dc &lt;&lt;&lt; '100k 2vp' 
+1.4142135623730950488016887242096980785696718753769480731766797379907\
+324784621070388503875343276415727
+&lt;/code&gt;
+dc supports //large// precision arguments.
+
+You can change the base used to output (//print//) the numbers with ''o'' and the base used to
+input (//type//) the numbers with ''i'':
+&lt;code&gt;
+dc &lt;&lt; EOF
+20 p# prints 20, output is in base 10
+16o # the output is now in base 2 16
+20p # prints 14,  in hex
+16i # the output is now in hex
+p   # prints 14 this doesn't modify the number in the stack
+10p # prints 10 the output is done in base 16
+EOF
+&lt;/code&gt;
+
+Note: when the input value is modified, the base is modified for all commands, including ''i'':
+
+&lt;code&gt;
+dc &lt;&lt; EOF
+16i 16o # base is 16 for input and output
+10p # prints 10
+10i # ! set the base to 10 i.e. to 16 decimal
+17p # prints 17 
+EOF
+&lt;/code&gt;
+
+This code prints 17 while we might think that ''10i'' reverts the base back to 10 and thus the number should be converted to hex and printed as 11.
+The problem is 10 was typed while the input base 16, thus the base was set to 10 hexadecimal, i.e. 16 decimal.
+
+&lt;code&gt;
+dc &lt;&lt; EOF
+16o16o10p #prints 10
+Ai # set the base to A in hex i.e. 10
+17p # prints 11 in base 16
+EOF
+&lt;/code&gt;
+
+===== Stack =====
+
+There are two basic commands to manipulate the stack:
+  * ''d'' duplicates the top of the stack
+  * ''c'' clears the stack
+
+&lt;code&gt;
+$ dc &lt;&lt; EOF
+2   # put 2 on the stack
+d   # duplicate i.e. put another 2 on the stack
+*p  # multiply and print
+c p # clear and print
+EOF
+4
+dc: stack empty
+&lt;/code&gt;
+
+''c p'' results in an error, as we would expect, as c removes everything
+on the stack. //Note: we can use ''#'' to put comments in the script.//
+
+If you are lost, you can inspect (i.e. print) the stack using the command
+''f''. The stack remains unchanged:
+
+&lt;code&gt;
+dc &lt;&lt;&lt; '1 2 d 4+f'
+6
+2
+1
+&lt;/code&gt;
+
+Note how the first element that will be popped from the stack is printed first, if you are
+used to an HP calculator, it's the reverse.
+
+Don't hesitate to put ''f'' in the examples of this tutorial, it doesn't change the result,
+and it's a good way to see what's going on.
+
+===== Registers =====
+
+The GNU ''dc'' manual says that dc has at least **256 registers** depending on
+the range of unsigned char.  I'm not sure how you are supposed to use
+the NUL byte.
+Using a register is easy:
+
+&lt;code&gt;
+dc &lt;&lt;EOF
+12 # put 12 on the stack
+sa # remove it from the stack (s), and put it in register 'a'
+10 # put 10 on the stack
+la # read (l) the value of register 'a' and push it on the stack
++p # add the 2 values and print
+EOF
+&lt;/code&gt;
+
+The above snippet uses newlines to embed comments, but it doesn't
+really matter, you can use ''echo '12sa10la+p'| dc'', with the same results.
+
+The register can contain more than just a value, **each register is a
+stack on its own**.
+
+&lt;code&gt;
+dc &lt;&lt;EOF
+12sa #store 12 in 'a'
+6Sa # with a capital S the 6 is removed
+    # from the  main stack and pushed on the 'a' stack
+lap # prints 6, the value at the top of the 'a' stack
+lap # still prints 6
+Lap # prints 6 also but with a capital L, it pushes the value in 'a'
+    # to the main stack and pulls it from the 'a' stack
+lap # prints 12, which is now at the top of the stack
+EOF
+&lt;/code&gt;
+
+===== Macros =====
+
+''dc'' lets you push arbitrary strings on the stack when the strings are enclosed in ''[]''.
+You can print it with ''p'': ''&lt;nowiki&gt;dc &lt;&lt;&lt; '[Hello World!]p'&lt;/nowiki&gt;'' and you can
+evalute it with x: ''&lt;nowiki&gt;dc &lt;&lt;&lt; '[1 2+]xp'&lt;/nowiki&gt;''.
+
+This is not that interesting until combined with registers.
+First, let's say we want to calculate the square of a number
+(don't forget to include ''f'' if you get lost!):
+&lt;code&gt;
+dc &lt;&lt; EOF
+3 # push our number on the stack
+d # duplicate it i.e. push 3 on the stack again
+d**p # duplicate again and calculate the product and print
+EOF
+&lt;/code&gt;
+
+Now we have several cubes to calculate, we could use ''&lt;nowiki&gt;dd**&lt;/nowiki&gt;'' several times, or
+use a macro.
+
+&lt;code&gt;
+dc &lt;&lt; EOF
+[dd**] # push a string
+sa # save it in register a
+3 # push 3 on the stack
+lax # push the string &quot;dd**&quot; on the stack and execute it
+p # print the result
+4laxp # same operation for 4, in one line
+EOF
+&lt;/code&gt;
+
+===== Conditionals and Loops =====
+
+''dc'' can execute a macro stored in a register using the ''lR x'' combo, but
+it can also execute macros conditionally.  ''&gt;a'' will execute the macro
+stored in the register ''a'', if the top of the stack is //greater than// the second
+element of the stack.  Note: the top of the stack contains the last entry.
+When written, it appears as the reverse of what we are used to reading:
+
+&lt;code&gt;
+dc &lt;&lt; EOF
+[[Hello World]p] sR  # store in 'R' a macro that prints Hello World
+2 1 &gt;R   	     # do nothing 1 is at the top 2 is the second element
+1 2 &gt;R    	     # prints Hello World
+EOF
+&lt;/code&gt;
+
+Some ''dc'' have ''&gt;R &lt;R =R'', GNU ''dc'' had some more, check your manual. Note
+that the test &quot;consumes&quot; its operands: the 2 first elements are popped
+off the stack (you can verify that ''&lt;nowiki&gt;dc &lt;&lt;&lt; &quot;[f]sR 2 1 &gt;R 1 2 &gt;R f&quot;&lt;/nowiki&gt;''
+doesn't print anything)
+
+Have you noticed how we can //include// a macro (string) in a macro? and as ''dc''
+relies on a stack we can, in fact, use the macro recursively (have your
+favorite control-c key combo ready ;)) :
+
+&lt;code&gt;
+dc &lt;&lt; EOF
+[ [Hello World] p   # our macro starts by printing Hello World
+  lRx            ]  # and then executes the macro in R
+sR 		    # we store it in the register R
+lRx                 # and finally executes it.
+EOF
+&lt;/code&gt;
+
+We have recursivity, we have test, we have loops:
+
+&lt;code&gt;
+dc &lt;&lt; EOF
+[ li       # put our index i on the stack 
+  p 	   # print it, to see what's going on
+  1 -      # we decrement the index by one
+  si 	   # store decremented index (i=i-1)
+ 0 li &gt;L   # if i &gt; 0 then execute L
+] sL       # store our macro with the name L
+ 
+10 si      # let's give to our index the value 10
+lLx        # and start our loop
+EOF
+&lt;/code&gt;
+
+Of course code written this way is far too easy to read! Make sure to
+remove all those extra spaces newlines and comments:
+
+&lt;code&gt; 
+dc &lt;&lt;&lt; '[lip1-si0li&gt;L]sL10silLx' 
+dc &lt;&lt;&lt; '[p1-d0&lt;L]sL10lLx' # use the stack instead of a register
+&lt;/code&gt;
+
+I'll let you figure out the second example, it's not hard, it uses the stack
+instead of a register for the index.
+
+===== Next =====
+
+Check your dc manual, i haven't decribed everything, like arrays
+(only documented with  &quot;; :   are used by  bc(1) for array operations&quot; on solaris,
+probably because //echo '1  0:a 0Sa 2 0:a La 0;ap' | dc// results in 
+//Segmentation Fault (core dump) //, the latest solaris uses GNU dc)
+
+You can find more info and dc programs here:
+  * [[http://en.wikipedia.org/wiki/Dc_(Unix)|http://en.wikipedia.org/wiki/Dc_(Unix)]]
+
+And more example, as well as a dc implementation in python here:
+  * http://en.literateprograms.org/Category:Programming_language:dc
+  * http://en.literateprograms.org/Desk_calculator_%28Python%29
+
+The manual for the 1971 dc from Bell Labs:
+  * http://cm.bell-labs.com/cm/cs/who/dmr/man12.ps (dead link)</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+</div><!-- /content --></div>
+                    </div>
+                </div>
+
+                <div class="small text-right">
+
+                                        <span class="docInfo">
+                        <ul class="list-inline"><li><span class="iconify text-muted" data-icon="mdi:file-document-outline"></span> <span title="howto/calculate-dc.txt">howto/calculate-dc.txt</span></li><li><span class="iconify text-muted" data-icon="mdi:calendar"></span> Last modified: <span title="2018/06/21 23:36">2018/06/21 23:36</span></li><li class="text-muted">by <bdi>izxle</bdi></li></ul>                    </span>
+                    
+                    
+                </div>
+
+            </article>
+
+            
+        </div>
+
+    </main>
+
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container-fluid">
+        <hr/>
+<div align="center">
+<h3><a target="_blank" href="http://web.archive.org/web/20220615023700/http://www.performing-databases.com/">This site is supported by Performing Databases - your experts for database administration</a></h3>
+</div>
+<hr/>
+<div align="center">
+<script async src="//web.archive.org/web/20220615023700js_/https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- BHORG_BOTTOM -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4658830517838678" data-ad-slot="1603598940"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- footer -->
+<div class="dw-container small container-fluid mx-5">
+
+    
+    <div class="footer-dw-title">
+                <div class="media">
+            <div class="media-left">
+                <img src="/web/20220615023700im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/logo.png" alt="Bash Hackers Wiki" class="media-object" style="height:32px"/>
+            </div>
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h4 class="media-heading">Bash Hackers Wiki</h4>
+                        <p>
+                                                    </p>
+                    </div>
+                    <div class="col-sm-10">
+                                            </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+
+    <div class="footer-license row">
+        <hr/>
+        <div id="dw__license" class="col-sm-6">
+                        <p>
+                <a href="http://web.archive.org/web/20220615023700/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license"><img src="/web/20220615023700im_/https://wiki.bash-hackers.org/lib/tpl/bootstrap3/images/license/gnufdl.png" width="24" height="24" alt="gnufdl"/> </a>            </p>
+            <p class="small">
+                Except where otherwise noted, content on this wiki is licensed under the following license:<br/><a href="http://web.archive.org/web/20220615023700/http://www.gnu.org/licenses/fdl-1.3.html" title="GNU Free Documentation License 1.3" target="" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license">GNU Free Documentation License 1.3</a>            </p>
+                    </div>
+
+        <div class="col-sm-6">
+                    </div>
+
+    </div>
+
+</div>
+<!-- /footer -->
+    </footer>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="skip to content" accesskey="t">
+        <span class="iconify" data-icon="mdi:chevron-up"></span>    </a>
+
+    <div id="screen__mode">        <span class="visible-xs-block"></span>
+        <span class="visible-sm-block"></span>
+        <span class="visible-md-block"></span>
+        <span class="visible-lg-block"></span>
+    </div>
+
+    <img src="/web/20220615023700im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=howto%3Acalculate-dc&amp;1655260622" width="2" height="1" alt=""/>
+</div>
+
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 02:37:00 Jun 15, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:35:52 Apr 14, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 103.845
+  exclusion.robots: 0.22
+  exclusion.robots.policy: 0.185
+  cdx.remote: 0.09
+  esindex: 0.013
+  LoadShardBlock: 75.779 (3)
+  PetaboxLoader3.datanode: 76.279 (4)
+  load_resource: 442.589
+  PetaboxLoader3.resolve: 398.827
+-->
