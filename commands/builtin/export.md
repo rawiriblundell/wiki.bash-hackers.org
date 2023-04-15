@@ -2,10 +2,10 @@
 
 ===== Synopsis =====
 
-&lt;code&gt;
+<code>
 export [-fn] [NAME[=VALUE] ...]
 export -p
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 
@@ -29,14 +29,14 @@ An argument of ''%%--%%'' disables further option processing.
 ===== Examples =====
 
 Set the display to use when launching a GUI application (useful during SSH sessions):
-&lt;code&gt;
+<code>
 export DISPLAY=&quot;:0&quot;
-&lt;/code&gt;
+</code>
 
 Set your default text editor (e.g. SublimeText):
-&lt;code&gt;
+<code>
 export EDITOR=subl
-&lt;/code&gt; 
+</code> 
 ===== Portability considerations =====
 
   * in POSIX(r), only the ''-p'' option is specified

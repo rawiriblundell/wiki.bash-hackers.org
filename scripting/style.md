@@ -24,16 +24,16 @@ Speaking of hard-tabs: Avoid them if possible. They only make trouble. I can ima
 Whenever you need to break lines of long code, you should follow one of these two rules:
 
 __**Indention using command width:**__
-&lt;code&gt;
+<code>
 activate some_very_long_option \
          some_other_option
-&lt;/code&gt;
+</code>
 
 __**Indention using two spaces:**__
-&lt;code&gt;
+<code>
 activate some_very_long_option \
   some_other_option
-&lt;/code&gt;
+</code>
 
 Personally, with some exceptions, I prefer the first form because it supports the visual impression of &quot;these belong together&quot;.
 
@@ -49,16 +49,16 @@ I'm used to (not all points apply to all compound commands, just pick the basic 
 
 What?! Well, here again:
 == Symbolic ==
-&lt;code&gt;
+<code>
 HEAD_KEYWORD parameters; BODY_BEGIN
   BODY_COMMANDS
 BODY_END
-&lt;/code&gt;
+</code>
 
 == if/then/elif/else ==
 This construct is a bit special, because it has keywords (''elif'', ''else'') &quot;in the middle&quot;. The visually appealing way is to indent them like this:
 
-&lt;code&gt;
+<code>
 if ...; then
   ...
 elif ...; then
@@ -66,28 +66,28 @@ elif ...; then
 else
   ...
 fi
-&lt;/code&gt;
+</code>
 
 == for ==
-&lt;code&gt;
+<code>
 for f in /etc/*; do
   ...
 done
-&lt;/code&gt;
+</code>
 
 == while/until ==
-&lt;code&gt;
+<code>
 while [[ $answer != [YyNn] ]]; do
   ...
 done
-&lt;/code&gt;
+</code>
 
 == The case construct ==
 
 The ''case'' construct might need a bit more discussion here, since its structure is a bit more complex.
 
 In general, every new &quot;layer&quot; gets a new indentation level:
-&lt;code&gt;
+<code>
 case $input in
   hello)
     echo &quot;You said hello&quot;
@@ -102,7 +102,7 @@ case $input in
     echo &quot;You said something weird...&quot;
   ;;
 esac
-&lt;/code&gt;
+</code>
 
 Some notes:
   * if not 100% needed, the optional left parenthesis on the pattern is not used
@@ -129,7 +129,7 @@ Since all reserved variables are ''UPPERCASE'', the safest way is to only use ''
   * if you use ''UPPERCASE'' names, **do not use reserved variable names** (see [[http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08|SUS]] for an incomplete list)
   * if you use ''UPPERCASE'' names, prepend the name with a unique prefix (''MY_'' in the example below)
 
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 # the prefix 'MY_'
@@ -138,7 +138,7 @@ MY_LOG_DIRECTORY=/var/adm/
 for file in &quot;$MY_LOG_DIRECTORY&quot;/*; do
   echo &quot;Found Logfile: $file&quot;
 done
-&lt;/code&gt;
+</code>
 ==== Variable initialization ====
 
 As in C, it's always a good idea to initialize your variables, though, the shell will initialize fresh variables itself (better: Unset variables will generally behave like variables containing a null string).
@@ -146,11 +146,11 @@ As in C, it's always a good idea to initialize your variables, though, the shell
 It's no problem to pass an **environment variable** to the script. If you blindly assume that all variables you use for the first time are **empty**, anybody can **inject** content into a variable by passing it via the environment.
 
 The solution is simple and effective: **Initialize them**
-&lt;code&gt;
+<code>
 my_input=&quot;&quot;
 my_array=()
 my_number=0
-&lt;/code&gt;
+</code>
 
 If you do that for every variable you use, then you also have some in-code documentation for them.
 
@@ -159,21 +159,21 @@ If you do that for every variable you use, then you also have some in-code docum
 Unless you are really sure what you're doing, **quote every parameter expansion**.
 
 There are some cases where this isn't needed from a technical point of view, e.g.
-  * inside ''&lt;nowiki&gt;[[ ... ]]&lt;/nowiki&gt;'' (other than the RHS of the ''=='', ''!='', and ''=~'' operators)
+  * inside ''<nowiki>[[ ... ]]</nowiki>'' (other than the RHS of the ''=='', ''!='', and ''=~'' operators)
   * the parameter (''WORD'') in ''case $WORD in ....''
   * variable assignment: ''VAR=$WORD''
 
 But quoting these is never a mistake. If you quote every parameter expansion, you'll be safe.
 
 If you need to parse a parameter as a list of words, you can't quote, of course, e.g.
-&lt;code&gt;
+<code>
 list=&quot;one two three&quot;
 
 # you MUST NOT quote $list here
 for word in $list; do
   ...
 done
-&lt;/code&gt;
+</code>
 
 ==== Function names ====
 
@@ -206,7 +206,7 @@ Avoid it, unless absolutely neccesary:
 
 The basic structure of a script simply reads:
 
-&lt;code&gt;
+<code>
 #!SHEBANG
 
 CONFIGURATION_VARIABLES
@@ -214,7 +214,7 @@ CONFIGURATION_VARIABLES
 FUNCTION_DEFINITIONS
 
 MAIN_CODE
-&lt;/code&gt;
+</code>
 
 ==== The shebang ====
 
@@ -241,11 +241,11 @@ Unless there are reasons not to, all function definitions should be declared bef
 Since a function isn't parsed before it is executed, you usually don't have to ensure they're in a specific order.
 
 The portable form of the function definition should be used, without the ''function'' keyword (here using the [[syntax:ccmd:grouping_plain | grouping compound command]]):
-&lt;code&gt;
+<code>
 getargs() {
   ...
 }
-&lt;/code&gt;
+</code>
 
 Speaking about the command grouping in function definitions using ''{ ...; }'': If you don't have a good reason to use another compound command directly, you should always use this one.
 
@@ -260,22 +260,22 @@ Speaking about the command grouping in function definitions using ''{ ...; }'': 
 If you use external commands that may not be present on the path, or not installed, check for their availability, then tell the user they're missing.
 
 Example:
-&lt;code&gt;
+<code>
 my_needed_commands=&quot;sed awk lsof who&quot;
 
 missing_counter=0
 for needed_command in $my_needed_commands; do
-  if ! hash &quot;$needed_command&quot; &gt;/dev/null 2&gt;&amp;1; then
-    printf &quot;Command not found in PATH: %s\n&quot; &quot;$needed_command&quot; &gt;&amp;2
+  if ! hash &quot;$needed_command&quot; >/dev/null 2>&1; then
+    printf &quot;Command not found in PATH: %s\n&quot; &quot;$needed_command&quot; >&2
     ((missing_counter++))
   fi
 done
 
-if ((missing_counter &gt; 0)); then
-  printf &quot;Minimum %d commands are missing in PATH, aborting\n&quot; &quot;$missing_counter&quot; &gt;&amp;2
+if ((missing_counter > 0)); then
+  printf &quot;Minimum %d commands are missing in PATH, aborting\n&quot; &quot;$missing_counter&quot; >&2
   exit 1
 fi
-&lt;/code&gt;
+</code>
 
 ==== Exit meaningfully ====
 

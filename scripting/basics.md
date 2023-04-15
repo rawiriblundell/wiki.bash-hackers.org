@@ -1,16 +1,16 @@
 ====== The basics of shell scripting ======
 
-{{keywords&gt;bash shell scripting basics learning tutorial}}
+{{keywords>bash shell scripting basics learning tutorial}}
 
 ===== Script files =====
 A shell script usually resides inside a file. The file can be executable, but you can call a Bash script with that filename as a parameter:
-&lt;code&gt;
+<code>
 bash ./myfile
-&lt;/code&gt;
+</code>
 There is **no need to add a boring filename extension** like ''.bash'' or ''.sh''. That is a holdover from UNIX(r), where executables are not tagged by the extension, but by **permissions** (filemode). The file name can be any combination of legal filename characters. Adding a proper filename extension is a convention, nothing else.
-&lt;code&gt;
+<code>
 chmod +x ./myfile
-&lt;/code&gt;
+</code>
 
 If the file is executable, and you want to use it by calling only the script name, the shebang must be included in the file.
 
@@ -22,38 +22,38 @@ If the file is executable, and you want to use it by calling only the script nam
 
 ===== The Shebang =====
 The in-file specification of the interpreter of that file, for example:
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 echo &quot;Hello world...&quot;
-&lt;/code&gt;
+</code>
 This is interpreted by the kernel ((under specific circumstances, also by the shell itself)) of your system. In general, if a file is executable, but not an executable (binary) program, and such a line is present, the program specified after ''#!'' is started with the scriptname and all its arguments. These two characters ''#'' and ''!'' must be **the first two bytes** in the file!
 
 You can follow the process by using ''echo'' as a fake interpreter:
-&lt;code&gt;
+<code>
 #!/bin/echo
-&lt;/code&gt;
+</code>
 We don't need a script body here, as the file will never be interpreted and executed by &quot;''echo''&quot;. You can see what the Operating System does, it calls &quot;''/bin/echo''&quot; with the name of the executable file and following arguments.
-&lt;code&gt;
+<code>
 $ /home/bash/bin/test testword hello
 /home/bash/bin/test testword hello
-&lt;/code&gt;
+</code>
 
 The same way, with ''#!/bin/bash'' the shell &quot;''/bin/bash''&quot; is called with the script filename as an argument. It's the same as executing &quot;''/bin/bash /home/bash/bin/test testword hello''&quot;
 
 If the interpreter can be specified with arguments and how long it can be is system-specific (see [[http://www.in-ulm.de/~mascheck/various/shebang/|#!-magic]]).
 When Bash executes a file with a #!/bin/bash shebang, the shebang itself is ignored, since the first character is a hashmark &quot;#&quot;, which indicates a comment. The shebang is for the operating system, not for the shell. Programs that don't ignore such lines, may not work as shebang driven interpreters.
 
-&lt;WRAP center round important 60%&gt;
+<WRAP center round important 60%>
 __**Attention:**__When the specified interpreter is unavailable or not executable (permissions), you usually get a &quot;''bad interpreter''&quot; error message., If you get nothing and it fails, check the shebang. Older Bash versions will respond with a &quot;''no such file or directory''&quot; error for a nonexistant interpreter specified by the shebang.
-&lt;/WRAP&gt;
+</WRAP>
 
 **Additional note:** When you specify ''#!/bin/sh'' as shebang and that's a link to a Bash, then Bash will run in POSIX(r) mode! See:
   * [[scripting:bashbehaviour | Bash behaviour]].
 
 A common method is to specify a shebang like
-&lt;code&gt;
+<code>
 #!/usr/bin/env bash
-&lt;/code&gt;
+</code>
 ...which just moves the location of the potential problem to
   * the ''env'' utility must be located in /usr/bin/
   * the needed ''bash'' binary must be located in ''PATH''
@@ -105,40 +105,40 @@ The lower codes 0 to 125 are not reserved and may be used for whatever the progr
 A value of 0 means **successful** termination, a value not 0 means **unsuccessful** termination. This behavior (== 0, != 0) is also what Bash reacts to in some flow control statements.
 
 An example of using the exit code of the program ''grep'' to check if a specific user is present in /etc/passwd:
-&lt;code bash&gt;
+<code bash>
 if grep ^root /etc/passwd; then
    echo &quot;The user root was found&quot;
 else
    echo &quot;The user root was not found&quot;
 fi
-&lt;/code&gt;
+</code>
 
 A common decision making command is &quot;''test''&quot; or its equivalent &quot;''[''&quot;. But note that, when calling test with the name &quot;''[''&quot;, the square brackets  are not part of the shell syntax, the left bracket **is** the test command!
 
-&lt;code bash&gt;
+<code bash>
 if [ &quot;$mystring&quot; = &quot;Hello world&quot; ]; then
    echo &quot;Yeah dude, you entered the right words...&quot;
 else
    echo &quot;Eeeek - go away...&quot;
 fi
-&lt;/code&gt;
+</code>
 Read more about [[commands:classictest | the test command]]
 
-A common exit code check method uses the &quot;''||''&quot; or &quot;''&amp;&amp;''&quot; operators. This lets you execute a command based on whether or not the previous command completed successfully:
-&lt;code bash&gt;
-grep ^root: /etc/passwd &gt;/dev/null || echo &quot;root was not found - check the pub at the corner.&quot;
-which vi &amp;&amp; echo &quot;Your favourite editor is installed.&quot;
-&lt;/code&gt;
+A common exit code check method uses the &quot;''||''&quot; or &quot;''&&''&quot; operators. This lets you execute a command based on whether or not the previous command completed successfully:
+<code bash>
+grep ^root: /etc/passwd >/dev/null || echo &quot;root was not found - check the pub at the corner.&quot;
+which vi && echo &quot;Your favourite editor is installed.&quot;
+</code>
 
 Please, when your script exits on errors, provide a &quot;FALSE&quot; exit code, so others can check the script execution.
 
 ===== Comments =====
 In a larger, or complex script, it's wise to comment the code. Comments can help with debugging or tests. Comments start with the # character (hashmark) and continue to the end of the line:
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 # This is a small script to say something.
 echo &quot;Be liberal in what you accept, and conservative in what you send&quot; # say something
-&lt;/code&gt;
+</code>
 The first thing was already explained, it's the so-called shebang, for the shell, **only a comment**. The second one is a comment from the beginning of the line, the third comment starts after a valid command. All three syntactically correct.
 
 
@@ -148,21 +148,21 @@ The first thing was already explained, it's the so-called shebang, for the shell
 
 ==== Block commenting ====
 To temporarily disable complete blocks of code you would normally have to prefix every line of that block with a # (hashmark) to make it a comment. There's a little trick, using the pseudo command '':'' (colon) and input redirection. The '':'' does nothing, it's a pseudo command, so it does not care about standard input. In the following code example, you want to test mail and logging, but not dump the database, or execute a shutdown:
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 # Write info mails, do some tasks and bring down the system in a safe way
 echo &quot;System halt requested&quot; | mail -s &quot;System halt&quot; netadmin@example.com
 logger -t SYSHALT &quot;System halt requested&quot;
 
 ##### The following &quot;code block&quot; is effectively ignored
-: &lt;&lt;&quot;SOMEWORD&quot;
+: <<&quot;SOMEWORD&quot;
 /etc/init.d/mydatabase clean_stop
 mydatabase_dump /var/db/db1 /mnt/fsrv0/backups/db1
 logger -t SYSHALT &quot;System halt: pre-shutdown actions done, now shutting down the system&quot;
 shutdown -h NOW
 SOMEWORD
 ##### The ignored codeblock ends here
-&lt;/code&gt;
+</code>
 What happened? The '':'' pseudo command was given some input by redirection (a here-document) - the pseudo command didn't care about it, effectively, the entire block was ignored.
 
 The here-document-tag was quoted here **to avoid substitutions** in the &quot;commented&quot; text! Check [[syntax:redirection#tag_heredoc | redirection with here-documents]] for more
@@ -174,19 +174,19 @@ The here-document-tag was quoted here **to avoid substitutions** in the &quot;co
 In Bash, the scope of user variables is generally //global//. That means, it does **not** matter whether a variable is set in the &quot;main program&quot; or in a &quot;function&quot;, the variable is defined everywhere.
 
 Compare the following //equivalent// code snippets:
-&lt;code bash&gt;
+<code bash>
 myvariable=test
 echo $myvariable
-&lt;/code&gt;
+</code>
 
-&lt;code bash&gt;
+<code bash>
 myfunction() {
   myvariable=test
 }
 
 myfunction
 echo $myvariable
-&lt;/code&gt;
+</code>
 
 In both cases, the variable ''myvariable'' is set and accessible from everywhere in that script, both in functions and in the &quot;main program&quot;.
 
@@ -197,7 +197,7 @@ In both cases, the variable ''myvariable'' is set and accessible from everywhere
 Bash provides ways to make a variable's scope //local// to a function:
   * Using the ''local'' keyword, or
   * Using ''declare'' (which will //detect// when it was called from within a function and make the variable(s) local).
-&lt;code bash&gt;
+<code bash>
 myfunc() {
 local var=VALUE
 
@@ -206,11 +206,11 @@ declare var=VALUE
 
 ...
 }
-&lt;/code&gt;
+</code>
 
 The //local// keyword (or declaring a variable using the ''declare'' command) tags a variable to be treated //completely local and separate// inside the function where it was declared:
 
-&lt;code bash&gt;
+<code bash>
 foo=external
 
 printvalue() {
@@ -228,7 +228,7 @@ printvalue
 
 # this will print - again - &quot;external&quot;
 echo $foo
-&lt;/code&gt;
+</code>
 
 ==== Environment variables ====
 
@@ -237,13 +237,13 @@ The environment space is not directly related to the topic about scope, but it's
 Every UNIX(r) process has a so-called //environment//. Other items, in addition to variables, are saved there, the so-called //environment variables//. When a child process is created (in Bash e.g. by simply executing another program, say ''ls'' to list files), the whole environment //including the environment variables// is copied to the new process. Reading that from the other side means: **Only variables that are part of the environment are available in the child process.**
 
 A variable can be tagged to be part of the environment using the ''export'' command:
-&lt;code bash&gt;
+<code bash>
 # create a new variable and set it:
-# -&gt; This is a normal shell variable, not an environment variable!
+# -> This is a normal shell variable, not an environment variable!
 myvariable=&quot;Hello world.&quot;
 
 # make the variable visible to all child processes:
-# -&gt; Make it an environment variable: &quot;export&quot; it
+# -> Make it an environment variable: &quot;export&quot; it
 export myvariable
-&lt;/code&gt;
+</code>
 

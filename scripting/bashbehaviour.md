@@ -1,6 +1,6 @@
 ====== Bash's behaviour ======
 
-{{keywords&gt;bash shell scripting startup files dotfiles modes POSIX}}
+{{keywords>bash shell scripting startup files dotfiles modes POSIX}}
 
 FIXME incomplete
 
@@ -20,13 +20,13 @@ Why an extra login shell mode? There are many actions and variable sets that onl
 __**Methods to start Bash as a login shell:**__
   * the first character of ''argv[0]'' is ''-'' (a hyphen): traditional UNIX(r) shells start from the ''login'' binary
   * Bash is started with the ''-l'' option
-  * Bash is started with the ''&lt;nowiki&gt;--login&lt;/nowiki&gt;'' option
+  * Bash is started with the ''<nowiki>--login</nowiki>'' option
 
 __**Methods to test for login shell mode:**__
   * the shell option ''[[internals:shell_options#login_shell |login_shell]]'' is set
 
 __**Related switches:**__
-  * ''&lt;nowiki&gt;--noprofile&lt;/nowiki&gt;'' disables reading of all profile files
+  * ''<nowiki>--noprofile</nowiki>'' disables reading of all profile files
 
 
 
@@ -43,8 +43,8 @@ __**Methods to test for interactive-shell mode:**__
 
 __**Related switches:**__
   * ''-i'' forces the interactive mode
-  * ''&lt;nowiki&gt;--norc&lt;/nowiki&gt;'' disables reading of the startup files (e.g. ''/etc/bash.bashrc'' if supported) and ''~/.bashrc''
-  * ''&lt;nowiki&gt;--rcfile&lt;/nowiki&gt;'' defines another startup file (instead of ''/etc/bash.bashrc'' and ''~/.bashrc'')
+  * ''<nowiki>--norc</nowiki>'' disables reading of the startup files (e.g. ''/etc/bash.bashrc'' if supported) and ''~/.bashrc''
+  * ''<nowiki>--rcfile</nowiki>'' defines another startup file (instead of ''/etc/bash.bashrc'' and ''~/.bashrc'')
 
 
 
@@ -70,7 +70,7 @@ When Bash is started in POSIX(r) mode, it follows the POSIX(r) standard for star
 No other startup files are read. Hence, a non-interactive shell doesn't read any startup files in POSIX(r) mode.
 
 __**Bash starts in POSIX(r) mode when:**__
-  * the commandline option ''&lt;nowiki&gt;--posix&lt;/nowiki&gt;'' is specified
+  * the commandline option ''<nowiki>--posix</nowiki>'' is specified
   * the environment variable [[syntax:shellvars#POSIXLY_CORRECT|POSIXLY_CORRECT]] is set
 
 
@@ -103,7 +103,7 @@ __**Bash starts in POSIX(r) mode when:**__
 ==== POSIX run mode ====
 
 In POSIX(r) mode, Bash follows the POSIX(r) standard regarding behaviour and parsing (excerpt from a Bash maintainer's document):
-&lt;code&gt;
+<code>
 Starting Bash with the `--posix' command-line option or executing `set
 -o posix' while Bash is running will cause Bash to conform more closely
 to the POSIX standard by changing the behavior to match that specified
@@ -278,14 +278,14 @@ even when in POSIX mode.  Specifically:
 
 Bash can be configured to be POSIX-conformant by default, by specifying
 the `--enable-strict-posix-default' to `configure' when building.
-&lt;/code&gt;
+</code>
 
 
 FIXME help me to find out what breaks in POSIX(r) mode!
 
 __**The POSIX(r) mode can be switched on by:**__
   * Bash starting as ''sh'' (the basename of ''argv[0]'' is ''sh'')
-  * starting Bash with the commandline option ''&lt;nowiki&gt;--posix&lt;/nowiki&gt;''
+  * starting Bash with the commandline option ''<nowiki>--posix</nowiki>''
   * on startup, the environment variable [[syntax:shellvars#POSIXLY_CORRECT|POSIXLY_CORRECT]] is set
   * the command ''set -o posix''
 
@@ -303,7 +303,7 @@ In restricted mode, Bash sets up (and runs) a shell environment that's far more 
   * filenames containing a ''/'' (slash) can't be specified as argument to the ''-p'' option of the ''hash'' builtin command
   * function definitions are not inherited from the environment at shell startup
   * the environment variable [[syntax:shellvars#SHELLOPTS|SHELLOPTS]] is ignored at startup
-  * redirecting output using the ''&gt;'', ''&gt;|'', ''&lt;&gt;'', ''&gt;&amp;'', ''&amp;&gt;'', and ''&lt;nowiki&gt;&gt;&gt;&lt;/nowiki&gt;'' redirection operators isn't allowed
+  * redirecting output using the ''>'', ''>|'', ''<>'', ''>&'', ''&>'', and ''<nowiki>>></nowiki>'' redirection operators isn't allowed
   * the ''exec'' builtin command can't replace the shell with another process
   * adding or deleting builtin commands with the ''-f'' and ''-d'' options to the enable builtin command is forbidden
   * using the ''enable'' builtin command to enable disabled shell builtins doesn't work
@@ -318,7 +318,7 @@ When the command that is run is a shell script, then the restrictions are **turn
 __**The restricted shell can be switched on by:**__
   * calling Bash as ''rbash'' (the basename of ''argv[0]'' is ''rbash'')
   * calling Bash with the ''-r'' option
-  * calling Bash with the ''&lt;nowiki&gt;--restricted&lt;/nowiki&gt;'' option
+  * calling Bash with the ''<nowiki>--restricted</nowiki>'' option
 
 __**Tests for restricted mode:**__
   * the special parameter ''$-'' contains the letter ''r'' (lowercase R)

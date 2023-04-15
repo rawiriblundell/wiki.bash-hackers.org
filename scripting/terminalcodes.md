@@ -1,6 +1,6 @@
 ====== Terminal codes (ANSI/VT100) introduction ======
 
-{{keywords&gt;bash shell scripting colors cursor control vt100 ansi}}
+{{keywords>bash shell scripting colors cursor control vt100 ansi}}
 
 Terminal (control) codes are used to issue specific commands to your terminal. This can be related to switching colors or positioning the cursor, i.e. anything that can't be done by the application itself.
 
@@ -28,7 +28,7 @@ If I couldn't find a matching ANSI escape, you'll see a :?: as  the code. Feel f
 The ANSI codes always start with the ESC character. (ASCII 0x1B or octal 033) This isn't part of the list, but **you should avoid using the ANSI codes directly - use the ''tput'' command!**
 
 All codes that can be used with ''tput'' can be found in terminfo(5). (on OpenBSD at least)
-See [[http://www.openbsd.org/cgi-bin/man.cgi?query=terminfo&amp;apropos=0&amp;sektion=5&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html|OpenBSD's terminfo(5)]] under the __Capabilities__ section.  The //cap-name// is the code to use with tput. A description of each code is also provided.
+See [[http://www.openbsd.org/cgi-bin/man.cgi?query=terminfo&apropos=0&sektion=5&manpath=OpenBSD+Current&arch=i386&format=html|OpenBSD's terminfo(5)]] under the __Capabilities__ section.  The //cap-name// is the code to use with tput. A description of each code is also provided.
 
 ==== General useful ASCII codes ====
 
@@ -42,13 +42,13 @@ The **Ctrl-Key** representation is simply associating the non-printable characte
 |''VT''|11|013|0x0B|''\v''|''^K''|Vertical TAB|
 |''FF''|12|014|0x0C|''\f''|''^L''|Formfeed (also: New page ''NP'')|
 |''CR''|13|015|0x0D|''\r''|''^M''|Carriage return|
-|''ESC''|27|033|0x1B|''&lt;none&gt;''|''^[''|Escape character|
-|''DEL''|127|177|0x7F|''&lt;none&gt;''|''&lt;none&gt;''|Delete character|
+|''ESC''|27|033|0x1B|''<none>''|''^[''|Escape character|
+|''DEL''|127|177|0x7F|''<none>''|''<none>''|Delete character|
 
 ==== Cursor handling ====
 
 ^ANSI^terminfo equivalent^Description^
-|''[ &lt;X&gt; ; &lt;Y&gt; H''\\ ''[ &lt;X&gt; ; &lt;Y&gt; f''|''cup &lt;X&gt; &lt;Y&gt;''|Home-positioning to ''X'' and ''Y'' coordinates\\ :!: it seems that ANSI uses 1-1 as home while ''tput'' uses 0-0|
+|''[ <X> ; <Y> H''\\ ''[ <X> ; <Y> f''|''cup <X> <Y>''|Home-positioning to ''X'' and ''Y'' coordinates\\ :!: it seems that ANSI uses 1-1 as home while ''tput'' uses 0-0|
 |''[ H''|''home''|Move cursor to home position (0-0)|
 |''7''|''sc''|Save current cursor position|
 |''8''|''rc''|Restore saved cursor position|
@@ -108,7 +108,7 @@ The **Ctrl-Key** representation is simply associating the non-printable characte
 Used capabilities: ''smcup'', ''rmcup''
 
 You've undoubtedly already encountered programs that restore the terminal contents after they do their work (like ''vim''). This can be done by the following commands:
-&lt;code&gt;
+<code>
 # save, clear screen
 tput smcup
 clear
@@ -119,27 +119,27 @@ read -n1 -p &quot;Press any key to continue...&quot;
 
 # restore
 tput rmcup
-&lt;/code&gt;
+</code>
 
 These features require that certain capabilities exist in your termcap/terminfo.  While ''xterm'' and most of its clones (''rxvt'', ''urxvt'', etc) will support the instructions, your operating system may not include references to them in its default xterm profile.  (FreeBSD, in particular, falls into this category.)  If `tput smcup` appears to do nothing for you, and you don't want to modify your system termcap/terminfo data, and you KNOW that you are using a compatible xterm application, the following may work for you:
 
-&lt;code&gt;
+<code>
 echo -e '\033[?47h' # save screen
 echo -e '\033[?47l' # restore screen
-&lt;/code&gt;
+</code>
 
 Certain software uses these codes (via their termcap capabilities) as well. You may have seen the screen save/restore in ''less'', ''vim'', ''top'', ''screen'' and others.  Some of these applications may also provide configuration options to *disable* this behaviour.  For example, ''less'' has a ''-X'' option for this, which can also be set in an environment variable:
 
-&lt;code&gt;
+<code>
 export LESS=X
 less /path/to/file
-&lt;/code&gt;
+</code>
 
 Similarly, ''vim'' can be configured not to &quot;restore&quot; the screen by adding the following to your ''~/.vimrc'':
 
-&lt;code&gt;
+<code>
 set t_ti= t_te=
-&lt;/code&gt;
+</code>
 
 
 
@@ -154,38 +154,38 @@ The Virtual Terminal implemented in the Linux kernel supports only 16 colors, an
 
 ==== Hardcoded colors ====
 
-&lt;code&gt;
+<code>
 printf '%b\n' 'It is \033[31mnot\033[39m intelligent to use \033[32mhardcoded ANSI\033[39m codes!'
-&lt;/code&gt;
+</code>
 
 ==== Colors using tput ====
 
 __Directly inside the echo:__
-&lt;code&gt;
+<code>
 echo &quot;TPUT is a $(tput setaf 2)nice$(tput setaf 9) and $(tput setaf 5)user friendly$(tput setaf 9) terminal capability database.&quot;
-&lt;/code&gt;
+</code>
 
 __With preset variables:__
-&lt;code&gt;
+<code>
 COL_NORM=&quot;$(tput setaf 9)&quot;
 COL_RED=&quot;$(tput setaf 1)&quot;
 COL_GREEN=&quot;$(tput setaf 2)&quot;
 echo &quot;It's ${COL_RED}red${COL_NORM} and ${COL_GREEN}green${COL_NORM} - have you seen?&quot;
-&lt;/code&gt;
+</code>
 
 ==== Misc ====
 
 __HOME function__
-&lt;code&gt;
+<code>
 home() {
   # yes, actually not much shorter ;-)
   tput home
 }
-&lt;/code&gt;
+</code>
 
 ==== Silly but nice effect ====
 
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 DATA[0]=&quot;     _/  _/    _/                            _/    &quot;
@@ -217,23 +217,23 @@ clear
 
 while :; do
 
-for ((c=1; c &lt;= 7; c++)); do
+for ((c=1; c <= 7; c++)); do
   tput setaf $c
-  for ((x=0; x&lt;${#DATA[0]}; x++)); do
-    for ((y=0; y&lt;=4; y++)); do
+  for ((x=0; x<${#DATA[0]}; x++)); do
+    for ((y=0; y<=4; y++)); do
       draw_char $x $y
     done
   done
 done
 
 done
-&lt;/code&gt;
+</code>
 
 ==== Mandelbrot set ====
 
 This is a slightly modified version of Charles Cooke's colorful Mandelbrot plot scripts ([[http://earth.gkhs.net/ccooke/shell.html | original w/ screenshot]]) -- ungolfed, optimized a bit, and without hard-coded terminal escapes. The ''colorBox'' function is [[http://en.wikipedia.org/wiki/Memoization | memoized]] to collect ''tput'' output only when required and output a new escape only when a color change is needed. This limits the number of ''tput'' calls to at most 16, and reduces raw output by more than half. The ''doBash'' function uses integer arithmetic, but is still ksh93-compatible (run as e.g. ''bash ./mandelbrot'' to use it). The ksh93-only floating-point ''doKsh'' is almost 10x faster than ''doBash'' (thus the ksh shebang by default), but uses only features that don't make the Bash parser crash.
 
-&lt;code&gt;
+<code>
 #!/usr/bin/env ksh
 
 # Charles Cooke's 16-color Mandelbrot
@@ -242,11 +242,11 @@ This is a slightly modified version of Charles Cooke's colorful Mandelbrot plot 
 
 function doBash {
 	typeset P Q X Y a b c i v x y 
-	for ((P=10**8,Q=P/100,X=320*Q/cols,Y=210*Q/lines,y=-105*Q,v=-220*Q,x=v;y&lt;105*Q;x=v,y+=Y)); do
-		for ((;x&lt;P;a=b=i=c=0,x+=X)); do
-			for ((;a**2+b**2&lt;4*P**2&amp;&amp;i++&lt;99;a=((c=a)**2-b**2)/P+x,b=2*c*b/P+y)); do :
+	for ((P=10**8,Q=P/100,X=320*Q/cols,Y=210*Q/lines,y=-105*Q,v=-220*Q,x=v;y<105*Q;x=v,y+=Y)); do
+		for ((;x<P;a=b=i=c=0,x+=X)); do
+			for ((;a**2+b**2<4*P**2&&i++<99;a=((c=a)**2-b**2)/P+x,b=2*c*b/P+y)); do :
 			done
-			colorBox $((i&lt;99?i%16:0))
+			colorBox $((i<99?i%16:0))
 		done
 		echo
 	done
@@ -256,12 +256,12 @@ function doKsh {
 	integer i
 	float a b c x=2.2 y=-1.05 X=3.2/cols Y=2.1/lines 
 	while
-		for ((a=b=i=0;(c=a)**2+b**2&lt;=2&amp;&amp;i++&lt;99&amp;&amp;(a=a**2-b**2+x,b=2*c*b+y);)); do :
+		for ((a=b=i=0;(c=a)**2+b**2<=2&&i++<99&&(a=a**2-b**2+x,b=2*c*b+y);)); do :
 		done
-		. colorBox $((i&lt;99?i%16:0))
-		if ((x&lt;1?!(x+=X):(y+=Y,x=-2.2))); then
+		. colorBox $((i<99?i%16:0))
+		if ((x<1?!(x+=X):(y+=Y,x=-2.2))); then
 			print
-			((y&lt;1.05)) 
+			((y<1.05)) 
 		fi
 		do :
 	done
@@ -277,5 +277,5 @@ unset -v lastclr
 typeset -a colrs
 trap 'tput sgr0; echo' EXIT
 ${KSH_VERSION+. doKsh} ${BASH_VERSION+doBash}
-&lt;/code&gt;
+</code>
 

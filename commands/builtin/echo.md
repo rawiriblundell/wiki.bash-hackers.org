@@ -1,12 +1,12 @@
 ====== The echo builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;
+<code>
 echo [-neE] [arg ...]
-&lt;/code&gt;
+</code>
 
 ===== Description =====
-''echo'' outputs it's args to stdout, separated by spaces, followed by a newline. The return status is always ''0''. If the [[commands:builtin:shopt|shopt]] option ''xpg_echo'' is set, Bash dynamically determines whether echo should expand escape characters (listed below) by default based on the current platform. ''echo'' doesn't interpret ''&lt;nowiki&gt;--&lt;/nowiki&gt;'' as the end of options, and will simply print this string if given.
+''echo'' outputs it's args to stdout, separated by spaces, followed by a newline. The return status is always ''0''. If the [[commands:builtin:shopt|shopt]] option ''xpg_echo'' is set, Bash dynamically determines whether echo should expand escape characters (listed below) by default based on the current platform. ''echo'' doesn't interpret ''<nowiki>--</nowiki>'' as the end of options, and will simply print this string if given.
 
 ==== Options ====
 ^Option  ^Description  ^

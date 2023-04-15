@@ -1,6 +1,6 @@
 ====== List of shell options ======
 
-{{keywords&gt;bash shell scripting options runtime variable behaviour}}
+{{keywords>bash shell scripting options runtime variable behaviour}}
 
 This information was taken from a Bash version &quot;''4.1''&quot;, every now and then new options are added, so likely, this list isn't complete.
 
@@ -145,7 +145,7 @@ If set, the extended [[syntax:pattern | pattern matching]] features are enabled.
 ^Option:  |''extquote''  ^Since:  |3.0-alpha (?)  |
 ^Shell mode:  |all  ^Default: |on  |
 
-If set, ''&lt;nowiki&gt;$'string'&lt;/nowiki&gt;'' and ''$&quot;string&quot;'' quoting is performed within [[syntax:pe | parameter expansions]] enclosed in double quotes. See the important note below under [[#parser_configurations | Parser configurations]].
+If set, ''<nowiki>$'string'</nowiki>'' and ''$&quot;string&quot;'' quoting is performed within [[syntax:pe | parameter expansions]] enclosed in double quotes. See the important note below under [[#parser_configurations | Parser configurations]].
 
 ==== failglob ====
 ^Option:  |''failglob''  ^Since:  |3.0-alpha  |
@@ -171,7 +171,7 @@ characters will collate together.
 ^Option:  |''globstar''  ^Since:  |4.0-alpha  |
 ^Shell mode:  |all  ^Default: |off  |
 
-If set, recursive globbing with ''&lt;nowiki&gt;**&lt;/nowiki&gt;'' is enabled.
+If set, recursive globbing with ''<nowiki>**</nowiki>'' is enabled.
 
 ==== gnu_errfmt ====
 ^Option:  |''gnu_errfmt''  ^Since:  |3.0-alpha  |
@@ -261,7 +261,7 @@ If set, Bash matches filenames in a case-insensitive fashion when performing pat
 ^Option:  |''nocasematch''  ^Since:  |3.1-alpha1  |
 ^Shell mode:  |all  ^Default: |off  |
 
-If set, Bash matches patterns in a case-insensitive fashion when performing matching while executing ''case'' or ''&lt;nowiki&gt;[[&lt;/nowiki&gt;'' conditional commands.
+If set, Bash matches patterns in a case-insensitive fashion when performing matching while executing ''case'' or ''<nowiki>[[</nowiki>'' conditional commands.
 
 ==== nullglob ====
 ^Option:  |''nullglob''  ^Since:  |unknown  |
@@ -323,17 +323,17 @@ There are two options that influence the parsing this way:
   * ''extquote''
 
 Consequence: You **can't** use the new syntax (e.g. the extended globbing syntax) and the command to enable it **in the same line**.
-&lt;code&gt;
+<code>
 $ shopt -s extglob; echo !(*.txt) # this is the WRONG way!
 -bash: syntax error near unexpected token `('
-&lt;/code&gt;
+</code>
 
 You have to configure the parser **before** a line with new syntax is parsed:
-&lt;code&gt;
+<code>
 $ shopt -s extglob # standalone - CORRECT way!
 $ echo !(*.txt)
 ...
-&lt;/code&gt;
+</code>
 
 ===== See also =====
 

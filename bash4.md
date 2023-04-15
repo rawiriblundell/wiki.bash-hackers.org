@@ -2,7 +2,7 @@
 
 :V4:
 
-&lt;note&gt;Attention: Since Bash 4 has been around for quite some time now (4.3 will come soon), I consider it to be &quot;standard&quot;. This page is not maintained anymore and is left here to keep your links working. See the [[scripting:bashchanges]] page for new stuff introduced.&lt;/note&gt;
+<note>Attention: Since Bash 4 has been around for quite some time now (4.3 will come soon), I consider it to be &quot;standard&quot;. This page is not maintained anymore and is left here to keep your links working. See the [[scripting:bashchanges]] page for new stuff introduced.</note>
 
 Besides many bugfixes since Bash 3.2, Bash 4 will bring some interesting new
 features for shell users and scripters. See also [[scripting:bashchanges]] for a small general overview with more details.
@@ -15,11 +15,11 @@ feel free to write a chapter here.**
 The complete list of fixes and changes is in the CHANGES or NEWS file of your
 Bash 4 distribution.
 
-&lt;WRAP center round download 60%&gt;
+<WRAP center round download 60%>
 The current available **stable** version is  4.4.18 release (February 03, 2018):
   * ftp://ftp.cwru.edu/pub/bash/bash-4.4.18.tar.gz
   * ftp://ftp.gnu.org/pub/gnu/bash/bash-4.4.18.tar.gz
-&lt;/WRAP&gt;
+</WRAP>
 
 
 
@@ -50,10 +50,10 @@ See: [[commands:builtin:mapfile]]
 
 The ''case'' construct understands two new action list terminators:
 
-The '';&amp;'' terminator causes execution to continue with the next action list
+The '';&'' terminator causes execution to continue with the next action list
 (rather than terminate the ''case'' construct).
 
-The '';;&amp;'' terminator causes the ''case'' construct to test the next given
+The '';;&'' terminator causes the ''case'' construct to test the next given
 pattern instead of terminating the whole execution.
 
 See [[syntax:ccmd:case]]
@@ -124,15 +124,15 @@ See [[syntax:pe#case_modification | Case modification on parameter expansion]]
 When using substring expansion on the positional parameters, a starting
 index of 0 now causes $0 to be prepended to the list (if the positional parameters are used). Before, this expansion
 started with $1:
-&lt;code&gt;
+<code>
 # this should display $0 on Bash v4, $1 on Bash v3
 echo ${@:0:1}
-&lt;/code&gt;
+</code>
 
 ==== Globbing ====
 
 There's a new shell option ''[[internals:shell_options#globstar | globstar]]''. When enabled, Bash will perform
-recursive globbing on ''&lt;nowiki&gt;**&lt;/nowiki&gt;'' -- this means it matches all directories and files
+recursive globbing on ''<nowiki>**</nowiki>'' -- this means it matches all directories and files
 from the current position in the filesystem, rather than only the current level.
 
 The new shell option  ''[[internals:shell_options#dirspell | dirspell]]'' enables spelling corrections on directory
@@ -145,23 +145,23 @@ See [[syntax:expansion:globs]]
 Besides the classic method of integer indexed arrays, Bash 4 supports associative arrays.
 
 An associative array is an array indexed by an arbitrary string, something like
-&lt;code&gt;
+<code>
 declare -A ASSOC
 
 ASSOC[First]=&quot;first element&quot;
 ASSOC[Hello]=&quot;second element&quot;
 ASSOC[Peter Pan]=&quot;A weird guy&quot;
-&lt;/code&gt;
+</code>
 
 See [[syntax:arrays]]
 
 ===== Redirection =====
 
-There is a new ''&lt;nowiki&gt;&amp;&gt;&gt;&lt;/nowiki&gt;'' redirection operator, which appends the standard output
-and standard error to the named file. This is the same as the good old ''&lt;nowiki&gt;&gt;&gt;FILE 2&gt;&amp;1&lt;/nowiki&gt;''
+There is a new ''<nowiki>&>></nowiki>'' redirection operator, which appends the standard output
+and standard error to the named file. This is the same as the good old ''<nowiki>>>FILE 2>&1</nowiki>''
 notation.
 
-The parser now understands ''|&amp;'' as a synonym for ''2&gt;&amp;1 |'', which redirects
+The parser now understands ''|&'' as a synonym for ''2>&1 |'', which redirects
 the standard error for a command through a pipe.
 
 See [[syntax:redirection]]
@@ -180,9 +180,9 @@ The mentioned shell options are **off by default** unless otherwise mentioned.
 
 ^Option ^Description ^
 |''[[internals:shell_options#checkjobs | checkjobs]]'' | check for and report any running jobs at shell exit |
-|''[[internals:shell_options#compat31 | compat*]]'' | set compatiblity modes for older shell versions (influences regular expression matching in ''&lt;nowiki&gt;[[ ... ]]&lt;/nowiki&gt;'' |
+|''[[internals:shell_options#compat31 | compat*]]'' | set compatiblity modes for older shell versions (influences regular expression matching in ''<nowiki>[[ ... ]]</nowiki>'' |
 |''[[internals:shell_options#dirspell | dirspell]]'' | enables spelling corrections on directory names during globbing |
-|''[[internals:shell_options#globstar | globstar]]'' | enables recursive globbing with ''&lt;nowiki&gt;**&lt;/nowiki&gt;'' |
+|''[[internals:shell_options#globstar | globstar]]'' | enables recursive globbing with ''<nowiki>**</nowiki>'' |
 |''[[internals:shell_options#lastpipe | lastpipe]]'' | (4.2) to execute the last command in a pipeline in the current environment |
 
 

@@ -1,7 +1,7 @@
 ====== The trap builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;trap [-lp] [[ARGUMENT] SIGNAL]&lt;/code&gt;
+<code>trap [-lp] [[ARGUMENT] SIGNAL]</code>
 
 ===== Description =====
 The ''trap'' command is used to &quot;trap&quot; signals and other events. In this context, &quot;trapping&quot; means to install handler code.
@@ -42,15 +42,15 @@ Special events
 
 ==== List installed traps ====
 
-&lt;code&gt;
+<code>
 trap
-&lt;/code&gt;
+</code>
 
 ==== Ignore terminal interrupt (Ctrl-C, SIGINT) ====
 
-&lt;code&gt;
+<code>
 trap '' INT
-&lt;/code&gt;
+</code>
 
 ===== Portability considerations =====
 

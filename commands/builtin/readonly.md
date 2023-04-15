@@ -2,9 +2,9 @@
 
 ===== Synopsis =====
 
-&lt;code&gt;
+<code>
 readonly [-p] [-a] [-A] [-f] [NAME[=VALUE] ...]
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 

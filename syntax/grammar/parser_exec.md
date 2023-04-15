@@ -2,16 +2,16 @@ FIXME work in progress...
 
 ====== Parsing and execution ======
 
-{{keywords&gt;bash shell scripting syntax language behaviour executing execution}}
+{{keywords>bash shell scripting syntax language behaviour executing execution}}
 
 Nearly everything in [[syntax:basicgrammar | Bash grammar]] can be broken down to a &quot;simple command&quot;. The only thing Bash has to expand, evaluate and execute is the simple command.
 
 
 ===== Simple command expansion =====
-&lt;div center round info 60%&gt;
+<div center round info 60%>
   * http://lists.gnu.org/archive/html/bug-bash/2013-01/msg00040.html
   * http://lists.research.att.com/pipermail/ast-developers/2013q2/002456.html
-&lt;/div&gt;
+</div>
 
 This step happens after the initial command line splitting.
 
@@ -28,7 +28,7 @@ If **no command name** results after expansion:
     * This is what happens when you enter only a variable assignment at the command prompt.
     * Assignment to readonly variables causes an error and the command exits non-zero.
   * Redirections are performed, but do not affect the current shell environment.
-    * that means, a ''&gt; FILE'' without any command **will** be performed: the ''FILE'' will be created!
+    * that means, a ''> FILE'' without any command **will** be performed: the ''FILE'' will be created!
   * The command exits
     * with an exit code indicating the redirection error, if any
     * with the exit code of the last command-substitution parsed, if any
@@ -41,10 +41,10 @@ Otherwise, if a command name results:
     * **Assignment errors** in (non-interactive) POSIX mode cause //the entire script to terminate//
 
 The behavior regarding the variable assignment errors can be tested:
-&lt;div center round info 60%&gt;http://lists.gnu.org/archive/html/bug-bash/2013-01/msg00054.html&lt;/div&gt;
+<div center round info 60%>http://lists.gnu.org/archive/html/bug-bash/2013-01/msg00054.html</div>
 
 **__This one exits the script completely__**
-&lt;code&gt;
+<code>
 #!/bin/sh
 # This shell runs in POSIX mode!
 
@@ -55,11 +55,11 @@ echo PRE
 foo=$((8#9))
 
 echo POST
-&lt;/code&gt;
+</code>
 
 
 **__This one terminates only the enclosing compound command (the ''{ ...; }''):__**
-&lt;code&gt;
+<code>
 #!/bin/bash
 # This shell runs in native Bash-mode!
 
@@ -71,7 +71,7 @@ echo PRE
 
 echo POST
 
-&lt;/code&gt;
+</code>
 
 ===== Simple command execution =====
 

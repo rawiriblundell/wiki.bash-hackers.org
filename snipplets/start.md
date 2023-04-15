@@ -3,7 +3,7 @@
 
 ====== Small code snippets ======
 
-{{keywords&gt;bash shell scripting code download snippet example}}
+{{keywords>bash shell scripting code download snippet example}}
 
 These snippets are **not** meant as HowTo or Tutorial or FAQ. Mostly they are only a line of code and a short comment.
 

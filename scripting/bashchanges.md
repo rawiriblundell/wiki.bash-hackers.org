@@ -58,7 +58,7 @@ For this topic, see also
 ==== General (all/many builtins) ====
 ^Feature or change description  ^Appeared in Bash version  ^See also/remarks  ^
 |generally return 2 on usage error  |2.0  |  |
-|generally accept ''&lt;nowiki&gt;--&lt;/nowiki&gt;'' (end of options)  |2.0  |  |
+|generally accept ''<nowiki>--</nowiki>'' (end of options)  |2.0  |  |
 |(where applicable) implement a ''-p'' option to produce reusable output  |2.0  |''shopt'' and ''umask'' builtins were fixed to support that in 2.02  |
 
 ==== printf ====
@@ -91,12 +91,12 @@ For this topic, see also
   * [[commands:classictest]]
 
 ^ Feature or change description                                               ^ Appeared in Bash version  ^ See also/remarks                                                                     ^
-| ''test'': ''-o'', ''=='', ''&lt;'' and ''&gt;''                                   | 2.0                       |                                                                                      |
+| ''test'': ''-o'', ''=='', ''<'' and ''>''                                   | 2.0                       |                                                                                      |
 | ''test'': ''-N''                                                            | 2.02                      |                                                                                      |
 | ''%%[[...]]%%'': new                                                        | 2.02-alpha1               | KSH93                                                                                |
 | ''%%[[...]]%%'': regex support (''=~'')                                     | 3.0-alpha                 |                                                                                      |
 | ''%%[[...]]%%'': quotable right-hand-side of ''=~'' forces string matching  | 3.2-alpha                 | for consistency with pattern matching                                                |
-| ''%%[[...]]%%'': ''&lt;'' and ''&gt;'' operators respect locale                   | 4.1-alpha                 | for consistency, since 4.1-beta: ensure you have set compatiblity to &gt;4.0 (default)  |
+| ''%%[[...]]%%'': ''<'' and ''>'' operators respect locale                   | 4.1-alpha                 | for consistency, since 4.1-beta: ensure you have set compatiblity to >4.0 (default)  |
 | ''test''/''%%[%%''/''%%[[%%'': ''-v''                                       | 4.2-alpha                 | check if a variable is set                                                           |
 | ''test''/''%%[%%''/''%%[[%%'': ''-v''                                       | 4.2-alpha                 | support array syntax to check for elements                                           |
 | ''test''/''%%[%%''/''%%[[%%'': ''-N'' accepts nanoseconds                   | 5.1-alpha                 |                                                                                      |
@@ -126,7 +126,7 @@ For this topic, see also
 | ''caller''                   | new                                                                                                                                               | 3.0                       | [[commands:builtin:caller]]                                                                          |
 | ''coproc''                   | new                                                                                                                                               | 4.0-alpha                 |                                                                                                      |
 | ''declare''                  | new options ''-l'' and ''-u''                                                                                                                     | 4.0-alpha                 | together with case-changing expansion forms                                                          |
-| ''case''                     | new action list terminators ''%%;;&amp;%% and ''%%;&amp;%%                                                                                                | 4.0-alpha                 | ksh93: only '';&amp;''. zsh and mksh: '';|''. mksh: all 4, ('';;&amp;'' is undocumented Bash compatibility)  |
+| ''case''                     | new action list terminators ''%%;;&%% and ''%%;&%%                                                                                                | 4.0-alpha                 | ksh93: only '';&''. zsh and mksh: '';|''. mksh: all 4, ('';;&'' is undocumented Bash compatibility)  |
 | ''read''                     | changed ''-t'' (fractional seconds)                                                                                                               | 4.0-alpha                 |                                                                                                      |
 | ''mapfile''                  | new                                                                                                                                               | 4.0-alpha                 |                                                                                                      |
 | ''read''                     | new option ''-i''                                                                                                                                 | 4.0-alpha                 |                                                                                                      |
@@ -234,7 +234,7 @@ For this topic, see also
 | ''%%$&quot;...&quot;%%'' (localized strings)                                                                            | 2.0                       |                                                                                                                  |
 | ''%%$'...'%%'' (ANSI-C-like strings)                                                                          | 2.0                       |                                                                                                                  |
 | ''%%\xNNN%%'' in ''%%$'...'%%'' (and ''echo -e'')                                                             | 2.02-alpha1               |                                                                                                                  |
-| ''%%$(&lt; FILENAME)%%'' (file content)                                                                          | 2.02-alpha1               |                                                                                                                  |
+| ''%%$(< FILENAME)%%'' (file content)                                                                          | 2.02-alpha1               |                                                                                                                  |
 | globbing (''fnmatch()'') capable of POSIX(r) character classes etc.                                           | 2.02-alpha1               |                                                                                                                  |
 | extended globbing                                                                                             | 2.02-alpha1               | KSH88                                                                                                            |
 | globbing inside array mass-assignment: ''ARRAY=(*.txt)''                                                      | 2.03-alpha                |                                                                                                                  |
@@ -269,11 +269,11 @@ For this topic, see also
   * [[syntax:expansion:arith]]
 
 ^Feature or change description  ^Appeared in Bash version  ^Remarks  ^
-|''&lt;nowiki&gt;((...))&lt;/nowiki&gt;''  |2.0-beta2  |KSH93  |
+|''<nowiki>((...))</nowiki>''  |2.0-beta2  |KSH93  |
 |ternary operator  |2.0  |  |
 |base 64 integer constants  |2.0  |the max. base before is unknown. Anybody?  |
-|deprecated ''$[...]'' in favor of ''&lt;nowiki&gt;$((...))&lt;/nowiki&gt;''  |2.0  |  |
-|exponentiaition operator (''&lt;nowiki&gt;**&lt;/nowiki&gt;'')  |2.02-alpha1  |  |
+|deprecated ''$[...]'' in favor of ''<nowiki>$((...))</nowiki>''  |2.0  |  |
+|exponentiaition operator (''<nowiki>**</nowiki>'')  |2.02-alpha1  |  |
 |comma operator ''EXPR,EXPR''  |2.04-devel  |  |
 |pre- and postfix operators  |2.04-devel  |  |
 
@@ -286,12 +286,12 @@ For this topic, see also
 | socket redirection (''/dev/tcp/'', ''/dev/udp/'')                                 | 2.04-devel                |          |
 | OS/filesystem-independent support for ''/dev/std(in|out|err)'' and ''/dev/fd/*''  | 2.04                      |          |
 | socket redirection accepts service names                                          | 2.05                      |          |
-| ''[n]&lt;&amp;word-'' and ''[n]&gt;&amp;word-'' FD-duplicate/closing                            | 2.05b-alpha1              | KSH93    |
-| Here strings: ''%%&lt;&lt;&lt; WORD%%''                                                    | 2.05b-alpha1              |          |
-| ''|&amp;'' (synonym for ''2&gt;&amp;1 |'')                                                   | 4.0-alpha                 |          |
-| ''%%&amp;&gt;&gt;%%'' (equiv. to ''%%&gt;&gt;FILE 2&gt;&amp;1%%'')                                       | 4.0-alpha                 |          |
-| ''&lt;nowiki&gt;{varname}&lt;/nowiki&gt;'' style automatic file descriptor allocation         | 4.1-alpha                 | ksh93    |
-| ''&lt;nowiki&gt;{varname[idx]}&lt;/nowiki&gt;'' fd allocation accepts array subscripts and special-meaning variables       | 4.3-alpha                 | ksh93    |
+| ''[n]<&word-'' and ''[n]>&word-'' FD-duplicate/closing                            | 2.05b-alpha1              | KSH93    |
+| Here strings: ''%%<<< WORD%%''                                                    | 2.05b-alpha1              |          |
+| ''|&'' (synonym for ''2>&1 |'')                                                   | 4.0-alpha                 |          |
+| ''%%&>>%%'' (equiv. to ''%%>>FILE 2>&1%%'')                                       | 4.0-alpha                 |          |
+| ''<nowiki>{varname}</nowiki>'' style automatic file descriptor allocation         | 4.1-alpha                 | ksh93    |
+| ''<nowiki>{varname[idx]}</nowiki>'' fd allocation accepts array subscripts and special-meaning variables       | 4.3-alpha                 | ksh93    |
 
 
 ===== Misc =====

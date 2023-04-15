@@ -2,9 +2,9 @@
 
 ===== Synopsis =====
 
-&lt;code&gt;
+<code>
  coproc [NAME] command [redirections]
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 
@@ -20,21 +20,21 @@ The return status of a coprocess is the exit status of its command.
 
 The optional redirections are applied after the pipes have been set up. Some examples:
 
-&lt;code bash&gt;
+<code bash>
 # redirecting stderr in the pipe
-$ coproc { ls thisfiledoesntexist; read; } 2&gt;&amp;1
+$ coproc { ls thisfiledoesntexist; read; } 2>&1
 [2] 23084
 $ IFS= read -ru ${COPROC[0]} x; printf '%s\n' &quot;$x&quot;
 ls: cannot access thisfiledoesntexist: No such file or directory
-&lt;/code&gt;
+</code>
 
-&lt;code bash&gt;
+<code bash>
 #let the output of the coprocess go to stdout
-$ { coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}'; } &gt;&amp;3; } 3&gt;&amp;1
+$ { coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}'; } >&3; } 3>&1
 [2] 23092
-$ echo bar &gt;&amp;${mycoproc[1]}
+$ echo bar >&${mycoproc[1]}
 $ foobar
-&lt;/code&gt;
+</code>
 
 Here we need to save the previous file descriptor of stdout, because by the time we redirect the fds of the coprocess, stdout has already been redirected to the pipe. 
 
@@ -45,21 +45,21 @@ Here we need to save the previous file descriptor of stdout, because by the time
 The traditional Ksh workaround to avoid the subshell when doing ''command | while read'' is to use a coprocess. Unfortunately, Bash's behavior differs.
 
 In Ksh you would do:
-&lt;code bash&gt;
+<code bash>
 # ksh93 or mksh/pdksh derivatives
-ls |&amp; # start a coprocess
+ls |& # start a coprocess
 while IFS= read -rp file; do print -r -- &quot;$file&quot;; done # read its output
-&lt;/code&gt;
+</code>
 
 In bash:
-&lt;code bash&gt;
+<code bash>
 #DOESN'T WORK
 $ coproc ls
 [1] 23232
 $ while IFS= read -ru ${COPROC[0]} line; do printf '%s\n' &quot;$line&quot;; done
 bash: read: line: invalid file descriptor specification
 [1]+  Done                    coproc COPROC ls
-&lt;/code&gt;
+</code>
 
 By the time we start reading from the output of the coprocess, the file descriptor has been closed.
 
@@ -69,13 +69,13 @@ See [[http://mywiki.wooledge.org/BashFAQ/024 | this FAQ entry on Greg's wiki]] f
 
 In the first example, we GNU awk's ''fflush()'' command. As always, when you use pipes the I/O operations are buffered. Let's see what happens with ''sed'':
 
-&lt;code bash&gt;
+<code bash>
 $ coproc sed s/^/foo/
 [1] 22981
-$ echo bar &gt;&amp;${COPROC[1]}
-$ read -t 3 -ru ${COPROC[0]} _; (( $? &gt; 127 )) &amp;&amp; echo &quot;nothing read&quot;
+$ echo bar >&${COPROC[1]}
+$ read -t 3 -ru ${COPROC[0]} _; (( $? > 127 )) && echo &quot;nothing read&quot;
 nothing read
-&lt;/code&gt;
+</code>
 
 Even though this example is the same as the first ''awk'' example, the ''read'' doesn't return because the output is waiting in a buffer.
 
@@ -87,31 +87,31 @@ A coprocess' file descriptors are accessible only to the process from which the 
 
 Here is a not-so-meaningful illustration. Suppose we want to continuously read the output of a coprocess and ''echo'' the result:
 
-&lt;code bash&gt;
+<code bash>
 #NOT WORKING
 $ coproc awk '{print &quot;foo&quot; $0;fflush()}'
 [2] 23100
-$ while IFS= read -ru ${COPROC[0]} x; do printf '%s\n' &quot;$x&quot;; done &amp;
+$ while IFS= read -ru ${COPROC[0]} x; do printf '%s\n' &quot;$x&quot;; done &
 [3] 23104
 bash: line 243: read: 61: invalid file descriptor: Bad file descriptor
-&lt;/code&gt;
+</code>
 
-This fails because the file descriptors created by the parent are not available to the subshell created by &amp;.
+This fails because the file descriptors created by the parent are not available to the subshell created by &.
 
 A possible workaround:
 
-&lt;code bash&gt;
+<code bash>
 #WARNING: for illustration purpose ONLY
 # this is not the way to make the coprocess print its output
 # to stdout, see the redirections above.
 $ coproc awk '{print &quot;foo&quot; $0;fflush()}'
 [2] 23109
-$ exec 3&lt;&amp;${COPROC[0]}
-$ while IFS= read -ru 3 x; do printf '%s\n' &quot;$x&quot;; done &amp;
+$ exec 3<&${COPROC[0]}
+$ while IFS= read -ru 3 x; do printf '%s\n' &quot;$x&quot;; done &
 [3] 23110
-$ echo bar &gt;&amp;${COPROC[1]}
+$ echo bar >&${COPROC[1]}
 $ foobar
-&lt;/code&gt;
+</code>
 
 Here, fd 3 is inherited.
 
@@ -121,68 +121,68 @@ Here, fd 3 is inherited.
 
 Unlike ksh, Bash doesn't have true anonymous coprocesses. Instead, Bash assigns FDs to a default array named ''COPROC'' if no ''NAME'' is supplied. Here's an example:
 
-&lt;code bash&gt;
+<code bash>
 $ coproc awk '{print &quot;foo&quot; $0;fflush()}'
 [1] 22978
-&lt;/code&gt;
+</code>
 
 This command starts in the background, and ''coproc'' returns immediately. Two new file descriptors are now available via the ''COPROC'' array. We can send data to our command:
 
-&lt;code bash&gt;
-$ echo bar &gt;&amp;${COPROC[1]}
-&lt;/code&gt;
+<code bash>
+$ echo bar >&${COPROC[1]}
+</code>
 
 And then read its output:
 
-&lt;code bash&gt;
+<code bash>
 $ IFS= read -ru ${COPROC[0]} x; printf '%s\n' &quot;$x&quot;
 foobar
-&lt;/code&gt;
+</code>
 
 When we don't need our command anymore, we can kill it via its pid:
 
-&lt;code&gt;
+<code>
 $ kill $COPROC_PID
 $
 [1]+  Terminated              coproc COPROC awk '{print &quot;foo&quot; $0;fflush()}'
-&lt;/code&gt;
+</code>
 
 ==== Named Coprocess ====
 
 Using a named coprocess is simple. We just need a compound command (like when defining a function), and the resulting FDs will be assigned to the indexed array ''NAME'' we supply instead.
 
-&lt;code bash&gt;
+<code bash>
 $ coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}' ;}
 [1] 23058
-$ echo bar &gt;&amp;${mycoproc[1]}
+$ echo bar >&${mycoproc[1]}
 $ IFS= read -ru ${mycoproc[0]} x; printf '%s\n' &quot;$x&quot;
 foobar
 $ kill $mycoproc_PID
 $
 [1]+  Terminated              coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}'; }
-&lt;/code&gt;
+</code>
 
 ==== Redirecting the output of a script to a file and to the screen ====
 
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 # we start tee in the background
 # redirecting its output to the stdout of the script
-{ coproc tee { tee logfile ;} &gt;&amp;3 ;} 3&gt;&amp;1 
+{ coproc tee { tee logfile ;} >&3 ;} 3>&1 
 # we redirect stding and stdout of the script to our coprocess
-exec &gt;&amp;${tee[1]} 2&gt;&amp;1
-&lt;/code&gt;
+exec >&${tee[1]} 2>&1
+</code>
 
 ===== Portability considerations =====
 
   * The ''coproc'' keyword is not specified by POSIX(R)
   * The ''coproc'' keyword appeared in Bash version 4.0-alpha
   * The ''-p'' option to Bash's ''print'' loadable is a NOOP and not connected to Bash coprocesses in any way. It is only recognized as an option for ksh compatibility, and has no effect.
-  * The ''-p'' option to Bash's ''[[commands:builtin:read | read]]'' builtin conflicts with that of all kshes and zsh. The equivalent in those shells is to add a ''\?prompt'' suffix to the first variable name argument to ''read''. i.e., if the first variable name given contains a ''?'' character, the remainder of the argument is used as the prompt string. Since this feature is pointless and redundant, I suggest not using it in either shell. Simply precede the ''read'' command with a ''printf %s prompt &gt;&amp;2''. 
+  * The ''-p'' option to Bash's ''[[commands:builtin:read | read]]'' builtin conflicts with that of all kshes and zsh. The equivalent in those shells is to add a ''\?prompt'' suffix to the first variable name argument to ''read''. i.e., if the first variable name given contains a ''?'' character, the remainder of the argument is used as the prompt string. Since this feature is pointless and redundant, I suggest not using it in either shell. Simply precede the ''read'' command with a ''printf %s prompt >&2''. 
 
 ==== Other shells ====
   
-ksh93, mksh, zsh, and Bash all support something called &quot;coprocesses&quot; which all do approximately the same thing. ksh93 and mksh have virtually identical syntax and semantics for coprocs. A //list// operator: ''|&amp;'' is added to the language which runs the preceding //pipeline// as a coprocess (This is another reason not to use the special ''|&amp;'' pipe operator in Bash -- its syntax is conflicting). The ''-p'' option to the ''read'' and ''print'' builtins can then be used to read and write to the pipe of the coprocess (whose FD isn't yet known). Special redirects are added to move the last spawned coprocess to a different FD: ''&lt;&amp;p'' and ''&gt;&amp;p'', at which point it can be accessed at the new FD using ordinary redirection, and another coprocess may then be started, again using ''|&amp;''.
+ksh93, mksh, zsh, and Bash all support something called &quot;coprocesses&quot; which all do approximately the same thing. ksh93 and mksh have virtually identical syntax and semantics for coprocs. A //list// operator: ''|&'' is added to the language which runs the preceding //pipeline// as a coprocess (This is another reason not to use the special ''|&'' pipe operator in Bash -- its syntax is conflicting). The ''-p'' option to the ''read'' and ''print'' builtins can then be used to read and write to the pipe of the coprocess (whose FD isn't yet known). Special redirects are added to move the last spawned coprocess to a different FD: ''<&p'' and ''>&p'', at which point it can be accessed at the new FD using ordinary redirection, and another coprocess may then be started, again using ''|&''.
 
 zsh coprocesses are very similar to ksh except in the way they are started. zsh adds the shell reserved word ''coproc'' to the pipeline syntax (similar to the way Bash's ''time'' keyword works), so that the pipeline that follows is started as a coproc. The coproc's input and output FDs can then be accessed and moved using the same ''read''/''print'' ''-p'' and redirects used by the ksh shells.
 

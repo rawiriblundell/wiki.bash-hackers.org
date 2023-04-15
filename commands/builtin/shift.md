@@ -1,7 +1,7 @@
 ====== The shift builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;shift [n]&lt;/code&gt;
+<code>shift [n]</code>
 
 ===== Description =====
 
@@ -46,20 +46,20 @@ There are no options.
 ===== Portability considerations =====
 
   * The ''shift'' builtin command is specified by POSIX(r).
-  * Many shells will throw a fatal error when attempting to ''shift'' more than the number of positional parameters. **POSIX does not require that behavior**. Bash (even in POSIX mode) and Zsh return 1 when there are no args, and no error output is produced unless the [[internals/shell_options#shift_verbose | shift_verbose]] [[commands/builtin/shopt | shopt]] option is enabled. Ksh93, pdksh, posh, mksh, and dash, all throw useless fatal shell errors.&lt;code&gt;
+  * Many shells will throw a fatal error when attempting to ''shift'' more than the number of positional parameters. **POSIX does not require that behavior**. Bash (even in POSIX mode) and Zsh return 1 when there are no args, and no error output is produced unless the [[internals/shell_options#shift_verbose | shift_verbose]] [[commands/builtin/shopt | shopt]] option is enabled. Ksh93, pdksh, posh, mksh, and dash, all throw useless fatal shell errors.<code>
 $ dash -c 'f() { if shift; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
 dash: 1: shift: can't shift that many
-&lt;/code&gt; In most shells, you can work around this problem using the [[commands:builtin:command | command]] builtin to suppress fatal errors caused by //special builtins//. &lt;code&gt; $ dash -c 'f() { if command shift 2&gt;/dev/null; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
+</code> In most shells, you can work around this problem using the [[commands:builtin:command | command]] builtin to suppress fatal errors caused by //special builtins//. <code> $ dash -c 'f() { if command shift 2>/dev/null; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
 no args
-&lt;/code&gt; While, POSIX requires this behavior, it isn't very obvious and some shells don't do it correctly. To work around this, you can use something like:
+</code> While, POSIX requires this behavior, it isn't very obvious and some shells don't do it correctly. To work around this, you can use something like:
 
-&lt;code&gt; $ mksh -c 'f() { if ! ${1+false} &amp;&amp; shift; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
+<code> $ mksh -c 'f() { if ! ${1+false} && shift; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
 no args
-&lt;/code&gt;
-&lt;del&gt;The mksh maintainer refuses to change either the ''shift'' or ''command'' builtins.&lt;/del&gt; [[https://github.com/MirBSD/mksh/commit/996e05548ab82f7ef2dea61f109cc7b6d13837fa | Fixed]]. (Thanks!)
-  * Perhaps almost as bad as the above, busybox sh's ''shift'' always returns success, even when attempting to shift beyond the final argument. &lt;code&gt; $ bb -c 'f() { if shift; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
+</code>
+<del>The mksh maintainer refuses to change either the ''shift'' or ''command'' builtins.</del> [[https://github.com/MirBSD/mksh/commit/996e05548ab82f7ef2dea61f109cc7b6d13837fa | Fixed]]. (Thanks!)
+  * Perhaps almost as bad as the above, busybox sh's ''shift'' always returns success, even when attempting to shift beyond the final argument. <code> $ bb -c 'f() { if shift; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
 (no output)
-&lt;/code&gt; The above mksh workaround will work in this case too.
+</code> The above mksh workaround will work in this case too.
 
 ===== See also =====
 

@@ -83,8 +83,9 @@ scrape_targets() {
 # First, remove everything between the first line and 'name="sectok"'
 # Next, remove everything after '</textarea>'
 # This should remove everything above and below our desired markdown
+# We also take the opportunity to convert some HTML chars
 extract_markdown() {
-    sed -e '1,/name="sectok"/d' -e '/<\/textarea>/,$d' "${1:-/dev/stdin}"
+    sed -e '1,/name="sectok"/d' -e '/<\/textarea>/,$d' -e 's/&gt;/>/g' -e 's/&lt;/</g' -e 's/&amp;/\&/g' "${1:-/dev/stdin}"
 }
 
 ###### Beyond this point things get a little wishy-washy ######

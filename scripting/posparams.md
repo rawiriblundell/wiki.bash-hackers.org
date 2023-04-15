@@ -1,6 +1,6 @@
 ====== Handling positional parameters ======
 
-{{keywords&gt;bash shell scripting arguments positional parameters options}}
+{{keywords>bash shell scripting arguments positional parameters options}}
 
 
 ===== Intro =====
@@ -32,25 +32,25 @@ is usually set to the script's name exactly as called, and it's
 set on shell initialization:
 
 __Testscript__ - it just echos ''$0'':
-&lt;code&gt;
+<code>
 #!/bin/bash
 echo &quot;$0&quot;
-&lt;/code&gt;
-You see, ''$0'' is always set to the name the script is called with (''&gt;'' is the prompt...):
-&lt;code&gt;
-&gt; ./testscript 
+</code>
+You see, ''$0'' is always set to the name the script is called with (''>'' is the prompt...):
+<code>
+> ./testscript 
 ./testscript
-&lt;/code&gt;
-&lt;code&gt;
-&gt; /usr/bin/testscript
+</code>
+<code>
+> /usr/bin/testscript
 /usr/bin/testscript
-&lt;/code&gt;
+</code>
 
 However, this isn't true for login shells:
-&lt;code&gt;
-&gt; echo &quot;$0&quot;
+<code>
+> echo &quot;$0&quot;
 -bash
-&lt;/code&gt;
+</code>
 
 In other terms, ''$0'' is not a positional parameter, it's a
 special parameter independent from the positional parameter list. It
@@ -81,7 +81,7 @@ Enough theory, you want to access your script-arguments. Well, here we go.
 ==== One by one ====
 
 One way is to access specific parameters:
-&lt;code&gt;
+<code>
 #!/bin/bash
 echo &quot;Total number of arguments: $#&quot;
 echo &quot;Argument 1: $1&quot;
@@ -89,14 +89,14 @@ echo &quot;Argument 2: $2&quot;
 echo &quot;Argument 3: $3&quot;
 echo &quot;Argument 4: $4&quot;
 echo &quot;Argument 5: $5&quot;
-&lt;/code&gt;
+</code>
 
 While useful in another situation, this way is lacks flexibility.
 The maximum number of arguments is a fixedvalue
 - which is a bad idea if you write a script that takes many filenames
 as arguments.
 
-=&gt; forget that one
+=> forget that one
 
 ==== Loops ====
 
@@ -108,14 +108,14 @@ You can code a [[syntax:ccmd:c_for | C-style for-loop]] using ''$#''
 as the end value. On every iteration, the ''shift''-command is used to
 shift the argument list:
 
-&lt;code&gt;
+<code>
 numargs=$#
-for ((i=1 ; i &lt;= numargs ; i++))
+for ((i=1 ; i <= numargs ; i++))
 do
     echo &quot;$1&quot;
     shift
 done
-&lt;/code&gt;
+</code>
 
 Not very stylish, but usable. The ''numargs'' variable is used
 to store the initial value of ''$#'' because the shift command
@@ -126,12 +126,12 @@ will change it as the script runs.
 Another way to iterate one argument at a time is the ''for'' loop
 without a given wordlist. The loop uses the positional parameters as a wordlist:
 
-&lt;code&gt;
+<code>
 for arg
 do
     echo &quot;$arg&quot;
 done
-&lt;/code&gt;
+</code>
 __Advantage:__ The positional parameters will be preserved
 
 ----
@@ -140,24 +140,24 @@ The next method is similar to the first example (the ''for'' loop), but
 it doesn't test for reaching ''$#''. It shifts and checks if ''$1''
 still expands to something, using the [[commands:classictest | test command]]:
 
-&lt;code&gt;
+<code>
 while [ &quot;$1&quot; ]
 do
     echo &quot;$1&quot;
     shift
 done
-&lt;/code&gt;
+</code>
 
 Looks nice, but has the disadvantage of stopping when ''$1'' is empty
 (null-string). Let's modify it to run as long as ''$1'' is defined
 (but may be null), using [[syntax:pe#use_an_alternate_value | parameter expansion for an alternate value]]:
 
-&lt;code&gt;
+<code>
 while [ &quot;${1+defined}&quot; ]; do
   echo &quot;$1&quot;
   shift
 done
-&lt;/code&gt;
+</code>
 
 ==== Getopts ====
 
@@ -231,9 +231,9 @@ starting with the last one.
 
 __**Example:**__
 START at the last positional parameter:
-&lt;code&gt;
+<code>
 echo &quot;${@: -1}&quot;
-&lt;/code&gt;
+</code>
 
 __**Attention**__: As of Bash 4, a ''START'' of ''0'' includes the special parameter ''$0'', i.e. the shell name or whatever $0 is set to, when the positional parameters are in use. A ''START'' of ''1'' begins at ''$1''. In Bash 3 and older, both ''0'' and ''1'' began at ''$1''.
 
@@ -245,7 +245,7 @@ The [[ commands:builtin:set | builtin command, set ]]
 may be used to &quot;artificially&quot; change the positional parameters from
 inside the script or function:
 
-&lt;code&gt;
+<code>
 set &quot;This is&quot; my new &quot;set of&quot; positional parameters
 
 # RESULTS IN
@@ -255,22 +255,22 @@ set &quot;This is&quot; my new &quot;set of&quot; positional parameters
 # $4: set of
 # $5: positional
 # $6: parameters
-&lt;/code&gt;
+</code>
 
 It's wise to signal &quot;end of options&quot; when setting positional
 parameters this way. If not, the dashes might be interpreted as an option switch
 by ''set'' itself:
 
-&lt;code&gt;
+<code>
 # both ways work, but behave differently. See the article about the set command!
 set -- ...
 set - ...
-&lt;/code&gt;
+</code>
 
 Alternately this will also preserve any verbose (-v) or tracing (-x) flags, which may otherwise be reset by ''set''
-&lt;code&gt;
+<code>
 set -$- ...
-&lt;/code&gt;
+</code>
 
 FIXME continue
 
@@ -280,13 +280,13 @@ FIXME continue
 
 To make your program accept options as standard command syntax:
 
-''COMMAND [options] &lt;params&gt;''  # Like 'cat -A file.txt'
+''COMMAND [options] <params>''  # Like 'cat -A file.txt'
 
 See simple option parsing code below. It's not that flexible. It
 doesn't auto-interpret combined options (-fu USER) but it works and is
 a good rudimentary way to parse your arguments.
 
-&lt;code&gt;
+<code>
 #!/bin/sh
 # Keeping options in alphabetical order makes it easy to add more.
 
@@ -327,7 +327,7 @@ do
 	  shift
 	  break;
       -*)
-	  echo &quot;Error: Unknown option: $1&quot; &gt;&amp;2
+	  echo &quot;Error: Unknown option: $1&quot; >&2
 	  exit 1
 	  ;;
       *)  # No more options
@@ -337,7 +337,7 @@ do
 done
 
 # End of file
-&lt;/code&gt;
+</code>
 
 ==== Filter unwanted options with a wrapper script ====
 
@@ -347,7 +347,7 @@ positional parameters and builds a filtered array consisting of them, then
 calls ''ls'' with the new option set. It also respects the ''--''
 as &quot;end of options&quot; for ''ls'' and doesn't change anything after it:
 
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 # simple ls(1) wrapper that doesn't allow the -a option
@@ -389,7 +389,7 @@ do
 done
 
 /bin/ls &quot;${options[@]}&quot;
-&lt;/code&gt;
+</code>
 
 ==== Using getopts ====
 

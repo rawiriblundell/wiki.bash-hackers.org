@@ -1,6 +1,6 @@
 ====== Lock your script (against parallel execution) ======
 
-{{keywords&gt;bash shell scripting mutex locking run-control}}
+{{keywords>bash shell scripting mutex locking run-control}}
 
 ===== Why lock? =====
 
@@ -31,9 +31,9 @@ To create a file or set a file timestamp, usually the command touch is used. The
 A locking mechanism checks for the existance of the lockfile, if no lockfile exists, it creates one and continues. Those are **two separate steps**! That means it's **not an atomic operation**. There's a small amount of time between checking and creating, where another instance of the same script could perform locking (because when it checked, the lockfile wasn't there)! In that case you would have 2 instances of the script running, both thinking they are succesfully locked, and can operate without colliding.
 Setting the timestamp is similar: One step to check the timespamp, a second step to set the timestamp.
 
-&lt;WRAP center round tip 60%&gt;
+<WRAP center round tip 60%>
 __**Conclusion:**__ We need an operation that does the check and the locking in one step.
-&lt;/WRAP&gt;
+</WRAP>
 
 A simple way to get that is to create a **lock directory** - with the mkdir command. It will:
 
@@ -42,14 +42,14 @@ A simple way to get that is to create a **lock directory** - with the mkdir comm
 
 
 With mkdir it seems, we have our two steps in one simple operation. A (very!) simple locking code might look like this:
-&lt;code bash&gt;
+<code bash>
 if mkdir /var/lock/mylock; then
-  echo &quot;Locking succeeded&quot; &gt;&amp;2
+  echo &quot;Locking succeeded&quot; >&2
 else
-  echo &quot;Lock failed - exit&quot; &gt;&amp;2
+  echo &quot;Lock failed - exit&quot; >&2
   exit 1
 fi
-&lt;/code&gt;
+</code>
 In case ''mkdir'' reports an error, the script will exit at this point - **the MUTEX did its job!**
 
 //If the directory is removed after setting a successful lock, while the script is still running, the lock is lost. Doing chmod -w for the parent directory containing the lock directory can be done, but it is not atomic. Maybe a while loop checking continously for the existence of the lock in the background and sending a signal such as USR1, if the directory is not found, can be done. The signal would need to be trapped. I am sure there there is a better solution than this suggestion// --- //[[sunny_delhi18@yahoo.com|sn18]] 2009/12/19 08:24//
@@ -58,18 +58,18 @@ In case ''mkdir'' reports an error, the script will exit at this point - **the M
 
 Another atomic method is setting the ''noclobber'' shell option (''set -C''). That will cause redirection to fail, if the file the redirection points to already exists (using diverse ''open()'' methods). Need to write a code example here.
 
-&lt;code bash&gt;
+<code bash>
 
-if ( set -o noclobber; echo &quot;locked&quot; &gt; &quot;$lockfile&quot;) 2&gt; /dev/null; then
+if ( set -o noclobber; echo &quot;locked&quot; > &quot;$lockfile&quot;) 2> /dev/null; then
   trap 'rm -f &quot;$lockfile&quot;; exit $?' INT TERM EXIT
-  echo &quot;Locking succeeded&quot; &gt;&amp;2
+  echo &quot;Locking succeeded&quot; >&2
   rm -f &quot;$lockfile&quot;
 else
-  echo &quot;Lock failed - exit&quot; &gt;&amp;2
+  echo &quot;Lock failed - exit&quot; >&2
   exit 1
 fi
 
-&lt;/code&gt;
+</code>
 
 Another explanation of this basic pattern using ''set -C'' can be found [[http://pubs.opengroup.org/onlinepubs/9699919799/xrat/V4_xcu_chap02.html#tag_23_02_07 | here]].
 ===== An example =====
@@ -83,7 +83,7 @@ There are some differences compared to the very simple example above:
 
 
 Details on how the script is killed aren't given, only code relevant to the locking process is shown:
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 
 # lock dirs/files
@@ -100,20 +100,20 @@ ENO_RECVSIG=3; ETXT[3]=&quot;ENO_RECVSIG&quot;
 ### start locking attempt
 ###
 
-trap 'ECODE=$?; echo &quot;[statsgen] Exit: ${ETXT[ECODE]}($ECODE)&quot; &gt;&amp;2' 0
-echo -n &quot;[statsgen] Locking: &quot; &gt;&amp;2
+trap 'ECODE=$?; echo &quot;[statsgen] Exit: ${ETXT[ECODE]}($ECODE)&quot; >&2' 0
+echo -n &quot;[statsgen] Locking: &quot; >&2
 
-if mkdir &quot;${LOCKDIR}&quot; &amp;&gt;/dev/null; then
+if mkdir &quot;${LOCKDIR}&quot; &>/dev/null; then
 
     # lock succeeded, install signal handlers before storing the PID just in case 
     # storing the PID fails
     trap 'ECODE=$?;
-          echo &quot;[statsgen] Removing lock. Exit: ${ETXT[ECODE]}($ECODE)&quot; &gt;&amp;2
+          echo &quot;[statsgen] Removing lock. Exit: ${ETXT[ECODE]}($ECODE)&quot; >&2
           rm -rf &quot;${LOCKDIR}&quot;' 0
-    echo &quot;$$&quot; &gt;&quot;${PIDFILE}&quot; 
+    echo &quot;$$&quot; >&quot;${PIDFILE}&quot; 
     # the following handler will exit the script upon receiving these signals
     # the trap on &quot;0&quot; (EXIT) from above will be triggered by this trap's &quot;exit&quot; command!
-    trap 'echo &quot;[statsgen] Killed by a signal.&quot; &gt;&amp;2
+    trap 'echo &quot;[statsgen] Killed by a signal.&quot; >&2
           exit ${ENO_RECVSIG}' 1 2 3 15
     echo &quot;success, installed signal handlers&quot;
 
@@ -127,24 +127,24 @@ else
     #  Thanks to Grzegorz Wierzowiecki for pointing out this race condition on
     #  http://wiki.grzegorz.wierzowiecki.pl/code:mutex-in-bash
     if [ $? != 0 ]; then
-      echo &quot;lock failed, PID ${OTHERPID} is active&quot; &gt;&amp;2
+      echo &quot;lock failed, PID ${OTHERPID} is active&quot; >&2
       exit ${ENO_LOCKFAIL}
     fi
 
-    if ! kill -0 $OTHERPID &amp;&gt;/dev/null; then
+    if ! kill -0 $OTHERPID &>/dev/null; then
         # lock is stale, remove it and restart
-        echo &quot;removing stale lock of nonexistant PID ${OTHERPID}&quot; &gt;&amp;2
+        echo &quot;removing stale lock of nonexistant PID ${OTHERPID}&quot; >&2
         rm -rf &quot;${LOCKDIR}&quot;
-        echo &quot;[statsgen] restarting myself&quot; &gt;&amp;2
+        echo &quot;[statsgen] restarting myself&quot; >&2
         exec &quot;$0&quot; &quot;$@&quot;
     else
         # lock is valid and OTHERPID is active - exit, we're locked!
-        echo &quot;lock failed, PID ${OTHERPID} is active&quot; &gt;&amp;2
+        echo &quot;lock failed, PID ${OTHERPID} is active&quot; >&2
         exit ${ENO_LOCKFAIL}
     fi
 
 fi
-&lt;/code&gt;
+</code>
 
 ===== Related links =====
 

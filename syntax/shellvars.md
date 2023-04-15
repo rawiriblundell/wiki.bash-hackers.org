@@ -9,8 +9,8 @@
 |''?''|question mark|Status of the most recently executed foreground-pipeline (exit/return code)|
 |''-''|dash|Current option flags set by the shell itself, on invocation, or using the [[commands:builtin:set | set builtin command]]. It's just a set of characters, like ''himB'' for ''h'', ''i'', ''m'' and ''B''.|
 |''$''|dollar-sign|The process ID (PID) of the shell. In an [[syntax:ccmd:grouping_subshell | explicit subshell]] it expands to the PID of the current &quot;main shell&quot;, not the subshell. This is different from ''$BASHPID''!|
-|''!''|exclamation mark|The process ID (PID) of the most recently executed background pipeline (like started with ''command &amp;'')|
-|''0''|zero|The name of the shell or the shell script (filename). Set by the shell itself. \\ If Bash is started with a filename to execute (script), it's set to this filename. If started with the ''-c &lt;CMDLINE&gt;'' option (commandline given as argument), then ''$0'' will be the first argument after the given ''&lt;CMDLINE&gt;''. Otherwise, it is set to the string given on invocation for ''argv[0]''. \\ Unlike popular belief, ''$0'' is //not a positional parameter//.|
+|''!''|exclamation mark|The process ID (PID) of the most recently executed background pipeline (like started with ''command &'')|
+|''0''|zero|The name of the shell or the shell script (filename). Set by the shell itself. \\ If Bash is started with a filename to execute (script), it's set to this filename. If started with the ''-c <CMDLINE>'' option (commandline given as argument), then ''$0'' will be the first argument after the given ''<CMDLINE>''. Otherwise, it is set to the string given on invocation for ''argv[0]''. \\ Unlike popular belief, ''$0'' is //not a positional parameter//.|
 |''_''|underscore|A kind of catch-all parameter. Directly after shell invocation, it's set to the filename used to invoke Bash, or the absolute or relative path to the script, just like ''$0'' would show it. Subsequently, expands to the last argument to the previous command. Placed into the environment when executing commands, and set to the full pathname of these commands. When checking mail, this parameter holds the name of the mail file currently being checked.|
 
 ===== Shell Variables =====
@@ -36,9 +36,9 @@ in the environment when Bash starts up, each shell option in the list will
 be enabled before reading any startup files.
 
 Example content:
-&lt;code&gt;
+<code>
 cmdhist:expand_aliases:extquote:force_fignore:hostcomplete:interactive_comments:progcomp:promptvars:sourcepath
-&lt;/code&gt;
+</code>
 
 This variable is read-only.
 
@@ -155,7 +155,7 @@ is ''${BASH_SOURCE[$i]}''. Use ''LINENO'' to obtain the current line number.
 ^Set by Bash:  |yes  ^Default: |n/a  |
 
 An array variable whose members are assigned by the ''=~'' binary operator to
-the ''&lt;nowiki&gt;[[&lt;/nowiki&gt;'' conditional command.
+the ''<nowiki>[[</nowiki>'' conditional command.
 
 The element with index 0 is the portion of the string matching the entire regular expression. The element
 with index ''n'' is the portion of the string matching the nth parenthesized
@@ -392,9 +392,9 @@ Automatically set to a string that uniquely describes the type of machine on
 which Bash is executing.
 
 Example content:
-&lt;code&gt;
+<code>
 x86_64
-&lt;/code&gt;
+</code>
 
 ==== LINENO ====
 ^Variable:  |''LINENO''  ^Since:  |unknown   |
@@ -419,9 +419,9 @@ Automatically set to a string that fully describes the system type on which
 Bash is executing, in the standard GNU &quot;cpu-company-system&quot; format.
 
 Example content:
-&lt;code&gt;
+<code>
 x86_64-unknown-linux-gnu
-&lt;/code&gt;
+</code>
 
 ==== MAPFILE ====
 ^Variable:  |''MAPFILE''  ^Since:  |unknown   |
@@ -464,9 +464,9 @@ Automatically set to a string that describes the operating system on which
 Bash is executing.
 
 Example content:
-&lt;code&gt;
+<code>
 linux-gnu
-&lt;/code&gt;
+</code>
 
 
 ==== PIPESTATUS ====
@@ -609,7 +609,7 @@ This is a colon-separated list of directories in which the shell looks for
 destination directories specified by the ''cd'' command.
 
 Example content:
-&lt;code&gt;.:~:/usr&lt;/code&gt;
+<code>.:~:/usr</code>
 
 ==== COLUMNS ====
 ^Variable:  |''COLUMNS''  ^Since:  |unknown   |
@@ -661,7 +661,7 @@ completion. A filename whose suffix matches one of the entries in ''FIGNORE''
 is excluded from the list of matched filenames.
 
 Example content:
-&lt;code&gt;.o:~&lt;/code&gt;
+<code>.o:~</code>
 
 ==== FUNCNEST ====
 ^Variable:  |''FUNCNEST''  ^Since:  |4.2-alpha   |
@@ -743,8 +743,8 @@ line and must match the complete line (no implicit '*' is appended).
 Each pattern is tested against the line after the checks specified by
 ''HISTCONTROL'' are applied.
 
-In addition to the normal shell pattern matching characters, &quot;&amp;&quot; matches the
-previous history line. &quot;&amp;&quot; may be escaped using a backslash; the backslash is
+In addition to the normal shell pattern matching characters, &quot;&&quot; matches the
+previous history line. &quot;&&quot; may be escaped using a backslash; the backslash is
 removed before attempting a match.
 
 The second and subsequent lines of a multi-line compound command are not tested,
@@ -805,7 +805,7 @@ When ''HOSTFILE'' is unset, the hostname list is cleared.
 ==== IFS ====
 ^Variable:  |''IFS''  ^Since:  |unknown   |
 ^Type:  |normal variable  ^Read-only:  |no  |
-^Set by Bash:  |no  ^Default: |''&lt;space&gt;&lt;tab&gt;&lt;newline&gt;''|
+^Set by Bash:  |no  ^Default: |''<space><tab><newline>''|
 
 The Internal Field Separator that is used for word splitting
 after expansion and to split lines into words with the read
@@ -933,7 +933,7 @@ When used in the text of the message, ''$_'' expands to
 the name of the current mailfile.
 
 Example content:
-&lt;code&gt;/var/mail/bfox?&quot;You have mail&quot;:~/shell-mail?&quot;$_ has mail!&quot;&lt;/code&gt;
+<code>/var/mail/bfox?&quot;You have mail&quot;:~/shell-mail?&quot;$_ has mail!&quot;</code>
 
 ==== OPTERR ====
 ^Variable:  |''OPTERR''  ^Since:  |unknown   |
@@ -1015,7 +1015,7 @@ The value of this parameter is expanded and used as the primary prompt string.
 ==== PS2 ====
 ^Variable:  |''PS2''  ^Since:  |unknown   |
 ^Type:  |normal variable  ^Read-only:  |no  |
-^Set by Bash:  |if unset  ^Default: |&quot;''&gt; ''&quot;  |
+^Set by Bash:  |if unset  ^Default: |&quot;''> ''&quot;  |
 
 The value of this parameter is expanded as with PS1 and used as
 the secondary prompt string.
@@ -1077,7 +1077,7 @@ The optional modifiers (p and l) are:
 |''l''  |A longer format, including minutes, of the form MMmSS.FFs. The value of p determines whether or not the fraction is included.  |
 
 If this variable is not set, Bash acts as if it had the value
-&lt;code&gt;$'\nreal\t%3lR\nuser\t%3lU\nsys%3lS'&lt;/code&gt;
+<code>$'\nreal\t%3lR\nuser\t%3lU\nsys%3lS'</code>
 
 If the value is null, no timing information is displayed.
 

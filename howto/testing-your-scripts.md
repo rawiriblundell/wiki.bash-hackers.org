@@ -4,7 +4,7 @@ The one of the simplest way to check your bash/sh scripts is run it and check it
 
 We have a simple **stat.sh** script:
 
-&lt;code&gt;
+<code>
 #!/usr/bin/env bash
 
 if [ -z &quot;$1&quot; ]
@@ -19,26 +19,26 @@ FILES=$(find $DIR -name '*.py' | wc -l)
 LINES=$((find $DIR -name '*.py' -print0 | xargs -0 cat) | wc -l)
 echo &quot;PYTHON FILES: $FILES&quot;
 echo &quot;PYTHON LINES: $LINES&quot;
-&lt;/code&gt;
+</code>
 
 This script evaluate the number of python files and the number of python code lines in the files.
-We can use it like **./stat.sh &lt;dir&gt;**
+We can use it like **./stat.sh <dir>**
 
 ==== Create testsuit ====
 
 Then make test suits for **stat.sh**. We make a directory **testsuit** which contain test python files.
 
 **testsuit/main.py**
-&lt;code&gt;
+<code>
 import foo
 print(foo)
-&lt;/code&gt;
+</code>
 
 **testsuit/foo.py**
-&lt;code&gt;
+<code>
 BAR = 1
 BUZ = BAR + 2
-&lt;/code&gt;
+</code>
 
 Ok! Our test suit is ready! 
 We have 2 python files which contains 4 lines of code.
@@ -49,22 +49,22 @@ Lets write tests. We just write a shell command for testing our work.
 
 Create file **tests.bashtest**:
 
-&lt;code&gt;
+<code>
 $ ./stat.sh testsuit/
 Evaluate *.py statistics
 PYTHON FILES:        2
 PYTHON LINES:        4
 
-&lt;/code&gt;
+</code>
 
 This is our test! This is simple. Try to run it.
 
-&lt;code&gt;
+<code>
 # install bashtest if required!
 $ pip install bashtest
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 # run tests
 $ bashtest *.bashtest
 1 items passed all tests:
@@ -72,11 +72,11 @@ $ bashtest *.bashtest
 1 tests in 1 items.
 1 passed and 0 failed.
 Test passed.
-&lt;/code&gt;
+</code>
 
 Thats all. We wrote one test. You can write more tests if you want.
 
-&lt;code&gt;
+<code>
 $ ls testsuit/
 foo.py  main.py
 
@@ -85,18 +85,18 @@ Evaluate *.py statistics
 PYTHON FILES:        2
 PYTHON LINES:        4
 
-&lt;/code&gt;
+</code>
 
 And run tests again:
 
-&lt;code&gt;
+<code>
 $ bashtest *.bashtest
 1 items passed all tests:
    2 tests in tests.bashtest
 2 tests in 1 items.
 2 passed and 0 failed.
 Test passed.
-&lt;/code&gt;
+</code>
 
 You can find more **.bashtest** examples in the [[https://github.com/pahaz/bashtest | bashtest github repo]]. You can also write your question or report a bug [[https://github.com/pahaz/bashtest/issues | here]].
 

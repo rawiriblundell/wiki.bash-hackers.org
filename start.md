@@ -3,21 +3,21 @@
 
 ====== The Bash Hackers Wiki ======
 
-{{keywords&gt;bash shell linux scripting}}
+{{keywords>bash shell linux scripting}}
 
-&lt;WRAP center round box 90%&gt;
+<WRAP center round box 90%>
 This wiki is intended to hold documentation of any kind about GNU Bash. The main motivation was to provide //human-readable documentation// and information so users aren't forced to read every bit of the Bash manpage - which can be difficult to understand. However, the docs here are **not** meant as a newbie tutorial.
 
 This wiki and any programs found in this wiki are free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This wiki and its programs are distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 [[wishes | What would YOU like to see here?]] (outdated and locked, please use the discussions)
 
-**Stranger!** [[http://wiki.bash-hackers.org/start&amp;do=register | Feel free to register]] and comment or edit the contents. There is a [[meta:need_love|Bash Hackers Wiki needs love page]] that lists some things to do. The registration is only there to prevent SPAM.
-&lt;/WRAP&gt;
+**Stranger!** [[http://wiki.bash-hackers.org/start&do=register | Feel free to register]] and comment or edit the contents. There is a [[meta:need_love|Bash Hackers Wiki needs love page]] that lists some things to do. The registration is only there to prevent SPAM.
+</WRAP>
 
 ===== Scripting and general information =====
   * [[bash4 | Bash v4 - a rough overview]] (unmaintained, since Bash 4 is more or less standard)
@@ -70,7 +70,7 @@ See also [[misc:readthesourceluke|some Bash source code excerpts]].
   * [[syntax:shellvars | Special parameters and shell variables]]
   * [[syntax:arrays | Arrays]]
 
-&lt;WRAP column 40%&gt;
+<WRAP column 40%>
 //**__Compound commands__**//
 
 ^**[[syntax:ccmd:intro | Compound commands overview]]**  ^^
@@ -78,20 +78,20 @@ See also [[misc:readthesourceluke|some Bash source code excerpts]].
 |''{ ...; }''|[[syntax:ccmd:grouping_plain | command grouping]]|
 |''( ... )''|[[syntax:ccmd:grouping_subshell | command grouping in a subshell]]|
 ^Conditionals  ^^
-|''&lt;nowiki&gt;[[ ... ]]&lt;/nowiki&gt;''|[[syntax:ccmd:conditional_expression | conditional expression]]| 
+|''<nowiki>[[ ... ]]</nowiki>''|[[syntax:ccmd:conditional_expression | conditional expression]]| 
 |''if ...; then ...; fi''|[[syntax:ccmd:if_clause | conditional branching]]|
 |''case ... esac''|[[syntax:ccmd:case | pattern-based branching]]|
 ^Loops  ^^
 |''for word in ...; do ...; done''|[[syntax:ccmd:classic_for | classic for-loop]]|
-|''&lt;nowiki&gt;for ((x=1; x&lt;=10; x++)); do ...; done&lt;/nowiki&gt;''|[[syntax:ccmd:c_for | C-style for-loop]]|
+|''<nowiki>for ((x=1; x<=10; x++)); do ...; done</nowiki>''|[[syntax:ccmd:c_for | C-style for-loop]]|
 |''while ...; do ...; done''|[[syntax:ccmd:while_loop | while loop]]|
 |''until ...; do ...; done''|[[syntax:ccmd:until_loop | until loop]]|
 ^Misc  ^^
-|''&lt;nowiki&gt;(( ... ))&lt;/nowiki&gt;''|[[syntax:ccmd:arithmetic_eval | arithmetic evaluation]]|
+|''<nowiki>(( ... ))</nowiki>''|[[syntax:ccmd:arithmetic_eval | arithmetic evaluation]]|
 |''select word in ...; do ...; done''|[[syntax:ccmd:user_select | user selections]]|
-&lt;/WRAP&gt;
+</WRAP>
 
-&lt;WRAP column 40%&gt;
+<WRAP column 40%>
 //**__Expansions and substitutions__**//
 
 ^**[[syntax:expansion:intro | Introduction to expansions and substitutions]]**  ^^
@@ -99,19 +99,19 @@ See also [[misc:readthesourceluke|some Bash source code excerpts]].
 |''~/    ~root/''|[[syntax:expansion:tilde | Tilde expansion]]|
 |''$FOO    ${BAR%.mp3}''|[[syntax:pe | Parameter expansion]]|
 |''`command`    $(command)''|[[syntax:expansion:cmdsubst | Command substitution]]|
-|''&lt;(command)    &gt;(command)''|[[syntax:expansion:proc_subst | Process substitution]]|
-|''&lt;nowiki&gt;$((1 + 2 + 3))    $[4 + 5 + 6]&lt;/nowiki&gt;''|[[syntax:expansion:arith | Arithmetic expansion]]|
-|''Hello    &lt;nowiki&gt;&lt;---&gt;&lt;/nowiki&gt;    Word!''|[[syntax:expansion:wordsplit | Word splitting]]|
+|''<(command)    >(command)''|[[syntax:expansion:proc_subst | Process substitution]]|
+|''<nowiki>$((1 + 2 + 3))    $[4 + 5 + 6]</nowiki>''|[[syntax:expansion:arith | Arithmetic expansion]]|
+|''Hello    <nowiki><---></nowiki>    Word!''|[[syntax:expansion:wordsplit | Word splitting]]|
 |''/data/*-av/*.mp?''|[[syntax:expansion:globs | Pathname expansion]]|
-&lt;/WRAP&gt;
-&lt;WRAP clear&gt;&lt;/WRAP&gt;
+</WRAP>
+<WRAP clear></WRAP>
 
 ===== Builtin Commands =====
 
 This is a selection of builtin commands and command-like keywords, loosely arranged by their common uses. These are provided directly by the shell, rather than invoked as standalone external commands.
 
-&lt;WRAP column 46%&gt;
-^  Declaration commands\\ &lt;wrap center round lo todo box 80%&gt;Commands that set and query attributes/types, and manipulate simple datastructures.&lt;/wrap&gt;  ^^  Alt  ^  Type  ^
+<WRAP column 46%>
+^  Declaration commands\\ <wrap center round lo todo box 80%>Commands that set and query attributes/types, and manipulate simple datastructures.</wrap>  ^^  Alt  ^  Type  ^
 |[[commands:builtin:declare | declare]]|Display or set shell variables or functions along with attributes.|  ''typeset''  |  builtin  |
 |[[commands:builtin:export | export]]|Display or set shell variables, also giving them the export attribute.|  ''typeset -x''  |  special builtin  |
 |[[commands:builtin:eval | eval]]|Evaluate arguments as shell code.|  -  |  special builtin  |
@@ -119,20 +119,20 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 |[[commands:builtin:readonly | readonly]]|Mark variables or functions as read-only.|  ''typeset -r''  |  special builtin  |
 |[[commands:builtin:unset | unset]]|Unset variables and functions.|  -  |  special builtin  |
 |[[commands:builtin:shift | shift]]|Shift positional parameters|  -  |  special builtin  |
-^  I/O\\ &lt;wrap center round lo todo box 80%&gt;Commands for reading/parsing input, or producing/formatting output of standard streams.&lt;/wrap&gt;  ^^  Alt  ^  Type  ^
+^  I/O\\ <wrap center round lo todo box 80%>Commands for reading/parsing input, or producing/formatting output of standard streams.</wrap>  ^^  Alt  ^  Type  ^
 |[[syntax:keywords:coproc | coproc]]|Co-processes: Run a command in the background with pipes for reading / writing its standard streams.|  -  |  keyword  |
 |[[commands:builtin:echo | echo]]|Create output from arguments.|  -  |  builtin  |
 |[[commands:builtin:mapfile | mapfile]]|Read lines of input into an array.|  ''readarray''  |  builtin  |
 |[[commands:builtin:printf | printf]]|&quot;advanced ''echo''.&quot;|  -  |  builtin  |
 |[[commands:builtin:read | read]]|Read input into variables or arrays, or split strings into fields using delimiters.|  -  |  builtin  |
-^  Configuration and Debugging\\ &lt;wrap center round lo todo box 80%&gt;Commands that modify shell behavior, change special options, assist in debugging.&lt;/wrap&gt;  ^^  Alt  ^  Type  ^
+^  Configuration and Debugging\\ <wrap center round lo todo box 80%>Commands that modify shell behavior, change special options, assist in debugging.</wrap>  ^^  Alt  ^  Type  ^
 |[[commands:builtin:caller | caller]]|Identify/print execution frames.|  -  |  builtin  |
 |[[commands:builtin:set | set]]|Set the positional parameters and/or set options that affect shell behaviour.|  -  |  special builtin  |
 |[[commands:builtin:shopt | shopt]]|set/get some bash-specific shell options.|  -  |  builtin  |
-&lt;/WRAP&gt;
+</WRAP>
 
-&lt;WRAP column 46%&gt;
-^  Control flow and data processing\\ &lt;wrap center round lo todo box 80%&gt;Commands that operate on data and/or affect control flow.&lt;/wrap&gt;                                                           |^  Alt     ^  Type             ^
+<WRAP column 46%>
+^  Control flow and data processing\\ <wrap center round lo todo box 80%>Commands that operate on data and/or affect control flow.</wrap>                                                           |^  Alt     ^  Type             ^
 | [[commands:builtin:true| colon]]                                                                                                         | &quot;true&quot; null command.                                    |  true    |  special builtin  |
 | [[commands:builtin:source| dot]]                                                                                                         | Source external files.                                  |  source  |  special builtin  |
 | [[commands:builtin:false| false]]                                                                                                        | Fail at doing nothing.                                  |  -       |  builtin          |
@@ -140,7 +140,7 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 | [[commands:builtin:let| let]]                                                                                                            | Arithmetic evaluation simple command.                   |  -       |  builtin          |
 | [[commands:builtin:return| return]]                                                                                                      | Return from a function with a specified exit status.    |  -       |  special builtin  |
 | [[commands:classictest| []]                                                                                                              | The classic ''test'' simple command.                    |  test    |  builtin          |
-^  Process and Job control\\ &lt;wrap center round lo todo box 80%&gt;Commands related to jobs, signals, process groups, subshells.&lt;/wrap&gt;                                                                |^  Alt     ^  Type             ^
+^  Process and Job control\\ <wrap center round lo todo box 80%>Commands related to jobs, signals, process groups, subshells.</wrap>                                                                |^  Alt     ^  Type             ^
 | [[commands:builtin:exec| exec]]                                                                                                          | Replace the current shell process or set redirections.  |  -       |  special builtin  |
 | [[commands:builtin:exit| exit]]                                                                                                          | Exit the shell.                                         |  -       |  special builtin  |
 | [[commands:builtin:kill| kill]]                                                                                                          | Send a signal to specified process(es)                  |  -       | builtin           |
@@ -148,10 +148,10 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 | [[commands:builtin:times| times]]                                                                                                        | Display process times.                                  |  -       |  special builtin  |
 | [[commands:builtin:wait| wait]]                                                                                                          | Wait for background jobs and asynchronous lists.        |  -       |  builtin          |
 ^                                                                                                                                                                                                   |^  Alt     ^  Type             ^
-&lt;/WRAP&gt;
-&lt;WRAP clear&gt;&lt;/WRAP&gt;
-&lt;WRAP hide&gt; previous alphabetical version
-&lt;WRAP column 40%&gt;
+</WRAP>
+<WRAP clear></WRAP>
+<WRAP hide> previous alphabetical version
+<WRAP column 40%>
 ^A-G^^
 |[[commands:builtin:caller | caller]]|identify/print execution frames (Bash builtin)  |
 |[[syntax:keywords:coproc | coproc]]|Co-processes (Bash keyword) |
@@ -160,9 +160,9 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 ^I-N^^
 |[[commands:builtin:let | let]]|arithmetic evaluation - an old fashioned way (Bash builtin)  |
 |[[commands:builtin:mapfile | mapfile]]|Mapping lines of input to an array, also named ''readarray'' (Bash builtin)  |
-&lt;/WRAP&gt;
+</WRAP>
 
-&lt;WRAP column 40%&gt;
+<WRAP column 40%>
 ^O-T^^
 |[[commands:builtin:printf | printf]]|&quot;advanced ''echo''&quot; (Bash builtin)  |
 |[[commands:builtin:read | read]]|getting input from ''stdin'' (Bash builtin)  |
@@ -172,12 +172,12 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 |[[commands:classictest | test]]|the classic ''test'' command (Bash builtin)  |
 ^U-Z^^
 |[[commands:builtin:unset | unset]]|unset variables and functions (Bash builtin)  |
-&lt;/WRAP&gt;
-&lt;WRAP clear&gt;&lt;/WRAP&gt;
-&lt;/WRAP&gt;
+</WRAP>
+<WRAP clear></WRAP>
+</WRAP>
 ===== Dictionary ======
 
-&lt;note tip&gt;A list of expressions, words, and their meanings is [[dict:index | here]].&lt;/note&gt;
+<note tip>A list of expressions, words, and their meanings is [[dict:index | here]].</note>
 
 ===== Links =====
 
@@ -186,11 +186,11 @@ This is a selection of builtin commands and command-like keywords, loosely arran
   * [[http://tiswww.case.edu/php/chet/bash/bashtop.html|Chet Ramey's Bash page]] and its [[http://tiswww.case.edu/php/chet/bash/FAQ|FAQ]].
   * [[http://www.gnu.org/software/bash/ | GNU Bash software page]]
   * Official Bash mailing lists:
-    * **Bug reports**: &lt;bug-bash@gnu.org&gt; ([[http://mail.gnu.org/pipermail/bug-bash|archives]])
-    * **General questions**: &lt;help-bash@gnu.org&gt; ([[http://mail.gnu.org/pipermail/help-bash|archives]])
+    * **Bug reports**: <bug-bash@gnu.org> ([[http://mail.gnu.org/pipermail/bug-bash|archives]])
+    * **General questions**: <help-bash@gnu.org> ([[http://mail.gnu.org/pipermail/help-bash|archives]])
   * Official Bash git repository:
     * **Browse**: [[http://git.savannah.gnu.org/cgit/bash.git | cgit]]
-    * **Clone**: //git:// &lt;nowiki&gt;ssh://git.sv.gnu.org/srv/git/bash.git&lt;/nowiki&gt; • //ssh:// &lt;nowiki&gt;ssh://git.sv.gnu.org/srv/git/bash.git&lt;/nowiki&gt; • //http:// &lt;nowiki&gt;http://git.savannah.gnu.org/r/bash.git&lt;/nowiki&gt;
+    * **Clone**: //git:// <nowiki>ssh://git.sv.gnu.org/srv/git/bash.git</nowiki> • //ssh:// <nowiki>ssh://git.sv.gnu.org/srv/git/bash.git</nowiki> • //http:// <nowiki>http://git.savannah.gnu.org/r/bash.git</nowiki>
 
 ==== Recommended Shell resources ====
 
@@ -209,7 +209,7 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 === Documentation / Reference ===
 
   * **Bash**: [[http://tiswww.case.edu/php/chet/bash/bash.html | man page]] [[http://tiswww.case.edu/php/chet/bash/bashref.html | info page]]
-  * **AT&amp;T ksh**: [[http://www2.research.att.com/sw/download/man/man1/ksh88.html | ksh88]] [[http://www2.research.att.com/sw/download/man/man1/ksh.html | ksh93]]
+  * **AT&T ksh**: [[http://www2.research.att.com/sw/download/man/man1/ksh88.html | ksh88]] [[http://www2.research.att.com/sw/download/man/man1/ksh.html | ksh93]]
   * [[https://www.mirbsd.org/htman/i386/man1/mksh.htm | mksh]] (pdksh successor) 
   * [[http://zsh.sourceforge.net/Doc/ | zsh]]
   * [[http://man7.org/linux/man-pages/man1/dash.1.html | dash]]
@@ -235,7 +235,7 @@ This is a selection of builtin commands and command-like keywords, loosely arran
   * [[https://github.com/hornos/shf3 | General purpose shell framework for bash 4]] - in development.
   * [[https://github.com/chilicuil/learn/blob/master/sh/lib| General purpose bash library for bash 4]] - active development
 
-&lt;div hide&gt;
+<div hide>
 ===== Most wanted =====
 
 ^Statistics for Month: **April 2012**^^^
@@ -253,10 +253,10 @@ This is a selection of builtin commands and command-like keywords, loosely arran
 
   * &quot;Total visits&quot;: 35144
   * The overall &quot;start&quot; page is not counted
-&lt;/div&gt;
+</div>
 ===== Contact =====
 
-&lt;WRAP column 40%&gt;
+<WRAP column 40%>
 Visit us in ''irc.freenode.net'', channel ''#bash'' ;-)
 
 If you have critiques or suggestions, please feel free to send a mail using the contact form on the right. Note that there is a simple discussion option below every article.
@@ -270,8 +270,8 @@ It also would be nice to drop a line when
   * you don't like it
   * you found mistakes / bugs
 Simply: Reader's feedback
-&lt;/WRAP&gt;
+</WRAP>
 
-&lt;WRAP column 40%&gt;
-{{contact&gt;subj=Wiki reader feedback}}
-&lt;/WRAP&gt;
+<WRAP column 40%>
+{{contact>subj=Wiki reader feedback}}
+</WRAP>

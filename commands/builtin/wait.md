@@ -1,7 +1,7 @@
 ====== The wait builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;wait [-f] [-n] [-p VARNAME] [ID...]&lt;/code&gt;
+<code>wait [-f] [-n] [-p VARNAME] [ID...]</code>
 
 ===== Description =====
 The ''wait'' builtin command is used to wait for job completion and return exit status.

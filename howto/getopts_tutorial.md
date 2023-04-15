@@ -1,9 +1,9 @@
 ====== Small getopts tutorial ======
 
-{{keywords&gt;bash shell scripting arguments positional parameters options getopt getopts}}
+{{keywords>bash shell scripting arguments positional parameters options getopt getopts}}
 
 ===== Description =====
-**Note that** ''getopts'' is neither able to parse GNU-style long options (''&lt;nowiki&gt;--&lt;/nowiki&gt;myoption'') nor XF86-style long options (''-myoption''). So, when you want to parse command line arguments in a professional ;-) way, ''getopts'' may or may not work for you. Unlike its older brother ''getopt'' (note the missing //s//!), it's a shell builtin command. The advantages are:
+**Note that** ''getopts'' is neither able to parse GNU-style long options (''<nowiki>--</nowiki>myoption'') nor XF86-style long options (''-myoption''). So, when you want to parse command line arguments in a professional ;-) way, ''getopts'' may or may not work for you. Unlike its older brother ''getopt'' (note the missing //s//!), it's a shell builtin command. The advantages are:
   * No need to pass the positional parameters through to an external program.
   * Being a builtin, ''getopts'' can set shell variables to use for parsing (impossible for an //external// process!)
   * There's no need to argue with several ''getopt'' implementations which had buggy concepts in the past (whitespace, ...)
@@ -17,9 +17,9 @@ Some other methods to parse positional parameters - using neither **getopt** nor
 ==== Terminology ====
 
 It's useful to know what we're talking about here, so let's see... Consider the following command line:
-&lt;code&gt;
+<code>
 mybackup -x -f /etc/mybackup.conf -r ./foo.txt ./bar.txt
-&lt;/code&gt;
+</code>
 
 These are all positional parameters, but they can be divided into several logical groups:
   * ''-x'' is an **option** (aka **flag** or **switch**). It consists of a dash (''-'') followed by **one** character.
@@ -28,9 +28,9 @@ These are all positional parameters, but they can be divided into several logica
   * ''./foo.txt'' and ''./bar.txt'' are remaining arguments without any associated options. These are often used as **mass-arguments**. For example, the filenames specified for ''cp(1)'', or arguments that don't need an option to be recognized because of the intended behavior of the program. POSIX(r) calls them **operands**.
 
 To give you an idea about why ''getopts'' is useful, The above command line is equivalent to:
-&lt;code&gt;
+<code>
 mybackup -xrf /etc/mybackup.conf ./foo.txt ./bar.txt
-&lt;/code&gt;
+</code>
 
 which is complex to parse without the help of ''getopts''.
 
@@ -40,20 +40,20 @@ The option flags can be **upper- and lowercase** characters, or **digits**. It m
 
 In general you need to call ''getopts'' several times. Each time it will use the next positional parameter and a possible argument, if parsable, and provide it to you. ''getopts'' will not change the set of positional parameters. If you want to shift them, it must be done manually:
 
-&lt;code&gt;
+<code>
 shift $((OPTIND-1))
 # now do something with $@
-&lt;/code&gt;
+</code>
 
 Since ''getopts'' sets an exit status of //FALSE// when there's nothing left to parse, it's easy to use in a while-loop:
 
-&lt;code&gt;
+<code>
 while getopts ...; do
   ...
 done
-&lt;/code&gt;
+</code>
 
-''getopts'' will parse options and their possible arguments. It will stop parsing on the first non-option argument (a string that doesn't begin with  a hyphen (''-'') that isn't an argument for any option in front of it). It will also stop parsing when it sees the ''&lt;nowiki&gt;--&lt;/nowiki&gt;'' (double-hyphen), which means [[dict:terms:end_of_options | end of options]].
+''getopts'' will parse options and their possible arguments. It will stop parsing on the first non-option argument (a string that doesn't begin with  a hyphen (''-'') that isn't an argument for any option in front of it). It will also stop parsing when it sees the ''<nowiki>--</nowiki>'' (double-hyphen), which means [[dict:terms:end_of_options | end of options]].
 
 
 
@@ -69,9 +69,9 @@ done
 ==== Specify what you want ====
 
 The base-syntax for ''getopts'' is:
-&lt;code&gt;
+<code>
 getopts OPTSTRING VARNAME [ARGS...]
-&lt;/code&gt;
+</code>
 where:
 ^''OPTSTRING''|tells ''getopts'' which options to expect and where to expect arguments (see below)|
 ^''VARNAME''|tells ''getopts'' which shell-variable to use for option reporting|
@@ -80,10 +80,10 @@ where:
 === The option-string ===
 
 The option-string tells ''getopts'' which options to expect and which of them must have an argument. The syntax is very simple --- every option character is simply named as is, this example-string would tell ''getopts'' to look for ''-f'', ''-A'' and ''-x'':
-&lt;code&gt;getopts fAx VARNAME&lt;/code&gt;
+<code>getopts fAx VARNAME</code>
 
 When you want ''getopts'' to expect an argument for an option, just place a '':'' (colon) after the proper option flag. If you want ''-A'' to expect an argument (i.e. to become ''-A SOMETHING'') just do:
-&lt;code&gt;getopts fA:x VARNAME&lt;/code&gt;
+<code>getopts fA:x VARNAME</code>
 
 If the **very first character** of the option-string is a '':'' (colon), which would normally be nonsense because there's no option letter preceding it, ''getopts'' switches to &quot;**silent error reporting mode**&quot;. In productive scripts, this is usually what you want because it allows you to handle errors yourself without being disturbed by annoying messages.
 
@@ -95,16 +95,16 @@ You can give your own set of arguments to the utility to parse. Whenever additio
 
 This way, you are able to parse any option set you like, here for example from an array:
 
-&lt;code&gt;
+<code>
 while getopts :f:h opt &quot;${MY_OWN_SET[@]}&quot;; do
   ...
 done
-&lt;/code&gt;
+</code>
 
 A call to ''getopts'' **without** these additional arguments is **equivalent** to explicitly calling it with ''&quot;$@&quot;'':
-&lt;code&gt;
+<code>
 getopts ... &quot;$@&quot;
-&lt;/code&gt;
+</code>
 
 ==== Error Reporting ====
 
@@ -132,20 +132,20 @@ For productive scripts I recommend to use the silent mode, since everything look
 Enough said - action!
 
 Let's play with a very simple case: only one option (''-a'') expected, without any arguments. Also we disable the //verbose error handling// by preceding the whole option string with a colon ('':''):
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 
 while getopts &quot;:a&quot; opt; do
   case $opt in
     a)
-      echo &quot;-a was triggered!&quot; &gt;&amp;2
+      echo &quot;-a was triggered!&quot; >&2
       ;;
     \?)
-      echo &quot;Invalid option: -$OPTARG&quot; &gt;&amp;2
+      echo &quot;Invalid option: -$OPTARG&quot; >&2
       ;;
   esac
 done
-&lt;/code&gt;
+</code>
 
 I put that into a file named ''go_test.sh'', which is the name you'll see below in the examples.
 
@@ -153,18 +153,18 @@ Let's do some tests:
 
 === Calling it without any arguments ===
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh
 $ 
-&lt;/code&gt;
+</code>
 Nothing happened? Right. ''getopts'' didn't see any valid or invalid options (letters preceded by a dash), so it wasn't triggered.
 
 === Calling it with non-option arguments ===
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh /etc/passwd
 $ 
-&lt;/code&gt;
+</code>
 Again --- nothing happened. The **very same** case: ''getopts'' didn't see any valid or invalid options (letters preceded by a dash), so it wasn't triggered.
 
 The arguments given to your script are of course accessible as ''$1'' - ''${N}''.
@@ -174,40 +174,40 @@ The arguments given to your script are of course accessible as ''$1'' - ''${N}''
 Now let's trigger ''getopts'': Provide options.
 
 First, an **invalid** one:
-&lt;code&gt;
+<code>
 $ ./go_test.sh -b
 Invalid option: -b
 $ 
-&lt;/code&gt;
+</code>
 As expected, ''getopts'' didn't accept this option and acted like told above: It placed ''?'' into ''$opt'' and the invalid option character (''b'') into ''$OPTARG''. With our ''case'' statement, we were able to detect this.
 
 Now, a **valid** one (''-a''):
-&lt;code&gt;
+<code>
 $ ./go_test.sh -a
 -a was triggered!
 $ 
-&lt;/code&gt;
+</code>
 You see, the detection works perfectly. The ''a'' was put into the variable ''$opt'' for our case statement.
 
 Of course it's possible to **mix valid and invalid** options when calling:
-&lt;code&gt;
+<code>
 $ ./go_test.sh -a -x -b -c
 -a was triggered!
 Invalid option: -x
 Invalid option: -b
 Invalid option: -c
 $ 
-&lt;/code&gt;
+</code>
 
 Finally, it's of course possible, to give our option **multiple times**:
-&lt;code&gt;
+<code>
 $ ./go_test.sh -a -a -a -a
 -a was triggered!
 -a was triggered!
 -a was triggered!
 -a was triggered!
 $ 
-&lt;/code&gt;
+</code>
 
 The last examples lead us to some points you may consider:
   * **invalid options don't stop the processing**: If you want to stop the script, you have to do it yourself (''exit'' in the right place)
@@ -219,43 +219,43 @@ Let's extend our example from above. Just a little bit:
   * ''-a'' now takes an argument
   * on an error, the parsing exits with ''exit 1''
 
-&lt;code bash&gt;
+<code bash>
 #!/bin/bash
 
 while getopts &quot;:a:&quot; opt; do
   case $opt in
     a)
-      echo &quot;-a was triggered, Parameter: $OPTARG&quot; &gt;&amp;2
+      echo &quot;-a was triggered, Parameter: $OPTARG&quot; >&2
       ;;
     \?)
-      echo &quot;Invalid option: -$OPTARG&quot; &gt;&amp;2
+      echo &quot;Invalid option: -$OPTARG&quot; >&2
       exit 1
       ;;
     :)
-      echo &quot;Option -$OPTARG requires an argument.&quot; &gt;&amp;2
+      echo &quot;Option -$OPTARG requires an argument.&quot; >&2
       exit 1
       ;;
   esac
 done
-&lt;/code&gt;
+</code>
 
 Let's do the very same tests we did in the last example:
 
 === Calling it without any arguments ===
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh
 $ 
-&lt;/code&gt;
+</code>
 
 As above, nothing happened. It wasn't triggered.
 
 === Calling it with non-option arguments ===
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh /etc/passwd
 $ 
-&lt;/code&gt;
+</code>
 
 The **very same** case: It wasn't triggered.
 
@@ -263,31 +263,31 @@ The **very same** case: It wasn't triggered.
 
 **Invalid** option:
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh -b
 Invalid option: -b
 $ 
-&lt;/code&gt;
+</code>
 
 As expected, as above, ''getopts'' didn't accept this option and acted like programmed.
 
 **Valid** option, but without the mandatory **argument**:
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh -a
 Option -a requires an argument.
 $ 
-&lt;/code&gt;
+</code>
 
 The option was okay, but there is an argument missing.
 
 Let's provide **the argument**:
 
-&lt;code&gt;
+<code>
 $ ./go_test.sh -a /etc/passwd
 -a was triggered, Parameter: /etc/passwd
 $
-&lt;/code&gt;
+</code>
 
 ===== See also =====
   * Internal: [[scripting:posparams]]

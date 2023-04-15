@@ -1,7 +1,7 @@
 ====== The exit builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;exit [N]&lt;/code&gt;
+<code>exit [N]</code>
 
 ===== Description =====
 The ''exit'' command terminates the current shell (or script).
@@ -25,9 +25,9 @@ Naturally, you can't ask for the exit status from within the shell that executed
 ===== Examples =====
 
 ==== Exit the shell and explicitely set its exit status ====
-&lt;code&gt;
+<code>
 exit 3
-&lt;/code&gt;
+</code>
 
 ===== Portability considerations =====
   * if ''N'' is specified, but its value is not between 0 and 255 inclusively, the exit status is undefined.

@@ -1,7 +1,7 @@
 ====== The return builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;return [N]&lt;/code&gt;
+<code>return [N]</code>
 
 ===== Description =====
 The ''return'' command returns from a shell function.

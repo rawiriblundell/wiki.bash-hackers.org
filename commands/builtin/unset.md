@@ -2,9 +2,9 @@
 
 ===== Synopsis =====
 
-&lt;code&gt;
+<code>
 unset [-f|v] [-n] [NAME ...]
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 
@@ -28,13 +28,13 @@ Without any option, ''unset'' tries to unset a variable first, then a function.
 
 ===== Examples =====
 
-&lt;code&gt;
+<code>
 unset -v EDITOR
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 unset -f myfunc1 myfunc2
-&lt;/code&gt;
+</code>
 
 ==== Scope ====
 
@@ -43,7 +43,7 @@ In bash, unset has some interesting properties due to its unique dynamic scope. 
 If however unset is called from a child scope relative to where a local variable has been set, then the variable of the same name in the next-outermost scope becomes visible to its scope and all children - as if the variable that was unset was never set to begin with. This property allows looking upwards through the stack as variable names are unset, so long as unset and the local it unsets aren't together in the same scope level. 
 
 Here's a demonstration of this behavior.
-&lt;code&gt;
+<code>
 #!/usr/bin/env bash
 
 FUNCNEST=10
@@ -53,7 +53,7 @@ FUNCNEST=10
 callDepth() {
     # Strip &quot;main&quot; off the end of FUNCNAME[@] if current function is named &quot;main&quot; and
     # Bash added an extra &quot;main&quot; for non-interactive scripts.
-    if [[ main == !(!(&quot;${FUNCNAME[1]}&quot;)|!(&quot;${FUNCNAME[-1]}&quot;)) &amp;&amp; $- != *i* ]]; then
+    if [[ main == !(!(&quot;${FUNCNAME[1]}&quot;)|!(&quot;${FUNCNAME[-1]}&quot;)) && $- != *i* ]]; then
         local -a 'fnames=(&quot;${FUNCNAME[@]:1:${#FUNCNAME[@]}-2}&quot;)'
     else
         local -a 'fnames=(&quot;${FUNCNAME[@]:1}&quot;)'
@@ -79,9 +79,9 @@ unset2() {
 
 f() {
     local a
-    if (( (a=$(callDepth)) &lt;= 4 )); then
-        (( a == 1 )) &amp;&amp; unset a
-        (( a == 2 )) &amp;&amp; declare -g a='global scope yo'
+    if (( (a=$(callDepth)) <= 4 )); then
+        (( a == 1 )) && unset a
+        (( a == 2 )) && declare -g a='global scope yo'
         f
     else
         trap 'declare -p a' DEBUG
@@ -97,15 +97,15 @@ a='global scope'
 f
 
 # vim: set fenc=utf-8 ff=unix ts=4 sts=4 sw=4 ft=sh nowrap et:
-&lt;/code&gt;
+</code>
 output:
-&lt;code&gt;
+<code>
 declare -- a=&quot;5&quot;
 declare -- a=&quot;4&quot;
 declare -- a=&quot;2&quot;
 ./unset-tests: line 44: declare: a: not found
 declare -- a=&quot;global scope yo&quot;
-&lt;/code&gt;
+</code>
 
 Some things to observe:
   * ''unset2'' is only really needed once. We remain 5 levels deep in ''f'''s for the remaining ''unset'' calls, which peel away the outer layers of ''a'''s.
@@ -115,32 +115,32 @@ Some things to observe:
 
 ==== Args ====
 Like several other Bash builtins that take parameter names, unset expands its arguments.
-&lt;code&gt;
+<code>
  ~ $ ( a=({a..d}); unset 'a[2]'; declare -p a )
 declare -a a='([0]=&quot;a&quot; [1]=&quot;b&quot; [3]=&quot;d&quot;)'
-&lt;/code&gt;
+</code>
 
 As usual in such cases, it's important to quote the args to avoid accidental results such as globbing.
-&lt;code&gt;
+<code>
  ~ $ ( a=({a..d}) b=a c=d d=1; set -x; unset &quot;${b}[&quot;{2..3}-c\]; declare -p a )
 + unset 'a[2-1]' 'a[3-1]'
 + declare -p a
 declare -a a='([0]=&quot;a&quot; [3]=&quot;d&quot;)'
-&lt;/code&gt;
+</code>
 Of course hard to follow indirection is still possible whenever arithmetic is involved, also as shown above, even without extra expansions.
 
 In Bash, the ''unset'' builtin only evaluates array subscripts if the array itself is set.
 
-&lt;code&gt;
- ~ $ ( unset -v 'a[$(echo a was set &gt;&amp;2)0]' )
- ~ $ ( a=(); unset -v 'a[$(echo a was set &gt;&amp;2)0]' )
+<code>
+ ~ $ ( unset -v 'a[$(echo a was set >&2)0]' )
+ ~ $ ( a=(); unset -v 'a[$(echo a was set >&2)0]' )
 a was set
-&lt;/code&gt;
+</code>
 
 ===== Portability considerations =====
 
 Quoting POSIX:
-&lt;code&gt;If neither -f nor -v is specified, name refers to a variable; if a variable by that name does not exist, it is unspecified whether a function by that name, if any, shall be unset.&lt;/code&gt;
+<code>If neither -f nor -v is specified, name refers to a variable; if a variable by that name does not exist, it is unspecified whether a function by that name, if any, shall be unset.</code>
 Therefore, it is recommended to explicitly specify ''-f'' or ''-v'' when using ''unset''. Also, I prefer it as a matter of style.
 
 ===== See also =====

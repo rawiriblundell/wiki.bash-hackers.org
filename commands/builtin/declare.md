@@ -1,12 +1,12 @@
 ====== The declare builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;
+<code>
 declare [-aAfFgilrtux] [-p] [NAME[=VALUE] ...]
 
 # obsolete typeset synonym
 typeset [-aAfFgilrtux] [-p] [NAME[=VALUE] ...]
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 
@@ -61,7 +61,7 @@ Unix shells offer very few datatypes. Bash and some other shells extend this by 
 
 ==== Display defined functions ====
 ''declare -f'' can be used to display all defined functions...
-&lt;code&gt;
+<code>
 $ declare -f
 foo () 
 { 
@@ -71,21 +71,21 @@ world ()
 { 
     echo &quot;Hello World!&quot;
 }
-&lt;/code&gt;
+</code>
 ...or just a specific defined function.
-&lt;code&gt;
+<code>
 $ declare -f foo
 foo () 
 { 
     echo &quot;FOO is BAR&quot;
 }
-&lt;/code&gt;
+</code>
 
 ==== Nameref ====
 
 Bash 4.3 adds a new way to indirectly reference variables. ''typeset -n'' can be used to make a variable indirectly refer to another. In Bash, the lvalue of the assignment given to ''typeset -n'' will refer to the variable whose name is expanded on the RHS.
 
-&lt;code&gt;
+<code>
 # Sum a set of arrays and assign the result indirectly, also printing each intermediary result (without portability workarounds)
 # sum name arrname [ arrname ... ]
 function sum {
@@ -101,8 +101,8 @@ function sum {
 a=(1 2 3) b=(6 5 4) c=(2 4 6)
 sum total a b c
 printf 'Final value of &quot;total&quot; is: %d\n' &quot;$total&quot;
-&lt;/code&gt;
-&lt;div hide&gt;
+</code>
+<div hide>
 function sum {
 	typeset -n _result=$1
 	shift
@@ -118,7 +118,7 @@ function sum {
 a=(1 2 3); b=(6 5 4); c=(2 4 6)
 sum total a b c
 printf 'Final value of &quot;total&quot; is: %d\n' &quot;$total&quot;
-&lt;/div&gt;
+</div>
 
 ''typeset -n'' is currently implemented in ksh93, mksh, and Bash 4.3. Bash and mksh's implementations are quite similar, but much different from ksh93's. See [[#portability_considerations | Portability considerations]] for details. ksh93 namerefs are much more powerful than Bash's.
 

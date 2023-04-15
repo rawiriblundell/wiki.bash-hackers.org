@@ -1,6 +1,6 @@
 ====== Debugging a script ======
 
-{{keywords&gt;bash shell scripting bug debug debugging}}
+{{keywords>bash shell scripting bug debug debugging}}
 
 These few lines are not intended as a full-fledged debugging tutorial, but as hints and comments about debugging a Bash script.
 
@@ -40,23 +40,23 @@ An available syslog interface is ''logger'' ([[http://unixhelp.ed.ac.uk/CGI/man-
 ===== Inject debugging code =====
 
 Insert **echos** everywhere you can, and print to ''stderr'':
-&lt;code&gt;
-echo &quot;DEBUG: current i=$i&quot; &gt;&amp;2
-&lt;/code&gt;
+<code>
+echo &quot;DEBUG: current i=$i&quot; >&2
+</code>
 
 If you read input from **anywhere**, such as a file or [[syntax:expansion:cmdsubst | command substitution]], print the debug output with literal quotes, to see leading and trailing spaces!
 
-&lt;code&gt;
-pid=$(&lt; fooservice.pid)
-echo &quot;DEBUG: read from file: pid=\&quot;$pid\&quot;&quot; &gt;&amp;2
-&lt;/code&gt;
+<code>
+pid=$(< fooservice.pid)
+echo &quot;DEBUG: read from file: pid=\&quot;$pid\&quot;&quot; >&2
+</code>
 
 Bash's [[commands:builtin:printf | printf]] command has the ''%q'' format, which is handy for verifying whether strings are what they appear to be.
-&lt;code&gt;
-foo=$(&lt; inputfile)
-printf &quot;DEBUG: foo is |%q|\n&quot; &quot;$foo&quot; &gt;&amp;2
+<code>
+foo=$(< inputfile)
+printf &quot;DEBUG: foo is |%q|\n&quot; &quot;$foo&quot; >&2
 # exposes whitespace (such as CRs, see below) and non-printing characters
-&lt;/code&gt;
+</code>
 
 ===== Use shell debug output =====
 
@@ -68,7 +68,7 @@ There are two useful debug outputs for that task (both are written to ''stderr''
   * ''set -x'' mode (''set -o xtrace'')
     * print everything as if it were executed, after [[syntax:expansion:intro | substitution and expansion]] is applied
     * indicate the depth-level of the subshell (by default by prefixing a ''+'' (plus) sign to the displayed command)
-    * indicate the recognized words after [[syntax:expansion:wordsplit | word splitting]] by marking them like ''&lt;nowiki&gt;'x y'&lt;/nowiki&gt;''
+    * indicate the recognized words after [[syntax:expansion:wordsplit | word splitting]] by marking them like ''<nowiki>'x y'</nowiki>''
     * in shell version 4.1, this debug output can be printed to a configurable file descriptor, rather than sdtout by setting the [[syntax:shellvars#BASH_XTRACEFD|BASH_XTRACEFD]] variable.
 
 **__Hint:__** These modes can be entered when calling Bash:
@@ -79,30 +79,30 @@ There are two useful debug outputs for that task (both are written to ''stderr''
 ==== Simple example of how to interpret xtrace output ====
 
 Here's a simple command (a string comparison using the [[commands:classictest | classic test command]]) executed while in ''set -x'' mode: 
-&lt;code&gt;
+<code>
 set -x
 foo=&quot;bar baz&quot;
 [ $foo = test ]
-&lt;/code&gt;
+</code>
 
 That fails. Why? Let's see the ''xtrace'' output:
 
-&lt;code&gt;
+<code>
 + '[' bar baz = test ']'
-&lt;/code&gt;
+</code>
 
 And now you see that it's (&quot;bar&quot; and &quot;baz&quot;) recognized as two separate words (which you would have realized if you READ THE ERROR MESSAGES ;) ). Let's check it...
-&lt;code&gt;
+<code>
 # next try
 [ &quot;$foo&quot; = test ]
-&lt;/code&gt;
+</code>
 
 ''xtrace'' now gives
-&lt;code&gt;
+<code>
 + '[' 'bar baz' = test ']'
       ^       ^
     word markers!
-&lt;/code&gt;
+</code>
 
 
 
@@ -113,19 +113,19 @@ And now you see that it's (&quot;bar&quot; and &quot;baz&quot;) recognized as tw
 (by AnMaster)
 
 ''xtrace'' output would be more useful if it contained source file and line number. Add this assignment [[syntax:shellvars#PS4|PS4]] at the beginning of your script to enable the inclusion of that information:
-&lt;code&gt;
+<code>
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-&lt;/code&gt;
+</code>
 **Be sure to use single quotes here!**
 
 The output would look like this when you trace code //outside a function//:
-&lt;code&gt;
+<code>
 +(somefile.bash:412): echo 'Hello world'
-&lt;/code&gt;
+</code>
 ...and like this when you trace code //inside a function//:
-&lt;code&gt;
+<code>
 +(somefile.bash:412): myfunc(): echo 'Hello world'
-&lt;/code&gt;
+</code>
 
 That helps a lot when the script is long, or when the main script sources many other files.
 
@@ -134,57 +134,57 @@ If you test variables that flag the state of options, such as with ''%%if [[ -n 
 ===== Debugging commands depending on a set variable =====
 
 For general debugging purposes you can also define a function and a variable to use:
-&lt;code&gt;
+<code>
 debugme() {
- [[ $script_debug = 1 ]] &amp;&amp; &quot;$@&quot; || :
+ [[ $script_debug = 1 ]] && &quot;$@&quot; || :
  # be sure to append || : or || true here or use return 0, since the return code
  # of this function should always be 0 to not influence anything else with an unwanted
  # &quot;false&quot; return code (for example the script's exit code if this function is used
  # as the very last command in the script)
 }
-&lt;/code&gt;
+</code>
 
 This function does nothing when ''script_debug'' is unset or empty, but it executes the given parameters as commands when ''script_debug'' is set. Use it like this:
-&lt;code&gt;
+<code>
 script_debug=1
 # to turn it off, set script_debug=0
 
 debugme logger &quot;Sorting the database&quot;
 database_sort
 debugme logger &quot;Finished sorting the database, exit code $?&quot;
-&lt;/code&gt;
+</code>
 
 Of course this can be used to execute something other than echo during debugging:
-&lt;code&gt;
+<code>
 debugme set -x
 # ... some code ...
 debugme set +x
-&lt;/code&gt;
+</code>
 
 ===== Dry-run STDIN driven commands =====
 
 Imagine you have a script that runs FTP commands using the standard FTP client:
 
-&lt;code bash&gt;
-ftp user@host &lt;&lt;FTP
+<code bash>
+ftp user@host <<FTP
 cd /data
 get current.log
 dele current.log
 FTP
-&lt;/code&gt;
+</code>
 
 A method to dry-run this with debug output is:
-&lt;code bash&gt;
+<code bash>
 if [[ $DRY_RUN = yes ]]; then
   sed 's/^/DRY_RUN FTP: /'
 else
   ftp user@host
-fi &lt;&lt;FTP
+fi <<FTP
 cd /data
 get current.log
 dele current.log
 FTP
-&lt;/code&gt;
+</code>
 
 This can be wrapped in a shell function for more readable code.
 
@@ -193,9 +193,9 @@ This can be wrapped in a shell function for more readable code.
 
 
 ==== Unexpected end of file ====
-&lt;code&gt;
+<code>
 script.sh: line 100: syntax error: unexpected end of file
-&lt;/code&gt;
+</code>
 
 Usually indicates exactly what it says: An unexpected end of file. It's unexpected because Bash waits for the closing of a [[syntax:ccmd:intro | compound command]]:
   * did you close your ''do'' with a ''done''?
@@ -205,7 +205,7 @@ Usually indicates exactly what it says: An unexpected end of file. It's unexpect
   * did you close your ''('' with a '')''?
 
 
-**__Note:__** It seems that here-documents (tested on versions ''1.14.7'', ''2.05b'', ''3.1.17'' and ''4.0'') are correctly terminated when there is an EOF before the end-of-here-document tag (see [[syntax:redirection | redirection]]). The reason is unknown, but it seems to be deliberate. Bash 4.0 added an extra message for this: ''warning: here-document at line &lt;N&gt; delimited by end-of-file (wanted `&lt;MARKER&gt;')''
+**__Note:__** It seems that here-documents (tested on versions ''1.14.7'', ''2.05b'', ''3.1.17'' and ''4.0'') are correctly terminated when there is an EOF before the end-of-here-document tag (see [[syntax:redirection | redirection]]). The reason is unknown, but it seems to be deliberate. Bash 4.0 added an extra message for this: ''warning: here-document at line <N> delimited by end-of-file (wanted `<MARKER>')''
 
 
 
@@ -213,51 +213,51 @@ Usually indicates exactly what it says: An unexpected end of file. It's unexpect
 
 ==== Unexpected end of file while looking for matching ... ====
 
-&lt;code&gt;
+<code>
 script.sh: line 50: unexpected EOF while looking for matching `&quot;'
 script.sh: line 100: syntax error: unexpected end of file
-&lt;/code&gt;
+</code>
 
 This one indicates the double-quote opened in line 50 does not have a matching closing quote.
 
 These //unmatched errors// occur with:
   * double-quote pairs
-  * single-quote pairs (also ''&lt;nowiki&gt;$'string'&lt;/nowiki&gt;''!)
+  * single-quote pairs (also ''<nowiki>$'string'</nowiki>''!)
   * missing a closing ''}'' with [[syntax:pe | parameter expansion syntax]]
 
 
 
 ==== Too many arguments ====
 
-&lt;code&gt;
+<code>
 bash: test: too many arguments
-&lt;/code&gt;
+</code>
 
 You most likely forgot to quote a variable expansion somewhere. See the example for ''xtrace'' output from above. External commands may display such an error message though in our example, it was the **internal** test-command that yielded the error.
 
 
 ==== !&quot;: event not found ====
 
-&lt;code&gt;
+<code>
 $ echo &quot;Hello world!&quot;
 bash: !&quot;: event not found
-&lt;/code&gt;
+</code>
 
 This is not an error per se. It happens in interactive shells, when the C-Shell-styled history expansion (&quot;''!searchword''&quot;) is enabled. This is the default. Disable it like this:
-&lt;code&gt;
+<code>
 set +H
 # or
 set +o histexpand
-&lt;/code&gt;
+</code>
 
 ==== syntax error near unexpected token `(' ====
 
 When this happens during a script **function definition** or on the commandline, e.g.
 
-&lt;code&gt;
+<code>
 $ foo () { echo &quot;Hello world&quot;; }
 bash: syntax error near unexpected token `('
-&lt;/code&gt;
+</code>
 
 you most likely have an alias defined with the same name as the function (here: ''foo''). Alias expansion happens before the real language interpretion, thus the alias is expanded and makes your function definition invalid.
 
@@ -283,12 +283,12 @@ Some possible sources of CRs:
 ==== Why do CRs hurt? ====
 
 CRs can be a nuisance in various ways. They are especially bad when present in the shebang/interpreter specified with ''#!'' in the very first line of a script. Consider the following script, written with a  Windows(r) text editor (''^M'' is a symbolic representation of the ''CR'' carriage return character!):
-&lt;code&gt;
+<code>
 #!/bin/bash^M
 ^M
 echo &quot;Hello world&quot;^M
 ...
-&lt;/code&gt;
+</code>
 
 Here's what happens because of the ''#!/bin/bash^M'' in our shebang:
   * the file ''/bin/bash^M'' doesn't exist (hopefully)
@@ -296,18 +296,18 @@ Here's what happens because of the ''#!/bin/bash^M'' in our shebang:
   * the script can't be executed
 
 The error message can vary. If you're lucky, you'll get:
-&lt;code&gt;
+<code>
 bash: ./testing.sh: /bin/bash^M: bad interpreter: No such file or directory
-&lt;/code&gt;
+</code>
 which alerts you to the CR.  But you may also get the following:
-&lt;code&gt;
+<code>
 : bad interpreter: No such file or directory
-&lt;/code&gt;
+</code>
 Why? Because when printed literally, the ''^M'' makes the cursor go back to the beginning of the line. The whole error message is //printed//, but you //see// only part of it!
 
-&lt;note warning&gt;
+<note warning>
 It's easy to imagine the ''^M'' is bad in other places too. If you get weird and illogical messages from your script, rule out the possibility that''^M'' is involved. Find and eliminate it!
-&lt;/note&gt;
+</note>
 
 ==== How can I find and eliminate them? ====
 
@@ -316,7 +316,7 @@ It's easy to imagine the ''^M'' is bad in other places too. If you get weird and
   * with ''cat(1)'': ''cat -v FILE''
 
 **To eliminate** them (only a few examples)
-  * blindly with ''tr(1)'': ''tr -d &lt;nowiki&gt;'\r'&lt;/nowiki&gt; &lt;FILE &gt;FILE.new''
+  * blindly with ''tr(1)'': ''tr -d <nowiki>'\r'</nowiki> <FILE >FILE.new''
   * controlled with ''recode(1)'': ''recode MSDOS..latin1 FILE''
   * controlled with ''dos2unix(1)'': ''dos2unix FILE''
 

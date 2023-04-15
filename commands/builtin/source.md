@@ -1,7 +1,7 @@
 <label class="block control-label" for="focus__this"><span>Username</span> <input type="text" id="focus__this" name="u" class="edit form-control"/></label><br/>
 <label class="block control-label"><span>Password</span> <input type="password" name="p" class="edit form-control"/></label><br/>
 <label class="simple control-label" for="remember__me"><input type="checkbox" id="remember__me" name="r" value="1" class="checkbox-inline"/> <span>Remember me</span></label>
-<div id="plugin__captcha_wrapper"><input type="hidden" name="80d13662bc018ff4d7809a8d517a0cfb" value="42FOZdS2ttGgeyJAq6xhPpjk5crSblSEQXmyW2Yg3W8="/><label for="plugin__captcha" class="control-label">Please fill all the letters into the box to prove you're human.</label> <img src="/web/20221209023650im_/https://wiki.bash-hackers.org/lib/plugins/captcha/img.php?secret=42FOZdS2ttGgeyJAq6xhPpjk5crSblSEQXmyW2Yg3W8%3D&amp;id=commands:builtin:source" width="160" height="40" alt=""/>  <input type="text" size="5" name="40d641ec62438c7a0daa80e665d812c6" class="edit form-control"/> <label class="no control-label">Please keep this field empty: <input type="text" name="ce7eb8fa38586f8a0eaf3e46319431ea" class="form-control"/></label></div><button type="submit" class="btn btn-success btn btn-default"><span class="iconify" data-icon="mdi:lock"></span> Log In</button>
+<div id="plugin__captcha_wrapper"><input type="hidden" name="80d13662bc018ff4d7809a8d517a0cfb" value="42FOZdS2ttGgeyJAq6xhPpjk5crSblSEQXmyW2Yg3W8="/><label for="plugin__captcha" class="control-label">Please fill all the letters into the box to prove you're human.</label> <img src="/web/20221209023650im_/https://wiki.bash-hackers.org/lib/plugins/captcha/img.php?secret=42FOZdS2ttGgeyJAq6xhPpjk5crSblSEQXmyW2Yg3W8%3D&id=commands:builtin:source" width="160" height="40" alt=""/>  <input type="text" size="5" name="40d641ec62438c7a0daa80e665d812c6" class="edit form-control"/> <label class="no control-label">Please keep this field empty: <input type="text" name="ce7eb8fa38586f8a0eaf3e46319431ea" class="form-control"/></label></div><button type="submit" class="btn btn-success btn btn-default"><span class="iconify" data-icon="mdi:lock"></span> Log In</button>
 </fieldset>
 <p>You don't have an account yet? Just get one: <a href="/web/20221209023650/https://wiki.bash-hackers.org/commands/builtin/source?do=register" title="Register" rel="nofollow" class="register">Register</a></p><p>Forgotten your password? Get a new one: <a href="/web/20221209023650/https://wiki.bash-hackers.org/commands/builtin/source?do=resendpwd" title="Set new password" rel="nofollow" class="resendpwd">Set new password</a></p></div></form>
 </div>
@@ -89,7 +89,7 @@
         <span class="visible-lg-block"></span>
     </div>
 
-    <img src="/web/20221209023650im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=commands%3Abuiltin%3Asource&amp;1670553440" width="2" height="1" alt=""/>
+    <img src="/web/20221209023650im_/https://wiki.bash-hackers.org/lib/exe/indexer.php?id=commands%3Abuiltin%3Asource&1670553440" width="2" height="1" alt=""/>
 </div>
 
 </body>

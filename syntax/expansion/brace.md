@@ -1,33 +1,33 @@
 ====== Brace expansion ======
 
-{{keywords&gt;bash shell scripting expansion substitution text list brace}}
+{{keywords>bash shell scripting expansion substitution text list brace}}
 
-&lt;code&gt;
+<code>
 {string1,string2,...,stringN}
-{&lt;START&gt;..&lt;END&gt;}
+{<START>..<END>}
 
-{&lt;START&gt;..&lt;END&gt;..&lt;INCR&gt;} (Bash 4)
+{<START>..<END>..<INCR>} (Bash 4)
 
-&lt;PREFIX&gt;{........}
+<PREFIX>{........}
 
-{........}&lt;SUFFIX&gt;
+{........}<SUFFIX>
 
-&lt;PREFIX&gt;{........}&lt;SUFFIX&gt;
-&lt;/code&gt;
+<PREFIX>{........}<SUFFIX>
+</code>
 
 Brace expansion is used to generate arbitrary strings. The specified strings are used to generate **all possible combinations** with the optional surrounding prefixes and suffixes.
 
 Usually it's used to generate mass-arguments for a command, that follow a specific naming-scheme.
 
 :!: It is the very first step in expansion-handling, it's important to understand that. When you use
-&lt;code&gt;
+<code>
 echo {a,b}$PATH
-&lt;/code&gt;
+</code>
 then the brace expansion **does not expand the variable** - this is done in a **later step**. Brace expansion just makes it being:
-&lt;code&gt;
+<code>
 echo a$PATH b$PATH
-&lt;/code&gt;
-Another common pitfall is to assume that a range like ''{1..200}'' can be expressed with variables using ''{$a..$b}''. Due to what I described above, it **simply is not possible**, because it's the very first step in doing expansions. A possible way to achieve this, if you really can't handle this in another way, is using the ''eval'' command, which basically evaluates a commandline twice: &lt;code&gt;eval echo {$a..$b}&lt;/code&gt; For instance, when embedded inside a for loop : &lt;code&gt;for i in $(eval echo {$a..$b})&lt;/code&gt; This requires that the entire command be properly escaped to avoid unexpected expansions. If the sequence expansion is to be assigned to an array, another method is possible using [[commands:builtin:declare|declaration commands]]: &lt;code&gt;declare -a 'pics=(img{'&quot;$a..$b&quot;'}.png)'; mv &quot;${pics[@]}&quot; ../imgs&lt;/code&gt; This is significantly safer, but one must still be careful to control the values of $a and $b. Both the exact quoting, and explicitly including &quot;-a&quot; are important.
+</code>
+Another common pitfall is to assume that a range like ''{1..200}'' can be expressed with variables using ''{$a..$b}''. Due to what I described above, it **simply is not possible**, because it's the very first step in doing expansions. A possible way to achieve this, if you really can't handle this in another way, is using the ''eval'' command, which basically evaluates a commandline twice: <code>eval echo {$a..$b}</code> For instance, when embedded inside a for loop : <code>for i in $(eval echo {$a..$b})</code> This requires that the entire command be properly escaped to avoid unexpected expansions. If the sequence expansion is to be assigned to an array, another method is possible using [[commands:builtin:declare|declaration commands]]: <code>declare -a 'pics=(img{'&quot;$a..$b&quot;'}.png)'; mv &quot;${pics[@]}&quot; ../imgs</code> This is significantly safer, but one must still be careful to control the values of $a and $b. Both the exact quoting, and explicitly including &quot;-a&quot; are important.
 
 The brace expansion is present in two basic forms, **string lists** and **ranges**.
 
@@ -35,18 +35,18 @@ It can be switched on and off under runtime by using the ''set'' builtin and the
 
 ===== String lists =====
 
-&lt;code&gt;
+<code>
 {string1,string2,...,stringN}
-&lt;/code&gt;
+</code>
 
 Without the optional prefix and suffix strings, the result is just a space-separated list of the given strings:
-&lt;code&gt;
+<code>
 $ echo {I,want,my,money,back}
 I want my money back
-&lt;/code&gt;
+</code>
 
 With prefix or suffix strings, the result is a space-separated list of **all possible combinations** of prefix or suffix specified strings:
-&lt;code&gt;
+<code>
 $ echo _{I,want,my,money,back}
 _I _want _my _money _back
 
@@ -55,54 +55,54 @@ I_ want_ my_ money_ back_
 
 $ echo _{I,want,my,money,back}-
 _I- _want- _my- _money- _back-
-&lt;/code&gt;
+</code>
 
 The brace expansion is only performed, if the given string list is really a **list of strings**, i.e., if there is a minimum of one &quot;'',''&quot; (comma)! Something like ''{money}'' doesn't expand to something special, it's really only the text &quot;''{money}''&quot;.
 
 ===== Ranges =====
 
-&lt;code&gt;
-{&lt;START&gt;..&lt;END&gt;}
-&lt;/code&gt;
+<code>
+{<START>..<END>}
+</code>
 
 Brace expansion using ranges is written giving the startpoint and the endpoint of the range. This is a &quot;sequence expression&quot;. The sequences can be of two types
   * integers (optionally zero padded, optionally with a given increment)
   * characters
 
-&lt;code&gt;
+<code>
 $ echo {5..12}
 5 6 7 8 9 10 11 12
 
 $ echo {c..k}
 c d e f g h i j k
-&lt;/code&gt;
+</code>
 
 When you mix these both types, brace expansion is **not** performed:
-&lt;code&gt;
+<code>
 $ echo {5..k}
 {5..k}
-&lt;/code&gt;
+</code>
 
 When you zero pad one of the numbers (or both) in a range, then the generated range is zero padded, too:
-&lt;code&gt;
+<code>
 $ echo {01..10}
 01 02 03 04 05 06 07 08 09 10
-&lt;/code&gt;
+</code>
 There's a chapter of Bash 4 brace expansion changes at [[#new_in_bash_4.0 | the end of this article]].
 
 Similar to the expansion using stringlists, you can add prefix and suffix strings:
-&lt;code&gt;
+<code>
 $ echo 1.{0..9}
 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9
 
 $ echo ---{A..E}---
 ---A--- ---B--- ---C--- ---D--- ---E---
-&lt;/code&gt;
+</code>
 
 ===== Combining and nesting =====
 
 When you combine more brace expansions, you effectively use a brace expansion as prefix or suffix for another one. Let's generate all possible combinations of uppercase letters and digits:
-&lt;code&gt;
+<code>
 $ echo {A..Z}{0..9}
 A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 B0 B1 B2 B3 B4 B5 B6 B7 B8 B9 C0 C1 C2 C3 C4 C5 C6
 C7 C8 C9 D0 D1 D2 D3 D4 D5 D6 D7 D8 D9 E0 E1 E2 E3 E4 E5 E6 E7 E8 E9 F0 F1 F2 F3
@@ -114,16 +114,16 @@ Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 R0 R1 R2 R3 R4 R5 R6 R7 R8 R9 S0 S1 S2 S3 S4 S5 S6 S7 S8
 S9 T0 T1 T2 T3 T4 T5 T6 T7 T8 T9 U0 U1 U2 U3 U4 U5 U6 U7 U8 U9 V0 V1 V2 V3 V4 V5
 V6 V7 V8 V9 W0 W1 W2 W3 W4 W5 W6 W7 W8 W9 X0 X1 X2 X3 X4 X5 X6 X7 X8 X9 Y0 Y1 Y2
 Y3 Y4 Y5 Y6 Y7 Y8 Y9 Z0 Z1 Z2 Z3 Z4 Z5 Z6 Z7 Z8 Z9
-&lt;/code&gt;
+</code>
 Hey.. that **saves you writing** 260 strings!
 
 Brace expansions can be nested, but too much of it usually makes you losing overview a bit ;-)
 
 Here's a sample to generate the alphabet, first the uppercase letters, then the lowercase ones:
-&lt;code&gt;
+<code>
 $ echo {{A..Z},{a..z}}
 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z
-&lt;/code&gt;
+</code>
 
 ===== Common use and examples =====
 
@@ -132,15 +132,15 @@ In this example, ''wget'' is used to download documentation that is split over s
 
 ''wget'' won't see your braces. It will see **6 different URLs** to download.
 
-&lt;code&gt;
+<code>
 wget http://docs.example.com/documentation/slides_part{1,2,3,4,5,6}.html
-&lt;/code&gt;
+</code>
 
 Of course it's possible, and even easier, to do that with a sequence:
 
-&lt;code&gt;
+<code>
 wget http://docs.example.com/documentation/slides_part{1..6}.html
-&lt;/code&gt;
+</code>
 
 
 
@@ -148,88 +148,88 @@ wget http://docs.example.com/documentation/slides_part{1..6}.html
 
 Your life is hard? Let's ease it a bit - that's what shells are here for.
 
-&lt;code&gt;
+<code>
 mkdir /home/bash/test/{foo,bar,baz,cat,dog}
-&lt;/code&gt;
+</code>
 
 
 
 ==== Generate numbers with a prefix 001 002 ... ====
   * Using a prefix:
-&lt;code&gt;
+<code>
 for i in 0{1..9} 10; do printf &quot;%s\n&quot; &quot;$i&quot;;done
-&lt;/code&gt;
+</code>
 If you need to create words with the  number embedded, you can use nested brace:
-&lt;code&gt;
+<code>
 printf &quot;%s\n&quot; img{00{1..9},0{10..99},{100..999}}.png
-&lt;/code&gt;
+</code>
   * Formatting the numbers with printf:
-&lt;code&gt;
+<code>
 echo $(printf &quot;img%02d.png &quot; {1..99})
-&lt;/code&gt;
+</code>
 
 See the [[#news_in_bash_4.0 | text below]] for a new Bash 4 method.
 
 ==== Repeating arguments or words ====
 
-&lt;code&gt;
+<code>
 somecommand -v -v -v -v -v
-&lt;/code&gt;
+</code>
 
 Can be written as
-&lt;code&gt;
+<code>
 somecommand -v{,,,,}
-&lt;/code&gt;
+</code>
 ...which is a kind of a hack, but hey, it works.
 
-&lt;div round info&gt;
+<div round info>
 === More fun ===
 The most optimal possible brace expansion to expand n arguments of course consists of n's prime factors. We can use the &quot;factor&quot; program bundled with GNU coreutils to emit a brace expansion that will expand any number of arguments.
 
-&lt;code&gt;
+<code>
 function braceify {
     [[ $1 == +([[:digit:]]) ]] || return
     typeset -a a
-    read -ra a &lt; &lt;(factor &quot;$1&quot;)
+    read -ra a < <(factor &quot;$1&quot;)
     eval &quot;echo $(printf '{$(printf ,%%.s {1..%s})}' &quot;${a[@]:1}&quot;)&quot;
 }
 
 printf 'eval printf &quot;$arg&quot;%s' &quot;$(braceify 1000000)&quot;
-&lt;/code&gt;
+</code>
 
 &quot;Braceify&quot; generates the expansion code itself. In this example we inject that output into a template which displays the most terse brace expansion code that would expand ''&quot;$arg&quot;'' 1,000,000 times if evaluated. In this case, the output is:
 
-&lt;code&gt;
+<code>
 eval printf &quot;$arg&quot;{,,}{,,}{,,}{,,}{,,}{,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}
-&lt;/code&gt;
-&lt;/div&gt;
+</code>
+</div>
 ===== New in Bash 4.0 =====
 
 ==== Zero padded number expansion ====
 
 Prefix either of the numbers in a numeric range with ''0'' to pad the expanded numbers with the correct amount of zeros:
-&lt;code&gt;
+<code>
 $ echo {0001..5}
 0001 0002 0003 0004 0005
-&lt;/code&gt;
+</code>
 
 ==== Increment ====
 It is now possible to specify an increment using ranges:
-&lt;code&gt;
-{&lt;START&gt;..&lt;END&gt;..&lt;INCR&gt;}
-&lt;/code&gt;
-''&lt;INCR&gt;'' is numeric, you can use a negative integer but the correct sign is deduced from the order of ''&lt;START&gt;'' and ''&lt;END&gt;'' anyways.
-&lt;code&gt;
+<code>
+{<START>..<END>..<INCR>}
+</code>
+''<INCR>'' is numeric, you can use a negative integer but the correct sign is deduced from the order of ''<START>'' and ''<END>'' anyways.
+<code>
 $ echo {1..10..2}
 1 3 5 7 9
 $ echo {10..1..2}
 10 8 6 4 2
-&lt;/code&gt;
+</code>
 
 Interesting feature: The increment specification also works for letter-ranges:
-&lt;code&gt;
+<code>
 $ echo {a..z..3}
 a d g j m p s v y
-&lt;/code&gt; 
+</code> 
 
 ===== See also =====

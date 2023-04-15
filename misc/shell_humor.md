@@ -4,49 +4,49 @@ Nothing special, just my private collection of some more or less funny shell stu
 
 Usually Bash and/or Linux (GNU Toolset) specific.
 
-&lt;code&gt;
+<code>
 $ %blow
 -bash: fg: %blow: no such job
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 $ ar m god
 ar: creating god
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 $ touch /pussy
 touch: cannot touch `/pussy': Permission denied
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 $ mount; fsck; fsck; fsck; umount; sleep
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 # the lover variant
 $ unzip; strip; touch; finger; grep; mount; fsck; more; yes; fsck; fsck; umount; sleep
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 # it's not directly funny, only because it's not obvious that this is an sed command
-# for the &lt;&lt;&lt;, it works only in Bash
-$ sed streetlight &lt;&lt;&lt; reeter
+# for the <<<, it works only in Bash
+$ sed streetlight <<< reeter
 lighter
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 # see above for comments
-$ sed statement &lt;&lt;&lt; cat
+$ sed statement <<< cat
 cement
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 $ \(-
 bash: (-: command not found
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 $ echo '[q]sa[ln0=aln256%Pln256/snlbx]sb3135071790101768542287578439snlbxq'|dc
 GET A LIFE!
-&lt;/code&gt;
+</code>

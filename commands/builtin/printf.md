@@ -1,13 +1,13 @@
 ====== The printf command ======
 
-&lt;div center round todo box 70%&gt;
+<div center round todo box 70%>
 FIXME Stranger, this is a very big topic that needs experience - please fill in missing information, extend the descriptions, and correct the details if you can!
-&lt;/div&gt;
-&lt;div center round tip 70%&gt;
+</div>
+<div center round tip 70%>
 __**Attention:**__ This is about the Bash-builtin command ''printf'' - however, the description should be nearly identical for an external command that follows POSIX(r).
 
-[[http://www.gnu.org/software/gawk/manual/gawk.html#Printf|GNU Awk]] expects a comma after the format string and between each of the arguments of a **printf** command.  For examples, see: [[printf?&amp;#using_printf_inside_of_awk|code snippet]].
-&lt;/div&gt;
+[[http://www.gnu.org/software/gawk/manual/gawk.html#Printf|GNU Awk]] expects a comma after the format string and between each of the arguments of a **printf** command.  For examples, see: [[printf?&#using_printf_inside_of_awk|code snippet]].
+</div>
 
 Unlike other documentations, I don't want to redirect you to the manual page for the ''printf()'' C function family. However, if you're more experienced, that should be the most detailed description for the format strings and modifiers.
 
@@ -21,16 +21,16 @@ Beside other reasons, POSIX(r) has a very good argument to recommend it: Both hi
 
 ===== Syntax =====
 
-&lt;code&gt;
-printf &lt;FORMAT&gt; &lt;ARGUMENTS...&gt;
-&lt;/code&gt;
+<code>
+printf <FORMAT> <ARGUMENTS...>
+</code>
 
-The text format is given in ''&lt;FORMAT&gt;'', while all arguments the formatstring may point to are given after that, here, indicated by ''&lt;ARGUMENTS...&gt;''.
+The text format is given in ''<FORMAT>'', while all arguments the formatstring may point to are given after that, here, indicated by ''<ARGUMENTS...>''.
 
 Thus, a typical ''printf''-call looks like:
-&lt;code&gt;
+<code>
 printf &quot;Surname: %s\nName: %s\n&quot; &quot;$SURNAME&quot; &quot;$FIRSTNAME&quot;
-&lt;/code&gt;
+</code>
 where ''&quot;Surname: %s\nName: %s\n&quot;'' is the format specification, and the two variables are passed as arguments, the ''%s'' in the formatstring points to (for every format specifier you give, ''printf'' awaits one argument!).
 
 ==== Options ====
@@ -39,15 +39,15 @@ where ''&quot;Surname: %s\nName: %s\n&quot;'' is the format specification, and t
 
 The ''-v'' Option can't assign directly to array indexes in Bash versions older than Bash 4.1.
 
-&lt;note warning&gt;
+<note warning>
 In versions newer than 4.1, one must be careful when performing expansions into the first non-option argument of printf as this opens up the possibility of an easy code injection vulnerability.
-&lt;code&gt;
-$ var='-vx[$(echo hi &gt;&amp;2)]'; printf &quot;$var&quot; hi; declare -p x
+<code>
+$ var='-vx[$(echo hi >&2)]'; printf &quot;$var&quot; hi; declare -p x
 hi
 declare -a x='([0]=&quot;hi&quot;)'
-&lt;/code&gt;
-...where the echo can of course be replaced with any arbitrary command. If you must, either specify a hard-coded format string or use &lt;nowiki&gt;--&lt;/nowiki&gt; to signal the end of options. The exact same issue also applies to [[commands/builtin/read | read]], and a similar one to [[commands/builtin/mapfile | mapfile]], though performing expansions into their arguments is less common.
-&lt;/note&gt;
+</code>
+...where the echo can of course be replaced with any arbitrary command. If you must, either specify a hard-coded format string or use <nowiki>--</nowiki> to signal the end of options. The exact same issue also applies to [[commands/builtin/read | read]], and a similar one to [[commands/builtin/mapfile | mapfile]], though performing expansions into their arguments is less common.
+</note>
 
 ==== Arguments ====
 
@@ -59,24 +59,24 @@ Of course in shell-meaning the arguments are just strings, however, the common C
 |''0xN''|A hexadecimal number|
 |''0XN''|A hexadecimal number|
 |''&quot;X''|(a literal double-quote infront of a character): interpreted as number (underlying codeset) **don't forget escaping**|
-|''&lt;nowiki&gt;'X&lt;/nowiki&gt;''|(a literal single-quote infront of a character): interpreted as number (underlying codeset) **don't forget escaping**|
+|''<nowiki>'X</nowiki>''|(a literal single-quote infront of a character): interpreted as number (underlying codeset) **don't forget escaping**|
 
 __**If more arguments than format specifiers**__ are present, then the format string is re-used until the last argument is interpreted. If fewer format specifiers than arguments are present, then number-formats are set to zero, while string-formats are set to null (empty).
 
 Take care to avoid [[syntax:expansion:wordsplit | word splitting]], as accidentally passing the wrong number of arguments can produce wildly different and unexpected results. See [[syntax:words | this article]].
 
-&lt;note warning&gt;
+<note warning>
 __**Again, attention:**__ When a numerical format expects a number, the internal ''printf''-command will use the common Bash arithmetic rules regarding the base. A command like the following example **will** throw an error, since ''08'' is not a valid octal number (''00'' to ''07''!):
-&lt;code&gt;
+<code>
 printf '%d\n' 08
-&lt;/code&gt;
-&lt;/note&gt;
+</code>
+</note>
 
 ==== Format strings ====
 
 The format string interpretion is derived from the C ''printf()'' function family. Only format specifiers that end in one of the letters ''diouxXfeEgGaAcs'' are recognized.
 
-To print a literal ''%'' (percent-sign), use ''&lt;nowiki&gt;%%&lt;/nowiki&gt;'' in the format string.
+To print a literal ''%'' (percent-sign), use ''<nowiki>%%</nowiki>'' in the format string.
 
 __**Again:**__ Every format specifier expects an associated argument provided!
 
@@ -96,7 +96,7 @@ These specifiers have different names, depending who you ask. But they all mean 
 |''%x''|Print the associated argument as **unsigned hexadecimal** number with lower-case hex-digits (a-f)|
 |''%X''|Same as ''%x'', but with upper-case hex-digits (A-F)|
 |''%f''|Interpret and print the associated argument as **floating point** number|
-|''%e''|Interpret the associated argument as **double**, and print it in ''&lt;N&gt;±e&lt;N&gt;'' format|
+|''%e''|Interpret the associated argument as **double**, and print it in ''<N>±e<N>'' format|
 |''%E''|Same as ''%e'', but with an upper-case ''E'' in the printed format|
 |''%g''|Interprets the associated argument as **double**, but prints it like ''%f'' or ''%e''|
 |''%G''|Same as ''%g'', but print it like ''%E''|
@@ -112,20 +112,20 @@ Some of the mentioned format specifiers can modify their behaviour by getting a 
 ==== Modifiers ====
 
 To be more flexible in the output of numbers and strings, the ''printf'' command allows format modifiers. These are specified **between** the introductory ''%'' and the character that specifies the format:
-&lt;code&gt;printf &quot;%50s\n&quot; &quot;This field is 50 characters wide...&quot;&lt;/code&gt;
+<code>printf &quot;%50s\n&quot; &quot;This field is 50 characters wide...&quot;</code>
 
 === Field and printing modifiers ===
 
 ^Field output format^^
-|''&lt;N&gt;''|**Any number**: Specifies a **minimum field width**, if the text to print is shorter, it's padded with spaces, if the text is longer, the field is expanded|
+|''<N>''|**Any number**: Specifies a **minimum field width**, if the text to print is shorter, it's padded with spaces, if the text is longer, the field is expanded|
 |''.''|**The dot**: Together with a field width, the field is **not** expanded when the text is longer, the text is truncated instead. &quot;''%.s''&quot; is an undocumented equivalent for &quot;''%.0s''&quot;, which will force a field width of zero, effectively hiding the field from output|
 |''*''|**The asterisk**: the width is given as argument before the string or number. Usage (the &quot;''*''&quot; corresponds to the &quot;''20''&quot;): ''printf &quot;%*s\n&quot; 20 &quot;test string&quot;''|
 |''#''|&quot;Alternative format&quot; for numbers: see table below|
 |''-''|**Left-bound** text printing in the field (standard is **right-bound**)|
 |''0''|Pads numbers with zeros, not spaces|
-|''&lt;space&gt;''|Pad a positive number with a space, where a minus (''-'') is for negative numbers|
+|''<space>''|Pad a positive number with a space, where a minus (''-'') is for negative numbers|
 |''+''|Prints all numbers **signed** (''+'' for positive, ''-'' for negative)|
-|''&lt;nowiki&gt;'&lt;/nowiki&gt;''|For decimal conversions, the thousands grouping separator is applied to the integer portion of the output according to the current LC_NUMERIC|
+|''<nowiki>'</nowiki>''|For decimal conversions, the thousands grouping separator is applied to the integer portion of the output according to the current LC_NUMERIC|
 
 __**The &quot;alternative format&quot; modifier ''#'':**__
 
@@ -137,8 +137,8 @@ __**The &quot;alternative format&quot; modifier ''#'':**__
 
 === Precision ===
 
-The precision for a floating- or double-number can be specified by using ''.&lt;DIGITS&gt;'', where ''&lt;DIGITS&gt;'' is the number of digits for precision. If ''&lt;DIGITS&gt;'' is an asterisk (''*''), the precision is read from the argument that precedes the number to print, like (prints 4,3000000000):
-&lt;code&gt;printf &quot;%.*f\n&quot; 10 4,3&lt;/code&gt;
+The precision for a floating- or double-number can be specified by using ''.<DIGITS>'', where ''<DIGITS>'' is the number of digits for precision. If ''<DIGITS>'' is an asterisk (''*''), the precision is read from the argument that precedes the number to print, like (prints 4,3000000000):
+<code>printf &quot;%.*f\n&quot; 10 4,3</code>
 The format ''.*N'' to specify the N'th argument for precision does not work in Bash.
 
 For strings, the precision specifies the maximum number of characters to print (i.e., the maximum field width). For integers, it specifies the number of digits to print (zero-padding!).
@@ -156,19 +156,19 @@ These are interpreted if used anywhere in the format string, or in an argument c
 |''\r''|Prints a carriage-return|
 |''\t''|Prints a horizontal tabulator|
 |''\v''|Prints a vertical tabulator|
-|''\&quot;''|Prints a ''&lt;nowiki&gt;'&lt;/nowiki&gt;''|
+|''\&quot;''|Prints a ''<nowiki>'</nowiki>''|
 |''\?''|Prints a ''?''|
-|''\&lt;NNN&gt;''|Interprets ''&lt;NNN&gt;'' as **octal** number and prints the corresponding character from the character set|
-|''\0&lt;NNN&gt;''|same as ''\&lt;NNN&gt;''|
-|''\x&lt;NNN&gt;''|Interprets ''&lt;NNN&gt;'' as **hexadecimal** number and prints the corresponding character from the character set (**3 digits**)|
-|''\u&lt;NNNN&gt;''|same as ''\x&lt;NNN&gt;'', but **4 digits**|
-|''\U&lt;NNNNNNNN&gt;''|same as ''\x&lt;NNN&gt;'', but **8 digits**|
+|''\<NNN>''|Interprets ''<NNN>'' as **octal** number and prints the corresponding character from the character set|
+|''\0<NNN>''|same as ''\<NNN>''|
+|''\x<NNN>''|Interprets ''<NNN>'' as **hexadecimal** number and prints the corresponding character from the character set (**3 digits**)|
+|''\u<NNNN>''|same as ''\x<NNN>'', but **4 digits**|
+|''\U<NNNNNNNN>''|same as ''\x<NNN>'', but **8 digits**|
 
 The following additional escape and extra rules apply only to arguments associated with a ''%b'' format:
 
 |''\c''|Terminate output similarly to the ''\c'' escape used by ''echo -e''. printf produces no additional output after coming across a ''\c'' escape in a ''%b'' argument.|
 
-  * Backslashes in the escapes: ''\&lt;nowiki&gt;'&lt;/nowiki&gt;'', ''\&quot;'', and ''\?'' are not removed.
+  * Backslashes in the escapes: ''\<nowiki>'</nowiki>'', ''\&quot;'', and ''\?'' are not removed.
   * Octal escapes beginning with ''\0'' may contain up to four digits. (POSIX specifies up to three).
 
 These are also respects in which ''%b'' differs from the escapes used by [[syntax/quoting#ansi_c_like_strings | $'...']] style quoting.
@@ -200,17 +200,17 @@ This small loop prints all numbers from 0 to 127 in
   * decimal
   * octal
   * hex
-&lt;code&gt;
-for ((x=0; x &lt;= 127; x++)); do
+<code>
+for ((x=0; x <= 127; x++)); do
   printf '%3d | %04o | 0x%02x\n' &quot;$x&quot; &quot;$x&quot; &quot;$x&quot;
 done
-&lt;/code&gt;
+</code>
 
 ==== Ensure well-formatted MAC address ====
 
 This code here will take a common MAC address and rewrite it into a well-known format (regarding leading zeros or upper/lowercase of the hex digits, ...):
 
-&lt;code&gt;
+<code>
 the_mac=&quot;0:13:ce:7:7a:ad&quot;
 
 # lowercase hex digits
@@ -218,7 +218,7 @@ the_mac=&quot;$(printf &quot;%02x:%02x:%02x:%02x:%02x:%02x&quot; 0x${the_mac//:/
 
 # or the uppercase-digits variant
 the_mac=&quot;$(printf &quot;%02X:%02X:%02X:%02X:%02X:%02X&quot; 0x${the_mac//:/ 0x})&quot;
-&lt;/code&gt;
+</code>
 
 ==== Replacement echo ====
 
@@ -226,13 +226,13 @@ This code was found in Solaris manpage for echo(1).
 
 Solaris version of ''/usr/bin/echo'' is equivalent to:
 
-&lt;code&gt;
+<code>
 printf &quot;%b\n&quot; &quot;$*&quot;
-&lt;/code&gt;
+</code>
 
 Solaris ''/usr/ucb/echo'' is equivalent to:
 
-&lt;code&gt;
+<code>
 if [ &quot;X$1&quot; = &quot;X-n&quot; ]
 then
      shift
@@ -240,39 +240,39 @@ then
 else
      printf &quot;%s\n&quot; &quot;$*&quot;
 fi
-&lt;/code&gt;
+</code>
 
 ==== prargs Implementation ====
 
 Working off the replacement echo, here is a terse implementation of prargs:
 
-&lt;code&gt;
+<code>
 printf '&quot;%b&quot;\n' &quot;$0&quot; &quot;$@&quot; | nl -v0 -s&quot;: &quot;
-&lt;/code&gt;
+</code>
 
 ==== repeating a character (for example to print a line) ====
 
 A small trick: Combining printf and parameter expansion to draw a line
 
-&lt;code&gt;
+<code>
 length=40
 printf -v line '%*s' &quot;$length&quot;
 echo ${line// /-}
-&lt;/code&gt;
+</code>
 or:
-&lt;code&gt;
+<code>
 length=40
 eval printf -v line '%.0s-' {1..$length}
-&lt;/code&gt;
+</code>
 
 ==== Replacement for some calls to date(1) ====
 
 The ''%(...)T'' format string is a direct interface to ''strftime(3)''.
 
-&lt;code&gt;
+<code>
 $ printf 'This is week %(%U/%Y)T.\n' -1
 This is week 52/2010.
-&lt;/code&gt;
+</code>
 
 Please read the manpage of ''strftime(3)'' to get more information about the supported formats.
 
@@ -282,7 +282,7 @@ Awk also derives its //printf()// function from C, and therefore has similar for
 
 In the following example, the two strings are concatenated by the intervening space so that no argument remains to fill the format.
 
-&lt;code&gt;
+<code>
 
 $ echo &quot;Foo&quot; | awk '{ printf &quot;%s\n&quot; $1 }'
 awk: (FILENAME=- FNR=1) fatal: not enough arguments to satisfy format string
@@ -290,21 +290,21 @@ awk: (FILENAME=- FNR=1) fatal: not enough arguments to satisfy format string
 Foo'
 	 ^ ran out for this one
 
-&lt;/code&gt;
+</code>
 
 Simply replacing the space with a comma and adding parentheses yields correct awk syntax.
 
-&lt;code&gt;
+<code>
 $ echo &quot;Foo&quot; | awk '{ printf( &quot;%s\n&quot;, $1 ) }'
 Foo
-&lt;/code&gt;
+</code>
 
 With appropriate metacharacter escaping the bash printf can be called from inside awk (as from perl and other languages that support shell callout) as long as you don't care about program efficiency or readability.
 
-&lt;code&gt;
+<code>
 echo &quot;Foo&quot; | awk '{ system( &quot;printf \&quot;%s\\n \&quot; \&quot;&quot; $1 &quot;\&quot;&quot;  ) }'
 Foo
-&lt;/code&gt;
+</code>
 
 ===== Differences from C, and portability considerations =====
 
@@ -313,19 +313,19 @@ Foo
   * There is no wide-character support (wprintf). For instance, if you use ''%c'', you're actually asking for the first byte of the argument. Likewise, the maximum field width modifier (dot) in combination with ''%s'' goes by bytes, not characters. This limits some of printf's functionality to working with ascii only. ksh93's ''printf'' supports the ''L'' modifier with ''%s'' and ''%c'' (but so far not ''%S'' or ''%C'') in order to treat precision as character width, not byte count. zsh appears to adjust itself dynamically based upon ''LANG'' and ''LC_CTYPE''. If ''LC_CTYPE=C'', zsh will throw &quot;character not in range&quot; errors, and otherwise supports wide characters automatically if a variable-width encoding is set for the current locale.
 
   * Bash recognizes and skips over any characters present in the length modifiers specified by POSIX during format string parsing.
-&lt;code c|builtins/printf.def&gt;
+<code c|builtins/printf.def>
 #define LENMODS &quot;hjlLtz&quot;
 ...
 /* skip possible format modifiers */
 modstart = fmt;
-while (*fmt &amp;&amp; strchr (LENMODS, *fmt))
+while (*fmt && strchr (LENMODS, *fmt))
 fmt++;
-&lt;/code&gt;
+</code>
 
   * mksh has no built-in printf by default (usually). There is an unsupported compile-time option to include a very poor, basically unusable implementation. For the most part you must rely upon the system's ''/usr/bin/printf'' or equivalent. The mksh maintainer recommends using ''print''. The development version (post- R40f) adds a new parameter expansion in the form of ''${name@Q}'' which fills the role of ''printf %q'' -- expanding in a shell-escaped format.
 
   * ksh93 optimizes builtins run from within a command substitution and which have no redirections to run in the shell's process. Therefore the ''printf -v'' functionality can be closely matched by ''var=$(printf ...)'' without a big performance hit.
-&lt;code&gt;
+<code>
 # Illustrates Bash-like behavior. Redefining printf is usually unnecessary / not recommended.
 function printf {
     case $1 in
@@ -345,7 +345,7 @@ printf -v 'foo[2]' '%d\n' &quot;$(cut -d ' ' -f 1 /proc/self/stat)&quot;
 typeset -p foo
 # 22461
 # typeset -a foo=([2]=22461)
-&lt;/code&gt;
+</code>
 
   * The optional Bash loadable ''print'' may be useful for ksh compatibility and to overcome some of [[commands/builtin/echo | echo]]'s portability pitfalls. Bash, ksh93, and zsh's ''print'' have an ''-f'' option which takes a ''printf'' format string and applies it to the remaining arguments. Bash lists the synopsis as: ''print: print [-Rnprs] [-u unit] [-f format] [arguments]''. However, only ''-Rrnfu'' are actually functional. Internally, ''-p'' is a noop (it doesn't tie in with Bash coprocs at all), and ''-s'' only sets a flag but has no effect. ''-Cev'' are unimplemented.
 

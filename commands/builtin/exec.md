@@ -1,7 +1,7 @@
 ====== The exec builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;exec [-a NAME] [-cl] [COMMAND] [ARG...] [REDIRECTION...]&lt;/code&gt;
+<code>exec [-a NAME] [-cl] [COMMAND] [ARG...] [REDIRECTION...]</code>
 
 ===== Description =====
 The ''exec'' builtin command is used to
@@ -27,7 +27,7 @@ If only redirections are given, the redirections affect the current shell withou
 ===== Examples =====
 
 ==== Wrapper around a program ====
-&lt;code bash&gt;
+<code bash>
 myprog=/bin/ls
 echo &quot;This is the wrapper script, it will exec $myprog&quot;
 
@@ -35,30 +35,30 @@ echo &quot;This is the wrapper script, it will exec $myprog&quot;
 # well, stuff a wrapper is there for
 
 exec &quot;$myprog&quot; &quot;$@&quot;
-&lt;/code&gt;
+</code>
 
 ==== Open a file as input for the script ====
-&lt;code bash&gt;
+<code bash>
 # open it
-exec 3&lt; input.txt
+exec 3< input.txt
 
 # for example: read one line from the file(-descriptor)
 read -u 3 LINE
 # or
-read LINE &lt;&amp;3
+read LINE <&3
 
 # finally, close it
-exec 3&lt;&amp;-
-&lt;/code&gt;
+exec 3<&-
+</code>
 
 ==== Overall script logfile ====
 
 To redirect the whole ''stdout'' and ''stderr'' of the shell or shellscript to a file, you can use the ''exec'' builtin command:
-&lt;code bash&gt;
-exec &gt;/var/adm/my.log 2&gt;&amp;1
+<code bash>
+exec >/var/adm/my.log 2>&1
 
 # script continues here...
-&lt;/code&gt;
+</code>
 
 ===== Portability considerations =====
 

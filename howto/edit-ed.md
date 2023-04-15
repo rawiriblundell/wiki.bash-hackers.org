@@ -1,6 +1,6 @@
 ====== Editing files via scripts with ed ======
 
-{{keywords&gt;bash shell scripting arguments file editor edit ed sed}}
+{{keywords>bash shell scripting arguments file editor edit ed sed}}
 
 ===== Why ed? =====
 
@@ -22,37 +22,37 @@ Don't get me wrong, this is **not** meant as anti-''sed'' article! It's just mea
 Since ''ed'' is an interactive text editor, it reads and executes commands that come from ''stdin''. There are several ways to feed our commands to ed:
 
 **__Pipelines__**
-&lt;code&gt;
-echo '&lt;ED-COMMANDS&gt;' | ed &lt;FILE&gt;
-&lt;/code&gt;
+<code>
+echo '<ED-COMMANDS>' | ed <FILE>
+</code>
 
 To inject the needed newlines, etc. it may be easier to use the builtin command, ''printf'' (&quot;help printf&quot;). Shown here as an example Bash function to prefix text to file content:
-&lt;code&gt;
+<code>
 
 # insertHead &quot;$text&quot; &quot;$file&quot;
 
 insertHead() {
   printf '%s\n' H 1i &quot;$1&quot; . w | ed -s &quot;$2&quot;
 }
-&lt;/code&gt;
+</code>
 
 **__Here-strings__**
-&lt;code&gt;
-ed &lt;FILE&gt; &lt;&lt;&lt; '&lt;ED-COMMANDS&gt;'
-&lt;/code&gt;
+<code>
+ed <FILE> <<< '<ED-COMMANDS>'
+</code>
 
 **__Here-documents__**
-&lt;code&gt;
-ed &lt;FILE&gt; &lt;&lt;EOF
-&lt;ED-COMMANDS&gt;
+<code>
+ed <FILE> <<EOF
+<ED-COMMANDS>
 EOF
-&lt;/code&gt;
+</code>
 
 Which one you prefer is your choice. I will use the here-strings, since it looks best here IMHO.
 
 There are other ways to provide input to ''ed''. For example, process substitution. But these should be enough for daily needs.
 
-Since ''ed'' wants commands separated by newlines, I'll use a special Bash quoting method, the C-like strings ''&lt;nowiki&gt;$'TEXT'&lt;/nowiki&gt;'', as it can interpret a set of various escape sequences and special characters. I'll use the ''-s'' option to make it less verbose.
+Since ''ed'' wants commands separated by newlines, I'll use a special Bash quoting method, the C-like strings ''<nowiki>$'TEXT'</nowiki>'', as it can interpret a set of various escape sequences and special characters. I'll use the ''-s'' option to make it less verbose.
 
 
 
@@ -74,30 +74,30 @@ Line addresses or commands using //regular expressions// interpret POSIX Basic R
 
 By default, ''ed'' is not very talkative and will simply print a &quot;?&quot; when an error occurs. Interactively you can use the ''h'' command to get a short message explaining the last error. You can also turn on a mode that makes ''ed'' automatically print this message with the ''H'' command. It is a good idea to always add this command at the beginning of your ed scripts:
 
-&lt;code&gt;
-bash &gt; ed -s file &lt;&lt;&lt; $'H\n,df'
+<code>
+bash > ed -s file <<< $'H\n,df'
 ?
 script, line 2: Invalid command suffix
-&lt;/code&gt;
+</code>
 
 While working on your script, you might make errors and destroy your file, you might be tempted to try your script doing something like:
-&lt;code&gt;
+<code>
 # Works, but there is better
 
 # copy my original file
 cp file file.test
 
 # try my script on the file
-ed -s file.test &lt;&lt;&lt; $'H\n&lt;ed commands&gt;\nw'
+ed -s file.test <<< $'H\n<ed commands>\nw'
 
 # see the results
 cat file.test
-&lt;/code&gt;
+</code>
 There is a much better way though, you can use the ed command ''p'' to print the file, now your testing would look like:
 
-&lt;code&gt;
-ed -s file &lt;&lt;&lt; $'H\n&lt;ed commands&gt;\n,p'
-&lt;/code&gt;
+<code>
+ed -s file <<< $'H\n<ed commands>\n,p'
+</code>
 the '','' (comma) in front of the ''p'' command is a shortcut for ''1,$'' which defines an address range for the first to the last line, '',p'' thus means print the whole file, after it has been modified. When your script runs sucessfully, you only have to replace the '',p'' by a ''w''.
 
 Of course, even if the file is not modified by the ''p'' command, **it's always a good idea to have a backup copy!**
@@ -118,74 +118,74 @@ Like ''sed'', ''ed'' also knows the common ''s/FROM/TO/'' command, and it can al
 
 === Substitutions through the whole file ===
 
-&lt;code&gt;
-ed -s test.txt &lt;&lt;&lt; $',s/Windows(R)-compatible/POSIX-conform/g\nw'
-&lt;/code&gt;
+<code>
+ed -s test.txt <<< $',s/Windows(R)-compatible/POSIX-conform/g\nw'
+</code>
 
 __Note:__ The comma as single address operator is an alias for ''1,$'' (&quot;all lines&quot;).
 
 === Substitutions in specific lines ===
 
 On a line containing ''fruits'', do the substitution:
-&lt;code&gt;
-ed -s test.txt &lt;&lt;&lt; $'/fruits/s/apple/banana/g\nw'
-&lt;/code&gt;
+<code>
+ed -s test.txt <<< $'/fruits/s/apple/banana/g\nw'
+</code>
 
 On the 5th line after the line containing ''fruits'', do the substitution:
-&lt;code&gt;
-ed -s test.txt &lt;&lt;&lt; $'/fruits/+5s/apple/banana/g\nw'
-&lt;/code&gt;
+<code>
+ed -s test.txt <<< $'/fruits/+5s/apple/banana/g\nw'
+</code>
 
 ==== Block operations ====
 
 === Delete a block of text ===
 
 The simple one is a well-known (by position) block of text:
-&lt;code&gt;
+<code>
 # delete lines number 2 to 4 (2, 3, 4)
-ed -s test.txt &lt;&lt;&lt; $'2,5d\nw'
-&lt;/code&gt;
+ed -s test.txt <<< $'2,5d\nw'
+</code>
 
 This deletes all lines matching a specific regular expression:
-&lt;code&gt;
+<code>
 # delete all lines matching foobar
-ed -s test.txt &lt;&lt;&lt; $'g/foobar/d\nw'
-&lt;/code&gt;
+ed -s test.txt <<< $'g/foobar/d\nw'
+</code>
 g/regexp/ applies the command following it to all the lines matching the regexp
 
 
 === Move a block of text ===
-...using the ''m'' command: ''&lt;ADDRESS&gt; m &lt;TARGET-ADDRESS&gt;''
+...using the ''m'' command: ''<ADDRESS> m <TARGET-ADDRESS>''
 
 This is definitely something that can't be done easily with sed.
 
-&lt;code&gt;
+<code>
 # moving lines 5-9 to the end of the file
-ed -s test.txt &lt;&lt;&lt; $'5,9m$\nw'
+ed -s test.txt <<< $'5,9m$\nw'
 
 # moving lines 5-9 to line 3
-ed -s test.txt &lt;&lt;&lt; $'5,9m3\nw'
-&lt;/code&gt;
+ed -s test.txt <<< $'5,9m3\nw'
+</code>
 
 === Copy a block of text ===
-...using the ''t'' command: ''&lt;ADDRESS&gt; t &lt;TARGET-ADDRESS&gt;''
+...using the ''t'' command: ''<ADDRESS> t <TARGET-ADDRESS>''
 
 You use the ''t'' command just like you use the ''m'' (move) command.
 
-&lt;code&gt;
+<code>
 # make a copy of lines 5-9 and place it at the end of the file
-ed -s test.txt &lt;&lt;&lt; $'5,9t$\nw'
+ed -s test.txt <<< $'5,9t$\nw'
 
 # make a copy of lines 5-9 and place it at line 3
-ed -s test.txt &lt;&lt;&lt; $'5,9t3\nw'
-&lt;/code&gt;
+ed -s test.txt <<< $'5,9t3\nw'
+</code>
 
 === Join all lines ===
 ...but leave the final newline intact. This is done by an extra command: ''j'' (join).
 
-&lt;code&gt;
-ed -s file &lt;&lt;&lt; $'1,$j\nw'
-&lt;/code&gt;
+<code>
+ed -s file <<< $'1,$j\nw'
+</code>
 
 Compared with two other methods (using ''tr'' or ''sed''), you don't have to delete all newlines and manually add one at the end.
 
@@ -195,25 +195,25 @@ Compared with two other methods (using ''tr'' or ''sed''), you don't have to del
 === Insert another file ===
 
 How do you insert another file? As with ''sed'', you use the ''r'' (read) command. That inserts another file at the line before the last line (and prints the result to stdout - '',p''):
-&lt;code&gt;
-ed -s FILE1 &lt;&lt;&lt; $'$-1 r FILE2\n,p'
-&lt;/code&gt;
+<code>
+ed -s FILE1 <<< $'$-1 r FILE2\n,p'
+</code>
 
 To compare, here's a possible ''sed'' solution which must use Bash arithmetic and the external program ''wc'':
-&lt;code&gt;
-sed &quot;$(($(wc -l &lt; FILE1)-1))r FILE2&quot; FILE1
+<code>
+sed &quot;$(($(wc -l < FILE1)-1))r FILE2&quot; FILE1
 
 # UPDATE here's one which uses GNU sed's &quot;e&quot; parameter for the s-command
 #   it executes the commands found in pattern space. I'll take that as a
-#   security risk, but well, sometimes GNU &gt; security, you know...
+#   security risk, but well, sometimes GNU > security, you know...
 sed '${h;s/.*/cat FILE2/e;G}' FILE1
-&lt;/code&gt;
+</code>
 
 Another approach, in two invocations of sed, that avoids the use of external commands completely:
 
-&lt;code&gt;
+<code>
 sed $'${s/$/\\n-||-/;r FILE2\n}' FILE1 | sed '0,/-||-/{//!h;N;//D};$G'
-&lt;/code&gt;
+</code>
 
 ===== Pitfalls =====
 
@@ -230,16 +230,16 @@ on each line so this command will search the next line matching foo and delete i
 If you want to delete all lines matching foo, or do a subsitution on all lines matching foo
 you have to tell ed about it with the g (global) command:
 
-&lt;code&gt;
-echo $'1\n1\n3' &gt; file
+<code>
+echo $'1\n1\n3' > file
 
 #replace all lines matching 1 by &quot;replacement&quot;
-ed -s file &lt;&lt;&lt; $'g/1/s/1/replacement/\n,p' 
+ed -s file <<< $'g/1/s/1/replacement/\n,p' 
 
 #replace the first line matching 1 by &quot;replacement&quot;
 #(because it starts searching from the last line)
-ed -s file &lt;&lt;&lt; $'s/1/replacement/\n,p'
-&lt;/code&gt;
+ed -s file <<< $'s/1/replacement/\n,p'
+</code>
 
 **__ an error stops the script __**
 
@@ -248,21 +248,21 @@ does not find a pattern it's an error, while sed just continues with the next li
 For instance, let's say that you want to change foo to bar on the first line of the file and add something after the next line,
 ed will stop if it cannot find foo on the first line, sed will continue.
 
-&lt;code&gt;
+<code>
 #Gnu sed version
 sed -e '1s/foo/bar/' -e '$a\something' file
 
 #First ed version, does nothing if foo is not found on the first line:
-ed -s file &lt;&lt;&lt; $'H\n1s/foo/bar/\na\nsomething\n.\nw'
-&lt;/code&gt;
+ed -s file <<< $'H\n1s/foo/bar/\na\nsomething\n.\nw'
+</code>
 
 If you want the same behaviour you can use g/foo/ to trick ed. g/foo/ will apply the command on all lines matching foo,
 thus the substitution will succeed and ed will not produce an error when foo is not found:
 
-&lt;code&gt;
+<code>
 #Second version will add the line with &quot;something&quot; even if foo is not found
-ed -s file &lt;&lt;&lt; $'H\n1g/foo/s/foo/bar/\na\nsomething\n.\nw'
-&lt;/code&gt;
+ed -s file <<< $'H\n1g/foo/s/foo/bar/\na\nsomething\n.\nw'
+</code>
 
 In fact, even a substitution that fails after a g/ / command does not seem to cause an error, i.e. you can 
 use a trick like g/./s/foo/bar/ to attempt the substitution on all non blank lines  
@@ -273,9 +273,9 @@ use a trick like g/./s/foo/bar/ to attempt the substitution on all non blank lin
  
 If you don't quote the delimiter, $ has a special meaning. This sounds obvious but it's
 easy to forget this fact when you use addresses like $-1 or commands like $a. Either quote the $ or the delimiter:
-&lt;code&gt;
+<code>
 #fails
-ed -s file &lt;&lt; EOF
+ed -s file << EOF
 $a
 last line
 .
@@ -283,7 +283,7 @@ w
 EOF 
 
 #ok
-ed -s file &lt;&lt; EOF
+ed -s file << EOF
 \$a
 last line
 .
@@ -291,28 +291,28 @@ w
 EOF 
 
 #ok again
-ed -s file &lt;&lt; 'EOF'
+ed -s file << 'EOF'
 $a
 last line
 .
 w
 EOF 
-&lt;/code&gt;
+</code>
 
 **__ &quot;.&quot; is not a command __**
 
 The . used to terminate the command &quot;a&quot; must be the only thing on the line.
 take care if you indent the commands:
 
-&lt;code&gt;
+<code>
 #ed doesn't care about the spaces before the commands, but the . must be the only thing on the line:
-ed -s file &lt;&lt; EOF
+ed -s file << EOF
     a
 my content
 .
     w
 EOF
-&lt;/code&gt;
+</code>
 
 ===== Simulate other commands =====
 
@@ -320,14 +320,14 @@ Keep in mind that in all the examples below, the entire file will be read into m
 
 ==== A simple grep ====
 
-&lt;code&gt;
-ed -s file &lt;&lt;&lt; 'g/foo/p'
+<code>
+ed -s file <<< 'g/foo/p'
 
 # equivalent
-ed -s file &lt;&lt;&lt; 'g/foo/'
-&lt;/code&gt;
+ed -s file <<< 'g/foo/'
+</code>
 
-The name ''grep'' is derived from the notaion ''g/RE/p'' (global =&gt; regular expression =&gt; print).
+The name ''grep'' is derived from the notaion ''g/RE/p'' (global => regular expression => print).
 ref http://www.catb.org/~esr/jargon/html/G/grep.html
 
 
@@ -336,23 +336,23 @@ ref http://www.catb.org/~esr/jargon/html/G/grep.html
 
 Since the default for the ''ed'' &quot;print line number&quot; command is the last line, a simple ''='' (equal sign) will print this line number and thus the number of lines of the file:
 
-&lt;code&gt;
-ed -s file &lt;&lt;&lt; '='
-&lt;/code&gt;
+<code>
+ed -s file <<< '='
+</code>
 
 
 ==== cat ====
 Yea, it's a joke...
 
-&lt;code&gt;
-ed -s file &lt;&lt;&lt; $',p'
-&lt;/code&gt;
+<code>
+ed -s file <<< $',p'
+</code>
 
 ...but a similar thing to ''cat'' showing line-endings and escapes can be done with the ''list'' command (l):
 
-&lt;code&gt;
-ed -s file &lt;&lt;&lt; $',l'
-&lt;/code&gt;
+<code>
+ed -s file <<< $',l'
+</code>
 
 
 FIXME to be continued

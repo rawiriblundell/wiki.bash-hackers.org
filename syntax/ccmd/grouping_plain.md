@@ -1,40 +1,40 @@
 ====== Grouping commands ======
 
 ===== Synopsis =====
-&lt;code&gt;{ &lt;LIST&gt;; }&lt;/code&gt;
+<code>{ <LIST>; }</code>
 
-&lt;code&gt;
+<code>
 {
-&lt;LIST&gt;
+<LIST>
 }
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 
-The [[syntax:basicgrammar#lists|list]] ''&lt;LIST&gt;'' is simply executed in the **current** shell environment. The list must be terminated with a **newline** or **semicolon**. For parsing reasons, the curly braces must be separated from ''&lt;LIST&gt;'' by a **semicolon** and **blanks** if they're in the same line! ((Actually any properly terminated compound command will work without extra separator (also in some other shells), **example**: ''{ while sleep 1; do echo ZzZzzZ; done }'' is valid. But this is not documented, infact the documentation explicitly says that a semicolon or a newline must separate the enclosed list. -- thanks ''geirha'' at Freenode))((The main reason is the fact that in shell grammar, the curly braces are not control operators but reserved words -- TheBonsai))
+The [[syntax:basicgrammar#lists|list]] ''<LIST>'' is simply executed in the **current** shell environment. The list must be terminated with a **newline** or **semicolon**. For parsing reasons, the curly braces must be separated from ''<LIST>'' by a **semicolon** and **blanks** if they're in the same line! ((Actually any properly terminated compound command will work without extra separator (also in some other shells), **example**: ''{ while sleep 1; do echo ZzZzzZ; done }'' is valid. But this is not documented, infact the documentation explicitly says that a semicolon or a newline must separate the enclosed list. -- thanks ''geirha'' at Freenode))((The main reason is the fact that in shell grammar, the curly braces are not control operators but reserved words -- TheBonsai))
 
 This is known as a **group command**. The return status is the [[scripting:basics#exit_codes|exit status (exit code)]] of the list.
 
 The input and output **filedescriptors** are cumulative:
-&lt;code&gt;
+<code>
 {
   echo &quot;PASSWD follows&quot;
   cat /etc/passwd
   echo
   echo &quot;GROUPS follows&quot;
   cat /etc/group
-} &gt;output.txt
-&lt;/code&gt;
+} >output.txt
+</code>
 
 This compound command also usually is the body of a [[syntax:basicgrammar#shell_function_definitions | function definition]], though not the only compound command that's valid there:
-&lt;code&gt;
+<code>
 print_help() {
   echo &quot;Options:&quot;
   echo &quot;-h           This help text&quot;
   echo &quot;-f FILE      Use config file FILE&quot;
   echo &quot;-u USER      Run as user USER&quot;
 }
-&lt;/code&gt;
+</code>
 
 ===== Examples =====
 ==== A Try-Catch block ====

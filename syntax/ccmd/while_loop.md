@@ -1,14 +1,14 @@
 ====== The while-loop ======
 
 ===== Synopsis =====
-&lt;code&gt;
-while &lt;LIST1&gt; ; do
-  &lt;LIST2&gt;
+<code>
+while <LIST1> ; do
+  <LIST2>
 done
-&lt;/code&gt;
+</code>
 
 ===== Description =====
-The while-loop is relatively simple in what it does: it executes the [[syntax:basicgrammar#lists | command list]] ''&lt;LIST1&gt;'' and if the exit code of it was 0 (TRUE) it executes ''&lt;LIST2&gt;''. This happens again and again until ''&lt;LIST1&gt;'' returns FALSE.
+The while-loop is relatively simple in what it does: it executes the [[syntax:basicgrammar#lists | command list]] ''<LIST1>'' and if the exit code of it was 0 (TRUE) it executes ''<LIST2>''. This happens again and again until ''<LIST1>'' returns FALSE.
 
 This is exactly the opposite of the [[syntax:ccmd:until_loop | until loop]].
 
@@ -18,7 +18,7 @@ This is exactly the opposite of the [[syntax:ccmd:until_loop | until loop]].
 
 ==== Return status ====
 
-The return status is the one of the last command executed in ''&lt;LIST2&gt;'', or ''0'' (''TRUE'') if none was executed.
+The return status is the one of the last command executed in ''<LIST2>'', or ''0'' (''TRUE'') if none was executed.
 
 ===== Examples =====
 

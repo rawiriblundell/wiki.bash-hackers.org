@@ -1,9 +1,9 @@
 ====== The local builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;
+<code>
 local [option] name[=value] ...
-&lt;/code&gt;
+</code>
 
 ===== Description =====
 

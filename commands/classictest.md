@@ -1,64 +1,64 @@
 ====== The classic test command ======
 
-''test &lt;EXPRESSION&gt;''
+''test <EXPRESSION>''
 
-''[ &lt;EXPRESSION&gt; ]''
+''[ <EXPRESSION> ]''
 
 ===== General syntax =====
 
 This command allows you to do various tests and sets its exit code to 0 (//TRUE//) or 1 (//FALSE//) whenever such a test succeeds or not. Using this exit code, it's possible to let Bash react on the result of such a test, here by using the command in an if-statement:
-&lt;code&gt;
+<code>
 #!/bin/bash
 # test if /etc/passwd exists
 
 if test -e /etc/passwd; then
-  echo &quot;Alright man...&quot; &gt;&amp;2
+  echo &quot;Alright man...&quot; >&2
 else
-  echo &quot;Yuck! Where is it??&quot; &gt;&amp;2
+  echo &quot;Yuck! Where is it??&quot; >&2
   exit 1
 fi
-&lt;/code&gt;
+</code>
 
 
 The syntax of the test command is relatively easy. Usually it's the command name &quot;''test''&quot; followed by a test type (here &quot;''-e''&quot; for &quot;file exists&quot;) followed by test-type-specific values (here the filename to check, &quot;''/etc/passwd''&quot;).
 
-There's a second standardized command that does exactly the same: the command &quot;''[''&quot; - the difference just is that it's called &quot;''[''&quot; and the last argument to the command must be a &quot;'']''&quot;: It forms &quot;''**[ &lt;EXPRESSION&gt; ]**''&quot;
+There's a second standardized command that does exactly the same: the command &quot;''[''&quot; - the difference just is that it's called &quot;''[''&quot; and the last argument to the command must be a &quot;'']''&quot;: It forms &quot;''**[ <EXPRESSION> ]**''&quot;
 
 Let's rewrite the above example to use it:
-&lt;code&gt;
+<code>
 #!/bin/bash
 # test if /etc/passwd exists
 
 if [ -e /etc/passwd ]; then
-  echo &quot;Alright man...&quot; &gt;&amp;2
+  echo &quot;Alright man...&quot; >&2
 else
-  echo &quot;Yuck! Where is it??&quot; &gt;&amp;2
+  echo &quot;Yuck! Where is it??&quot; >&2
   exit 1
 fi
-&lt;/code&gt;
+</code>
 One might **think** now that these &quot;[&quot; and &quot;]&quot; belong to the syntax of Bash's if-clause: **No they don't! It's a simple, ordinary command, still!**
 
 Another thing you have to remember is that if the test command wants one parameter for a test, you have to give it one parameter. Let's check for some of your music files:
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 mymusic=&quot;/data/music/Van Halen/Van Halen - Right Now.mp3&quot;
 
 if [ -e &quot;$mymusic&quot; ]; then
-  echo &quot;Let's rock&quot; &gt;&amp;2
+  echo &quot;Let's rock&quot; >&2
 else
-  echo &quot;No music today, sorry...&quot; &gt;&amp;2
+  echo &quot;No music today, sorry...&quot; >&2
   exit 1
 fi
-&lt;/code&gt;
+</code>
 As you definitely noted, the filename contains spaces. Since we call a normal ordinary command (&quot;test&quot; or &quot;[&quot;) the shell will word-split the expansion of the variable ''mymusic'': You need to quote it when you don't want the ''test''-command to complain about too many arguments for this test-type! If you didn't understand it, please read the [[syntax:words | article about words...]]
 
-Please also note that the file-tests want **one filename** to test. Don't give a glob (filename-wildcards) as it can expand to many filenames =&gt; **too many arguments!**
+Please also note that the file-tests want **one filename** to test. Don't give a glob (filename-wildcards) as it can expand to many filenames => **too many arguments!**
 
 __**Another common mistake**__ is to provide too **few** arguments:
-&lt;code&gt;
+<code>
 [ &quot;$mystring&quot;!=&quot;test&quot; ]
-&lt;/code&gt;
+</code>
 This provides exactly **one** test-argument to the command. With one parameter, it defaults to the ''-n'' test: It tests if a provided string is empty (''FALSE'') or not (''TRUE'') - due to the lack of **spaces to separate the arguments** the shown command always ends ''TRUE''!
 
 Well, I addressed several basic rules, now let's see what the test-command can do for you. The Bash test-types can be split into several sections: **file tests**, **string tests**, **arithmetic tests**, **misc tests**.
@@ -68,56 +68,56 @@ Well, I addressed several basic rules, now let's see what the test-command can d
 This section probably holds the most tests, I'll list them in some logical order. Since Bash 4.1, all tests related to permissions respect ACLs, if the underlying filesystem/OS supports them.
 
 ^ Operator syntax          ^ Description                                                                                   |   |
-| **-a** &lt;FILE&gt;            | True if &lt;FILE&gt; exists. :!: (not recommended, may collide with ''-a'' for ''AND'', see below)  |   |
-| **-e** &lt;FILE&gt;            | True if &lt;FILE&gt; exists.                                                                        |   |
-| **-f** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **regular** file.                                             |   |
-| **-d** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **directory**.                                                   ||
-| **-c** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **character special** file.                                   |   |
-| **-b** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **block special** file.                                       |   |
-| **-p** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **named pipe** (FIFO).                                        |   |
-| **-S** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **socket** file.                                              |   |
-| **-L** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **symbolic link**.                                            |   |
-| **-h** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is a **symbolic link**.                                            |   |
-| **-g** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and has **sgid bit** set.                                              |   |
-| **-u** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and has **suid bit** set.                                              |   |
-| **-r** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is **readable**.                                                   |   |
-| **-w** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is **writable**.                                                   |   |
-| **-x** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and is **executable**.                                                 |   |
-| **-s** &lt;FILE&gt;            | True, if &lt;FILE&gt; exists and has size bigger than 0 (**not empty**).                            |   |
-| **-t** &lt;fd&gt;              | True, if file descriptor &lt;fd&gt; is open and refers to a terminal.                               |   |
-| &lt;FILE1&gt; **-nt** &lt;FILE2&gt;  | True, if &lt;FILE1&gt; is **newer than** &lt;FILE2&gt; (mtime). :!:                                       |   |
-| &lt;FILE1&gt; **-ot** &lt;FILE2&gt;  | True, if &lt;FILE1&gt; is **older than** &lt;FILE2&gt; (mtime). :!:                                       |   |
-| &lt;FILE1&gt; **-ef** &lt;FILE2&gt;  | True, if &lt;FILE1&gt; and &lt;FILE2&gt; refer to the **same device and inode numbers**. :!:              |   |
+| **-a** <FILE>            | True if <FILE> exists. :!: (not recommended, may collide with ''-a'' for ''AND'', see below)  |   |
+| **-e** <FILE>            | True if <FILE> exists.                                                                        |   |
+| **-f** <FILE>            | True, if <FILE> exists and is a **regular** file.                                             |   |
+| **-d** <FILE>            | True, if <FILE> exists and is a **directory**.                                                   ||
+| **-c** <FILE>            | True, if <FILE> exists and is a **character special** file.                                   |   |
+| **-b** <FILE>            | True, if <FILE> exists and is a **block special** file.                                       |   |
+| **-p** <FILE>            | True, if <FILE> exists and is a **named pipe** (FIFO).                                        |   |
+| **-S** <FILE>            | True, if <FILE> exists and is a **socket** file.                                              |   |
+| **-L** <FILE>            | True, if <FILE> exists and is a **symbolic link**.                                            |   |
+| **-h** <FILE>            | True, if <FILE> exists and is a **symbolic link**.                                            |   |
+| **-g** <FILE>            | True, if <FILE> exists and has **sgid bit** set.                                              |   |
+| **-u** <FILE>            | True, if <FILE> exists and has **suid bit** set.                                              |   |
+| **-r** <FILE>            | True, if <FILE> exists and is **readable**.                                                   |   |
+| **-w** <FILE>            | True, if <FILE> exists and is **writable**.                                                   |   |
+| **-x** <FILE>            | True, if <FILE> exists and is **executable**.                                                 |   |
+| **-s** <FILE>            | True, if <FILE> exists and has size bigger than 0 (**not empty**).                            |   |
+| **-t** <fd>              | True, if file descriptor <fd> is open and refers to a terminal.                               |   |
+| <FILE1> **-nt** <FILE2>  | True, if <FILE1> is **newer than** <FILE2> (mtime). :!:                                       |   |
+| <FILE1> **-ot** <FILE2>  | True, if <FILE1> is **older than** <FILE2> (mtime). :!:                                       |   |
+| <FILE1> **-ef** <FILE2>  | True, if <FILE1> and <FILE2> refer to the **same device and inode numbers**. :!:              |   |
 
 
 
 ===== String tests =====
 ^Operator syntax^Description^
-|**-z** &lt;STRING&gt;|True, if &lt;STRING&gt; is **empty**.|
-|**-n** &lt;STRING&gt;|True, if &lt;STRING&gt; is **not empty** (this is the default operation).|
-|&lt;STRING1&gt; **=** &lt;STRING2&gt;|True, if the strings are **equal**.|
-|&lt;STRING1&gt; **!=** &lt;STRING2&gt;|True, if the strings are **not equal**.|
-|&lt;STRING1&gt; **&lt;** &lt;STRING2&gt;|True if &lt;STRING1&gt; sorts **before** &lt;STRING2&gt; lexicographically (pure ASCII, not current locale!). Remember to escape! Use ''\&lt;''|
-|&lt;STRING1&gt; **&gt;** &lt;STRING2&gt;|True if &lt;STRING1&gt; sorts **after** &lt;STRING2&gt; lexicographically (pure ASCII, not current locale!). Remember to escape! Use ''\&gt;''|
+|**-z** <STRING>|True, if <STRING> is **empty**.|
+|**-n** <STRING>|True, if <STRING> is **not empty** (this is the default operation).|
+|<STRING1> **=** <STRING2>|True, if the strings are **equal**.|
+|<STRING1> **!=** <STRING2>|True, if the strings are **not equal**.|
+|<STRING1> **<** <STRING2>|True if <STRING1> sorts **before** <STRING2> lexicographically (pure ASCII, not current locale!). Remember to escape! Use ''\<''|
+|<STRING1> **>** <STRING2>|True if <STRING1> sorts **after** <STRING2> lexicographically (pure ASCII, not current locale!). Remember to escape! Use ''\>''|
 
 ===== Arithmetic tests =====
 ^Operator syntax^Description^
-|&lt;INTEGER1&gt; **-eq** &lt;INTEGER2&gt;|True, if the integers are **equal**.|
-|&lt;INTEGER1&gt; **-ne** &lt;INTEGER2&gt;|True, if the integers are **NOT equal**.|
-|&lt;INTEGER1&gt; **-le** &lt;INTEGER2&gt;|True, if the first integer is **less than or equal** second one.|
-|&lt;INTEGER1&gt; **-ge** &lt;INTEGER2&gt;|True, if the first integer is **greater than or equal** second one.|
-|&lt;INTEGER1&gt; **-lt** &lt;INTEGER2&gt;|True, if the first integer is **less than** second one.|
-|&lt;INTEGER1&gt; **-gt** &lt;INTEGER2&gt;|True, if the first integer is **greater than** second one.|
+|<INTEGER1> **-eq** <INTEGER2>|True, if the integers are **equal**.|
+|<INTEGER1> **-ne** <INTEGER2>|True, if the integers are **NOT equal**.|
+|<INTEGER1> **-le** <INTEGER2>|True, if the first integer is **less than or equal** second one.|
+|<INTEGER1> **-ge** <INTEGER2>|True, if the first integer is **greater than or equal** second one.|
+|<INTEGER1> **-lt** <INTEGER2>|True, if the first integer is **less than** second one.|
+|<INTEGER1> **-gt** <INTEGER2>|True, if the first integer is **greater than** second one.|
 
 ===== Misc syntax =====
 ^ Operator syntax         ^ Description                                                                                                                                 ^
-| &lt;TEST1&gt; **-a** &lt;TEST2&gt;  | True, if &lt;TEST1&gt; **and** &lt;TEST2&gt; are true (AND). Note that ''-a'' also may be used as a file test (see above)                               |
-| &lt;TEST1&gt; **-o** &lt;TEST2&gt;  | True, if either &lt;TEST1&gt; **or** &lt;TEST2&gt; is true (OR).                                                                                        |
-| **!** &lt;TEST&gt;            | True, if &lt;TEST&gt; is **false** (NOT).                                                                                                         |
-| **(** &lt;TEST&gt; **)**      | Group a test (for precedence). **Attention:** In normal shell-usage, the &quot;(&quot; and &quot;)&quot; must be escaped; use &quot;\(&quot; and &quot;\)&quot;!                    |
-| **-o** &lt;OPTION_NAME&gt;    | True, if the [[internals:shell_options| shell option]] &lt;OPTION_NAME&gt; is set.                                                                |
-| **-v** &lt;VARIABLENAME&gt;   | True if the variable &lt;VARIABLENAME&gt; has been set. Use ''var[n]'' for array elements.  |
-| **-R** &lt;VARIABLENAME&gt;   | True if the variable &lt;VARIABLENAME&gt; has been set and is a nameref variable (since 4.3-alpha)  |
+| <TEST1> **-a** <TEST2>  | True, if <TEST1> **and** <TEST2> are true (AND). Note that ''-a'' also may be used as a file test (see above)                               |
+| <TEST1> **-o** <TEST2>  | True, if either <TEST1> **or** <TEST2> is true (OR).                                                                                        |
+| **!** <TEST>            | True, if <TEST> is **false** (NOT).                                                                                                         |
+| **(** <TEST> **)**      | Group a test (for precedence). **Attention:** In normal shell-usage, the &quot;(&quot; and &quot;)&quot; must be escaped; use &quot;\(&quot; and &quot;\)&quot;!                    |
+| **-o** <OPTION_NAME>    | True, if the [[internals:shell_options| shell option]] <OPTION_NAME> is set.                                                                |
+| **-v** <VARIABLENAME>   | True if the variable <VARIABLENAME> has been set. Use ''var[n]'' for array elements.  |
+| **-R** <VARIABLENAME>   | True if the variable <VARIABLENAME> has been set and is a nameref variable (since 4.3-alpha)  |
 
 
 
@@ -147,10 +147,10 @@ Here are the rules taken from the manual (__**Note:**__ This is for the command 
 
 
 These rules may seem complex, but it's not so bad in practice. Knowing them might help you to explain some of the &quot;unexplicable&quot; behaviours you might encounter:
-&lt;code&gt;
+<code>
 var=&quot;&quot;
 if [ -n $var ]; then echo &quot;var is not empty&quot;; fi
-&lt;/code&gt; 
+</code> 
 
 This code prints &quot;var is not empty&quot;, even though ''-n something'' is supposed to be true if ''$var'' is not empty - **why?**
 
@@ -165,17 +165,17 @@ These rules also explain why, for instance, -a and -o can have several meanings.
 
 ==== The Prefered Way ====
 
-The way often recommended to logically connect several tests with AND and OR is to use **several single test commands** and to **combine** them with the shell ''&amp;&amp;'' and ''||'' **list control operators**.
+The way often recommended to logically connect several tests with AND and OR is to use **several single test commands** and to **combine** them with the shell ''&&'' and ''||'' **list control operators**.
 
 See this:
-&lt;code&gt;
-if [ -n &quot;$var&quot;] &amp;&amp; [ -e &quot;$var&quot;]; then
+<code>
+if [ -n &quot;$var&quot;] && [ -e &quot;$var&quot;]; then
    echo &quot;\$var is not null and a file named $var exists!&quot;
 fi
-&lt;/code&gt;
+</code>
 
 The return status of AND and OR lists is the exit status of the last command executed in the list
-  * With ''command1 &amp;&amp; command2'', ''command2'' is executed if, and only if, ''command1'' returns an exit status of zero (true)
+  * With ''command1 && command2'', ''command2'' is executed if, and only if, ''command1'' returns an exit status of zero (true)
   * With ''command1 ││ command2'', ''command2'' is executed if, and only if, ''command1'' returns a non-zero exit status (false) 
 
 
@@ -183,19 +183,19 @@ The return status of AND and OR lists is the exit status of the last command exe
 ==== The other way: -a and -o ====
 
 The logical operators AND and OR for the test-command itself are ''-a'' and ''-o'', thus:
-&lt;code&gt;
+<code>
 if [ -n &quot;$var&quot; -a -e &quot;$var&quot; ] ; then
    echo &quot;\$var is not null and a file named $var exists&quot;
 fi
-&lt;/code&gt;
+</code>
 
-They are **not** ''&amp;&amp;'' or ''||'':
-&lt;code&gt;
-$ if [ -n &quot;/tmp&quot; &amp;&amp; -d &quot;/tmp&quot;]; then echo true; fi # DOES NOT WORK
+They are **not** ''&&'' or ''||'':
+<code>
+$ if [ -n &quot;/tmp&quot; && -d &quot;/tmp&quot;]; then echo true; fi # DOES NOT WORK
 bash: [: missing `]'
-&lt;/code&gt;
+</code>
 
-You might find the error message confusing, ''['' does not find the required final '']'', because as seen above ''&amp;&amp;'' is used to write a **list of commands**. The ''if'' statement actually **sees two commands**:
+You might find the error message confusing, ''['' does not find the required final '']'', because as seen above ''&&'' is used to write a **list of commands**. The ''if'' statement actually **sees two commands**:
   * ''[ -n &quot;/tmp&quot;''
   * ''-d &quot;/tmp&quot; ]''
 ...which **must** fail.
@@ -207,7 +207,7 @@ You might find the error message confusing, ''['' does not find the required fin
 
 === If portability is a concern ===
 
-POSIX(r)/SUSv3 does **not** specify the behaviour of ''test'' in cases where there are more than 4 arguments. If you write a script that might not be executed by Bash, the behaviour might be different! ((&lt;rant&gt;Of course, one can wonder what is the use of including the parenthesis in the specification without defining the behaviour with more than 4 arguments or how usefull are the examples with 7 or 9 arguments attached to the specification.&lt;/rant&gt;))
+POSIX(r)/SUSv3 does **not** specify the behaviour of ''test'' in cases where there are more than 4 arguments. If you write a script that might not be executed by Bash, the behaviour might be different! ((<rant>Of course, one can wonder what is the use of including the parenthesis in the specification without defining the behaviour with more than 4 arguments or how usefull are the examples with 7 or 9 arguments attached to the specification.</rant>))
 
 === If you want the cut behaviour ===
 
@@ -215,49 +215,49 @@ Let's say, we want to check the following two things (AND):
   - if a string is null (empty)
   - if a command produced an output
 Let's see:
-&lt;code&gt;
-if [ -z &quot;false&quot; -a -z &quot;$(echo I am executed &gt;&amp;2)&quot; ] ; then ... 
-&lt;/code&gt;
-=&gt; The arguments are all expanded **before** ''test'' runs, thus the echo-command **is executed**.
+<code>
+if [ -z &quot;false&quot; -a -z &quot;$(echo I am executed >&2)&quot; ] ; then ... 
+</code>
+=> The arguments are all expanded **before** ''test'' runs, thus the echo-command **is executed**.
 
-&lt;code&gt;
-if [ -z &quot;false&quot; ] &amp;&amp; [ -z &quot;$(echo I am not executed &gt;&amp;2)&quot; ]; then... 
-&lt;/code&gt;
+<code>
+if [ -z &quot;false&quot; ] && [ -z &quot;$(echo I am not executed >&2)&quot; ]; then... 
+</code>
 
-=&gt; Due to the nature of the ''&amp;&amp;'' list operator, the second test-command runs only if the first test-command returns true, our  echo-command **is not executed**.
+=> Due to the nature of the ''&&'' list operator, the second test-command runs only if the first test-command returns true, our  echo-command **is not executed**.
 
 __**Note:**__ In my opinion, ''-a'' and ''-o'' are also less readable ''[pgas]''
 
 ==== Precedence and Parenthesis ====
 
-Take care if you convert your scripts from using ''-a'' and ''-o'' to use the list way (''&amp;&amp;'' and ''||''):
+Take care if you convert your scripts from using ''-a'' and ''-o'' to use the list way (''&&'' and ''||''):
   * in the test-command rules, ''-a'' has **precedence over** ''-o''
-  * in the shell grammar rules, ''&amp;&amp;'' and ''||'' have **equal precedence**
+  * in the shell grammar rules, ''&&'' and ''||'' have **equal precedence**
 That means, **you can get different results**, depending on the manner of use:
-&lt;code&gt;
-$ if [ &quot;true&quot; ] || [ -e /does/not/exist ] &amp;&amp; [ -e /does/not/exist ]; then echo true; else echo false; fi
+<code>
+$ if [ &quot;true&quot; ] || [ -e /does/not/exist ] && [ -e /does/not/exist ]; then echo true; else echo false; fi
 false
 
 $ if [ &quot;true&quot; -o -e /does/not/exist -a -e /does/not/exist ]; then  echo true; else echo false;fi
 true
-&lt;/code&gt;
+</code>
 As a result you have to think about it a little or add precedence control (parenthesis). 
 
-For ''&amp;&amp;'' and ''||'' parenthesis means (shell-ly) grouping the commands, and since ''( ... )'' introduces a subshell we will use ''{ ... }'' instead:
-&lt;code&gt;
-$ if  [ &quot;true&quot; ] || { [ -e /does/not/exist ]  &amp;&amp; [ -e /does/not/exist ] ;} ; then echo true; else echo false; fi
+For ''&&'' and ''||'' parenthesis means (shell-ly) grouping the commands, and since ''( ... )'' introduces a subshell we will use ''{ ... }'' instead:
+<code>
+$ if  [ &quot;true&quot; ] || { [ -e /does/not/exist ]  && [ -e /does/not/exist ] ;} ; then echo true; else echo false; fi
 true
-&lt;/code&gt;
+</code>
 
 For the test command, the precedence parenthesis are, as well, ''( )'', but you need to escape or quote them, so that the shell doesn't try to interpret them:
-&lt;code&gt;
+<code>
 $ if [ \( &quot;true&quot; -o -e /does/not/exist \) -a -e /does/not/exist ]; then  echo true; else echo false; fi
 false
 
 # equivalent, but less readable IMHO:
 $ if [ '(' &quot;true&quot; -o -e /does/not/exist ')' -a -e /does/not/exist ]; then  echo true; else echo false; fi
 false
-&lt;/code&gt;
+</code>
 
 
 
@@ -267,14 +267,14 @@ As for AND and OR, there are 2 ways to negate a test with the shell keyword ''!'
 
 
 Here ''!'' negates the exit status of the command ''test'' which is 0 (true), and the else part is executed:
-&lt;code&gt;
+<code>
 if ! [ -d '/tmp' ]; then echo &quot;/tmp doesn't exists&quot;; else echo &quot;/tmp exists&quot;; fi
-&lt;/code&gt;
+</code>
 
 Here the ''test'' command itself exits with status 1 (false) and the else is also executed:
-&lt;code&gt;
+<code>
 if  [ ! -d '/tmp' ]; then echo &quot;/tmp doesn't exists&quot;; else echo &quot;/tmp exists&quot;; fi
-&lt;/code&gt;
+</code>
 
 Unlike for AND and OR, both methods for NOT have an identical behaviour, at least for doing one single test.
 
@@ -285,7 +285,7 @@ In this section you will get all the mentioned (and maybe more) possible pitfall
 ==== General ====
 
 Here's the copy of a mail on bug-bash list. A user asking a question about using the test command in Bash, **he's talking about a problem, which you may have already had yourself**:
-&lt;code&gt;
+<code>
 From: (PROTECTED)
 Subject: -d option not working. . .?
 Date: Tue, 11 Sep 2007 21:51:59 -0400
@@ -317,21 +317,21 @@ done
 
 
 Regards
-&lt;/code&gt;
+</code>
 
 See the problem regarding the used test-command (the other potential problems are not of interest here)?
-&lt;code&gt;
+<code>
 [-d $i]
-&lt;/code&gt;
+</code>
 He simply didn't know that ''test'' or ''['' is a normal, simple command. Well, here's the answer he got. I quote it here, because it's a well written text that addresses most of the common issues with the &quot;classic&quot; test command:
 
-&lt;code&gt;
+<code>
 From: Bob Proulx (EMAIL PROTECTED)
 Subject: Re: -d option not working. . .?
 Date: Wed, 12 Sep 2007 10:32:35 -0600
 To: bug-bash@gnu.org
 
-&gt; (QUOTED TEXT WAS REMOVED)
+> (QUOTED TEXT WAS REMOVED)
 
 The shell is first and foremost a way to launch other commands.  The
 syntax is simply &quot;if&quot; followed by a command-list, (e.g. if /some/foo;
@@ -424,7 +424,7 @@ Fortran using -gt, -eq, etc. looked very normal.
 
 Incorrect use generating unlikely to be intended results:
 
-  if test 5 &gt; 2    # true, &quot;5&quot; is non-zero length, creates file named &quot;2&quot;
+  if test 5 > 2    # true, &quot;5&quot; is non-zero length, creates file named &quot;2&quot;
 
 Intended use:
 
@@ -439,13 +439,13 @@ shell processes [[ internally all arguments are known and do not need
 to be quoted.
 
   if [[ -d $file ]]  # okay
-  if [[ 5 &gt; 2 ]]     # okay
+  if [[ 5 > 2 ]]     # okay
 
 I am sure that I am remembering a detail wrong but hopefully this is
 useful as a gentle introduction and interesting anyway.
 
 Bob
-&lt;/code&gt;
+</code>
 
 I hope this text protects you a bit from stepping from one pitfall into the next.
 
@@ -462,12 +462,12 @@ Some code snipplets follow, different ways of shell reaction is used.
     * ''[ &quot;$MYVAR&quot; ]''
     * **Note:** There are possibilities to make a difference if a variable is //undefined// or //NULL// - see [[syntax:pe#use_an_alternate_value|Parameter Expansion - Using an alternate value]]
   * **check if a directory exists, if not, create it**
-    * ''test ! -d /home/user/foo &amp;&amp; mkdir /home/user/foo''
-    * ''[ ! -d /home/user/foo ] &amp;&amp; mkdir /home/user/foo''
+    * ''test ! -d /home/user/foo && mkdir /home/user/foo''
+    * ''[ ! -d /home/user/foo ] && mkdir /home/user/foo''
     * ''if [ ! -d /home/user/foo ]; then mkdir /home/user/foo; fi''
   * **check if minimum one parameter was given, and that one is &quot;Hello&quot;**
     * ''test $# -ge 1 -a &quot;$1&quot; = &quot;Hello&quot; || exit 1''
-    * ''[ $# -ge 1 ] &amp;&amp; [ &quot;$1&quot; = &quot;Hello&quot; ] || exit 1'' (see [[syntax:basicgrammar#lists | lists description]])
+    * ''[ $# -ge 1 ] && [ &quot;$1&quot; = &quot;Hello&quot; ] || exit 1'' (see [[syntax:basicgrammar#lists | lists description]])
 
 
 
@@ -475,11 +475,11 @@ Some code snipplets follow, different ways of shell reaction is used.
 
 Using a [[syntax:ccmd:classic_for | for-loop]] to iterate through all entries of a directory, if an entry is a directory (''[ -d &quot;$fn&quot; ]''), print its name:
 
-&lt;code&gt;
+<code>
 for fn in *; do
-  [ -d &quot;$fn&quot; ] &amp;&amp; echo &quot;$fn&quot;
+  [ -d &quot;$fn&quot; ] && echo &quot;$fn&quot;
 done
-&lt;/code&gt;
+</code>
 
 
 ===== See also =====

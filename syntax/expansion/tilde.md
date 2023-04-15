@@ -1,8 +1,8 @@
 ====== Tilde expansion ======
 
-{{keywords&gt;bash shell scripting expansion substitution tilde home homedir shortcut}}
+{{keywords>bash shell scripting expansion substitution tilde home homedir shortcut}}
 
-&lt;code&gt;
+<code>
 ~
 ~/...
 
@@ -14,7 +14,7 @@
 
 ~-
 ~-/...
-&lt;/code&gt;
+</code>
 
 The tilde expansion is used to expand to several specific pathnames:
   * home directories
@@ -29,35 +29,35 @@ Tilde expansion is also performed everytime a variable is assigned:
   * after the **first** ''='': ''TARGET=~moonman/share''
   * after **every** '':'' (colon) in the assigned value: ''TARGET=file:~moonman/share''
 
-&lt;note info&gt;
+<note info>
 As of now (Bash 4.3-alpha) the following constructs **also** works, though it's not a variable assignment:
-&lt;code&gt;
+<code>
 echo foo=~
 echo foo=:~
-&lt;/code&gt;
+</code>
 I don't know yet, if this is a bug or intended.
-&lt;/note&gt;
+</note>
 
 This way you can correctly use the tilde expansion in your [[syntax:shellvars#PATH|PATH]]:
-&lt;code&gt;
+<code>
 PATH=~/mybins:~peter/mybins:$PATH
-&lt;/code&gt;
+</code>
 
 **Spaces in the referenced pathes?** A construct like...
-&lt;code&gt;
+<code>
 ~/&quot;my directory&quot;
-&lt;/code&gt;
+</code>
 ...is perfectly valid and works!
 
 ===== Home directory =====
-&lt;code&gt;
+<code>
 ~
-~&lt;NAME&gt;
-&lt;/code&gt;
+~<NAME>
+</code>
 
-This form expands to the home-directory of the current user (''~'') or the home directory of the given user (''~&lt;NAME&gt;'').
+This form expands to the home-directory of the current user (''~'') or the home directory of the given user (''~<NAME>'').
 
-If the given user doesn't exist (or if his home directory isn't determinable, for some reason), it doesn't expand to something else, it stays what it is. The requested home directory is found by asking the operating system for the associated home directory for ''&lt;NAME&gt;''.
+If the given user doesn't exist (or if his home directory isn't determinable, for some reason), it doesn't expand to something else, it stays what it is. The requested home directory is found by asking the operating system for the associated home directory for ''<NAME>''.
 
 To find the home directory of the current user (''~''), Bash has a precedence:
   * expand to the value of [[syntax:shellvars#HOME|HOME]] if it's defined
@@ -66,35 +66,35 @@ That means, the variable ''HOME'' can override the &quot;real&quot; home directo
 
 
 ===== Current working directory =====
-&lt;code&gt;
+<code>
 ~+
-&lt;/code&gt;
+</code>
 
 This expands to the value of the [[syntax:shellvars#PWD|PWD]] variable, which holds the currect working directory:
-&lt;code&gt;
+<code>
 echo &quot;CWD is $PWD&quot;
-&lt;/code&gt;
+</code>
 is equivalent to (note it **must** be a separate word!):
-&lt;code&gt;
+<code>
 echo &quot;CWD is&quot; ~+
-&lt;/code&gt;
+</code>
 
 
 ===== Previous working directory =====
 
-&lt;code&gt;
+<code>
 ~-
-&lt;/code&gt;
+</code>
 
 This expands to the value of the [[syntax:shellvars#OLDPWD|OLDPWD]] variable, which holds the previous working directory (the one before the last ''cd''). If ''OLDPWD'' is unset (never changed the directory), it is not expanded.
 
-&lt;code&gt;
+<code>
 $ pwd
 /home/bash
 $ cd /etc
 $ echo ~-
 /home/bash
-&lt;/code&gt;
+</code>
 
 
 ===== See also =====

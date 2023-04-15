@@ -1,6 +1,6 @@
 ====== Parameter expansion ======
 
-{{keywords&gt;bash shell scripting expansion substitution text variable parameter mangle substitute change check defined null array arrays}}
+{{keywords>bash shell scripting expansion substitution text variable parameter mangle substitute change check defined null array arrays}}
 
 
 ===== Introduction =====
@@ -39,12 +39,12 @@ Looking for a specific syntax you saw, without knowing the name?
     * ''${PARAMETER#PATTERN}''
     * ''${PARAMETER##PATTERN}''
     * ''${PARAMETER%PATTERN}''
-    * ''&lt;nowiki&gt;${PARAMETER%%PATTERN}&lt;/nowiki&gt;''
+    * ''<nowiki>${PARAMETER%%PATTERN}</nowiki>''
   * [[#search_and_replace | Search and replace]]
     * ''${PARAMETER/PATTERN/STRING}''
-    * ''&lt;nowiki&gt;${PARAMETER//PATTERN/STRING}&lt;/nowiki&gt;''
+    * ''<nowiki>${PARAMETER//PATTERN/STRING}</nowiki>''
     * ''${PARAMETER/PATTERN}''
-    * ''&lt;nowiki&gt;${PARAMETER//PATTERN}&lt;/nowiki&gt;''
+    * ''<nowiki>${PARAMETER//PATTERN}</nowiki>''
   * [[#string_length | String length ]]
     * ''${#PARAMETER}''
   * [[#substring_expansion | Substring expansion]]
@@ -70,20 +70,20 @@ Looking for a specific syntax you saw, without knowing the name?
 
 The easiest form is to just use a parameter's name within braces. This is identical to using ''$FOO'' like you see it everywhere, but has the advantage that it can be immediately followed by characters that would be interpreted as part of the parameter name otherwise. Compare these two expressions (''WORD=&quot;car&quot;'' for example), where we want to print a word with a trailing &quot;s&quot;:
 
-&lt;code&gt;
+<code>
 echo &quot;The plural of $WORD is most likely $WORDs&quot;
 echo &quot;The plural of $WORD is most likely ${WORD}s&quot;
-&lt;/code&gt;
+</code>
 
 __Why does the first one fail?__ It prints nothing, because a parameter (variable) named &quot;''WORDs''&quot; is undefined and thus printed as &quot;&quot; (//nothing//). Without using braces for parameter expansion, Bash will interpret the sequence of all valid characters from the introducing &quot;''$''&quot; up to the last valid character as name of the parameter. When using braces you just force Bash to **only interpret the name inside your braces**.
 
 Also, please remember, that **parameter names are** (like nearly everything in UNIX(r)) **case sensitive!**
 
 The second form with the curly braces is also needed to access positional parameters (arguments to a script) beyond ''$9'':
-&lt;code&gt;
+<code>
 echo &quot;Argument  1 is: $1&quot;
 echo &quot;Argument 10 is: ${10}&quot;
-&lt;/code&gt;
+</code>
 
 ==== Simple usage: Arrays ====
 
@@ -101,40 +101,40 @@ For arrays you always need the braces. The arrays are expanded by individual ind
 
 In some cases, like for example
 
-&lt;code&gt;
+<code>
 ${PARAMETER}
 
 ${PARAMETER:0:3}
-&lt;/code&gt;
+</code>
 
 you can instead use the form
 
-&lt;code&gt;${!PARAMETER}&lt;/code&gt;
+<code>${!PARAMETER}</code>
 
 to enter a level of indirection. The referenced parameter is not ''PARAMETER'' itself, but the parameter whose name is stored as the value of ''PARAMETER''. If the parameter ''PARAMETER'' has the value &quot;''TEMP''&quot;, then ''${!PARAMETER}'' will expand to the value of the parameter named ''TEMP'':
-&lt;code&gt;
+<code>
 read -rep 'Which variable do you want to inspect? ' look_var
 
 printf 'The value of &quot;%s&quot; is: &quot;%s&quot;\n' &quot;$look_var&quot; &quot;${!look_var}&quot; 
-&lt;/code&gt;
+</code>
 
 Of course the indirection also works with special variables:
 
-&lt;code&gt;
+<code>
 # set some fake positional parameters
 set one two three four
 
 # get the LAST argument (&quot;#&quot; stores the number of arguments, so &quot;!#&quot; will reference the LAST argument)
 echo ${!#}
-&lt;/code&gt;
+</code>
 
 You can think of this mechanism as being roughly equivalent to taking any parameter expansion that begins with the parameter name, and substituting the ''!PARAMETER'' part with the value of PARAMETER.
 
-&lt;code&gt;
+<code>
 echo &quot;${!var^^}&quot;
 # ...is equivalent to
 eval 'echo &quot;${'&quot;$var&quot;'^^}&quot;'
-&lt;/code&gt;
+</code>
 
 It was an unfortunate design decision to use the ''!'' prefix for indirection, as it introduces parsing ambiguity with other parameter expansions that begin with ''!''. Indirection is not possible in combination with any parameter expansion whose modifier requires a prefix to the parameter name. Specifically, indirection isn't possible on the ''${!var@}'', ''${!var*}'', ''${!var[@]}'', ''${!var[*]}'', and ''${#var}'' forms. This means the ''!'' prefix can't be used to retrieve the indices of an array, the length of a string, or number of elements in an array indirectly (see [[syntax/arrays#indirection]] for workarounds). Additionally, the ''!''-prefixed parameter expansion conflicts with ksh-like shells which have the more powerful &quot;name-reference&quot; form of indirection, where the exact same syntax is used to expand to the name of the variable being referenced.
 
@@ -160,19 +160,19 @@ These expansion operators modify the case of the letters in the expanded text.
 
 The ''^'' operator modifies the first character to uppercase, the '','' operator to lowercase. When using the double-form (''^^'' and '',,''), all characters are converted.
 
-&lt;wrap center round info 60%&gt;
+<wrap center round info 60%>
 
 The (**currently undocumented**) operators ''~'' and ''~~'' reverse the case of the given text (in ''PARAMETER'').''~'' reverses the case of first letter of words in the variable while ''~~'' reverses case for all.  Thanks to ''Bushmills'' and ''geirha'' on the Freenode IRC channel for this finding.
 
-&lt;/wrap&gt;
+</wrap>
 
 
 __**Example: Rename all ''*.txt'' filenames to lowercase**__
-&lt;code&gt;
+<code>
 for file in *.txt; do
   mv &quot;$file&quot; &quot;${file,,}&quot;
 done
-&lt;/code&gt;
+</code>
 
 __**Note:**__  Case modification is a handy feature you can apply to a name or a title.   Or is it?  Case modification was an important aspect of the Bash 4 release. Bash version 4, RC1 would perform word splitting, and then case modification, resulting in title case (where every word is capitalized).  It was decided to apply case modification to values, not words, for the Bash 4 release.  Thanks Chet.
 
@@ -188,15 +188,15 @@ For [[syntax:arrays|array]] expansion, the case modification applies to **every 
 Assume: ''array=(This is some Text)''
 
   * ''echo &quot;${array[@],}&quot;''
-    * =&gt; ''this is some text''
+    * => ''this is some text''
   * ''echo &quot;${array[@],,}&quot;''
-    * =&gt; ''this is some text''
+    * => ''this is some text''
   * ''echo &quot;${array[@]^}&quot;''
-    * =&gt; ''This Is Some Text''
+    * => ''This Is Some Text''
   * ''echo &quot;${array[@]^^}&quot;''
-    * =&gt; ''THIS IS SOME TEXT''
+    * => ''THIS IS SOME TEXT''
    * ''echo &quot;${array[2]^^}&quot;''
-     * =&gt; ''SOME''
+     * => ''SOME''
 
 ===== Variable name expansion =====
 
@@ -204,13 +204,13 @@ Assume: ''array=(This is some Text)''
 
 ''${!PREFIX@}''
 
-This expands to a list of all set **variable names** beginning with the string ''PREFIX''. The elements of the list are separated by the first character in the ''IFS''-variable (&lt;space&gt; by default).
+This expands to a list of all set **variable names** beginning with the string ''PREFIX''. The elements of the list are separated by the first character in the ''IFS''-variable (<space> by default).
 
 This will show all defined variable names (not values!) beginning with &quot;BASH&quot;:
-&lt;code&gt;
+<code>
 $ echo ${!BASH*}
 BASH BASH_ARGC BASH_ARGV BASH_COMMAND BASH_LINENO BASH_SOURCE BASH_SUBSHELL BASH_VERSINFO BASH_VERSION
-&lt;/code&gt;
+</code>
 
 This list will also include [[syntax:arrays|array names]].
 
@@ -221,32 +221,32 @@ This list will also include [[syntax:arrays|array names]].
 
 ''${PARAMETER%PATTERN}''
 
-''&lt;nowiki&gt;${PARAMETER%%PATTERN}&lt;/nowiki&gt;''
+''<nowiki>${PARAMETER%%PATTERN}</nowiki>''
 
 This one can **expand only a part** of a parameter's value, **given a pattern to describe what to remove** from the string. The pattern is interpreted just like a pattern to describe a filename to match (globbing). See [[syntax:pattern | Pattern matching]] for more.
 
 Example string (//just a quote from a big man//):
-&lt;code&gt;
+<code>
 MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
-&lt;/code&gt;
+</code>
 
 
 ==== From the beginning ====
 ''${PARAMETER#PATTERN}'' and ''${PARAMETER##PATTERN}''
 
 This form is to remove the described [[syntax:pattern | pattern]] trying to **match it from the beginning of the string**.
-The operator &quot;''#''&quot; will try to remove the shortest text matching the pattern, while &quot;''##''&quot; tries to do it with the longest text matching. Look at the following examples to get the idea (matched text &lt;del&gt;marked striked&lt;/del&gt;, remember it will be removed!):
+The operator &quot;''#''&quot; will try to remove the shortest text matching the pattern, while &quot;''##''&quot; tries to do it with the longest text matching. Look at the following examples to get the idea (matched text <del>marked striked</del>, remember it will be removed!):
 ^Syntax^Result^
-|''${MYSTRING#*in}''|&lt;del&gt;Be liberal in&lt;/del&gt; what you accept, and conservative in what you send|
-|''${MYSTRING##*in}''|&lt;del&gt;Be liberal in what you accept, and conservative in&lt;/del&gt; what you send|
+|''${MYSTRING#*in}''|<del>Be liberal in</del> what you accept, and conservative in what you send|
+|''${MYSTRING##*in}''|<del>Be liberal in what you accept, and conservative in</del> what you send|
 
 ==== From the end ====
-''${PARAMETER%PATTERN}'' and ''&lt;nowiki&gt;${PARAMETER%%PATTERN}&lt;/nowiki&gt;''
+''${PARAMETER%PATTERN}'' and ''<nowiki>${PARAMETER%%PATTERN}</nowiki>''
 
 In the second form everything will be the same, except that Bash now tries to match the pattern from the end of the string:
 ^ Syntax                                 ^ Result                                                                          ^
-| ''${MYSTRING%in*}''                    | Be liberal in what you accept, and conservative &lt;del&gt;in what you send&lt;/del&gt;  |
-| ''&lt;nowiki&gt;${MYSTRING%%in*}&lt;/nowiki&gt;''  | Be liberal &lt;del&gt;in what you accept, and conservative in what you send&lt;/del&gt;  |
+| ''${MYSTRING%in*}''                    | Be liberal in what you accept, and conservative <del>in what you send</del>  |
+| ''<nowiki>${MYSTRING%%in*}</nowiki>''  | Be liberal <del>in what you accept, and conservative in what you send</del>  |
 
 The second form nullifies variables that begin with ''in'', by working from the end.
 ==== Common use ====
@@ -256,16 +256,16 @@ Well, maybe the most common use for it is to **extract parts of a filename**. Ju
 
   * **Get name without extension**
     * ''${FILENAME%.*}''
-    * =&gt; ''bash_hackers&lt;del&gt;.txt&lt;/del&gt;''
+    * => ''bash_hackers<del>.txt</del>''
   * **Get extension**
     * ''${FILENAME##*.}''
-    * =&gt; ''&lt;del&gt;bash_hackers.&lt;/del&gt;txt''
+    * => ''<del>bash_hackers.</del>txt''
   * **Get directory name**
     * ''${PATHNAME%/*}''
-    * =&gt; ''/home/bash&lt;del&gt;/bash_hackers.txt&lt;/del&gt;''
+    * => ''/home/bash<del>/bash_hackers.txt</del>''
   * **Get filename**
     * ''${PATHNAME##*/}''
-    * =&gt; ''&lt;del&gt;/home/bash/&lt;/del&gt;bash_hackers.txt''
+    * => ''<del>/home/bash/</del>bash_hackers.txt''
 
 These are the syntaxes for filenames with a single extension. Depending on your needs, you might need to adjust shortest/longest match.
 
@@ -278,8 +278,8 @@ Simple example, removing a trailing ''is'' from all array elements (on expansion
 Assume: ''array=(This is a text)''
 
   * ''echo &quot;${array[@]%is}&quot;''
-    * =&gt; ''Th  a text''
-    * (it was: ''Th&lt;del&gt;is&lt;/del&gt; &lt;del&gt;is&lt;/del&gt; a text'')
+    * => ''Th  a text''
+    * (it was: ''Th<del>is</del> <del>is</del> a text'')
 
 All other variants of this expansion behave the same.
 
@@ -288,53 +288,53 @@ All other variants of this expansion behave the same.
 ===== Search and replace =====
 ''${PARAMETER/PATTERN/STRING}''
 
-''&lt;nowiki&gt;${PARAMETER//PATTERN/STRING}&lt;/nowiki&gt;''
+''<nowiki>${PARAMETER//PATTERN/STRING}</nowiki>''
 
-''&lt;nowiki&gt;${PARAMETER/PATTERN}&lt;/nowiki&gt;''
+''<nowiki>${PARAMETER/PATTERN}</nowiki>''
 
-''&lt;nowiki&gt;${PARAMETER//PATTERN}&lt;/nowiki&gt;''
+''<nowiki>${PARAMETER//PATTERN}</nowiki>''
 
 This one can substitute (//replace//) a substring [[syntax:pattern | matched by a pattern]], on expansion time. The matched substring will be entirely removed and the given string will be inserted. Again some example string for the tests:
-&lt;code&gt;
+<code>
 MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
-&lt;/code&gt;
+</code>
 
-The two main forms only differ in **the number of slashes** after the parameter name: ''${PARAMETER/PATTERN/STRING}'' and ''&lt;nowiki&gt;${PARAMETER//PATTERN/STRING}&lt;/nowiki&gt;''
+The two main forms only differ in **the number of slashes** after the parameter name: ''${PARAMETER/PATTERN/STRING}'' and ''<nowiki>${PARAMETER//PATTERN/STRING}</nowiki>''
 
 The first one (//one slash//) is to only substitute **the first occurrence** of the given pattern, the second one (//two slashes//) is to substitute **all occurrences** of the pattern.
 
 First, let's try to say &quot;happy&quot; instead of &quot;conservative&quot; in our example string:
-&lt;code&gt;
+<code>
 ${MYSTRING//conservative/happy}
-&lt;/code&gt;
-=&gt; ''Be liberal in what you accept, and &lt;del&gt;conservative&lt;/del&gt;happy in what you send''
+</code>
+=> ''Be liberal in what you accept, and <del>conservative</del>happy in what you send''
 
 Since there is only one &quot;conservative&quot; in that example, it really doesn't matter which of the two forms we use.
 
 Let's play with the word &quot;in&quot;, I don't know if it makes any sense, but let's substitute it with &quot;by&quot;.
 
 __**First form: Substitute first occurrence**__
-&lt;code&gt;${MYSTRING/in/by}&lt;/code&gt;
-=&gt; ''Be liberal &lt;del&gt;in&lt;/del&gt;by what you accept, and conservative in what you send''
+<code>${MYSTRING/in/by}</code>
+=> ''Be liberal <del>in</del>by what you accept, and conservative in what you send''
 
 __**Second form: Substitute all occurrences**__
-&lt;code&gt;${MYSTRING//in/by}&lt;/code&gt;
-=&gt; ''Be liberal &lt;del&gt;in&lt;/del&gt;by what you accept, and conservative &lt;del&gt;in&lt;/del&gt;by what you send''
+<code>${MYSTRING//in/by}</code>
+=> ''Be liberal <del>in</del>by what you accept, and conservative <del>in</del>by what you send''
 
 __**Anchoring**__
 Additionally you can &quot;anchor&quot; an expression:
 A ''#'' (hashmark) will indicate that your expression is matched against the beginning portion of the string, a ''%'' (percent-sign) will do it for the end portion.
 
-&lt;code&gt;MYSTRING=xxxxxxxxxx
+<code>MYSTRING=xxxxxxxxxx
 echo ${MYSTRING/#x/y}  # RESULT: yxxxxxxxxx
-echo ${MYSTRING/%x/y}  # RESULT: xxxxxxxxxy&lt;/code&gt;
+echo ${MYSTRING/%x/y}  # RESULT: xxxxxxxxxy</code>
 
 If the replacement part is completely omitted, the matches are replaced by the nullstring, i.e., they are removed. This is equivalent to specifying an empty replacement:
-&lt;code&gt;
+<code>
 echo ${MYSTRING//conservative/}
 # is equivalent to
 echo ${MYSTRING//conservative}
-&lt;/code&gt;
+</code>
 
 
 ==== Search and replace: Arrays ====
@@ -346,20 +346,20 @@ A simple example, changing the (lowercase) letter ''t'' to ''d'':
 Assume: ''array=(This is a text)''
 
   * ''echo &quot;${array[@]/t/d}&quot;''
-    * =&gt; ''This is a dext''
-  * ''echo &quot;${array[@]&lt;nowiki&gt;//&lt;/nowiki&gt;t/d}&quot;''
-    * =&gt; ''This is a dexd''
+    * => ''This is a dext''
+  * ''echo &quot;${array[@]<nowiki>//</nowiki>t/d}&quot;''
+    * => ''This is a dexd''
 
 ===== String length =====
 ''${#PARAMETER}''
 
 When you use this form, the length of the parameter's value is expanded. Again, a quote from a big man, to have a test text:
 
-&lt;code&gt;MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;&lt;/code&gt;
+<code>MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;</code>
 
 Using echo ''${#MYSTRING}''...
 
-=&gt; ''64''
+=> ''64''
 
 The length is reported in characters, not in bytes. Depending on your environment this may not always be the same (multibyte-characters, like in UTF8 encoding).
 
@@ -376,9 +376,9 @@ Example:
 Assume: ''array=(This is a text)''
 
   * ''echo ${#array[1]}''
-    * =&gt; 2 (the word &quot;is&quot; has a length of 2)
+    * => 2 (the word &quot;is&quot; has a length of 2)
   * ''echo ${#array[@]}''
-    * =&gt; 4 (the array contains 4 elements)
+    * => 4 (the array contains 4 elements)
 
 __**Attention:**__ The number of used elements does not need to conform to the highest index. Sparse arrays are possible in Bash, that means you can have 4 elements, but with indexes 1, 7, 20, 31. **You can't loop through such an array with a counter loop based on the number of elements!**
 
@@ -396,28 +396,28 @@ Example string (a quote from a big man):
 
 ==== Using only Offset ====
 In the first form, the expansion is used without a length value, note that the offset 0 is the first character:
-&lt;code&gt;echo ${MYSTRING:35}&lt;/code&gt;
-=&gt; ''&lt;del&gt;Be liberal in what you accept, and &lt;/del&gt;conservative in what you send''
+<code>echo ${MYSTRING:35}</code>
+=> ''<del>Be liberal in what you accept, and </del>conservative in what you send''
 
 ==== Using Offset and Length ====
 In the second form we also give a length value:
-&lt;code&gt;echo ${MYSTRING:35:12}&lt;/code&gt;
-=&gt; ''&lt;del&gt;Be liberal in what you accept, and &lt;/del&gt;conservative&lt;del&gt; in what you send&lt;/del&gt;''
+<code>echo ${MYSTRING:35:12}</code>
+=> ''<del>Be liberal in what you accept, and </del>conservative<del> in what you send</del>''
 
 ==== Negative Offset Value ====
 If the given offset is negative, it's counted from the end of the string, i.e. an offset of -1 is the last character. In that case, the length still counts forward, of course. One special thing is to do when using a negative offset: You need to separate the (negative) number from the colon:
-&lt;code&gt;
+<code>
 ${MYSTRING: -10:5}
 ${MYSTRING:(-10):5}
-&lt;/code&gt;
+</code>
 Why? Because it's interpreted as the parameter expansion syntax to [[syntax:pe#use_a_default_value | use a default value]].
 
 ==== Negative Length Value ====
 If the ''LENGTH'' value is negative, it's used as offset from the end of the string. The expansion happens from the first to the second offset then:
-&lt;code&gt;
+<code>
 echo &quot;${MYSTRING:11:-17}&quot;
-&lt;/code&gt;
-=&gt; ''&lt;del&gt;Be liberal &lt;/del&gt;in what you accept, and conservative&lt;del&gt; in what you send&lt;/del&gt;''
+</code>
+=> ''<del>Be liberal </del>in what you accept, and conservative<del> in what you send</del>''
 
 This works since Bash 4.2-alpha, see also [[scripting:bashchanges]].
 
@@ -434,9 +434,9 @@ Example:
 Assume: ''array=(This is a text)''
 
   * ''echo ${array[0]:2:2}''
-    * =&gt; ''is'' (the &quot;is&quot; in &quot;This&quot;, array element 0)
+    * => ''is'' (the &quot;is&quot; in &quot;This&quot;, array element 0)
   * ''echo ${array[@]:1:2}''
-    * =&gt; ''is a'' (from element 1 inclusive, 2 elements are expanded, i.e. element 1 and 2)
+    * => ''is a'' (from element 1 inclusive, 2 elements are expanded, i.e. element 1 and 2)
 
 ===== Use a default value =====
 
@@ -446,19 +446,19 @@ Assume: ''array=(This is a text)''
 
 If the parameter ''PARAMETER'' is unset (never was defined) or null (empty), this one expands to ''WORD'', otherwise it expands to the value of ''PARAMETER'', as if it just was ''${PARAMETER}''. If you omit the '':'' (colon), like shown in the second form, the default value is only used when the parameter was **unset**, not when it was empty.
 
-&lt;code&gt;
+<code>
 echo &quot;Your home directory is: ${HOME:-/home/$USER}.&quot;
 echo &quot;${HOME:-/home/$USER} will be used to store your personal data.&quot;
-&lt;/code&gt;
+</code>
 
 If ''HOME'' is unset or empty, everytime you want to print something useful, you need to put that parameter syntax in.
 
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 read -p &quot;Enter your gender (just press ENTER to not tell us): &quot; GENDER
 echo &quot;Your gender is ${GENDER:-a secret}.&quot;
-&lt;/code&gt;
+</code>
 
 It will print &quot;Your gender is a secret.&quot; when you don't enter the gender. Note that the default value is **used on expansion time**, it is **not assigned to the parameter**.
 
@@ -476,7 +476,7 @@ In other words: The basic meaning of this expansion type is applied as consisten
 
 Example code (please try the example cases yourself):
 
-&lt;code&gt;
+<code>
 
 ####
 # Example cases for unset/empty arrays and nullstring elements
@@ -512,7 +512,7 @@ array=(&quot;&quot; word)
 
 echo ${array[@]:-This array is NULL or unset}
 echo ${array[@]-This array is NULL or unset}
-&lt;/code&gt;
+</code>
 
 ===== Assign a default value =====
 
@@ -522,22 +522,22 @@ echo ${array[@]-This array is NULL or unset}
 
 This one works like the [[syntax:pe#use_a_default_value | using default values]], but the default text you give is not only expanded, but also **assigned** to the parameter, if it was unset or null. Equivalent to using a default value, when you omit the '':'' (colon), as shown in the second form, the default value will only be assigned when the parameter was **unset**.
 
-&lt;code&gt;
+<code>
 echo &quot;Your home directory is: ${HOME:=/home/$USER}.&quot;
 echo &quot;$HOME will be used to store your personal data.&quot;
-&lt;/code&gt;
+</code>
 
 After the first expansion here (''${HOME:=/home/$USER}''), ''HOME'' is set and usable.
 
 Let's change our code example from above:
 
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 read -p &quot;Enter your gender (just press ENTER to not tell us): &quot; GENDER
 echo &quot;Your gender is ${GENDER:=a secret}.&quot;
 echo &quot;Ah, in case you forgot, your gender is really: $GENDER&quot;
-&lt;/code&gt;
+</code>
 
 ==== Assign a default value: Arrays ====
 
@@ -550,21 +550,21 @@ For [[syntax:arrays|arrays]] this expansion type is limited. For an individual i
 ''${PARAMETER+WORD}''
 
 This form expands to nothing if the parameter is unset or empty. If it is set, it does not expand to the parameter's value, **but to some text you can specify**:
-&lt;code&gt;
+<code>
 echo &quot;The Java application was installed and can be started.${JAVAPATH:+ NOTE: JAVAPATH seems to be set}&quot;
-&lt;/code&gt;
+</code>
 The above code will simply add a warning if ''JAVAPATH'' is set (because it could influence the startup behaviour of that imaginary application).
 
 Some more unrealistic example... Ask for some flags (for whatever reason), and then, if they were set, print a warning and also print the flags:
-&lt;code&gt;
+<code>
 #!/bin/bash
 
 read -p &quot;If you want to use special flags, enter them now: &quot; SPECIAL_FLAGS
 echo &quot;The installation of the application is finished${SPECIAL_FLAGS:+ (NOTE: there are special flags set: $SPECIAL_FLAGS)}.&quot;
-&lt;/code&gt;
+</code>
 
 If you omit the colon, as shown in the second form (''${PARAMETER+WORD}''), the alternate value will be used if the parameter is set (and it can be empty)! You can use it, for example, to complain if variables you need (and that can be empty) are undefined:
-&lt;code&gt;
+<code>
 # test that with the three stages:
 
 # unset foo
@@ -576,7 +576,7 @@ if [[ ${foo+isset} = isset ]]; then
 else
   echo &quot;foo is not set...&quot;
 fi
-&lt;/code&gt;
+</code>
 
 ==== Use an alternate value: Arrays ====
 
@@ -596,10 +596,10 @@ For some cases to play with, please see the code examples in the [[#use_a_defaul
 ''${PARAMETER?WORD}''
 
 If the parameter ''PARAMETER'' is set/non-null, this form will simply expand it. Otherwise, the expansion of ''WORD'' will be used as appendix for an error message:
-&lt;code&gt;
+<code>
 $ echo &quot;The unset parameter is: ${p_unset?not set}&quot;
 bash: p_unset: not set
-&lt;/code&gt;
+</code>
 
 After printing this message,
   * an interactive shell has ''$?'' to a non-zero value
@@ -616,7 +616,7 @@ are taken into account.
 ==== Substring removal ====
 
 Removing the first 6 characters from a text string:
-&lt;code&gt;
+<code>
 STRING=&quot;Hello world&quot;
 
 # only print 'Hello'
@@ -627,69 +627,69 @@ echo &quot;${STRING#??????}&quot;
 
 # store it into the same variable
 STRING=${STRING#??????}
-&lt;/code&gt;
+</code>
 
 ===== Bugs and Portability considerations =====
 
-  * **Fixed in 4.2.36** ([[ftp://ftp.cwru.edu/pub/bash/bash-4.2-patches/bash42-036 | patch]]). Bash doesn't follow either POSIX or its own documentation when expanding either a quoted ''&quot;$@&quot;'' or ''&quot;${arr[@]}&quot;'' with an adjacent expansion. ''&quot;$@$x&quot;'' expands in the same way as ''&quot;$*$x&quot;'' - i.e. all parameters plus the adjacent expansion are concatenated into a single argument. As a workaround, each expansion needs to be quoted separately. Unfortunately, this bug took a very long time to notice.&lt;code&gt;
-~ $ set -- a b c; x=foo; printf '&lt;%s&gt; ' &quot;$@$x&quot; &quot;$*&quot;&quot;$x&quot; &quot;$@&quot;&quot;$x&quot;
-&lt;a b cfoo&gt; &lt;a b cfoo&gt; &lt;a&gt; &lt;b&gt; &lt;cfoo&gt;
-&lt;/code&gt;
+  * **Fixed in 4.2.36** ([[ftp://ftp.cwru.edu/pub/bash/bash-4.2-patches/bash42-036 | patch]]). Bash doesn't follow either POSIX or its own documentation when expanding either a quoted ''&quot;$@&quot;'' or ''&quot;${arr[@]}&quot;'' with an adjacent expansion. ''&quot;$@$x&quot;'' expands in the same way as ''&quot;$*$x&quot;'' - i.e. all parameters plus the adjacent expansion are concatenated into a single argument. As a workaround, each expansion needs to be quoted separately. Unfortunately, this bug took a very long time to notice.<code>
+~ $ set -- a b c; x=foo; printf '<%s> ' &quot;$@$x&quot; &quot;$*&quot;&quot;$x&quot; &quot;$@&quot;&quot;$x&quot;
+<a b cfoo> <a b cfoo> <a> <b> <cfoo>
+</code>
 
-  * Almost all shells disagree about the treatment of an unquoted ''$@'', ''${arr[@]}'', ''$*'', and ''${arr[*]}'' when [[http://mywiki.wooledge.org/IFS | IFS]] is set to null. POSIX is unclear about the expected behavior. A null IFS causes both [[syntax:expansion:wordsplit | word splitting]] and [[syntax:expansion:globs | pathname expansion]] to behave randomly. Since there are few good reasons to leave ''IFS'' set to null for more than the duration of a command or two, and even fewer to expand ''$@'' and ''$*'' unquoted, this should be a rare issue. **Always quote them**!&lt;code&gt;
+  * Almost all shells disagree about the treatment of an unquoted ''$@'', ''${arr[@]}'', ''$*'', and ''${arr[*]}'' when [[http://mywiki.wooledge.org/IFS | IFS]] is set to null. POSIX is unclear about the expected behavior. A null IFS causes both [[syntax:expansion:wordsplit | word splitting]] and [[syntax:expansion:globs | pathname expansion]] to behave randomly. Since there are few good reasons to leave ''IFS'' set to null for more than the duration of a command or two, and even fewer to expand ''$@'' and ''$*'' unquoted, this should be a rare issue. **Always quote them**!<code>
 touch x 'y z'
 for sh in bb {{d,b}a,{m,}k,z}sh; do
     echo &quot;$sh&quot;
-    &quot;$sh&quot; -s a 'b c' d \* &lt;/dev/fd/0
-done &lt;&lt;\EOF
-${ZSH_VERSION+:} false &amp;&amp; emulate sh
+    &quot;$sh&quot; -s a 'b c' d \* </dev/fd/0
+done <<\EOF
+${ZSH_VERSION+:} false && emulate sh
 IFS=
-printf '&lt;%s&gt; ' $*
+printf '<%s> ' $*
 echo
-printf &quot;&lt;%s&gt; &quot; $@
+printf &quot;<%s> &quot; $@
 echo
 EOF
-&lt;/code&gt;&lt;code&gt;
+</code><code>
 bb
-&lt;ab cd*&gt;
-&lt;ab cd*&gt;
+<ab cd*>
+<ab cd*>
 dash
-&lt;ab cd*&gt;
-&lt;ab cd*&gt;
+<ab cd*>
+<ab cd*>
 bash
-&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
-&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+<a> <b c> <d> <x> <y z>
+<a> <b c> <d> <x> <y z>
 mksh
-&lt;a b c d *&gt;
-&lt;a b c d *&gt;
+<a b c d *>
+<a b c d *>
 ksh
-&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
-&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
+<a> <b c> <d> <x> <y z>
+<a> <b c> <d> <x> <y z>
 zsh
-&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
-&lt;a&gt; &lt;b c&gt; &lt;d&gt; &lt;x&gt; &lt;y z&gt;
-&lt;/code&gt;When ''IFS'' is set to a non-null value, or unset, all shells behave the same - first expanding into separate args, then applying pathname expansion and word-splitting to the results, except for zsh, which doesn't do pathname expansion in its default mode.
+<a> <b c> <d> <x> <y z>
+<a> <b c> <d> <x> <y z>
+</code>When ''IFS'' is set to a non-null value, or unset, all shells behave the same - first expanding into separate args, then applying pathname expansion and word-splitting to the results, except for zsh, which doesn't do pathname expansion in its default mode.
 
-  * Additionally, shells disagree about various wordsplitting behaviors, the behavior of inserting delimiter characters from IFS in ''$*'', and the way adjacent arguments are concatenated, when IFS is modified in the middle of expansion through side-effects.&lt;code&gt;
+  * Additionally, shells disagree about various wordsplitting behaviors, the behavior of inserting delimiter characters from IFS in ''$*'', and the way adjacent arguments are concatenated, when IFS is modified in the middle of expansion through side-effects.<code>
 for sh in bb {{d,b}a,po,{m,}k,z}sh; do
     printf '%-4s: ' &quot;$sh&quot;
-    &quot;$sh&quot; &lt;/dev/fd/0
-done &lt;&lt;\EOF
-${ZSH_VERSION+:} false &amp;&amp; emulate sh
+    &quot;$sh&quot; </dev/fd/0
+done <<\EOF
+${ZSH_VERSION+:} false && emulate sh
 set -f -- a b c
 unset -v IFS
-printf '&lt;%s&gt; ' ${*}${IFS=}${*}${IFS:=-}&quot;${*}&quot;
+printf '<%s> ' ${*}${IFS=}${*}${IFS:=-}&quot;${*}&quot;
 echo
 EOF
-&lt;/code&gt;&lt;code&gt;
-bb  : &lt;a b cabc&gt; &lt;a-b-c&gt;
-dash: &lt;a b cabc&gt; &lt;a-b-c&gt;
-bash: &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c-a b c&gt;
-posh: &lt;a&gt; &lt;b&gt; &lt;ca b c&gt; &lt;a-b-c&gt;
-mksh: &lt;a&gt; &lt;b&gt; &lt;ca b c&gt; &lt;a-b-c&gt;
-ksh : &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c&gt; &lt;a b c&gt;
-zsh : &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c&gt; &lt;a-b-c&gt;
-&lt;/code&gt;ksh93 and mksh can additionally achieve this side effect (and others) via the ''${ cmds;}'' expansion. I haven't yet tested every possible side-effect that can affect expansion halfway through expansion that way.
+</code><code>
+bb  : <a b cabc> <a-b-c>
+dash: <a b cabc> <a-b-c>
+bash: <a> <b> <ca> <b> <c-a b c>
+posh: <a> <b> <ca b c> <a-b-c>
+mksh: <a> <b> <ca b c> <a-b-c>
+ksh : <a> <b> <ca> <b> <c> <a b c>
+zsh : <a> <b> <ca> <b> <c> <a-b-c>
+</code>ksh93 and mksh can additionally achieve this side effect (and others) via the ''${ cmds;}'' expansion. I haven't yet tested every possible side-effect that can affect expansion halfway through expansion that way.
 
   * As previously mentioned, the Bash form of indirection by prefixing a parameter expansion with a ''!'' conflicts with the same syntax used by mksh, zsh, and ksh93 for a different purpose. Bash will &quot;slightly&quot; modify this expansion in the next version with the addition of namerefs.
 
@@ -697,48 +697,48 @@ zsh : &lt;a&gt; &lt;b&gt; &lt;ca&gt; &lt;b&gt; &lt;c&gt; &lt;a-b-c&gt;
 
   * In ksh93, the ''_'' parameter has even more uses. It is used in the same way as ''self'' in some object-oriented languages; as a placeholder for some data local to a class; and also as the mechanism for class inheritance. In most other contexts, ''_'' is compatible with Bash.
 
-  * Bash only evaluates the subscripts of the slice expansion (''${x:y:z}'') if the parameter is set (for both nested expansions and arithmetic). For ranges, Bash evaluates as little as possible, i.e., if the first part is out of range, the second won't be evaluated. ksh93 and mksh always evaluate the subscript parts even if the parameter is unset. &lt;code&gt;
- $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=(); echo &quot;${x[@]:n,6:m}&quot;' # No output
- $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=([5]=hi); echo &quot;${x[@]:n,6:m}&quot;'
+  * Bash only evaluates the subscripts of the slice expansion (''${x:y:z}'') if the parameter is set (for both nested expansions and arithmetic). For ranges, Bash evaluates as little as possible, i.e., if the first part is out of range, the second won't be evaluated. ksh93 and mksh always evaluate the subscript parts even if the parameter is unset. <code>
+ $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=(); echo &quot;${x[@]:n,6:m}&quot;' # No output
+ $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=([5]=hi); echo &quot;${x[@]:n,6:m}&quot;'
 yo
- $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=([6]=hi); echo &quot;${x[@]:n,6:m}&quot;'
+ $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=([6]=hi); echo &quot;${x[@]:n,6:m}&quot;'
 yojo
- $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=12345; echo &quot;${x:n,5:m}&quot;'
+ $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=12345; echo &quot;${x:n,5:m}&quot;'
 yojo
- $ bash -c 'n=&quot;y[\$(printf yo &gt;&amp;2)1]&quot; m=&quot;y[\$(printf jo &gt;&amp;2)1]&quot;; x=12345; echo &quot;${x:n,6:m}&quot;'
+ $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=12345; echo &quot;${x:n,6:m}&quot;'
 yo
-&lt;/code&gt;
+</code>
 
 ==== Quote Nesting ====
 
   * In most shells, when dealing with an &quot;alternate&quot; parameter expansion that expands to multiple words, and nesting such expansions, not all combinations of nested quoting are possible.
-&lt;code&gt;
+<code>
 # Bash
  $ typeset -a a=(meh bleh blerg) b
  $ IFS=e
- $ printf &quot;&lt;%s&gt; &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot;; echo # The entire PE is quoted so Bash considers the inner quotes redundant.
-&lt;meh&gt; &lt;bleh&gt; &lt;blerg meh&gt; &lt;bleh&gt; &lt;blerg&gt;
- $ printf &quot;&lt;%s&gt; &quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # The outer quotes cause the inner expansions to be considered quoted.
-&lt;meh&gt; &lt;bleh&gt; &lt;blerg meh&gt; &lt;bleh&gt; &lt;blerg&gt;
+ $ printf &quot;<%s> &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot;; echo # The entire PE is quoted so Bash considers the inner quotes redundant.
+<meh> <bleh> <blerg meh> <bleh> <blerg>
+ $ printf &quot;<%s> &quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # The outer quotes cause the inner expansions to be considered quoted.
+<meh> <bleh> <blerg meh> <bleh> <blerg>
  $ b=(meep beep)
- $ printf &quot;&lt;%s&gt; &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # Again no surprises. Outer quotes quote everything recursively.
-&lt;meep&gt; &lt;beep&gt; &lt;meep&gt; &lt;beep&gt;
-&lt;/code&gt;
+ $ printf &quot;<%s> &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # Again no surprises. Outer quotes quote everything recursively.
+<meep> <beep> <meep> <beep>
+</code>
 
 Now lets see what can happen if we leave the outside unquoted.
-&lt;code&gt;
+<code>
 # Bash
  $ typeset -a a=(meh bleh blerg) b
  $ IFS=e
- $ printf &quot;&lt;%s&gt; &quot; ${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}; echo # Inner quotes make inner expansions quoted.
-&lt;meh&gt; &lt;bleh&gt; &lt;blerg meh&gt; &lt;bleh&gt; &lt;blerg&gt;
- $ printf &quot;&lt;%s&gt; &quot; ${b[@]-${a[@]} ${a[@]}}; echo' # No quotes at all wordsplits / globs, like you'd expect.
-&lt;m&gt; &lt;h&gt; &lt;bl&gt; &lt;h&gt; &lt;bl&gt; &lt;rg m&gt; &lt;h&gt; &lt;bl&gt; &lt;h&gt; &lt;bl&gt; &lt;rg&gt;
-&lt;/code&gt;
+ $ printf &quot;<%s> &quot; ${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}; echo # Inner quotes make inner expansions quoted.
+<meh> <bleh> <blerg meh> <bleh> <blerg>
+ $ printf &quot;<%s> &quot; ${b[@]-${a[@]} ${a[@]}}; echo' # No quotes at all wordsplits / globs, like you'd expect.
+<m> <h> <bl> <h> <bl> <rg m> <h> <bl> <h> <bl> <rg>
+</code>
 
 This all might be intuitive, and is the most common implementation, but this design sucks for a number of reasons. For one, it means Bash makes it absolutely impossible to expand any part of the inner region //unquoted// while leaving the outer region quoted. Quoting the outer forces quoting of the inner regions recursively (except nested command substitutions of course). Word-splitting is necessary to split words of the inner region, which cannot be done together with outer quoting. Consider the following (only slightly far-fetched) code:
 
-&lt;code&gt;
+<code>
 # Bash (non-working example)
 
 unset -v IFS # make sure we have a default IFS
@@ -754,7 +754,7 @@ typeset -a otherArgs=(arg3 arg4)
 # What do you think will actually happen...
 
 &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5
-&lt;/code&gt;
+</code>
 
 This final line is perhaps not the most obvious, but I've run into cases were this type of logic can be desirable and realistic. We can deduce what was intended:
 
@@ -763,40 +763,40 @@ This final line is perhaps not the most obvious, but I've run into cases were th
 
 Unfortunately, it is impossible to get the intended result in Bash (and most other shells) without taking a considerably different approach. The only way to split the literal inner parts is through word-splitting, which requires that the PE be unquoted. But, the only way to expand the outer expansion correctly without word-splitting or globbing is to quote it. Bash will actually expand the command as one of these:
 
-&lt;code&gt;
+<code>
 # The quoted PE produces a correct result here...
- $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
-&lt;myCmd&gt; &lt;arg1&gt; &lt;arg2 yay!&gt; &lt;third*arg*&gt; &lt;4&gt; &lt;arg5&gt;
+ $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
+<myCmd> <arg1> <arg2 yay!> <third*arg*> <4> <arg5>
 
 # ...but in the opposite case the first 3 arguments are glued together. There are no workarounds.
- $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
-&lt;mycommand arg2 arg3&gt; &lt;arg4&gt; &lt;arg5&gt;
+ $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
+<mycommand arg2 arg3> <arg4> <arg5>
 
 # UNLESS! we unquote the outer expansion allowing the inner quotes to
 # affect the necessary parts while allowing word-splitting to split the literals:
- $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;&lt;%s&gt; &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
-&lt;mycommand&gt; &lt;arg2&gt; &lt;arg3&gt; &lt;arg4&gt; &lt;arg5&gt;
+ $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;<%s> &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
+<mycommand> <arg2> <arg3> <arg4> <arg5>
 
 # Success!!!
- $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;&lt;%s&gt; &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
-&lt;myCmd&gt; &lt;arg1&gt; &lt;arg2&gt; &lt;yay!&gt; &lt;third*arg*&gt; &lt;4&gt; &lt;arg5&gt;
+ $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;<%s> &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
+<myCmd> <arg1> <arg2> <yay!> <third*arg*> <4> <arg5>
 
 # ...Ah f^^k. (again, no workaround possible.)
-&lt;/code&gt;
+</code>
 
 === The ksh93 exception ===
 To the best of my knowledge, ksh93 is the only shell that acts differently. Rather than forcing nested expansions into quoting, a quote at the beginning and end of the nested region will cause the quote state to reverse itself within the nested part. I have no idea whether it's an intentional or documented effect, but it does solve the problem and consequently adds a lot of potential power to these expansions.
 
 All we need to do is add two extra double-quotes:
-&lt;code&gt;
+<code>
 # ksh93 passing the two failed tests from above:
 
- $ ksh -c 'otherArgs=(arg3 arg4); someOtherCmd=&quot;mycommand&quot;; printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
-&lt;mycommand&gt; &lt;arg2&gt; &lt;arg3&gt; &lt;arg4&gt; &lt;arg5&gt;
+ $ ksh -c 'otherArgs=(arg3 arg4); someOtherCmd=&quot;mycommand&quot;; printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
+<mycommand> <arg2> <arg3> <arg4> <arg5>
 
- $ ksh -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;&lt;%s&gt; &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
-&lt;myCmd&gt; &lt;arg1&gt; &lt;arg2 yay!&gt; &lt;third*arg*&gt; &lt;4&gt; &lt;arg5&gt;
-&lt;/code&gt;
+ $ ksh -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
+<myCmd> <arg1> <arg2 yay!> <third*arg*> <4> <arg5>
+</code>
 
 This can be used to control the quote state of any part of any expansion to an arbitrary depth. Sadly, it is the only shell that does this and the difference may introduce a possible compatibility problem.
 ===== See also =====

@@ -2,17 +2,17 @@ Comments extracted from the bash source and therefore Copyright (C) 1987-2004 Fr
 the terms of the GNU General Public License etc..
 
 from  ''mailcheck.c'':
-&lt;code C&gt;
+<code C>
 /* check_mail () is useful for more than just checking mail.  Since it has
    the paranoids dream ability of telling you when someone has read your
    mail, it can just as easily be used to tell you when someones .profile
    file has been read, thus letting one know when someone else has logged
    in.  Pretty good, huh? */
-&lt;/code&gt;
+</code>
 
 From  ''builtins/read.def'':
 
-&lt;code C&gt;
+<code C>
  /* If there are no variables, save the text of the line read to the
      variable $REPLY.  ksh93 strips leading and trailing IFS whitespace,
      so that `read x ; echo &quot;$x&quot;' and `read ; echo &quot;$REPLY&quot;' behave the
@@ -21,10 +21,10 @@ From  ''builtins/read.def'':
      to read a line completely without interpretation or modification
      unless you mess with $IFS (e.g., setting it to the empty string).
      If you disagree, change the occurrences of `#if 0' to `#if 1' below. */
-&lt;/code&gt;
+</code>
 
 from ''variables.c'':
-&lt;code C&gt;
+<code C>
      /*
       * 24 October 2001
       *
@@ -35,10 +35,10 @@ from ''variables.c'':
       * I've made that behavior conditional on SSH_SOURCE_BASHRC being defined
       * in config-top.h.
       */
-&lt;/code&gt;
+</code>
 
 From ''shell.h'':
-&lt;code C&gt;
+<code C>
 /* Values that can be returned by execute_command (). */
 #define EXECUTION_FAILURE 1
 #define EXECUTION_SUCCESS 0
@@ -54,12 +54,12 @@ From ''shell.h'':
 #define EX_NOINPUT      126
 #define EX_NOTFOUND     127
 
-#define EX_SHERRBASE    256     /* all special error values are &gt; this. */
+#define EX_SHERRBASE    256     /* all special error values are > this. */
 
 #define EX_BADSYNTAX    257     /* shell syntax error */
 #define EX_USAGE        258     /* syntax error in usage */
 #define EX_REDIRFAIL    259     /* redirection failed */
 #define EX_BADASSIGN    260     /* variable assignment error */
 #define EX_EXPFAIL      261     /* word expansion failed */
-&lt;/code&gt;
+</code>
 

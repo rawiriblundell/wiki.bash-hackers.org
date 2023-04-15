@@ -1,16 +1,16 @@
 ====== The kill builtin command ======
 
 ===== Synopsis =====
-&lt;code&gt;kill [-s SIGNAL | -n SIGNALNUMBER | -SIGNAL] PID|JOB&lt;/code&gt;
-&lt;code&gt;kill -l|-L [SIGNAL...]&lt;/code&gt;
+<code>kill [-s SIGNAL | -n SIGNALNUMBER | -SIGNAL] PID|JOB</code>
+<code>kill -l|-L [SIGNAL...]</code>
 
 ===== Description =====
 The ''kill'' command is used to send signals to processes specified by their ''PID'' or their ''JOB''-specification.
 
 The signal(s) to be specified can have the following formats:
   * Numerical: The signal is specified using its constant numeric value. Be aware that not all systems have identical numbers for the signals.
-  * Symbolic (long): The signal is specified using the same name that is used for the constant/macro in the C API (''SIG&lt;name&gt;'')
-  * Symbolic (short): The signal is specified using the name from the C API without the ''SIG''-prefix (''&lt;name&gt;'')
+  * Symbolic (long): The signal is specified using the same name that is used for the constant/macro in the C API (''SIG<name>'')
+  * Symbolic (short): The signal is specified using the name from the C API without the ''SIG''-prefix (''<name>'')
 
 Without any specified signal, the command sends the ''SIGTERM''-signal.
 
@@ -39,23 +39,23 @@ The ''kill'' command is a Bash builtin command instead of relying on the externa
 
 ==== List supported signals ====
 
-&lt;code&gt;
+<code>
 kill -l
-&lt;/code&gt;
+</code>
 
 ==== Send KILL to a process ID ====
 
-&lt;code&gt;
+<code>
 kill -9 12345
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 kill -KILL 12345
-&lt;/code&gt;
+</code>
 
-&lt;code&gt;
+<code>
 kill -SIGKILL 12345
-&lt;/code&gt;
+</code>
 
 ===== Portability considerations =====
 

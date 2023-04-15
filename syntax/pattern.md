@@ -1,6 +1,6 @@
 ====== Patterns and pattern matching ======
 
-{{keywords&gt;bash shell scripting glob globbing wildcards filename pattern matching}}
+{{keywords>bash shell scripting glob globbing wildcards filename pattern matching}}
 
 A pattern is a **string description**. Bash uses them in various ways:
   * [[syntax:expansion:globs | Pathname expansion]] (Globbing - matching filenames)
@@ -30,12 +30,12 @@ The bracket expression ''[...]'' mentioned above has some useful applications:
 ^Bracket expression^Description^
 |''[XYZ]''|The &quot;normal&quot; bracket expression, matching either ''X'', ''Y'' or ''Z''|
 |''[X-Z]''|A range expression: Matching all the characters from ''X'' to ''Y'' (your current **locale**, defines how the characters are **sorted**!)|
-|''&lt;nowiki&gt;[[:class:]]&lt;/nowiki&gt;''|Matches all the characters defined by a [[https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap07.html#tag_07_03_01|POSIX(r) character class]]: ''alnum'', ''alpha'', ''ascii'', ''blank'', ''cntrl'', ''digit'', ''graph'', ''lower'', ''print'', ''punct'', ''space'', ''upper'', ''word'' and ''xdigit''|
+|''<nowiki>[[:class:]]</nowiki>''|Matches all the characters defined by a [[https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap07.html#tag_07_03_01|POSIX(r) character class]]: ''alnum'', ''alpha'', ''ascii'', ''blank'', ''cntrl'', ''digit'', ''graph'', ''lower'', ''print'', ''punct'', ''space'', ''upper'', ''word'' and ''xdigit''|
 |''[^...]''|A negating expression: It matches all the characters that are **not** in the bracket expression|
 |''[!...]''|Equivalent to ''[^...]''|
-|''&lt;nowiki&gt;[]...]&lt;/nowiki&gt;'' or ''[-...]''|Used to include the characters '']'' and ''-'' into the set, they need to be the first characters after the opening bracket|
+|''<nowiki>[]...]</nowiki>'' or ''[-...]''|Used to include the characters '']'' and ''-'' into the set, they need to be the first characters after the opening bracket|
 |''[=C=]''|Matches any character that is eqivalent to the collation weight of ''C'' (current locale!)|
-|''&lt;nowiki&gt;[[.SYMBOL.]]&lt;/nowiki&gt;''|Matches the collating symbol ''SYMBOL''|
+|''<nowiki>[[.SYMBOL.]]</nowiki>''|Matches the collating symbol ''SYMBOL''|
 
 
 
@@ -47,37 +47,37 @@ Some simple examples using normal pattern matching:
   * Pattern ''&quot;Hello world&quot;'' matches
     * ''Hello world''
   * Pattern ''[Hh]&quot;ello world&quot;'' matches
-    * =&gt; ''Hello world''
-    * =&gt; ''hello world''
+    * => ''Hello world''
+    * => ''hello world''
   * Pattern ''Hello*'' matches (for example)
-    * =&gt; ''Hello world''
-    * =&gt; ''Helloworld''
-    * =&gt; ''HelloWoRlD''
-    * =&gt; ''Hello''
-  * Pattern ''Hello world&lt;nowiki&gt;[[:punct:]]&lt;/nowiki&gt;'' matches (for example)
-    * =&gt; ''Hello world!''
-    * =&gt; ''Hello world.''
-    * =&gt; ''Hello world+''
-    * =&gt; ''Hello world?''
-  * Pattern ''&lt;nowiki&gt;[[.backslash.]]Hello[[.vertical-line.]]world[[.exclamation-mark.]]&lt;/nowiki&gt;'' matches (using [[https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap07.html#tag_07_03_02_04|collation symbols]])
-    * =&gt; ''\Hello|world!''
+    * => ''Hello world''
+    * => ''Helloworld''
+    * => ''HelloWoRlD''
+    * => ''Hello''
+  * Pattern ''Hello world<nowiki>[[:punct:]]</nowiki>'' matches (for example)
+    * => ''Hello world!''
+    * => ''Hello world.''
+    * => ''Hello world+''
+    * => ''Hello world?''
+  * Pattern ''<nowiki>[[.backslash.]]Hello[[.vertical-line.]]world[[.exclamation-mark.]]</nowiki>'' matches (using [[https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap07.html#tag_07_03_02_04|collation symbols]])
+    * => ''\Hello|world!''
 
 ===== Extended pattern language =====
 
-If you set the [[internals:shell_options | shell option]] ''extglob'', Bash understands some powerful patterns. A ''&lt;PATTERN-LIST&gt;'' is one or more patterns, separated by the pipe-symbol (''PATTERN|PATTERN'').
+If you set the [[internals:shell_options | shell option]] ''extglob'', Bash understands some powerful patterns. A ''<PATTERN-LIST>'' is one or more patterns, separated by the pipe-symbol (''PATTERN|PATTERN'').
 
-|''?(&lt;PATTERN-LIST&gt;)''|Matches **zero or one** occurrence of the given patterns|
-|''*(&lt;PATTERN-LIST&gt;)''|Matches **zero or more** occurrences of the given patterns|
-|''+(&lt;PATTERN-LIST&gt;)''|Matches **one or more** occurrences of the given patterns|
-|''@(&lt;PATTERN-LIST&gt;)''|Matches **one** of the given patterns|
-|''!(&lt;PATTERN-LIST&gt;)''|Matches anything **except** one of the given patterns|
+|''?(<PATTERN-LIST>)''|Matches **zero or one** occurrence of the given patterns|
+|''*(<PATTERN-LIST>)''|Matches **zero or more** occurrences of the given patterns|
+|''+(<PATTERN-LIST>)''|Matches **one or more** occurrences of the given patterns|
+|''@(<PATTERN-LIST>)''|Matches **one** of the given patterns|
+|''!(<PATTERN-LIST>)''|Matches anything **except** one of the given patterns|
 
 ==== Examples ====
 
 **__Delete all but one specific file__**
-&lt;code&gt;
+<code>
 rm -f !(survivior.txt)
-&lt;/code&gt;
+</code>
 
 ===== Pattern matching configuration =====
 
@@ -110,7 +110,7 @@ ksh93 supports some very powerful pattern matching features in addition to those
 
  * ksh93 supports arbitrary quantifiers just like ERE using the ''{from,to}(pattern-list)'' syntax. ''{2,4}(foo)bar'' matches between 2-4 &quot;foo&quot;'s followed by &quot;bar&quot;. ''{2,}(foo)bar'' matches 2 or more &quot;foo&quot;'s followed by &quot;bar&quot;. You can probably figure out the rest. So far, none of the other shells support this syntax.
 
- * In ksh93, a ''pattern-list'' may be delimited by either ''&amp;'' or ''|''. ''&amp;'' means &quot;all patterns must be matched&quot; instead of &quot;any pattern&quot;. For example, &lt;code&gt;[[ fo0bar == @(fo[0-9]&amp;+([[:alnum:]]))bar ]]&lt;/code&gt; would be true while &lt;code&gt;[[ f00bar == @(fo[0-9]&amp;+([[:alnum:]]))bar ]]&lt;/code&gt; is false, because all members of the and-list must be satisfied. No other shell supports this so far, but you can simulate some cases in other shells using double extglob negation. The aforementioned ksh93 pattern is equivalent in Bash to: &lt;code&gt;[[ fo0bar == !(!(fo[0-9])|!(+([[:alnum:]])))bar ]]&lt;/code&gt;, which is technically more portable, but ugly.
+ * In ksh93, a ''pattern-list'' may be delimited by either ''&'' or ''|''. ''&'' means &quot;all patterns must be matched&quot; instead of &quot;any pattern&quot;. For example, <code>[[ fo0bar == @(fo[0-9]&+([[:alnum:]]))bar ]]</code> would be true while <code>[[ f00bar == @(fo[0-9]&+([[:alnum:]]))bar ]]</code> is false, because all members of the and-list must be satisfied. No other shell supports this so far, but you can simulate some cases in other shells using double extglob negation. The aforementioned ksh93 pattern is equivalent in Bash to: <code>[[ fo0bar == !(!(fo[0-9])|!(+([[:alnum:]])))bar ]]</code>, which is technically more portable, but ugly.
 
  * ksh93's [[commands/builtin/printf|printf]] builtin can translate from shell patterns to ERE and back again using the ''%R'' and ''%P'' format specifiers respectively.
 

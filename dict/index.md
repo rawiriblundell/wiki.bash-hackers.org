@@ -7,4 +7,4 @@ This small dictionary is not meant as complete super online computer and UNIX(r)
 To get a full description, you should query a real UNIX(r) dictionary or FAQ, this is just for the most important concepts.
 
 
-{{pagequery&gt;@terms *;sort=a,name;group;proper;cols=3}}
+{{pagequery>@terms *;sort=a,name;group;proper;cols=3}}
