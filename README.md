@@ -6,7 +6,9 @@ This is targeting pages that have been captured by the Wayback Machine that spec
 See the incomplete script "archive_crawler" to see my working.
 
 - TODO: Markdown linting
+- TODO: Markdown conversion from Dokuwiki "Markup" to GitHub "Markdown" using pandoc
 - TODO: Parse the already downloaded files for any missing links
+- TODO: Rinse and repeat
 
 ## Extracting the markdown
 So the pages that have `'?do-edit'` on the end of their URL appear to have a reliable and predictable structure:
