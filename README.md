@@ -1,21 +1,44 @@
 # wiki.bash-hackers.org
 Extraction of wiki.bash-hackers.org from the Wayback Machine
 
-This is targeting pages that have been captured by the Wayback Machine that specifically have '?do=edit' on the end of their URL.  This gives us the markdown source.
+This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  This gives us the markdown source.
 
 See the incomplete script "archive_crawler" to see my working.
 
-- TODO: Second crawl
-- TODO: Filter out all the non-markdown garbage.  It looks like everything up to `<div class="editBox" role="application">`, and everything after `</div><!-- /content --></div>` is a good first cull.
+- TODO: Markdown linting
+- TODO: Parse the already downloaded files for any missing links
 
-# LICENSE
+## Extracting the markdown
+So the pages that have `'?do-edit'` on the end of their URL appear to have a reliable and predictable structure:
+
+```bash
+[ LINES ABOVE REMOVED FOR BREVITY ]
+    <div class="toolbar group">
+        <div id="draft__status" class="draft__status"></div>
+        <div id="tool__bar" class="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
+<input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="wishes"/>[REST OF LINE REMOVED FOR BREVITY]
+
+[ TARGET MARKDOWN CODE EXISTS HERE]
+
+</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+[ LINES BELOW REMOVED FOR BREVITY ]
+```
+
+So basically, we remove everything from the first line to the line that contains `name="sectok"`, and then we remove everything after `</textarea>`, and what's left should be the markdown that we want.
+
+## LICENSE
 
 As per the original wiki.bash-hackers.org:
 
 > Except where otherwise noted, content on this wiki is licensed under the following license:
 > [GNU Free Documentation License 1.3](https://web.archive.org/web/20220930131429/http://www.gnu.org/licenses/fdl-1.3.html)
 
-# COPYRIGHT
+## COPYRIGHT
 
 The original copyright belongs to Jan Schampera (TheBonsai) and subsequent contributors, 2007 - 2023.
 
