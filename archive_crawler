@@ -2,6 +2,11 @@
 # An incomplete script, more like notes really, for grabbing a
 # copy of wiki.bash-hackers.org from archive.org
 
+# This works by targeting pages that have been captured by the Wayback Machine 
+# that specifically have '?do=edit' on the end of their URL.
+# These pages present the original markdown source of the respective page.
+# So with a little massaging, we should be able to extract said markdown.
+
 # Where are we playing on the local file system?
 basedir="${HOME}/git/wiki.bash-hackers.org"
 
@@ -50,7 +55,7 @@ get_wayback_target() {
     # Create the path, ensuring that we strip the leading slash just-in-case e.g. /howto -> howto
     mkdir -p "${basedir:?FATAL - basedir unset}/${target_dirname/\//}"
     # Download the remote target to the local path
-    curl -s -X GET "${remote_target}" > "./${target_path}"
+    curl -s -X GET "${remote_target}" | extract_markdown - > "./${target_path}.md"
 }
 
 # We want to pull internal-wiki links out of the markdown fragments.  These look like
@@ -73,6 +78,17 @@ scrape_targets() {
         tr ':' '/'
 }
 
+# Because of the structure of the downloaded files,
+# we should be able to reliably extract our target markdown.
+# First, remove everything between the first line and 'name="sectok"'
+# Next, remove everything after '</textarea>'
+# This should remove everything above and below our desired markdown
+extract_markdown() {
+    sed -e '1,/name="sectok"/d' -e '/<\/textarea>/,$d' "${1:-/dev/stdin}"
+}
+
+###### Beyond this point things get a little wishy-washy ######
+
 (
     cd "${basedir}" || exit 1
 
@@ -81,14 +97,18 @@ scrape_targets() {
         get_wayback_target https://web.archive.org/web/20220930131429/https://wiki.bash-hackers.org/start?do=edit
     fi
 
+    # Extract a list of targets from the start page
     while read -r; do
-        prepend https://wiki.bash-hackers.org "${REPLY}"
+        prepend "https://wiki.bash-hackers.org" "${REPLY}"
     done < <(scrape_targets start) > raw_targets
 
+    # For each scraped target, validate that they're available from archive.org
+    # and in doing so, generate a list of the urls for the latest captures of each
     while read -r; do
         check_wayback_availability "${REPLY}"
     done < raw_targets > waybacktargets
 
+    # Work through each of the above urls
     while read -r; do
         get_wayback_target "${REPLY}"
     done < waybacktargets
