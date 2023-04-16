@@ -7,6 +7,16 @@
 # These pages present the original Dokuwiki Markup source of the respective page.
 # So with a little massaging, we should be able to extract said Dokuwiki Markup.
 
+# Ensure we have our required commands, otherwise fail early
+cmd_err=0
+for cmd in grep sed tr sort uniq mkdir curl jq pandoc; do
+    if ! command -v "${cmd}" >/dev/null 2>&1; then
+        printf -- '%s\n' "This script requires ${cmd} but it was not found in PATH." >&2
+        (( cmd_err++ ))
+    fi
+done
+(( cmd_err > 0 )) && exit 1
+
 # Where are we playing on the local file system?
 basedir="${HOME}/git/wiki.bash-hackers.org"
 
@@ -50,11 +60,19 @@ get_wayback_target() {
     # Strip out everything after 'bash-hackers.org' and '?do=edit' e.g.
     # http://web.archive.org/web/20220615023742/https://wiki.bash-hackers.org/howto/mutex?do=edit -> /howto/mutex
     target_path="$(sed -n 's/.*bash-hackers.org//p' <<< "${remote_target}" | sed -e 's/?do=edit//')"
+
+    # If we already have it, bounce out
+    if [[ -f "./${target_path}.markup" ]]; then
+        printf -- '%s\n' "./${target_path}.markup appears to already exist.  Remove it and re-run this script to force a fresh download."
+        return 0
+    fi
+
     # Get the dirname e.g. /howto/mutex?do=edit -> /howto
     target_dirname="$(dirname "${target_path}")"
     # Create the path, ensuring that we strip the leading slash just-in-case e.g. /howto -> howto
     mkdir -p "${basedir:?FATAL - basedir unset}/${target_dirname/\//}"
     # Download the remote target to the local path
+    printf -- '%s\n' "Retrieving into ./${target_path}.markup"
     curl -s -X GET "${remote_target}" | extract_markup - > "./${target_path}.markup"
 }
 
@@ -68,14 +86,18 @@ get_wayback_target() {
 # Then we grep out just the link substrings
 # Then we filter out friendly names (this could be brutally tidied up, it's late and I'm lazy right now)
 # Then we append "/?do=edit/"
+# Then we filter out unwanted garbage one last time
 scrape_targets() {
     local source_file
     source_file="${1:?No target specified}"
-    grep "\[\[" "${source_file}" |
-        grep -v "\[\[http" |
-        grep -o "\[\[.*\]\]" |
-        sed -e 's/ | .*\]\]/]]/g' -e 's/| .*\]\]/]]/g' -e 's/|.*\]\]/]]/g' -e 's/\[\[/\//g' -e 's/\]\]/?do=edit/g' |
-        tr ':' '/'
+    for source_file in "${@}"; do
+        grep "\[\[" "${source_file}" |
+            grep -v "\[\[http" |
+            grep -o "\[\[.*\]\]" |
+            sed -e 's/ | .*\]\]/]]/g' -e 's/| .*\]\]/]]/g' -e 's/|.*\]\]/]]/g' -e 's/\[\[/\//g' -e 's/\]\]/?do=edit/g' |
+            tr ':' '/' |
+            grep -Ev '==|!=|\$|#|/ |nowiki|ftp'
+    done
 }
 
 # Because of the structure of the downloaded files,
@@ -94,14 +116,14 @@ extract_markup() {
     cd "${basedir}" || exit 1
 
     # If it's not already here, get the start page
-    if [[ ! -f start ]]; then
+    if [[ ! -f start.markup ]]; then
         get_wayback_target https://web.archive.org/web/20220930131429/https://wiki.bash-hackers.org/start?do=edit
     fi
 
     # Extract a list of targets from the start page
     while read -r; do
         prepend "https://wiki.bash-hackers.org" "${REPLY}"
-    done < <(scrape_targets start) > raw_targets
+    done < <(scrape_targets start.markup) > raw_targets
 
     # For each scraped target, validate that they're available from archive.org
     # and in doing so, generate a list of the urls for the latest captures of each
@@ -113,9 +135,25 @@ extract_markup() {
     while read -r; do
         get_wayback_target "${REPLY}"
     done < waybacktargets
-)
 
-# Convert from dokuwiki markup to github markdown
-while read -r; do
-    pandoc --from dokuwiki --to gfm --toc --no-highlight "${REPLY}" > "${REPLY/.markup/}.md"
-done < <(find . -name "*.markup")
+    # Now we parse through the .markup files and try to generate a fresh list of raw_targets
+    # With extglob, this would be
+    # scrape_targets **/*.markup | sort | uniq
+    while read -r; do
+        scrape_targets "${REPLY}"
+    done < <(find . -name "*.markup") | sort | uniq > raw_targets
+
+    # And as before, we generate a list of targets and retrieve them
+    while read -r; do
+        check_wayback_availability "${REPLY}"
+    done < raw_targets > waybacktargets
+
+    while read -r; do
+        get_wayback_target "${REPLY}"
+    done < waybacktargets
+
+    # Next, we convert from dokuwiki markup to github markdown
+    while read -r; do
+        pandoc --from dokuwiki --to gfm --toc --no-highlight "${REPLY}" > "${REPLY/.markup/}.md"
+    done < <(find . -name "*.markup")
+)

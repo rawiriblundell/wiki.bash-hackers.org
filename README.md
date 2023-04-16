@@ -2,14 +2,12 @@
 
 Extraction of wiki.bash-hackers.org from the Wayback Machine
 
-This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  This gives us the Dokuwiki Markup source.
+This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  These pages give us the Dokuwiki Markup source, relatively unmolested.
 
-See the incomplete script "archive_crawler" to see my working.
+See the incomplete script "archive_crawler" to see my working.  I would not recommend blindly running it - it's beta quality at best.  Just read it and this page to follow the logic... or just fork this repo... or whatever, I'm not your Dad.
 
-- TODO: Parse the already downloaded files for any missing links
-- TODO: Markdown conversion from Dokuwiki Markup to GitHub Markdown using pandoc
-- TODO: Markdown linting
-- TODO: Rinse and repeat
+- TODO: Markdown linting and transformations
+- TODO: Perhaps add a "This was downloaded from [wayback url here] on [date]" to each page...
 
 ## Getting the latest capture URL from archive.org
 
@@ -71,7 +69,8 @@ So basically, we remove everything from the first line to the line that contains
 
 As per the original wiki.bash-hackers.org:
 
-> Except where otherwise noted, content on this wiki is licensed under the following license:
+> Except where otherwise noted, content on this wiki is licensed under the following license:  
+>  
 > [GNU Free Documentation License 1.3](https://web.archive.org/web/20220930131429/http://www.gnu.org/licenses/fdl-1.3.html)
 
 ## COPYRIGHT
