@@ -22,7 +22,7 @@ So the pages that have `'?do-edit'` on the end of their URL appear to have a rel
     <form id="dw__editform" method="post" action="" accept-charset="utf-8" class=" form-inline"><div class="no">
 <input type="hidden" name="sectok" value=""/><input type="hidden" name="id" value="wishes"/>[REST OF LINE REMOVED FOR BREVITY]
 
-[ TARGET MARKDOWN CODE EXISTS HERE]
+[ TARGET DOKUWIKI MARKUP CODE EXISTS HERE]
 
 </textarea>
 <div id="wiki__editbar" class="editBar">
