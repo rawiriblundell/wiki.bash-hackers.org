@@ -114,3 +114,8 @@ extract_markup() {
         get_wayback_target "${REPLY}"
     done < waybacktargets
 )
+
+# Convert from dokuwiki markup to github markdown
+while read -r; do
+    pandoc --from dokuwiki --to gfm --toc --no-highlight "${REPLY}" > "${REPLY/.markup/}.md"
+done < <(find . -name "*.markup")
