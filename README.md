@@ -1,4 +1,5 @@
 # wiki.bash-hackers.org
+
 Extraction of wiki.bash-hackers.org from the Wayback Machine
 
 This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  This gives us the Dokuwiki Markup source.
@@ -10,7 +11,40 @@ See the incomplete script "archive_crawler" to see my working.
 - TODO: Markdown linting
 - TODO: Rinse and repeat
 
+## Getting the latest capture URL from archive.org
+
+archive.org does not appear to have an exhaustive API, but it does have at least one API call that is relevant to our needs.  It's called `available`.
+
+How it works is you run a `curl -X GET` against `https://archive.org/wayback/available?url=[YOUR URL HERE]` and it returns to you with a bit of JSON.  For example:
+
+```bash
+curl -s -X GET "https://archive.org/wayback/available?url=https://wiki.bash-hackers.org/howto/mutex?do=edit" | jq -r '.'
+{
+  "url": "https://wiki.bash-hackers.org/howto/mutex?do=edit",
+  "archived_snapshots": {
+    "closest": {
+      "status": "200",
+      "available": true,
+      "url": "http://web.archive.org/web/20220615023742/https://wiki.bash-hackers.org/howto/mutex?do=edit",
+      "timestamp": "20220615023742"
+    }
+  }
+}
+```
+
+The path `'.archived_snapshots.closest.url'` will, therefore, either have a URL of a latest capture, or it will return `null`.
+
+Because different pages have different timestamps in their capture, you can't just do something like:
+
+```bash
+curl -s -X GET "http://web.archive.org/web/20220615023742/https://wiki.bash-hackers.org/some/other/page?do=edit"
+
+```
+
+Because the timestamp in the URL may or may not match.  So we use this API call to locate genuine resources.
+
 ## Extracting the Dokuwiki Markup
+
 So the pages that have `'?do-edit'` on the end of their URL appear to have a reliable and predictable structure:
 
 ```bash
