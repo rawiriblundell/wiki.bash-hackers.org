@@ -4,8 +4,8 @@
 
 # This works by targeting pages that have been captured by the Wayback Machine 
 # that specifically have '?do=edit' on the end of their URL.
-# These pages present the original markdown source of the respective page.
-# So with a little massaging, we should be able to extract said markdown.
+# These pages present the original Dokuwiki Markup source of the respective page.
+# So with a little massaging, we should be able to extract said Dokuwiki Markup.
 
 # Where are we playing on the local file system?
 basedir="${HOME}/git/wiki.bash-hackers.org"
@@ -43,7 +43,7 @@ check_wayback_availability() {
 
 # Download the given target into a local file structure e.g.
 # http://web.archive.org/web/20220706170849/https://wiki.bash-hackers.org/scripting/bashbehaviour?do=edit
-# Will download into scripting/bashbehaviour
+# Will download into: "${basedir}/scripting/bashbehaviour"
 get_wayback_target() {
     local remote_target target_path target_dirname
     remote_target="${1:?No target specified}"
@@ -55,10 +55,10 @@ get_wayback_target() {
     # Create the path, ensuring that we strip the leading slash just-in-case e.g. /howto -> howto
     mkdir -p "${basedir:?FATAL - basedir unset}/${target_dirname/\//}"
     # Download the remote target to the local path
-    curl -s -X GET "${remote_target}" | extract_markdown - > "./${target_path}.md"
+    curl -s -X GET "${remote_target}" | extract_markup - > "./${target_path}.markup"
 }
 
-# We want to pull internal-wiki links out of the markdown fragments.  These look like
+# We want to pull internal-wiki links out of the markup fragments.  These look like
 # [[path:to:file]]
 # But can be given friendly names like
 # [[path:to:file | friendly name]]
@@ -79,12 +79,12 @@ scrape_targets() {
 }
 
 # Because of the structure of the downloaded files,
-# we should be able to reliably extract our target markdown.
+# we should be able to reliably extract our target Dokuwiki Markup.
 # First, remove everything between the first line and 'name="sectok"'
 # Next, remove everything after '</textarea>'
-# This should remove everything above and below our desired markdown
+# This should remove everything above and below our desired Dokuwiki Markup
 # We also take the opportunity to convert some HTML chars
-extract_markdown() {
+extract_markup() {
     sed -e '1,/name="sectok"/d' -e '/<\/textarea>/,$d' -e 's/&gt;/>/g' -e 's/&lt;/</g' -e 's/&amp;/\&/g' "${1:-/dev/stdin}"
 }
 

@@ -1,16 +1,16 @@
 # wiki.bash-hackers.org
 Extraction of wiki.bash-hackers.org from the Wayback Machine
 
-This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  This gives us the markdown source.
+This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  This gives us the Dokuwiki Markup source.
 
 See the incomplete script "archive_crawler" to see my working.
 
-- TODO: Markdown linting
-- TODO: Markdown conversion from Dokuwiki "Markup" to GitHub "Markdown" using pandoc
 - TODO: Parse the already downloaded files for any missing links
+- TODO: Markdown conversion from Dokuwiki Markup to GitHub Markdown using pandoc
+- TODO: Markdown linting
 - TODO: Rinse and repeat
 
-## Extracting the markdown
+## Extracting the Dokuwiki Markup
 So the pages that have `'?do-edit'` on the end of their URL appear to have a reliable and predictable structure:
 
 ```bash
@@ -31,7 +31,7 @@ So the pages that have `'?do-edit'` on the end of their URL appear to have a rel
 [ LINES BELOW REMOVED FOR BREVITY ]
 ```
 
-So basically, we remove everything from the first line to the line that contains `name="sectok"`, and then we remove everything after `</textarea>`, and what's left should be the markdown that we want.
+So basically, we remove everything from the first line to the line that contains `name="sectok"`, and then we remove everything after `</textarea>`, and what's left should be the Dokuwiki Markup that we want.
 
 ## LICENSE
 
