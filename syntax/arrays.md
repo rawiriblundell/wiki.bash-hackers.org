@@ -131,7 +131,8 @@ As of now, arrays can't be exported.
 
 \<note\> For completeness and details on several parameter expansion
 variants, see the [article about parameter expansion](/syntax/pe) and
-check the notes about arrays. \</note\>
+check the notes about arrays.  |
+| --- |
 
 | Syntax                                                                | Description                                                                                                                                                                                                                                                                                                                                                 |
 |-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -217,7 +218,7 @@ It is best to [explicitly specify
 -v](commands/builtin/unset#portability_considerations) when unsetting
 variables with unset.
 
-\<note warning\> Specifying unquoted array elements as arguments to any
+| :warning:  Specifying unquoted array elements as arguments to any
 command, such as with the syntax above **may cause [pathname
 expansion](/syntax/expansion/globs) to occur** due to the presence of
 glob characters.
@@ -237,7 +238,8 @@ To avoid this, **always quote** the array name and index:
     unset -v 'x[1]'
 
 This applies generally to all commands which take variable names as
-arguments. Single quotes preferred. \</note\>
+arguments. Single quotes preferred.  |
+| --- |
 
 ## Usage
 
@@ -407,7 +409,8 @@ valid assignment. If so, they are evaluated as assignments. If not, they
 are undergo normal argument expansion before being passed to the builtin
 which evaluates the resulting string as an assignment (somewhat like
 `eval`, but there are differences.) `'Todo:`' Discuss this in detail.
-\</note\>
+ |
+| --- |
 
 ### Indirection
 

@@ -33,13 +33,14 @@ Tilde expansion is also performed everytime a variable is assigned:
 - after **every** `:` (colon) in the assigned value:
   `TARGET=file:~moonman/share`
 
-\<note info\> As of now (Bash 4.3-alpha) the following constructs
+| :memo:  As of now (Bash 4.3-alpha) the following constructs
 **also** works, though it's not a variable assignment:
 
     echo foo=~
     echo foo=:~
 
-I don't know yet, if this is a bug or intended. \</note\>
+I don't know yet, if this is a bug or intended.  |
+| --- |
 
 This way you can correctly use the tilde expansion in your
 [PATH](/syntax/shellvars#PATH):

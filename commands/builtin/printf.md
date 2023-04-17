@@ -57,7 +57,7 @@ argument!).
 The `-v` Option can't assign directly to array indexes in Bash versions
 older than Bash 4.1.
 
-\<note warning\> In versions newer than 4.1, one must be careful when
+| :warning:  In versions newer than 4.1, one must be careful when
 performing expansions into the first non-option argument of printf as
 this opens up the possibility of an easy code injection vulnerability.
 
@@ -70,7 +70,8 @@ If you must, either specify a hard-coded format string or use -- to
 signal the end of options. The exact same issue also applies to
 [read](commands/builtin/read), and a similar one to
 [mapfile](commands/builtin/mapfile), though performing expansions into
-their arguments is less common. \</note\>
+their arguments is less common.  |
+| --- |
 
 ### Arguments
 
@@ -96,7 +97,7 @@ Take care to avoid [word splitting](/syntax/expansion/wordsplit), as
 accidentally passing the wrong number of arguments can produce wildly
 different and unexpected results. See [this article](/syntax/words).
 
-\<note warning\> <u>**Again, attention:**</u> When a numerical format
+| :warning:  <u>**Again, attention:**</u> When a numerical format
 expects a number, the internal `printf`-command will use the common Bash
 arithmetic rules regarding the base. A command like the following
 example **will** throw an error, since `08` is not a valid octal number
@@ -104,7 +105,8 @@ example **will** throw an error, since `08` is not a valid octal number
 
     printf '%d\n' 08
 
-\</note\>
+ |
+| --- |
 
 ### Format strings
 

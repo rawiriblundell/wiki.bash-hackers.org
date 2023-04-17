@@ -212,9 +212,10 @@ Similarly for output file descriptors, writing a line to file descriptor
 `s` will append a line to a file as will writing a line to file
 descriptor `t`.
 
-\<note tip\>The syntax is somewhat confusing in that you would think
+| :bulb: The syntax is somewhat confusing in that you would think
 that the arrow would point in the direction of the copy, but it's
-reversed. So it's `target>&source` effectively.\</note\>
+reversed. So it's `target>&source` effectively. |
+| --- |
 
 So, as a simple example (albeit slightly contrived), is the following:
 

@@ -6,7 +6,8 @@
 (4.3 will come soon), I consider it to be "standard". This page is not
 maintained anymore and is left here to keep your links working. See the
 [bashchanges](/scripting/bashchanges) page for new stuff
-introduced.\</note\>
+introduced. |
+| --- |
 
 Besides many bugfixes since Bash 3.2, Bash 4 will bring some interesting
 new features for shell users and scripters. See also

@@ -141,7 +141,11 @@ extract_markup() {
     # scrape_targets **/*.markup | sort | uniq
     while read -r; do
         scrape_targets "${REPLY}"
-    done < <(find . -name "*.markup") | sort | uniq > raw_targets
+    done < <(find . -name "*.markup") | sort | uniq > fresh_targets
+
+    while read -r; do
+        prepend "https://wiki.bash-hackers.org" "${REPLY}"
+    done < fresh_targets > raw_targets
 
     # And as before, we generate a list of targets and retrieve them
     while read -r; do
@@ -157,3 +161,20 @@ extract_markup() {
         pandoc --from dokuwiki --to gfm --toc --no-highlight "${REPLY}" > "${REPLY/.markup/}.md"
     done < <(find . -name "*.markup")
 )
+
+# Ugh, screw the constant while read loops.  Let's extglob from here.
+
+# Replace <note important>
+sed -i -e 's/\\<note important\\>/\| :loudspeaker: /' ./**/*.md
+
+# Replace <note info>
+sed -i -e 's/\\<note info\\>/\| :memo: /' ./**/*.md
+
+# Replace <note tip>
+sed -i -e 's/\\<note tip\\>/\| :bulb: /' ./**/*.md
+
+# Replace <note warning>
+sed -i -e 's/\\<note warning\\>/\| :warning: /' ./**/*.md
+
+# Replace </note>
+sed -i -e 's/\\<\/note\\>/ |\n| --- |/' ./**/*.md

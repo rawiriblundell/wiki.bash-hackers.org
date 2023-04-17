@@ -345,9 +345,10 @@ Why? Because when printed literally, the `^M` makes the cursor go back
 to the beginning of the line. The whole error message is *printed*, but
 you *see* only part of it!
 
-\<note warning\> It's easy to imagine the `^M` is bad in other places
+| :warning:  It's easy to imagine the `^M` is bad in other places
 too. If you get weird and illogical messages from your script, rule out
-the possibility that`^M` is involved. Find and eliminate it! \</note\>
+the possibility that`^M` is involved. Find and eliminate it!  |
+| --- |
 
 ### How can I find and eliminate them?
 

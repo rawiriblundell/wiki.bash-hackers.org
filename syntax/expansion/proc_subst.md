@@ -30,7 +30,7 @@ from a file).
 
 ### Scope
 
-\<note important\> Note: According to multiple comments and sources, the
+| :loudspeaker:  Note: According to multiple comments and sources, the
 scope of process substitution file descriptors is **not** stable,
 guaranteed, or specified by bash. Newer versions of bash (5.0+) seem to
 have shorter scope, and substitutions scope seems to be shorter than
@@ -39,7 +39,8 @@ function scope. See
 and
 [stackoverflow](https://stackoverflow.com/questions/46660020/bash-what-is-the-scope-of-the-process-substitution);
 the latter discussion contains a script that can test the scoping
-behavior case-by-case \</note\>
+behavior case-by-case  |
+| --- |
 
 If a process substitution is expanded as an argument to a function,
 expanded to an environment variable during calling of a function, or

@@ -11,10 +11,11 @@ Responsible for site content and design:
 
 `Jan Schampera Erich-Schott-Str. 2 95666 Mitterteich Federal Republic of Germany`
 
-\<note warning\>*"I am not responsible for contents of linked pages. I
+| :warning: *"I am not responsible for contents of linked pages. I
 dissociate myself from illegal contents, especially child porn, any
 radical statements, picture material as well as illegal links. The
 webmasters of linked pages are responsible by themselves! I assure my
 users of trying to link only serious pages, and of checking my links
 first. But at least I can not guarantee for unknown people and their
-thoughts."*\</note\>
+thoughts."* |
+| --- |
