@@ -1,7 +1,5 @@
 # Bash 4 - a rough overview
 
-:V4:
-
 | :shell: Attention: Since Bash 4 has been around for quite some time now (4.3 will come soon), I consider it to be "standard". This page is not maintained anymore and is left here to keep your links working. See the [bashchanges](/scripting/bashchanges) page for new stuff introduced. |
 | --- |
 
