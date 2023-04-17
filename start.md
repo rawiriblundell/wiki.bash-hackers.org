@@ -431,8 +431,7 @@ version \<WRAP column 40%\>
 
 ## Dictionary
 
-| :bulb: A list of expressions, words, and their meanings is
-[here](/dict/index). |
+| :bulb: A list of expressions, words, and their meanings is [here](/dict/index). |
 | --- |
 
 ## Links
