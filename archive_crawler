@@ -164,6 +164,9 @@ extract_markup() {
 
 # Ugh, screw the constant while read loops.  Let's extglob from here.
 
+# Replace <note>
+sed -i -e 's/\\<note\\>/\| :shell: /' ./**/*.md
+
 # Replace <note important>
 sed -i -e 's/\\<note important\\>/\| :loudspeaker: /' ./**/*.md
 

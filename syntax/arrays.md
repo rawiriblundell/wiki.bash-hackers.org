@@ -129,7 +129,7 @@ As of now, arrays can't be exported.
 
 ### Getting values
 
-\<note\> For completeness and details on several parameter expansion
+| :shell:  For completeness and details on several parameter expansion
 variants, see the [article about parameter expansion](/syntax/pe) and
 check the notes about arrays.  |
 | --- |
@@ -403,7 +403,7 @@ strings would have been inserted into the integer array without
 evaluating the arithmetic. A special-case of this is shown in the next
 section.
 
-\<note\> Bash declaration commands are really keywords in disguise. They
+| :shell:  Bash declaration commands are really keywords in disguise. They
 magically parse arguments to determine whether they are in the form of a
 valid assignment. If so, they are evaluated as assignments. If not, they
 are undergo normal argument expansion before being passed to the builtin
