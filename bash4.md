@@ -18,10 +18,10 @@ of Bash (and Bash 4), feel free to write a chapter here.**
 The complete list of fixes and changes is in the CHANGES or NEWS file of
 your Bash 4 distribution.
 
-| :floppy_disk: The current available **stable** version is 4.4.18 release (February 03, 2018):
-
-- <ftp://ftp.cwru.edu/pub/bash/bash-4.4.18.tar.gz>
-- <ftp://ftp.gnu.org/pub/gnu/bash/bash-4.4.18.tar.gz> |
+| :floppy_disk: The current available **stable** version is 4.4.18 release (February 03, 2018): |
+| |
+|- <ftp://ftp.cwru.edu/pub/bash/bash-4.4.18.tar.gz> |
+|- <ftp://ftp.gnu.org/pub/gnu/bash/bash-4.4.18.tar.gz> |
 | --- |
 
 ## New or changed commands and keywords
