@@ -2,12 +2,13 @@
 
 Extraction of wiki.bash-hackers.org from the Wayback Machine
 
-This is targeting pages that have been captured by the Wayback Machine that specifically have `'?do=edit'` on the end of their URL.  These pages give us the Dokuwiki Markup source, relatively unmolested.
+This is targeting pages that have been captured by the Wayback Machine that specifically have `?do=edit` on the end of their URL.  These pages give us the Dokuwiki Markup source, relatively unmolested.
 
 See the incomplete script "archive_crawler" to see my working.  I would not recommend blindly running it - it's beta quality at best.  Just read it and this page to follow the logic... or just fork this repo... or whatever, I'm not your Dad.
 
 - TODO: Markdown linting and transformations
 - TODO: Perhaps add a "This was downloaded from [wayback url here] on [date]" to each page...
+- TODO: Import page-edit history as git log entries?  `?do=revisions` is the secret sauce there...
 
 ## Getting the latest capture URL from archive.org
 

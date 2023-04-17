@@ -15,7 +15,7 @@ a more human-readable version of the following topics:
 
 ## General
 
-A simplified version of \`man bash' and interesting bash tricks.:-)
+A simplified version of `man bash` and interesting bash tricks.:-)
 
 > The whole site is meant to be like that: a simplified or better
 > human-readable collection of manpage snipplets. Maybe a page with the
@@ -28,10 +28,10 @@ A simplified version of \`man bash' and interesting bash tricks.:-)
 **hmm maybe some of this stuff could make it somewhere to the
 wiki...:)**
 
--  an article about how to do ksh coprocess in bash (:V4: may be
-  obsolete regarding [Bash 4 features](bash4))
-  1.  single way -\> process substitution
-  2.  2 way name pipes
+- an article about how to do ksh coprocess in bash  
+  (:V4: may be obsolete regarding [Bash 4 features](bash4))
+  1. single way -> process substitution
+  2. 2 way name pipes
 - let's write a interactive tutorial script that teaches readline/bash
   (like C-h t in emacs, or vimtutor or vilearn)
 - programmable history:
