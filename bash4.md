@@ -22,7 +22,6 @@ your Bash 4 distribution.
 | --- |
 | - <ftp://ftp.cwru.edu/pub/bash/bash-4.4.18.tar.gz> |
 | - <ftp://ftp.gnu.org/pub/gnu/bash/bash-4.4.18.tar.gz> |
-| --- |
 
 ## New or changed commands and keywords
 
