@@ -1,8 +1,16 @@
 # wiki.bash-hackers.org
 
-Extraction of wiki.bash-hackers.org from the Wayback Machine
+The popular wiki.bash-hackers.org had its DNS expire in April 2023, with the owner seemingly being incommunicado.  It looked like this domain would be in the region of €1k to purchase - ouch.
 
-This is targeting pages that have been captured by the Wayback Machine that specifically have `?do=edit` on the end of their URL.  These pages give us the Dokuwiki Markup source, relatively unmolested.
+Fortunately, Archive.org has snapshotted this website, and so we can extract wiki.bash-hackers.org from archive.org's Wayback Machine.
+
+Additionally, the web server behind wiki.bash-hackers.org is still running, for now, so we can use an entry in our `hosts` file (`/etc/hosts` on *nix, `c:\Windows\System32\Drivers\etc\hosts` on Windows) that reads:
+
+```bash
+83.243.40.67 wiki.bash-hackers.org
+```
+
+This repo is targeting pages that have been captured by the Wayback Machine that specifically have `?do=edit` on the end of their URL.  These pages give us the Dokuwiki Markup source, relatively unmolested - maybe with a bit of errant html to strip.  We then convert the original source to GitHub markdown.
 
 See the incomplete script "archive_crawler" to see my working.  I would not recommend blindly running it - it's beta quality at best.  Just read it and this page to follow the logic... or just fork this repo... or whatever, I'm not your Dad.
 
@@ -65,6 +73,31 @@ So the pages that have `'?do-edit'` on the end of their URL appear to have a rel
 ```
 
 So basically, we remove everything from the first line to the line that contains `name="sectok"`, and then we remove everything after `</textarea>`, and what's left should be the Dokuwiki Markup that we want.
+
+## Converting to Markdown
+
+We'll convert to Github Markdown using `pandoc`
+
+Custom edits that `pandoc` doesn't handle will have to be figured out over time.
+
+### Note panels
+
+The original dokuwiki source has several of the following entries:
+
+```bash
+\<note tip\>The syntax is somewhat confusing in that you would think
+that the arrow would point in the direction of the copy, but it's
+reversed. So it's `target>&source` effectively.\</note\>
+```
+
+We convert these to markdown tables with emojis .e.g
+
+```bash
+| :bulb: The syntax is somewhat confusing in that you would think
+that the arrow would point in the direction of the copy, but it's
+reversed. So it's `target>&source` effectively. |
+| --- |
+```
 
 ## LICENSE
 
