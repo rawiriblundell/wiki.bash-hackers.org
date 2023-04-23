@@ -1,8 +1,11 @@
 # wiki.bash-hackers.org
 
+| :bulb: See [start.md](start.md) to get straight to business |
+| --- |
+
 The popular wiki.bash-hackers.org had its DNS expire in April 2023, with the owner seemingly being incommunicado.  It looked like this domain would be in the region of €1k to purchase - ouch.
 
-Fortunately, Archive.org has snapshotted this website, and so we can extract wiki.bash-hackers.org from archive.org's Wayback Machine.
+Fortunately, archive.org has snapshotted this website, and so we can extract wiki.bash-hackers.org from archive.org's Wayback Machine.
 
 Additionally, the web server behind wiki.bash-hackers.org is still running, for now, so we can use an entry in our `hosts` file (`/etc/hosts` on *nix, `c:\Windows\System32\Drivers\etc\hosts` on Windows) that reads:
 
@@ -48,7 +51,7 @@ curl -s -X GET "http://web.archive.org/web/20220615023742/https://wiki.bash-hack
 
 ```
 
-Because the timestamp in the URL may or may not match.  So we use this API call to locate genuine resources.
+Because, obviously, the timestamp in the URL may or may not match.  So we use this API call to validate that a desired resource exists, and if so, locate the latest available copy of it.
 
 ## Extracting the Dokuwiki Markup
 
