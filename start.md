@@ -1,15 +1,10 @@
-[](bash4) \~~DISCUSSION:off\~~
-
 # The Bash Hackers Wiki
 
-![](keywords>bash shell linux scripting)
-
-\<WRAP center round box 90%\> This wiki is intended to hold
-documentation of any kind about GNU Bash. The main motivation was to
-provide *human-readable documentation* and information so users aren't
-forced to read every bit of the Bash manpage - which can be difficult to
-understand. However, the docs here are **not** meant as a newbie
-tutorial.
+| This wiki is intended to hold documentation of any kind about GNU Bash.
+The main motivation was to provide *human-readable documentation* and
+information so users aren't forced to read every bit of the Bash manpage - 
+which can be difficult to understand. However, the docs here are **not**
+meant as a newbie tutorial.
 
 This wiki and any programs found in this wiki are free software: you can
 redistribute it and/or modify it under the terms of the GNU General
@@ -24,18 +19,19 @@ Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see \<<http://www.gnu.org/licenses/>\>.
 
-[What would YOU like to see here?](wishes) (outdated and locked, please
+[What would YOU like to see here?](wishes.md) (outdated and locked, please
 use the discussions)
 
 **Stranger!** [Feel free to
 register](http://wiki.bash-hackers.org/start&do=register) and comment or
 edit the contents. There is a [Bash Hackers Wiki needs love
 page](/meta/need_love) that lists some things to do. The registration is
-only there to prevent SPAM. \</WRAP\>
+only there to prevent SPAM. |
+[ --- ]
 
 ## Scripting and general information
 
-- [Bash v4 - a rough overview](bash4) (unmaintained, since Bash 4 is
+- [Bash v4 - a rough overview](bash4.md) (unmaintained, since Bash 4 is
   more or less standard)
 - [style](/scripting/style.md) -- an assorted collection of style and optic
   hints
@@ -65,7 +61,7 @@ See also [some Bash source code excerpts](/misc/readthesourceluke.md).
 - [Editing files with ed(1)](/howto/edit-ed.md)
 - [Collapsing Functions](/howto/collapsing_functions.md)
 - [Illustrated Redirection Tutorial](/howto/redirection_tutorial.md)
-- [Calculate with dc(1)](/howto/calculate-dc)
+- [Calculate with dc(1)](/howto/calculate-dc.md)
 - [Introduction to pax - the POSIX archiver](/howto/pax.md)
 - [getopts_tutorial](/howto/getopts_tutorial.md) (*under construction!*)
 - [dissectabadoneliner](/howto/dissectabadoneliner.md) An example of a bad
@@ -550,7 +546,7 @@ version \<WRAP column 40%\>
 | 4                                    | 2854  | [classictest](/commands/classictest.md) (March: 6145)         |
 | 5                                    | 2222  | [pe](/syntax/pe.md) (March: 4540)                             |
 | 6                                    | 1760  | [posparams](/scripting/posparams.md) (March: 3591)            |
-| 7                                    | 1249  | [bash4](bash4) (March: --)                                 |
+| 7                                    | 1249  | [bash4](bash4.md) (March: --)                                 |
 | 8                                    | 1212  | [edit-ed](/howto/edit-ed.md) (March: 2727)                    |
 | 9                                    | 1205  | [read](/commands/builtin/read.md) (March: --)                 |
 | 10                                   | 1182  | [mutex](/howto/mutex.md) (March: --)                          |
