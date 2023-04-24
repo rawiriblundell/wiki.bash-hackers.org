@@ -82,9 +82,9 @@ pipeline (like started with <code>command &amp;</code>)</td>
 <td>The name of the shell or the shell script (filename). Set by the
 shell itself.<br />
 If Bash is started with a filename to execute (script), it's set to this
-filename. If started with the <code>-c &lt;CMDLINE&gt;</code> option
+filename. If started with the <code>-c <CMDLINE></code> option
 (commandline given as argument), then <code>$0</code> will be the first
-argument after the given <code>&lt;CMDLINE&gt;</code>. Otherwise, it is
+argument after the given <code><CMDLINE></code>. Otherwise, it is
 set to the string given on invocation for <code>argv[0]</code>.<br />
 Unlike popular belief, <code>$0</code> is <em>not a positional
 parameter</em>.</td>

@@ -245,18 +245,18 @@ variable <code>id</code> (not required by POSIX(r))</td>
 </tr>
 <tr class="odd">
 <td
-style="text-align: left;"><code>&lt;EXPR&gt; ? &lt;EXPR&gt; : &lt;EXPR&gt;</code></td>
+style="text-align: left;"><code><EXPR> ? <EXPR> : <EXPR></code></td>
 <td style="text-align: left;">conditional (ternary) operator<br />
-&lt;condition&gt; ? &lt;result-if-true&gt; :
-&lt;result-if-false&gt;</td>
+<condition> ? <result-if-true> :
+<result-if-false></td>
 </tr>
 <tr class="even">
 <td
-style="text-align: left;"><code>&lt;EXPR&gt; , &lt;EXPR&gt;</code></td>
+style="text-align: left;"><code><EXPR> , <EXPR></code></td>
 <td style="text-align: left;">expression list</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>( &lt;EXPR&gt; )</code></td>
+<td style="text-align: left;"><code>( <EXPR> )</code></td>
 <td style="text-align: left;">subexpression (to force precedence)</td>
 </tr>
 </tbody>

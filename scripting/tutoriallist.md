@@ -59,7 +59,7 @@ indicator</th>
 <td style="text-align: left;"><a
 href="http://mywiki.wooledge.org/BashGuide">click</a> (<a
 href="http://guide.bash.academy">new revision draft</a>)</td>
-<td style="text-align: left;">&lt;progress=90&gt;</td>
+<td style="text-align: left;"><progress=90></td>
 <td style="text-align: left;">This guide teaches modern stuff and good
 practises. I recommend learning from it. It was written by the guys in
 <code>#bash</code>IRC channel on Freenode (mainly <code>lhunath</code>),
@@ -69,7 +69,7 @@ because there are so many bad tutorials out there.</td>
 <td style="text-align: left;">Steve Parker's shell scripting guide</td>
 <td style="text-align: left;"><a
 href="http://steve-parker.org/sh/intro.shtml">click</a></td>
-<td style="text-align: left;">&lt;progress=90&gt;</td>
+<td style="text-align: left;"><progress=90></td>
 <td style="text-align: left;">Very good (not only Bash) shell scripting
 guide. Teaches good practices, gives background information.</td>
 </tr>
@@ -78,7 +78,7 @@ guide. Teaches good practices, gives background information.</td>
 href="#rv_bgb">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://tldp.org/LDP/Bash-Beginners-Guide/html/">click</a></td>
-<td style="text-align: left;">&lt;progress=80&gt;</td>
+<td style="text-align: left;"><progress=80></td>
 <td style="text-align: left;">Good introduction that really requires no
 previous knowledge, also covers the most important unix utilities</td>
 </tr>
@@ -87,7 +87,7 @@ previous knowledge, also covers the most important unix utilities</td>
 href="#rv_abs">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://tldp.org/LDP/abs/html/">click</a></td>
-<td style="text-align: left;">&lt;progress=50&gt;</td>
+<td style="text-align: left;"><progress=50></td>
 <td style="text-align: left;">Has a lot of information that is hard to
 find, is outdated and often unsafe. To be avoided until you can filter
 out the good stuff.</td>
@@ -101,7 +101,7 @@ href="http://www.ibm.com/developerworks/library/l-bash.html">click(1)</a><br />
 href="http://www.ibm.com/developerworks/library/l-bash2.html">click(2)</a><br />
 <a
 href="http://www.ibm.com/developerworks/library/l-bash3.html">click(3)</a></td>
-<td style="text-align: left;">&lt;progress=80&gt;</td>
+<td style="text-align: left;"><progress=80></td>
 <td style="text-align: left;">Doesn't teach outdated stuff, doesn't tell
 you wrong things. A good start, though not that detailed.</td>
 </tr>
@@ -109,7 +109,7 @@ you wrong things. A good start, though not that detailed.</td>
 <td style="text-align: left;">Deadman's</td>
 <td style="text-align: left;"><a
 href="http://samrowe.com/wordpress/advancing-in-the-bash-shell/">click</a></td>
-<td style="text-align: left;">&lt;progress=70&gt;</td>
+<td style="text-align: left;"><progress=70></td>
 <td style="text-align: left;">Focus isn't scripting per se. Focus is
 interactive use and increasing the productivity on the prompt. Teaches
 some nice features.</td>
@@ -119,7 +119,7 @@ some nice features.</td>
 Lutus)</td>
 <td style="text-align: left;"><a
 href="http://www.arachnoid.com/linux/shell_programming.html">click</a></td>
-<td style="text-align: left;">&lt;progress=70&gt;</td>
+<td style="text-align: left;"><progress=70></td>
 <td style="text-align: left;">Good start. Though there are small
 bugs.</td>
 </tr>
@@ -128,7 +128,7 @@ bugs.</td>
 href="#rv_hypexrorg">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://www.hypexr.org/bash_tutorial.php">click</a></td>
-<td style="text-align: left;">&lt;progress=50&gt;</td>
+<td style="text-align: left;"><progress=50></td>
 <td style="text-align: left;">Shows you some nice stuff and links to
 other ressources. Not a tutorial to learn Bash, though.</td>
 </tr>
@@ -137,7 +137,7 @@ other ressources. Not a tutorial to learn Bash, though.</td>
 (<a href="#rv_bprogintrohowto">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html">click</a></td>
-<td style="text-align: left;">&lt;progress=10&gt;</td>
+<td style="text-align: left;"><progress=10></td>
 <td style="text-align: left;">Absolute crap. Many syntax errors
 alone.</td>
 </tr>
@@ -146,7 +146,7 @@ alone.</td>
 href="#rv_qguide">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://www.panix.com/~elflord/unix/bash-tute.html">click</a></td>
-<td style="text-align: left;">&lt;progress=50&gt;</td>
+<td style="text-align: left;"><progress=50></td>
 <td style="text-align: left;">Usable as a start. Doesn't teach wrong
 stuff, shows you good practices.</td>
 </tr>
@@ -156,7 +156,7 @@ stuff, shows you good practices.</td>
 complete</td>
 <td style="text-align: left;"><a
 href="http://linuxcommand.org/writing_shell_scripts.php">click</a></td>
-<td style="text-align: left;">&lt;progress=50&gt;</td>
+<td style="text-align: left;"><progress=50></td>
 <td style="text-align: left;">Practise oriented, some mistakes/flaws,
 but sadly it stops in the middle</td>
 </tr>
@@ -165,7 +165,7 @@ but sadly it stops in the middle</td>
 (<a href="#rv_linuxscriptv2">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://bash.cyberciti.biz/guide/Main_Page">click</a></td>
-<td style="text-align: left;">&lt;progress=40&gt;</td>
+<td style="text-align: left;"><progress=40></td>
 <td style="text-align: left;">currently reviewing (the tutorial is also
 under development)</td>
 </tr>
@@ -174,7 +174,7 @@ under development)</td>
 (<a href="#rv_linuxconfig">review</a>)</td>
 <td style="text-align: left;"><a
 href="http://www.linuxconfig.org/Bash_scripting_Tutorial">click</a></td>
-<td style="text-align: left;">&lt;progress=0&gt;</td>
+<td style="text-align: left;"><progress=0></td>
 <td style="text-align: left;">Teaches many outdated, unstable,
 undetailed stuff. You won't learn scripting from there.</td>
 </tr>
@@ -182,7 +182,7 @@ undetailed stuff. You won't learn scripting from there.</td>
 <td style="text-align: left;">Beginner\ Linux\ Tutorial</td>
 <td style="text-align: left;"><a
 href="http://linuxtutorial.todolistme.net">click</a></td>
-<td style="text-align: left;">&lt;progress=60&gt;</td>
+<td style="text-align: left;"><progress=60></td>
 <td style="text-align: left;">A comprehensive introduction to the Linux
 Command Line including ample examples to make learning easy.</td>
 </tr>
@@ -190,7 +190,7 @@ Command Line including ample examples to make learning easy.</td>
 <td style="text-align: left;">Beginner\ Bash\ Scripting\ Tutorial</td>
 <td style="text-align: left;"><a
 href="http://ryanstutorials.net/bash-scripting-tutorial/">click</a></td>
-<td style="text-align: left;">&lt;progress=60&gt;</td>
+<td style="text-align: left;"><progress=60></td>
 <td style="text-align: left;">A beginners guide to Bash scripting under
 Linux.</td>
 </tr>
@@ -199,7 +199,7 @@ Linux.</td>
 Line</td>
 <td style="text-align: left;"><a
 href="http://linuxcommand.org/tlcl.php/">click</a></td>
-<td style="text-align: left;">&lt;progress=40&gt;</td>
+<td style="text-align: left;"><progress=40></td>
 <td style="text-align: left;">A beginners guide to using Bash shell,
 basic unix utilities, and shell scripting. Shell scripting part is not
 so good. But good introduction on how to use various utilities in

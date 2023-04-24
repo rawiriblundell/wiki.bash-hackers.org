@@ -89,9 +89,9 @@ terminals.
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>[ &lt;X&gt; ; &lt;Y&gt; H</code><br />
-<code>[ &lt;X&gt; ; &lt;Y&gt; f</code></td>
-<td><code>cup &lt;X&gt; &lt;Y&gt;</code></td>
+<td><code>[ <X> ; <Y> H</code><br />
+<code>[ <X> ; <Y> f</code></td>
+<td><code>cup <X> <Y></code></td>
 <td>Home-positioning to <code>X</code> and <code>Y</code>
 coordinates<br />
 :!: it seems that ANSI uses 1-1 as home while <code>tput</code> uses

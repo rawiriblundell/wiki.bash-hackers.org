@@ -40,9 +40,9 @@ POSIX!</strong></td>
 </tr>
 <tr class="odd">
 <td
-style="text-align: center;"><code>command\ &lt;&lt;&lt;\ WORD</code></td>
+style="text-align: center;"><code>command\ <<<\ WORD</code></td>
 <td
-style="text-align: center;"><code>command &lt;&lt;MARKER WORD MARKER</code></td>
+style="text-align: center;"><code>command <<MARKER WORD MARKER</code></td>
 <td style="text-align: center;">a here-string, a special form of the
 here-document, avoid it in portable scripts!</td>
 <td style="text-align: center;">POSIX(r)</td>
@@ -78,9 +78,9 @@ classic test command</a></td>
 </tr>
 <tr class="odd">
 <td
-style="text-align: center;"><code>COMMAND\ &lt;\ &lt;(\ ...INPUTCOMMANDS...\ )</code></td>
+style="text-align: center;"><code>COMMAND\ <\ <(\ ...INPUTCOMMANDS...\ )</code></td>
 <td
-style="text-align: center;"><code>INPUTCOMMANDS\ &gt;\ TEMPFILE COMMAND\ &lt;\ TEMPFILE</code></td>
+style="text-align: center;"><code>INPUTCOMMANDS\ >\ TEMPFILE COMMAND\ <\ TEMPFILE</code></td>
 <td style="text-align: center;">Process substitution (here used with
 redirection); use the old fashioned way (tempfiles)</td>
 <td style="text-align: center;">POSIX(r) and others</td>
