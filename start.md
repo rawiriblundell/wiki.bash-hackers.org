@@ -51,7 +51,7 @@ There is a [section that holds small code snippets](/snipplets/start.md).
 
 See also [some Bash source code excerpts](/misc/readthesourceluke.md).
 
-## How to....
+## How to
 
 [Doing specific tasks: concepts, methods, ideas](/howto/start.md):
 
@@ -82,7 +82,7 @@ See also [some Bash source code excerpts](/misc/readthesourceluke.md).
 - [Special parameters and shell variables](/syntax/shellvars.md)
 - [Arrays](/syntax/arrays.md)
 
-\<WRAP column 40%\> ***<u>Compound commands</u>***
+## Compound commands
 
 | **[Compound commands overview](/syntax/ccmd/intro.md)** |                                                                  |
 |:-----------------------------------------------------|------------------------------------------------------------------|
@@ -102,9 +102,7 @@ See also [some Bash source code excerpts](/misc/readthesourceluke.md).
 | `(( ... ))`                                          | [arithmetic evaluation](/syntax/ccmd/arithmetic_eval.md)            |
 | `select word in ...; do ...; done`                   | [user selections](/syntax/ccmd/user_select.md)                      |
 
-\</WRAP\>
-
-\<WRAP column 40%\> ***<u>Expansions and substitutions</u>***
+## Expansions and substitutions
 
 | **[Introduction to expansions and substitutions](/syntax/expansion/intro.md)** |                                                      |
 |:----------------------------------------------------------------------------|------------------------------------------------------|
@@ -117,7 +115,6 @@ See also [some Bash source code excerpts](/misc/readthesourceluke.md).
 | `Hello <---> Word!`                                                         | [Word splitting](/syntax/expansion/wordsplit.md)        |
 | `/data/*-av/*.mp?`                                                          | [Pathname expansion](/syntax/expansion/globs.md)        |
 
-\</WRAP\> \<WRAP clear\>\</WRAP\>
 
 ## Builtin Commands
 
@@ -125,15 +122,13 @@ This is a selection of builtin commands and command-like keywords,
 loosely arranged by their common uses. These are provided directly by
 the shell, rather than invoked as standalone external commands.
 
-\<WRAP column 46%\>
-
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Declaration commands<br />
-&lt;wrap center round lo todo box 80%&gt;Commands that set and query
+Commands that set and query
 attributes/types, and manipulate simple
-datastructures.&lt;/wrap&gt;</th>
+datastructures.</th>
 <th></th>
 <th style="text-align: center;">Alt</th>
 <th style="text-align: center;">Type</th>
@@ -193,9 +188,9 @@ href="/commands/builtin/shift">shift</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">I/O<br />
-&lt;wrap center round lo todo box 80%&gt;Commands for reading/parsing
+Commands for reading/parsing
 input, or producing/formatting output of standard
-streams.&lt;/wrap&gt;</td>
+streams.</td>
 <td></td>
 <td style="text-align: center;">Alt</td>
 <td style="text-align: center;">Type</td>
@@ -239,8 +234,7 @@ using delimiters.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Configuration and Debugging<br />
-&lt;wrap center round lo todo box 80%&gt;Commands that modify shell
-behavior, change special options, assist in debugging.&lt;/wrap&gt;</td>
+Commands that modify shell behavior, change special options, assist in debugging.</td>
 <td></td>
 <td style="text-align: center;">Alt</td>
 <td style="text-align: center;">Type</td>
@@ -270,16 +264,11 @@ href="/commands/builtin/shopt.md">shopt</a></td>
 </tbody>
 </table>
 
-\</WRAP\>
-
-\<WRAP column 46%\>
-
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Control flow and data processing<br />
-&lt;wrap center round lo todo box 80%&gt;Commands that operate on data
-and/or affect control flow.&lt;/wrap&gt;</th>
+Commands that operate on data and/or affect control flow.</th>
 <th></th>
 <th style="text-align: center;">Alt</th>
 <th style="text-align: center;">Type</th>
@@ -337,8 +326,8 @@ href="/commands/classictest.md">[</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Process and Job control<br />
-&lt;wrap center round lo todo box 80%&gt;Commands related to jobs,
-signals, process groups, subshells.&lt;/wrap&gt;</td>
+Commands related to jobs,
+signals, process groups, subshells.</td>
 <td></td>
 <td style="text-align: center;">Alt</td>
 <td style="text-align: center;">Type</td>
@@ -393,36 +382,6 @@ href="/commands/builtin/wait">wait</a></td>
 </tr>
 </tbody>
 </table>
-
-\</WRAP\> \<WRAP clear\>\</WRAP\> \<WRAP hide\> previous alphabetical
-version \<WRAP column 40%\>
-
-| A-G                                  |                                                                                                      |
-|--------------------------------------|------------------------------------------------------------------------------------------------------|
-| [caller](/commands/builtin/caller.md)   | identify/print execution frames (Bash builtin)                                                       |
-| [coproc](/syntax/keywords/coproc.md)    | Co-processes (Bash keyword)                                                                          |
-| [declare](/commands/builtin/declare.md) | display or set shell variables or functions along with attributes (Bash builtin, synonym: `typeset`) |
-| [exec](/commands/builtin/exec.md)       | replace the shell, set redirections (Bash builtin)                                                   |
-| I-N                                  |                                                                                                      |
-| [let](/commands/builtin/let.md)         | arithmetic evaluation - an old fashioned way (Bash builtin)                                          |
-| [mapfile](/commands/builtin/mapfile.md) | Mapping lines of input to an array, also named `readarray` (Bash builtin)                            |
-
-\</WRAP\>
-
-\<WRAP column 40%\>
-
-| O-T                                    |                                                                  |
-|----------------------------------------|------------------------------------------------------------------|
-| [printf](/commands/builtin/printf.md)     | "advanced `echo`" (Bash builtin)                                 |
-| [read](/commands/builtin/read.md)         | getting input from `stdin` (Bash builtin)                        |
-| [readonly](/commands/builtin/read.mdonly) | mark variables or functions as read-only (Bash builtin)          |
-| [set](/commands/builtin/set.md)           | control positional parameters and shell behaviour (Bash builtin) |
-| [shopt](/commands/builtin/shopt.md)       | set/get shell options (Bash builtin)                             |
-| [test](/commands/classictest.md)          | the classic `test` command (Bash builtin)                        |
-| U-Z                                    |                                                                  |
-| [unset](/commands/builtin/unset.md)       | unset variables and functions (Bash builtin)                     |
-
-\</WRAP\> \<WRAP clear\>\</WRAP\> \</WRAP\>
 
 ## Dictionary
 
@@ -532,32 +491,9 @@ version \<WRAP column 40%\>
   4](https://github.com/chilicuil/learn/blob/master/sh/lib) - active
   development
 
-\<div hide\>
-
-## Most wanted
-
-| Statistics for Month: **April 2012** |       |                                                            |
-|--------------------------------------|-------|------------------------------------------------------------|
-| Rank                                 | Views | Article                                                    |
-| 1                                    | 6833  | [getopts_tutorial](/howto/getopts_tutorial.md) (March: 11663) |
-| 2                                    | 4025  | [printf](/commands/builtin/printf.md) (March: 7079)           |
-| 3                                    | 2861  | [quoting](/syntax/quoting.md) (March: 5730)                   |
-| 4                                    | 2854  | [classictest](/commands/classictest.md) (March: 6145)         |
-| 5                                    | 2222  | [pe](/syntax/pe.md) (March: 4540)                             |
-| 6                                    | 1760  | [posparams](/scripting/posparams.md) (March: 3591)            |
-| 7                                    | 1249  | [bash4](bash4.md) (March: --)                                 |
-| 8                                    | 1212  | [edit-ed](/howto/edit-ed.md) (March: 2727)                    |
-| 9                                    | 1205  | [read](/commands/builtin/read.md) (March: --)                 |
-| 10                                   | 1182  | [mutex](/howto/mutex.md) (March: --)                          |
-
-- "Total visits": 35144
-- The overall "start" page is not counted
-
-\</div\>
-
 ## Contact
 
-\<WRAP column 40%\> Visit us in `irc.freenode.net`, channel `#bash` ;-)
+Visit us in `irc.freenode.net`, channel `#bash` ;-)
 
 If you have critiques or suggestions, please feel free to send a mail
 using the contact form on the right. Note that there is a simple
@@ -574,6 +510,4 @@ It also would be nice to drop a line when
 - you don't like it
 - you found mistakes / bugs
 
-Simply: Reader's feedback \</WRAP\>
-
-\<WRAP column 40%\> ![](contact>subj=Wiki reader feedback) \</WRAP\>
+Simply: Reader's feedback
