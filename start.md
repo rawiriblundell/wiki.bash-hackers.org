@@ -1,6 +1,6 @@
 # The Bash Hackers Wiki
 
-| This wiki is intended to hold documentation of any kind about GNU Bash.
+This wiki is intended to hold documentation of any kind about GNU Bash.
 The main motivation was to provide *human-readable documentation* and
 information so users aren't forced to read every bit of the Bash manpage - 
 which can be difficult to understand. However, the docs here are **not**
@@ -26,8 +26,7 @@ use the discussions)
 register](http://wiki.bash-hackers.org/start&do=register) and comment or
 edit the contents. There is a [Bash Hackers Wiki needs love
 page](/meta/need_love) that lists some things to do. The registration is
-only there to prevent SPAM. |
-[ --- ]
+only there to prevent SPAM.
 
 ## Scripting and general information
 
