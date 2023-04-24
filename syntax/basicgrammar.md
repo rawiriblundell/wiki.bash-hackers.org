@@ -42,7 +42,7 @@ issue to report back to the calling program.
 **base** for all higher constructs. Everything you execute, from
 pipelines to functions, finally ends up in (many) simple commands.
 That's why Bash only has one method to [expand and execute a simple
-command](/syntax/grammar/parser_exec). \</wrap\>
+command](/syntax/grammar/parser_exec.md). \</wrap\>
 
 ## Pipelines
 
@@ -81,7 +81,7 @@ the leading `!` will "invert" the exit code, and the shell sees (and
 acts on) exit code 0 (TRUE) and the `then` part of the `if` stanza is
 executed. One could say we checked for "`not grep "^root" /etc/passwd`".
 
-The [set option pipefail](/commands/builtin/set#attributes) determines
+The [set option pipefail](/commands/builtin/set.md#attributes) determines
 the behavior of how bash reports the exit code of a pipeline. If it's
 set, then the exit code (`$?`) is the last command that exits with non
 zero status, if none fail, it's zero. If it's not set, then `$?` always
@@ -131,7 +131,7 @@ Your whole Bash script technically is one big single list!
 
 ## Compound Commands
 
-See also the [list of compound commands](/syntax/ccmd/intro).
+See also the [list of compound commands](/syntax/ccmd/intro.md).
 
 There are two forms of compound commands:
 
@@ -150,17 +150,17 @@ overview):
 
 | Compound command syntax                                    | Description                                                                                                                                             |
 |------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `( <LIST> )`                                               | Execute `<LIST>` in an extra subshell =\> [article](/syntax/ccmd/grouping_subshell)                                                                     |
-| `{ <LIST> ; }`                                             | Execute `<LIST>` as separate group (but not in a subshell) =\> [article](/syntax/ccmd/grouping_plain)                                                   |
-| `(( <EXPRESSION> ))`                                       | Evaluate the arithmetic expression `<EXPRESSION>` =\> [article](/syntax/ccmd/arithmetic_eval)                                                           |
-| `[[ <EXPRESSION> ]]`                                       | Evaluate the conditional expression `<EXPRESSION>` (aka "the new test command") =\> [article](/syntax/ccmd/conditional_expression)                      |
-| `for <NAME> in <WORDS> ; do <LIST> ; done`                 | Executes `<LIST>` while setting the variable `<NAME>` to one of `<WORDS>` on every iteration (classic for-loop) =\> [article](/syntax/ccmd/classic_for) |
-| `for (( <EXPR1> ; <EXPR2> ; <EXPR3> )) ; do <LIST> ; done` | C-style for-loop (driven by arithmetic expressions) =\> [article](/syntax/ccmd/c_for)                                                                   |
-| `select <NAME> in <WORDS> ; do <LIST> ; done`              | Provides simple menus =\> [article](/syntax/ccmd/user_select)                                                                                           |
-| `case <WORD> in <PATTERN>) <LIST> ;; ... esac`             | Decisions based on pattern matching - executing `<LIST>` on match =\> [article](/syntax/ccmd/case)                                                      |
-| `if <LIST> ; then <LIST> ; else <LIST> ; fi`               | The if clause: makes decisions based on exit codes =\> [article](/syntax/ccmd/if_clause)                                                                |
-| `while <LIST1> ; do <LIST2> ; done`                        | Execute `<LIST2>` while `<LIST1>` returns TRUE (exit code) =\> [article](/syntax/ccmd/while_loop)                                                       |
-| `until <LIST1> ; do <LIST2> ; done`                        | Execute `<LIST2>` until `<LIST1>` returns TRUE (exit code) =\> [article](/syntax/ccmd/until_loop)                                                       |
+| `( <LIST> )`                                               | Execute `<LIST>` in an extra subshell =\> [article](/syntax/ccmd/grouping_subshell.md)                                                                     |
+| `{ <LIST> ; }`                                             | Execute `<LIST>` as separate group (but not in a subshell) =\> [article](/syntax/ccmd/grouping_plain.md)                                                   |
+| `(( <EXPRESSION> ))`                                       | Evaluate the arithmetic expression `<EXPRESSION>` =\> [article](/syntax/ccmd/arithmetic_eval.md)                                                           |
+| `[[ <EXPRESSION> ]]`                                       | Evaluate the conditional expression `<EXPRESSION>` (aka "the new test command") =\> [article](/syntax/ccmd/conditional_expression.md)                      |
+| `for <NAME> in <WORDS> ; do <LIST> ; done`                 | Executes `<LIST>` while setting the variable `<NAME>` to one of `<WORDS>` on every iteration (classic for-loop) =\> [article](/syntax/ccmd/classic_for.md) |
+| `for (( <EXPR1> ; <EXPR2> ; <EXPR3> )) ; do <LIST> ; done` | C-style for-loop (driven by arithmetic expressions) =\> [article](/syntax/ccmd/c_for.md)                                                                   |
+| `select <NAME> in <WORDS> ; do <LIST> ; done`              | Provides simple menus =\> [article](/syntax/ccmd/user_select.md)                                                                                           |
+| `case <WORD> in <PATTERN>) <LIST> ;; ... esac`             | Decisions based on pattern matching - executing `<LIST>` on match =\> [article](/syntax/ccmd/case.md)                                                      |
+| `if <LIST> ; then <LIST> ; else <LIST> ; fi`               | The if clause: makes decisions based on exit codes =\> [article](/syntax/ccmd/if_clause.md)                                                                |
+| `while <LIST1> ; do <LIST2> ; done`                        | Execute `<LIST2>` while `<LIST1>` returns TRUE (exit code) =\> [article](/syntax/ccmd/while_loop.md)                                                       |
+| `until <LIST1> ; do <LIST2> ; done`                        | Execute `<LIST2>` until `<LIST1>` returns TRUE (exit code) =\> [article](/syntax/ccmd/until_loop.md)                                                       |
 
 ## Shell Function Definitions
 
@@ -320,10 +320,10 @@ Let's invert test command exit code, only one thing changes:
 
 ## See also
 
-- Internal: [List of compound commands](/syntax/ccmd/intro)
+- Internal: [List of compound commands](/syntax/ccmd/intro.md)
 - Internal: [Parsing and execution of simple
-  commands](/syntax/grammar/parser_exec)
-- Internal: [Quoting and escaping](/syntax/quoting)
+  commands](/syntax/grammar/parser_exec.md)
+- Internal: [Quoting and escaping](/syntax/quoting.md)
 - Internal: [Introduction to expansions and
-  substitutions](/syntax/expansion/intro)
-- Internal: [Some words about words...](/syntax/words)
+  substitutions](/syntax/expansion/intro.md)
+- Internal: [Some words about words...](/syntax/words.md)

@@ -5,7 +5,7 @@ Redirection makes it possible to control where the output of a command
 goes to, and where the input of a command comes from. It's a mighty tool
 that, together with pipelines, makes the shell powerful. The redirection
 operators are checked whenever a [simple command is about to be
-executed](/syntax/grammar/parser_exec).
+executed](/syntax/grammar/parser_exec.md).
 
 Under normal circumstances, there are 3 files open, accessible by the
 file descriptors 0, 1 and 2, all connected to your terminal:
@@ -79,7 +79,7 @@ This redirects the file descriptor number `N` to the target `TARGET`. If
 **truncated** before writing starts.
 
 If the option `noclobber` is set with [the set
-builtin](/commands/builtin/set), with cause the redirection to fail,
+builtin](/commands/builtin/set.md), with cause the redirection to fail,
 when `TARGET` names a regular file that already exists. You can manually
 override that behaviour by forcing overwrite with the redirection
 operator `>|` instead of `>`.
@@ -108,7 +108,7 @@ Since Bash4, there's `&>>TARGET`, which is equivalent to
 
 \<wrap center important\>This syntax is deprecated and should not be
 used. See the page about [obsolete and deprecated
-syntax](/scripting/obsolete).\</wrap\>
+syntax](/scripting/obsolete.md).\</wrap\>
 
 ## Appending redirected output and error output
 
@@ -160,9 +160,9 @@ used to mark the end of input later:
 As you see, substitutions are possible. To be precise, the following
 substitutions and expansions are performed in the here-document data:
 
-- [Parameter expansion](/syntax/pe)
-- [Command substitution](/syntax/expansion/cmdsubst)
-- [Arithmetic expansion](/syntax/expansion/arith)
+- [Parameter expansion](/syntax/pe.md)
+- [Command substitution](/syntax/expansion/cmdsubst.md)
+- [Arithmetic expansion](/syntax/expansion/arith.md)
 
 You can avoid that by quoting the tag:
 
@@ -238,10 +238,10 @@ How to make a program quiet (assuming all output goes to `STDOUT` and
 ## See also
 
 - Internal: [Illustrated Redirection
-  Tutorial](/howto/redirection_tutorial)
-- Internal: [The noclobber option](/commands/builtin/set#tag_noclobber)
-- Internal: [The exec builtin command](/commands/builtin/exec)
+  Tutorial](/howto/redirection_tutorial.md)
+- Internal: [The noclobber option](/commands/builtin/set.md#tag_noclobber)
+- Internal: [The exec builtin command](/commands/builtin/exec.md)
 - Internal: [Simple commands parsing and
-  execution](/syntax/grammar/parser_exec)
-- Internal: [Process substitution syntax](/syntax/expansion/proc_subst)
-- Internal: [Obsolete and deprecated syntax](/scripting/obsolete)
+  execution](/syntax/grammar/parser_exec.md)
+- Internal: [Process substitution syntax](/syntax/expansion/proc_subst.md)
+- Internal: [Obsolete and deprecated syntax](/scripting/obsolete.md)

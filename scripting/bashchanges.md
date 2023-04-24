@@ -19,8 +19,8 @@ Note that the `shopt` builtin command first appeared in Bash 2.0.
 
 For this topic, see also
 
-- [shell_options](/internals/shell_options)
-- [set](/commands/builtin/set)
+- [shell_options](/internals/shell_options.md)
+- [set](/commands/builtin/set.md)
 
 | Feature or change description   | Appeared in Bash version | See also/remarks                                                                |
 |:--------------------------------|:-------------------------|:--------------------------------------------------------------------------------|
@@ -77,7 +77,7 @@ For this topic, see also
 
 For this topic, see also
 
-- [printf](/commands/builtin/printf)
+- [printf](/commands/builtin/printf.md)
 
 | Feature or change description                               | Appeared in Bash version | See also/remarks                                       |
 |:------------------------------------------------------------|:-------------------------|:-------------------------------------------------------|
@@ -98,8 +98,8 @@ For this topic, see also
 
 For this topic, see also
 
-- [conditional_expression](/syntax/ccmd/conditional_expression)
-- [classictest](/commands/classictest)
+- [conditional_expression](/syntax/ccmd/conditional_expression.md)
+- [classictest](/commands/classictest.md)
 
 | Feature or change description                                      | Appeared in Bash version | See also/remarks                                                                     |
 |:-------------------------------------------------------------------|:-------------------------|:-------------------------------------------------------------------------------------|
@@ -121,23 +121,23 @@ For this topic, see also
 | `bashbug`             | new                                                                                                                                        | 1.14.0                   |                                                                                               |
 | `select`              | new                                                                                                                                        | 1.14.0                   |                                                                                               |
 | `disown`              | new                                                                                                                                        | 2.0                      |                                                                                               |
-| `shopt`               | new                                                                                                                                        | 2.0                      | [shopt](/commands/builtin/shopt)                                                              |
+| `shopt`               | new                                                                                                                                        | 2.0                      | [shopt](/commands/builtin/shopt.md)                                                              |
 | `declare`             | new options `-a` and `-F`                                                                                                                  | 2.0                      |                                                                                               |
 | `enable`              | builtin has basic plugin support (dlopen)                                                                                                  | 2.0                      |                                                                                               |
 | `exec`                | options `-l`, `-c` and `-a`                                                                                                                | 2.0                      |                                                                                               |
-| `read`                | options `-p`, `-e` and `-a`                                                                                                                | 2.0                      | [read](/commands/builtin/read)                                                                |
-| `readonly`            | option `-a`                                                                                                                                | 2.0                      | [arrays](/syntax/arrays)                                                                      |
+| `read`                | options `-p`, `-e` and `-a`                                                                                                                | 2.0                      | [read](/commands/builtin/read.md)                                                                |
+| `readonly`            | option `-a`                                                                                                                                | 2.0                      | [arrays](/syntax/arrays.md)                                                                      |
 | `time`                | new keyword                                                                                                                                | 2.0                      |                                                                                               |
 | `shopt`               | `-p` (reusable output)                                                                                                                     | 2.02                     |                                                                                               |
 | `umask`               | `-p` (reusable output)                                                                                                                     | 2.02                     |                                                                                               |
 | `complete`            | new                                                                                                                                        | 2.04-devel               | for and together with support for programmable completion                                     |
 | `compgen`             | new                                                                                                                                        | 2.04-devel               | for and together with support for programmable completion                                     |
-| `read`                | options `-t`, `-n`, `-d`, `-s`                                                                                                             | 2.04-devel               | [read](/commands/builtin/read)                                                                |
+| `read`                | options `-t`, `-n`, `-d`, `-s`                                                                                                             | 2.04-devel               | [read](/commands/builtin/read.md)                                                                |
 | `for ((...;...;...))` | new                                                                                                                                        | 2.04-devel               | KSH93                                                                                         |
 | `set`                 | print shell functions in a format reusable as input                                                                                        | 2.05-beta1               |                                                                                               |
 | `for`                 | allow an empty word list                                                                                                                   | 2.05a-alpha1             |                                                                                               |
-| `read`                | new option `-u`                                                                                                                            | 2.05b-alpha1             | [read](/commands/builtin/read)                                                                |
-| `caller`              | new                                                                                                                                        | 3.0                      | [caller](/commands/builtin/caller)                                                            |
+| `read`                | new option `-u`                                                                                                                            | 2.05b-alpha1             | [read](/commands/builtin/read.md)                                                                |
+| `caller`              | new                                                                                                                                        | 3.0                      | [caller](/commands/builtin/caller.md)                                                            |
 | `coproc`              | new                                                                                                                                        | 4.0-alpha                |                                                                                               |
 | `declare`             | new options `-l` and `-u`                                                                                                                  | 4.0-alpha                | together with case-changing expansion forms                                                   |
 | `case`                | new action list terminators '';;& and '';&                                                                                                 | 4.0-alpha                | ksh93: only `;&`. zsh and mksh: `;|`. mksh: all 4, (`;;&` is undocumented Bash compatibility) |
@@ -241,7 +241,7 @@ For this topic, see also
 
 For this topic, see also
 
-- [pe](/syntax/pe).
+- [pe](/syntax/pe.md).
 
 | Feature or change description                                                                        | Appeared in Bash version | Remarks                                                                                                       |
 |:-----------------------------------------------------------------------------------------------------|:-------------------------|:--------------------------------------------------------------------------------------------------------------|
@@ -282,8 +282,8 @@ For this topic, see also
 
 For this topic, see also
 
-- [arith_expr](/syntax/arith_expr)
-- [arith](/syntax/expansion/arith)
+- [arith_expr](/syntax/arith_expr.md)
+- [arith](/syntax/expansion/arith.md)
 
 | Feature or change description              | Appeared in Bash version | Remarks                                   |
 |:-------------------------------------------|:-------------------------|:------------------------------------------|
@@ -299,7 +299,7 @@ For this topic, see also
 
 For this topic, see also
 
-- [redirection](/syntax/redirection)
+- [redirection](/syntax/redirection.md)
 
 | Feature or change description                                                         | Appeared in Bash version | Remarks |
 |:--------------------------------------------------------------------------------------|:-------------------------|:--------|

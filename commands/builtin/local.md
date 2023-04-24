@@ -6,7 +6,7 @@
 
 ## Description
 
-`local` is identical to [declare](/commands/builtin/declare) in every
+`local` is identical to [declare](/commands/builtin/declare.md) in every
 way, and takes all the same options, with two exceptions:
 
 - Usage outside of a function is an error. Both `declare` and `local`

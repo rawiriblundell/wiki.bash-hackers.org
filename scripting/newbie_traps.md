@@ -24,8 +24,8 @@ them with <u>Bash</u>, and run them with Bash in <u>native mode</u>.
 
 See also:
 
-- [Bash startup mode: SH mode](/scripting/bashbehaviour#sh_mode)
-- [Bash run mode: POSIX mode](/scripting/bashbehaviour#posix_run_mode)
+- [Bash startup mode: SH mode](/scripting/bashbehaviour.md#sh_mode)
+- [Bash run mode: POSIX mode](/scripting/bashbehaviour.md#posix_run_mode)
 
 ### Your script named "test" doesn't execute
 
@@ -62,7 +62,7 @@ filename expansion happens **after** that, so there is a chance that
 
 Please see:
 
-- [brace](/syntax/expansion/brace)
+- [brace](/syntax/expansion/brace.md)
 
 ## Test-command
 
@@ -73,7 +73,7 @@ Please see:
 Please see:
 
 - [The classic test command -
-  pitfalls](/commands/classictest#pitfalls_summarized)
+  pitfalls](/commands/classictest.md#pitfalls_summarized)
 
 ## Variables
 
@@ -161,7 +161,7 @@ of the referenced variables/parameters. i.e. **not** (`$PATH`):
     echo "The first character of PATH is ${PATH:0:1}"
 
 Note that if you are using variables in [arithmetic
-expressions](/syntax/arith_expr), then the bare **name** is allowed:
+expressions](/syntax/arith_expr.md), then the bare **name** is allowed:
 
     ((a=$a+7))         # Add 7 to a
     ((a = a + 7))      # Add 7 to a.  Identical to the previous command.
@@ -171,10 +171,10 @@ expressions](/syntax/arith_expr), then the bare **name** is allowed:
 
 Please see:
 
-- [words](/syntax/words)
-- [quoting](/syntax/quoting)
-- [wordsplit](/syntax/expansion/wordsplit)
-- [pe](/syntax/pe)
+- [words](/syntax/words.md)
+- [quoting](/syntax/quoting.md)
+- [wordsplit](/syntax/expansion/wordsplit.md)
+- [pe](/syntax/pe.md)
 
 ### Exporting
 
@@ -204,7 +204,7 @@ In this case, the export command is of no use.
 
 Please see:
 
-- [processtree](/scripting/processtree)
+- [processtree](/scripting/processtree.md)
 
 ## Exit codes
 
@@ -240,7 +240,7 @@ you need only a "true/false" exit indication, there's no need for `$?`.
 
 See also:
 
-- [Exit codes](/scripting/basics#exit_codes)
+- [Exit codes](/scripting/basics.md#exit_codes)
 
 ### Output vs. Return Value
 
@@ -274,5 +274,5 @@ Make sure you're using the form you intended:
 
 Please see:
 
-- [intro](/syntax/ccmd/intro)
-- [cmdsubst](/syntax/expansion/cmdsubst)
+- [intro](/syntax/ccmd/intro.md)
+- [cmdsubst](/syntax/expansion/cmdsubst.md)

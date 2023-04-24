@@ -27,7 +27,7 @@
 This compound command provides a kind of menu. The user is prompted with
 a *numbered list* of the given words, and is asked to input the index
 number of the word. If a word was selected, the variable `<NAME>` is set
-to this word, and the [list](/syntax/basicgrammar#lists) `<LIST>` is
+to this word, and the [list](/syntax/basicgrammar.md#lists) `<LIST>` is
 executed.
 
 If no `in <WORDS>` is given, then the positional parameters are taken as

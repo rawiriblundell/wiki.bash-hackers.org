@@ -225,27 +225,27 @@ Some stuff I didn't like there:
 
 - uses external, unreliable command `which` instead of builtin `type -p`
   to determinate the location of a program
-- lacks [sane quoting](/syntax/quoting)
+- lacks [sane quoting](/syntax/quoting.md)
 - uses `function SOMENAME` keyword instead of the common
   POSIX-compatible variant `SOMENAME()` to [define a
-  function](/syntax/basicgrammar#shell_function_definitions)
+  function](/syntax/basicgrammar.md#shell_function_definitions)
 - uses backticks instead of `$( ... )` for [command
-  substitution](/syntax/expansion/cmdsubst)
+  substitution](/syntax/expansion/cmdsubst.md)
 - incorrectly uses an additional array to store [positional
-  parameters](/scripting/posparams), disregarding that `$@` already is
+  parameters](/scripting/posparams.md), disregarding that `$@` already is
   array-like
 - uses `echo -e` and the historical control character `\c` instead of
-  modern [printf](/commands/builtin/printf)
+  modern [printf](/commands/builtin/printf.md)
 - uses `` for a in `seq 1 10` `` instead of a [C-like counter
-  loop](/syntax/ccmd/c_for) `for ((a=1; a <= 10; a++))`
+  loop](/syntax/ccmd/c_for.md) `for ((a=1; a <= 10; a++))`
 - the `if/else` stuff looks as if the `test` (or `[ ...]`) command is
   the only thing Bash can execute and check
 - a `for` loop example that **will** explode on
-  [word-splitting](/syntax/expansion/wordsplit)
+  [word-splitting](/syntax/expansion/wordsplit.md)
 - arithmetic tests (the while/until loop examples) using the historical
   "old way" with `test`, not [modern arithmetic
-  components](/syntax/arith_expr)
-- useless [quoting](/syntax/quoting) of one-word strings (not that it
+  components](/syntax/arith_expr.md)
+- useless [quoting](/syntax/quoting.md) of one-word strings (not that it
   hurts per se, but it shows that the author has no clue when to use
   quotes)
 - a weird construct I don't understand (example for stdout/err
@@ -274,7 +274,7 @@ learning tutorial - but that is not the goal.
 One point (I **have** to criticize **something** ;-) ):
 
 - the article says that there are no [C-styled
-  for-loops](/syntax/ccmd/c_for) in Bash, this is wrong (maybe the
+  for-loops](/syntax/ccmd/c_for.md) in Bash, this is wrong (maybe the
   article is for a very old (pre `2.05b`) Bash version)
 
 \<BOOKMARK:rv_bprogintrohowto\>
@@ -288,14 +288,14 @@ A few points:
 
 - uses `function SOMENAME` instead of more common and most portable
   `SOMENAME()` to [define
-  functions](/syntax/basicgrammar#shell_function_definitions)
-- wrong description of the [if clause](/syntax/ccmd/if_clause) (says
+  functions](/syntax/basicgrammar.md#shell_function_definitions)
+- wrong description of the [if clause](/syntax/ccmd/if_clause.md) (says
   "the base \[...\] is `if [expression];`", which is wrong)
-- a [for-loop example](/syntax/ccmd/classic_for) will explode due to
-  [word splitting](/syntax/expansion/wordsplit) (`for i in $( ls )` -
+- a [for-loop example](/syntax/ccmd/classic_for.md) will explode due to
+  [word splitting](/syntax/expansion/wordsplit.md) (`for i in $( ls )` -
   evil!)
 - the mentioned C-like for-loop is not the [real C-like
-  for-loop](/syntax/ccmd/c_for), it just calls `seq(1)`+
+  for-loop](/syntax/ccmd/c_for.md), it just calls `seq(1)`+
 - Many syntax errors: The examples won't even parse correctly
 
 I like the style this article is written in. If the points are fixed, it

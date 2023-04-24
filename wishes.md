@@ -46,7 +46,7 @@ bash I found here:
 
 - <http://linux.derkeiler.com/Mailing-Lists/Debian/2006-08/msg00462.html>
 
-> added to [the for-loop-article](/syntax/ccmd/classic_for) as example,
+> added to [the for-loop-article](/syntax/ccmd/classic_for.md) as example,
 > but also made some critical comments; thanks --- Jan
 
 ### Getopts tutorial

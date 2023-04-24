@@ -6,7 +6,7 @@ This information was taken from a Bash version "`4.1`", every now and
 then new options are added, so likely, this list isn't complete.
 
 The shell-options can be set with the [shopt builtin
-command](/commands/builtin/shopt).
+command](/commands/builtin/shopt.md).
 
 ## Shell options
 
@@ -78,8 +78,8 @@ stopped.
 
 If set, Bash checks the window size after each command and, if
 necessary, updates the values of the variables
-[LINES](/syntax/shellvars#LINES) and
-[COLUMNS](/syntax/shellvars#COLUMNS).
+[LINES](/syntax/shellvars.md#LINES) and
+[COLUMNS](/syntax/shellvars.md#COLUMNS).
 
 ### cmdhist
 
@@ -174,7 +174,7 @@ match a glob.
 | Shell mode: | all       | Default: | off     |
 
 If set, Bash includes filenames beginning with a `.` (dot) in the
-results of [pathname expansion](/syntax/expansion/globs).
+results of [pathname expansion](/syntax/expansion/globs.md).
 
 ### execfail
 
@@ -209,7 +209,7 @@ If set, behavior intended for use by debuggers is enabled.
 |:------------|:----------|:---------|:------------|
 | Shell mode: | all       | Default: | off         |
 
-If set, the extended [pattern matching](/syntax/pattern) features are
+If set, the extended [pattern matching](/syntax/pattern.md) features are
 enabled. See the important note below under [Parser
 configurations](#parser_configurations).
 
@@ -220,7 +220,7 @@ configurations](#parser_configurations).
 | Shell mode: | all        | Default: | on            |
 
 If set, `$'string'` and `$"string"` quoting is performed within
-[parameter expansions](/syntax/pe) enclosed in double quotes. See the
+[parameter expansions](/syntax/pe.md) enclosed in double quotes. See the
 important note below under [Parser
 configurations](#parser_configurations).
 
@@ -240,7 +240,7 @@ result in an error message.
 | Shell mode: | interactive     | Default: | on        |
 
 If set, the suffixes specified by the
-[FIGNORE](/syntax/shellvars#FIGNORE) shell variable cause words to be
+[FIGNORE](/syntax/shellvars.md#FIGNORE) shell variable cause words to be
 ignored when performing word completion even if the ignored words are
 the only possible completions. This option is enabled by default.
 
@@ -280,7 +280,7 @@ message format".
 | Shell mode: | interactive (?) | Default: | off     |
 
 If set, the history list is appended to the file named by the value of
-the [HISTFILE](/syntax/shellvars#HISTFILE) variable when the shell
+the [HISTFILE](/syntax/shellvars.md#HISTFILE) variable when the shell
 exits, rather than overwriting the file.
 
 ### histreedit
@@ -324,7 +324,7 @@ interactive login shell exits.
 |:------------|:-----------------------|:---------|:--------|
 | Shell mode: | interactive            | Default: | on      |
 
-Allow [commenting](/scripting/basics#comments) in interactive shells, on
+Allow [commenting](/scripting/basics.md#comments) in interactive shells, on
 by default.
 
 ### lastpipe
@@ -505,5 +505,5 @@ parsed:
 
 ## See also
 
-- Internal: [shopt builtin command](/commands/builtin/shopt)
-- Internal: [set builtin command](/commands/builtin/set)
+- Internal: [shopt builtin command](/commands/builtin/shopt.md)
+- Internal: [set builtin command](/commands/builtin/set.md)

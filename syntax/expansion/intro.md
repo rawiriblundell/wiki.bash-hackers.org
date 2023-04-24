@@ -21,7 +21,7 @@ string "`$mystring`" to "`Hello world`", so that `echo` will only see
 
 After all these expansions and substitutions are done, all quotes that
 are not meant literally (i.e., [the quotes that marked contiguous
-words](/syntax/quoting), as part of the shell syntax) are removed from
+words](/syntax/quoting.md), as part of the shell syntax) are removed from
 the commandline text, so the called program won't see them. This step is
 called **quote-removal**.
 
@@ -30,28 +30,28 @@ called **quote-removal**.
 Saw a possible expansion syntax but don't know what it is? Here's a
 small list.
 
-- [Parameter expansion](/syntax/pe) (it has its own [overview
-  section](/syntax/pe#overview))
+- [Parameter expansion](/syntax/pe.md) (it has its own [overview
+  section](/syntax/pe.md#overview))
   - `$WORD`
   - `${STUFF...}`
-- [Pathname expansion](/syntax/expansion/globs)
+- [Pathname expansion](/syntax/expansion/globs.md)
   - `*.txt`
   - `page_1?.html`
-- [Arithmetic expansion](/syntax/expansion/arith)
+- [Arithmetic expansion](/syntax/expansion/arith.md)
   - `$(( EXPRESSION ))`
   - `$[ EXPRESSION ]`
-- [Command substitution](/syntax/expansion/cmdsubst)
+- [Command substitution](/syntax/expansion/cmdsubst.md)
   - `$( COMMAND )`
   - `` ` COMMAND ` ``
-- [Tilde expansion](/syntax/expansion/tilde)
+- [Tilde expansion](/syntax/expansion/tilde.md)
   - `~`
   - `~+`
   - `~-`
-- [Brace expansion](/syntax/expansion/brace)
+- [Brace expansion](/syntax/expansion/brace.md)
   - `{X,Y,Z}`
   - `{X..Y}`
   - `{X..Y..Z}`
-- [Process substitution](/syntax/expansion/proc_subst)
+- [Process substitution](/syntax/expansion/proc_subst.md)
   - `<( COMMAND )`
   - `>( COMMAND )`
 
@@ -64,25 +64,25 @@ splitting!).
 
 The order is (from first to last):
 
-- [Brace expansion](/syntax/expansion/brace)
-- [Tilde expansion](/syntax/expansion/tilde)
+- [Brace expansion](/syntax/expansion/brace.md)
+- [Tilde expansion](/syntax/expansion/tilde.md)
 - The following expansions happen at the same time, in a left-to-right
   fashion on the commandline (see below)
-  - [Parameter expansion](/syntax/pe)
-  - [Arithmetic expansion](/syntax/expansion/arith)
-  - [Command substitution](/syntax/expansion/cmdsubst)
-- [Word splitting](/syntax/expansion/wordsplit)
-- [Pathname expansion](/syntax/expansion/globs)
+  - [Parameter expansion](/syntax/pe.md)
+  - [Arithmetic expansion](/syntax/expansion/arith.md)
+  - [Command substitution](/syntax/expansion/cmdsubst.md)
+- [Word splitting](/syntax/expansion/wordsplit.md)
+- [Pathname expansion](/syntax/expansion/globs.md)
 
-[Process substitution](/syntax/expansion/proc_subst) is performed
-**simultaneously** with [parameter expansion](/syntax/pe), [command
-substitution](/syntax/expansion/cmdsubst) and [arithmetic
-expansion](/syntax/expansion/arith). It is only performed when the
+[Process substitution](/syntax/expansion/proc_subst.md) is performed
+**simultaneously** with [parameter expansion](/syntax/pe.md), [command
+substitution](/syntax/expansion/cmdsubst.md) and [arithmetic
+expansion](/syntax/expansion/arith.md). It is only performed when the
 underlying operating system supports it.
 
-The 3 steps [parameter expansion](/syntax/pe), [arithmetic
-expansion](/syntax/expansion/arith) and [command
-substitution](/syntax/expansion/cmdsubst) happen at the same time in a
+The 3 steps [parameter expansion](/syntax/pe.md), [arithmetic
+expansion](/syntax/expansion/arith.md) and [command
+substitution](/syntax/expansion/cmdsubst.md) happen at the same time in a
 left-to-right fashion on nthe commandline. This means
 
     i=1

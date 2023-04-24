@@ -10,12 +10,12 @@ parameters are described below:
 
 | Parameter(s)     | Description                                                                                                                     |
 |------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| `$0`             | the first positional parameter, equivalent to `argv[0]` in C, see [the first argument](/scripting/posparams#the_first_argument) |
+| `$0`             | the first positional parameter, equivalent to `argv[0]` in C, see [the first argument](/scripting/posparams.md#the_first_argument) |
 | `$FUNCNAME`      | the function name (<u>**attention**</u>: inside a function, `$0` is still the `$0` of the shell, **not** the function name)     |
 | `$1 ... $9`      | the argument list elements from 1 to 9                                                                                          |
-| `${10} ... ${N}` | the argument list elements beyond 9 (note the [parameter expansion](/syntax/pe) syntax!)                                        |
-| `$*`             | all positional parameters except `$0`, see [mass usage](/scripting/posparams#mass_usage)                                        |
-| `$@`             | all positional parameters except `$0`, see [mass usage](/scripting/posparams#mass_usage)                                        |
+| `${10} ... ${N}` | the argument list elements beyond 9 (note the [parameter expansion](/syntax/pe.md) syntax!)                                        |
+| `$*`             | all positional parameters except `$0`, see [mass usage](/scripting/posparams.md#mass_usage)                                        |
+| `$@`             | all positional parameters except `$0`, see [mass usage](/scripting/posparams.md#mass_usage)                                        |
 | `$#`             | the number of arguments, not counting `$0`                                                                                      |
 
 These positional parameters reflect exactly what was given to the script
@@ -104,7 +104,7 @@ There are several ways to loop through the positional parameters.
 
 ------------------------------------------------------------------------
 
-You can code a [C-style for-loop](/syntax/ccmd/c_for) using `$#` as the
+You can code a [C-style for-loop](/syntax/ccmd/c_for.md) using `$#` as the
 end value. On every iteration, the `shift`-command is used to shift the
 argument list:
 
@@ -135,7 +135,7 @@ a given wordlist. The loop uses the positional parameters as a wordlist:
 
 The next method is similar to the first example (the `for` loop), but it
 doesn't test for reaching `$#`. It shifts and checks if `$1` still
-expands to something, using the [test command](/commands/classictest):
+expands to something, using the [test command](/commands/classictest.md):
 
     while [ "$1" ]
     do
@@ -146,7 +146,7 @@ expands to something, using the [test command](/commands/classictest):
 Looks nice, but has the disadvantage of stopping when `$1` is empty
 (null-string). Let's modify it to run as long as `$1` is defined (but
 may be null), using [parameter expansion for an alternate
-value](/syntax/pe#use_an_alternate_value):
+value](/syntax/pe.md#use_an_alternate_value):
 
     while [ "${1+defined}" ]; do
       echo "$1"
@@ -156,7 +156,7 @@ value](/syntax/pe#use_an_alternate_value):
 ### Getopts
 
 There is a [small tutorial dedicated to
-`getopts`](/howto/getopts_tutorial) (*under construction*).
+`getopts`](/howto/getopts_tutorial.md) (*under construction*).
 
 ## Mass usage
 
@@ -202,8 +202,8 @@ Well, let's just say: **You almost always want a quoted `"$@"`!**
 
 Another way to mass expand the positional parameters is similar to what
 is possible for a range of characters using [substring
-expansion](/syntax/pe#substring_expansion) on normal parameters and the
-mass expansion range of [arrays](/syntax/arrays).
+expansion](/syntax/pe.md#substring_expansion) on normal parameters and the
+mass expansion range of [arrays](/syntax/arrays.md).
 
 `${@:START:COUNT}`
 
@@ -236,7 +236,7 @@ when the positional parameters are in use. A `START` of `1` begins at
 ## Setting Positional Parameters
 
 Setting positional parameters with command line arguments, is not the
-only way to set them. The [builtin command, set](/commands/builtin/set)
+only way to set them. The [builtin command, set](/commands/builtin/set.md)
 may be used to "artificially" change the positional parameters from
 inside the script or function:
 
@@ -381,16 +381,16 @@ options" for `ls` and doesn't change anything after it:
 ### Using getopts
 
 There is a [small tutorial dedicated to
-`getopts`](/howto/getopts_tutorial) (*under construction*).
+`getopts`](/howto/getopts_tutorial.md) (*under construction*).
 
 ## See also
 
-- Internal: [getopts_tutorial](/howto/getopts_tutorial)
-- Internal: [while_loop](/syntax/ccmd/while_loop)
-- Internal: [c_for](/syntax/ccmd/c_for)
-- Internal: [arrays](/syntax/arrays) (for equivalent syntax for
+- Internal: [getopts_tutorial](/howto/getopts_tutorial.md)
+- Internal: [while_loop](/syntax/ccmd/while_loop.md)
+- Internal: [c_for](/syntax/ccmd/c_for.md)
+- Internal: [arrays](/syntax/arrays.md) (for equivalent syntax for
   mass-expansion)
 - Internal: [Substring expansion on a
-  parameter](/syntax/pe#substring_expansion) (for equivalent syntax for
+  parameter](/syntax/pe.md#substring_expansion) (for equivalent syntax for
   mass-expansion)
 - Dictionary, internal: [parameter](/dict/terms/parameter)

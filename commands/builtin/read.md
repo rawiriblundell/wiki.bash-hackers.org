@@ -16,13 +16,13 @@ Since Bash 4.3-alpha, `read` skips any `NUL` (ASCII code 0) characters
 in input.
 
 If `<NAME...>` is given, the line is word-split using
-[IFS](/syntax/shellvars#IFS) variable, and every word is assigned to one
+[IFS](/syntax/shellvars.md#IFS) variable, and every word is assigned to one
 `<NAME>`. The remaining words are all assigned to the last `<NAME>` if
 more words than variable names are present.
 
 \<WRAP center round info 90%\> If no `<NAME>` is given, the whole line
 read (without performing word-splitting!) is assigned to the shell
-variable [REPLY](/syntax/shellvars#REPLY). Then, `REPLY` really contains
+variable [REPLY](/syntax/shellvars.md#REPLY). Then, `REPLY` really contains
 the line as it was read, without stripping pre- and postfix spaces and
 other things!
 
@@ -33,7 +33,7 @@ other things!
 \</WRAP\>
 
 If a timeout is given, or if the shell variable
-[TMOUT](/syntax/shellvars#TMOUT) is set, it is counted from initially
+[TMOUT](/syntax/shellvars.md#TMOUT) is set, it is counted from initially
 waiting for input until the completion of input (i.e. until the complete
 line is read). That means the timeout can occur during input, too.
 
@@ -64,7 +64,7 @@ Of course it's valid to set individual array elements without using
 \<WRAP center round important 90%\>
 
 Reading into array elements using the syntax above **may cause [pathname
-expansion](/syntax/expansion/globs) to occur**.
+expansion](/syntax/expansion/globs.md) to occur**.
 
 Example: You are in a directory with a file named `x1`, and you want to
 read into an array `x`, index `1` with
@@ -172,7 +172,7 @@ Take care that you cannot use a pipe:
 Why? because the commands of the pipe run in subshells that cannot
 modify the parent shell. As a result, the variables `col1`, `col2` and
 `col3` of the parent shell are not modified (see article:
-[processtree](/scripting/processtree)).
+[processtree](/scripting/processtree.md)).
 
 If the variable has more fields than there are variables, the last
 variable get the remaining of the line:
@@ -184,7 +184,7 @@ variable get the remaining of the line:
 
 By default reads separates the line in fields using spaces or tabs. You
 can modify this using the *special variable*
-[IFS](/syntax/shellvars#IFS), the Internal Field Separator.
+[IFS](/syntax/shellvars.md#IFS), the Internal Field Separator.
 
     IFS=":" read -r col1 col2 <<< "hello:world"
     printf "col1: %s col2: %s\n" "$col1" "$col2"
@@ -264,6 +264,6 @@ date/time string are recognized correctly.
 
 ## See also
 
-- Internal: [The printf builtin command](/commands/builtin/printf)
+- Internal: [The printf builtin command](/commands/builtin/printf.md)
 
 [^1]: fixed in 4.2-rc1

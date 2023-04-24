@@ -26,10 +26,10 @@ The `if`-clause can control the script's flow (what's executed) by
 looking at the exit codes of other commands.
 
 All commandsets `<LIST>` are interpreted as [command
-lists](/syntax/basicgrammar#lists), thus they can contain the whole
-palette from [simple commands](/syntax/basicgrammar#simple_commands)
-over [pipelines](/syntax/basicgrammar#pipelines) to [compound
-commands](/syntax/basicgrammar#compound_commands) (and their
+lists](/syntax/basicgrammar.md#lists), thus they can contain the whole
+palette from [simple commands](/syntax/basicgrammar.md#simple_commands)
+over [pipelines](/syntax/basicgrammar.md#pipelines) to [compound
+commands](/syntax/basicgrammar.md#compound_commands) (and their
 combination) as condition.
 
 ### Operation
@@ -88,4 +88,4 @@ example above (multiple commands):
 
 ## See also
 
-- Internal: [the classic test command](/commands/classictest)
+- Internal: [the classic test command](/commands/classictest.md)

@@ -32,88 +32,88 @@ only there to prevent SPAM.
 
 - [Bash v4 - a rough overview](bash4.md) (unmaintained, since Bash 4 is
   more or less standard)
-- [style](/scripting/style.md) -- an assorted collection of style and optic
+- [style](/scripting/style.md.md) -- an assorted collection of style and optic
   hints
-- [basics](/scripting/basics.md)
-- [newbie_traps](/scripting/newbie_traps.md)
-- [bashbehaviour](/scripting/bashbehaviour.md)
-- [posparams](/scripting/posparams.md)
-- [processtree](/scripting/processtree.md)
-- [obsolete](/scripting/obsolete.md)
-- [nonportable](/scripting/nonportable.md)
-- [debuggingtips](/scripting/debuggingtips.md)
-- [terminalcodes](/scripting/terminalcodes.md)
-- [tutoriallist](/scripting/tutoriallist.md)
+- [basics](/scripting/basics.md.md)
+- [newbie_traps](/scripting/newbie_traps.md.md)
+- [bashbehaviour](/scripting/bashbehaviour.md.md)
+- [posparams](/scripting/posparams.md.md)
+- [processtree](/scripting/processtree.md.md)
+- [obsolete](/scripting/obsolete.md.md)
+- [nonportable](/scripting/nonportable.md.md)
+- [debuggingtips](/scripting/debuggingtips.md.md)
+- [terminalcodes](/scripting/terminalcodes.md.md)
+- [tutoriallist](/scripting/tutoriallist.md.md)
 
 ## Code snippets
 
-There is a [section that holds small code snippets](/snipplets/start.md).
+There is a [section that holds small code snippets](/snipplets/start.md.md).
 
-See also [some Bash source code excerpts](/misc/readthesourceluke.md).
+See also [some Bash source code excerpts](/misc/readthesourceluke.md.md).
 
 ## How to
 
-[Doing specific tasks: concepts, methods, ideas](/howto/start.md):
+[Doing specific tasks: concepts, methods, ideas](/howto/start.md.md):
 
-- [Simple locking (against parallel run)](/howto/mutex.md)
-- [Rudimentary config files for your scripts](/howto/conffile.md)
-- [Editing files with ed(1)](/howto/edit-ed.md)
-- [Collapsing Functions](/howto/collapsing_functions.md)
-- [Illustrated Redirection Tutorial](/howto/redirection_tutorial.md)
+- [Simple locking (against parallel run)](/howto/mutex.md.md)
+- [Rudimentary config files for your scripts](/howto/conffile.md.md)
+- [Editing files with ed(1)](/howto/edit-ed.md.md)
+- [Collapsing Functions](/howto/collapsing_functions.md.md)
+- [Illustrated Redirection Tutorial](/howto/redirection_tutorial.md.md)
 - [Calculate with dc(1)](/howto/calculate-dc.md)
-- [Introduction to pax - the POSIX archiver](/howto/pax.md)
-- [getopts_tutorial](/howto/getopts_tutorial.md) (*under construction!*)
-- [dissectabadoneliner](/howto/dissectabadoneliner.md) An example of a bad
+- [Introduction to pax - the POSIX archiver](/howto/pax.md.md)
+- [getopts_tutorial](/howto/getopts_tutorial.md.md) (*under construction!*)
+- [dissectabadoneliner](/howto/dissectabadoneliner.md.md) An example of a bad
   oneliner, breakdown and fix (by `kojoro`)
-- [Write tests for ./your-script.sh](/howto/testing-your-scripts.md) by
+- [Write tests for ./your-script.sh](/howto/testing-your-scripts.md.md) by
   using bashtest util
 
 ## Bash syntax and operations
 
-- [Bash features overview by version](/scripting/bashchanges.md)
-- [Basic grammar rules](/syntax/basicgrammar.md)
-- [Quoting and character escaping](/syntax/quoting.md)
-- [Parsing and execution](/syntax/grammar/parser_exec.md)
-- [Some words about words...](/syntax/words.md)
-- [Patterns and pattern matching](/syntax/pattern.md)
-- [Arithmetic expressions](/syntax/arith_expr.md)
-- [List of shell options](/internals/shell_options.md)
-- [Redirection](/syntax/redirection.md)
-- [Special parameters and shell variables](/syntax/shellvars.md)
-- [Arrays](/syntax/arrays.md)
+- [Bash features overview by version](/scripting/bashchanges.md.md)
+- [Basic grammar rules](/syntax/basicgrammar.md.md)
+- [Quoting and character escaping](/syntax/quoting.md.md)
+- [Parsing and execution](/syntax/grammar/parser_exec.md.md)
+- [Some words about words...](/syntax/words.md.md)
+- [Patterns and pattern matching](/syntax/pattern.md.md)
+- [Arithmetic expressions](/syntax/arith_expr.md.md)
+- [List of shell options](/internals/shell_options.md.md)
+- [Redirection](/syntax/redirection.md.md)
+- [Special parameters and shell variables](/syntax/shellvars.md.md)
+- [Arrays](/syntax/arrays.md.md)
 
 ## Compound commands
 
-| **[Compound commands overview](/syntax/ccmd/intro.md)** |                                                                  |
+| **[Compound commands overview](/syntax/ccmd/intro.md.md)** |                                                                  |
 |:-----------------------------------------------------|------------------------------------------------------------------|
 | Grouping                                             |                                                                  |
-| `{ ...; }`                                           | [command grouping](/syntax/ccmd/grouping_plain.md)                  |
-| `( ... )`                                            | [command grouping in a subshell](/syntax/ccmd/grouping_subshell.md) |
+| `{ ...; }`                                           | [command grouping](/syntax/ccmd/grouping_plain.md.md)                  |
+| `( ... )`                                            | [command grouping in a subshell](/syntax/ccmd/grouping_subshell.md.md) |
 | Conditionals                                         |                                                                  |
-| `[[ ... ]]`                                          | [conditional expression](/syntax/ccmd/conditional_expression.md)    |
-| `if ...; then ...; fi`                               | [conditional branching](/syntax/ccmd/if_clause.md)                  |
-| `case ... esac`                                      | [pattern-based branching](/syntax/ccmd/case.md)                     |
+| `[[ ... ]]`                                          | [conditional expression](/syntax/ccmd/conditional_expression.md.md)    |
+| `if ...; then ...; fi`                               | [conditional branching](/syntax/ccmd/if_clause.md.md)                  |
+| `case ... esac`                                      | [pattern-based branching](/syntax/ccmd/case.md.md)                     |
 | Loops                                                |                                                                  |
-| `for word in ...; do ...; done`                      | [classic for-loop](/syntax/ccmd/classic_for.md)                     |
-| `for ((x=1; x<=10; x++)); do ...; done`              | [C-style for-loop](/syntax/ccmd/c_for.md)                           |
-| `while ...; do ...; done`                            | [while loop](/syntax/ccmd/while_loop.md)                            |
-| `until ...; do ...; done`                            | [until loop](/syntax/ccmd/until_loop.md)                            |
+| `for word in ...; do ...; done`                      | [classic for-loop](/syntax/ccmd/classic_for.md.md)                     |
+| `for ((x=1; x<=10; x++)); do ...; done`              | [C-style for-loop](/syntax/ccmd/c_for.md.md)                           |
+| `while ...; do ...; done`                            | [while loop](/syntax/ccmd/while_loop.md.md)                            |
+| `until ...; do ...; done`                            | [until loop](/syntax/ccmd/until_loop.md.md)                            |
 | Misc                                                 |                                                                  |
-| `(( ... ))`                                          | [arithmetic evaluation](/syntax/ccmd/arithmetic_eval.md)            |
-| `select word in ...; do ...; done`                   | [user selections](/syntax/ccmd/user_select.md)                      |
+| `(( ... ))`                                          | [arithmetic evaluation](/syntax/ccmd/arithmetic_eval.md.md)            |
+| `select word in ...; do ...; done`                   | [user selections](/syntax/ccmd/user_select.md.md)                      |
 
 ## Expansions and substitutions
 
-| **[Introduction to expansions and substitutions](/syntax/expansion/intro.md)** |                                                      |
+| **[Introduction to expansions and substitutions](/syntax/expansion/intro.md.md)** |                                                      |
 |:----------------------------------------------------------------------------|------------------------------------------------------|
-| `{A,B,C} {A..C}`                                                            | [Brace expansion](/syntax/expansion/brace.md)           |
-| `~/ ~root/`                                                                 | [Tilde expansion](/syntax/expansion/tilde.md)           |
-| `$FOO ${BAR%.mp3}`                                                          | [Parameter expansion](/syntax/pe.md)                    |
-| `` `command` $(command) ``                                                  | [Command substitution](/syntax/expansion/cmdsubst.md)   |
-| `<(command) >(command)`                                                     | [Process substitution](/syntax/expansion/proc_subst.md) |
-| `$((1 + 2 + 3)) $[4 + 5 + 6]`                                               | [Arithmetic expansion](/syntax/expansion/arith.md)      |
-| `Hello <---> Word!`                                                         | [Word splitting](/syntax/expansion/wordsplit.md)        |
-| `/data/*-av/*.mp?`                                                          | [Pathname expansion](/syntax/expansion/globs.md)        |
+| `{A,B,C} {A..C}`                                                            | [Brace expansion](/syntax/expansion/brace.md.md)           |
+| `~/ ~root/`                                                                 | [Tilde expansion](/syntax/expansion/tilde.md.md)           |
+| `$FOO ${BAR%.mp3}`                                                          | [Parameter expansion](/syntax/pe.md.md)                    |
+| `` `command` $(command) ``                                                  | [Command substitution](/syntax/expansion/cmdsubst.md.md)   |
+| `<(command) >(command)`                                                     | [Process substitution](/syntax/expansion/proc_subst.md.md) |
+| `$((1 + 2 + 3)) $[4 + 5 + 6]`                                               | [Arithmetic expansion](/syntax/expansion/arith.md.md)      |
+| `Hello <---> Word!`                                                         | [Word splitting](/syntax/expansion/wordsplit.md.md)        |
+| `/data/*-av/*.mp?`                                                          | [Pathname expansion](/syntax/expansion/globs.md.md)        |
 
 
 ## Builtin Commands
@@ -137,7 +137,7 @@ datastructures.</th>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/declare.md">declare</a></td>
+href="/commands/builtin/declare.md.md">declare</a></td>
 <td>Display or set shell variables or functions along with
 attributes.</td>
 <td style="text-align: center;"><code>typeset</code></td>
@@ -167,14 +167,14 @@ href="/commands/builtin/local">local</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/read.mdonly">readonly</a></td>
+href="/commands/builtin/read.md.mdonly">readonly</a></td>
 <td>Mark variables or functions as read-only.</td>
 <td style="text-align: center;"><code>typeset -r</code></td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/unset.md">unset</a></td>
+href="/commands/builtin/unset.md.md">unset</a></td>
 <td>Unset variables and functions.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
@@ -197,7 +197,7 @@ streams.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/syntax/keywords/coproc.md">coproc</a></td>
+href="/syntax/keywords/coproc.md.md">coproc</a></td>
 <td>Co-processes: Run a command in the background with pipes for reading
 / writing its standard streams.</td>
 <td style="text-align: center;">-</td>
@@ -212,21 +212,21 @@ href="/commands/builtin/echo">echo</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/mapfile.md">mapfile</a></td>
+href="/commands/builtin/mapfile.md.md">mapfile</a></td>
 <td>Read lines of input into an array.</td>
 <td style="text-align: center;"><code>readarray</code></td>
 <td style="text-align: center;">builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/printf.md">printf</a></td>
+href="/commands/builtin/printf.md.md">printf</a></td>
 <td>"advanced <code>echo</code>."</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/read.md">read</a></td>
+href="/commands/builtin/read.md.md">read</a></td>
 <td>Read input into variables or arrays, or split strings into fields
 using delimiters.</td>
 <td style="text-align: center;">-</td>
@@ -241,14 +241,14 @@ Commands that modify shell behavior, change special options, assist in debugging
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/caller.md">caller</a></td>
+href="/commands/builtin/caller.md.md">caller</a></td>
 <td>Identify/print execution frames.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/set.md">set</a></td>
+href="/commands/builtin/set.md.md">set</a></td>
 <td>Set the positional parameters and/or set options that affect shell
 behaviour.</td>
 <td style="text-align: center;">-</td>
@@ -256,7 +256,7 @@ behaviour.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/shopt.md">shopt</a></td>
+href="/commands/builtin/shopt.md.md">shopt</a></td>
 <td>set/get some bash-specific shell options.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
@@ -305,7 +305,7 @@ href="/commands/builtin/continueBreak">continue / break</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/let.md">let</a></td>
+href="/commands/builtin/let.md.md">let</a></td>
 <td>Arithmetic evaluation simple command.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
@@ -319,7 +319,7 @@ href="/commands/builtin/return">return</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/classictest.md">[</a></td>
+href="/commands/classictest.md.md">[</a></td>
 <td>The classic <code>test</code> simple command.</td>
 <td style="text-align: center;">test</td>
 <td style="text-align: center;">builtin</td>
@@ -334,7 +334,7 @@ signals, process groups, subshells.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/exec.md">exec</a></td>
+href="/commands/builtin/exec.md.md">exec</a></td>
 <td>Replace the current shell process or set redirections.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
@@ -385,7 +385,7 @@ href="/commands/builtin/wait">wait</a></td>
 
 ## Dictionary
 
-| :bulb: A list of expressions, words, and their meanings is [here](/dict/index.md). |
+| :bulb: A list of expressions, words, and their meanings is [here](/dict/index.md.md). |
 | --- |
 
 ## Links
@@ -474,7 +474,7 @@ href="/commands/builtin/wait">wait</a></td>
   commands](https://www.rosehosting.com/blog/basic-shell-commands-after-putty-ssh-logon/)
 - [Bashphorism list from the Bash IRC channel on
   Freenode](/misc/bashphorisms)
-- [Some more or less funny commandline stuff](/misc/shell_humor.md)
+- [Some more or less funny commandline stuff](/misc/shell_humor.md.md)
 - [How to Enable SSH on Ubuntu
   Tutorial](https://thishosting.rocks/how-to-enable-ssh-on-ubuntu/)
 - [How To Make an Awesome Custom Shell with
@@ -499,7 +499,7 @@ If you have critiques or suggestions, please feel free to send a mail
 using the contact form on the right. Note that there is a simple
 discussion option below every article.
 
-Please also see the [imprint](/user/thebonsai/imprint.md) if you have
+Please also see the [imprint](/user/thebonsai/imprint.md.md) if you have
 problems with the site and its contents (legality, ...)!
 
 It also would be nice to drop a line when

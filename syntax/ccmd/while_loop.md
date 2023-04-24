@@ -9,12 +9,12 @@
 ## Description
 
 The while-loop is relatively simple in what it does: it executes the
-[command list](/syntax/basicgrammar#lists) `<LIST1>` and if the exit
+[command list](/syntax/basicgrammar.md#lists) `<LIST1>` and if the exit
 code of it was 0 (TRUE) it executes `<LIST2>`. This happens again and
 again until `<LIST1>` returns FALSE.
 
 This is exactly the opposite of the [until
-loop](/syntax/ccmd/until_loop).
+loop](/syntax/ccmd/until_loop.md).
 
 :!: Like all loops (both `for`-loops, `while` and `until`), this loop
 can be
@@ -35,7 +35,7 @@ or `0` (`TRUE`) if none was executed.
 
 ## See also
 
-- Internal: [The until loop](/syntax/ccmd/until_loop)
+- Internal: [The until loop](/syntax/ccmd/until_loop.md)
 - Internal: [code examples of the read builtin
-  command](/commands/builtin/read#code_examples) to see how you can loop
+  command](/commands/builtin/read.md#code_examples) to see how you can loop
   over lines

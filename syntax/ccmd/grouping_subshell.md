@@ -6,7 +6,7 @@
 
 ## Description
 
-The [list](/syntax/basicgrammar#lists) `<LIST>` is executed in a
+The [list](/syntax/basicgrammar.md#lists) `<LIST>` is executed in a
 separate shell - a subprocess. No changes to the environment (variables
 etc...) are reflected in the "main shell".
 
@@ -31,5 +31,5 @@ echo "$PWD" # Still in the original directory.
 
 ## See also
 
-- [grouping commands](/syntax/ccmd/grouping_plain)
+- [grouping commands](/syntax/ccmd/grouping_plain.md)
 - [Subshells on Greycat's wiki](http://mywiki.wooledge.org/SubShell)

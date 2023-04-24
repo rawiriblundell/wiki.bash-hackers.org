@@ -8,7 +8,7 @@
 
 `echo` outputs it's args to stdout, separated by spaces, followed by a
 newline. The return status is always `0`. If the
-[shopt](/commands/builtin/shopt) option `xpg_echo` is set, Bash
+[shopt](/commands/builtin/shopt.md) option `xpg_echo` is set, Bash
 dynamically determines whether echo should expand escape characters
 (listed below) by default based on the current platform. `echo` doesn't
 interpret `--` as the end of options, and will simply print this string
@@ -68,7 +68,7 @@ if given.
 
 - **Never use options to `echo`! *Ever*!** Any time you feel tempted to
   use `echo -e`, `-n`, or any other special feature of echo, **use
-  [printf](/commands/builtin/printf) instead!** If portability is a
+  [printf](/commands/builtin/printf.md) instead!** If portability is a
   requirement, you should consider using `printf` *exclusively* and just
   ignore that `echo` even exists. If you must use `echo -e` and refuse
   to use `printf`, it is usually acceptable to use ''echo \$'...' ''if
@@ -78,11 +78,11 @@ if given.
 
 - `ksh93` has a `print` command, which if coding specifically for
   `ksh93` should be preferred over `echo`.
-  [printf](/commands/builtin/printf) still includes most of the
+  [printf](/commands/builtin/printf.md) still includes most of the
   functionality of both, and should usually be the most preferred
   option.
 
 ## See also
 
-- [printf](/commands/builtin/printf)
+- [printf](/commands/builtin/printf.md)
 - <http://cfajohnson.com/shell/cus-faq.html#Q0b>

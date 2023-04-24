@@ -66,7 +66,7 @@ empty"!).
 
 ### Iterate over array elements
 
-With some array syntax (see [arrays](/syntax/arrays)) you can easily
+With some array syntax (see [arrays](/syntax/arrays.md)) you can easily
 "feed" the for-loop to iterate over all elements in an array (by
 mass-expanding all elements):
 
@@ -88,7 +88,7 @@ done
 ### List positional parameters
 
 You can use this
-[function](/syntax/basicgrammar#shell_function_definitions) to test how
+[function](/syntax/basicgrammar.md#shell_function_definitions) to test how
 arguments to a command will be interpreted and parsed, and finally used:
 
 ``` bash
@@ -138,7 +138,7 @@ done
 This is just an example. In *general*
 
 - it's not a good idea to parse `ls(1)` output
-- the [while loop](/syntax/ccmd/while_loop) (using the `read` command)
+- the [while loop](/syntax/ccmd/while_loop.md) (using the `read` command)
   is a better joice to iterate over lines
 
 ### Nested for-loops
@@ -157,7 +157,7 @@ done
 ### Loop over a number range
 
 Beginning in Bash 4, you can also use "sequence expression" form of
-[brace expansion](/syntax/expansion/brace) syntax when looping over
+[brace expansion](/syntax/expansion/brace.md) syntax when looping over
 numbers, and this form does not create leading zeroes unless you ask for
 them:
 

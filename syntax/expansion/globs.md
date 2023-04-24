@@ -11,16 +11,16 @@ expanded filenames as its arguments (here, all filenames matching
     grep "changes:" *.log
 
 The base syntax for the pathname expansion is the [pattern
-matching](/syntax/pattern) syntax. The pattern you describe is matched
+matching](/syntax/pattern.md) syntax. The pattern you describe is matched
 against all existing filenames and the matching ones are substituted.
 Since this substitution happens **after [word
-splitting](/syntax/expansion/wordsplit)**, all resulting filenames are
+splitting](/syntax/expansion/wordsplit.md)**, all resulting filenames are
 literal and treated as separate words, no matter how many spaces or
 other `IFS`-characters they contain.
 
 ## Normal behaviour
 
-- with [the set command](/commands/builtin/set) (`-f`, `noglob`) you can
+- with [the set command](/commands/builtin/set.md) (`-f`, `noglob`) you can
   entirely disable pathname expansion
 - when matching a pathname, the slash-character (`/`) always needs to be
   matched explicitly
@@ -49,7 +49,7 @@ other `IFS`-characters they contain.
   globs (e.g. `[A-Z]`) use C locale order rather than the configured
   locale's order (i.e. `ABC...abc...` instead of e.g. `AaBbCc...`) -
   since 4.3-alpha
-- the variable [GLOBIGNORE](/syntax/shellvars#GLOBIGNORE) can be set to
+- the variable [GLOBIGNORE](/syntax/shellvars.md#GLOBIGNORE) can be set to
   a colon-separated list of patterns to be removed from the list before
   it is returned
 
@@ -66,7 +66,7 @@ In this example, no files matched the pattern, so the glob was left
 intact (a literal asterisk, followed by dot-txt).
 
 This can be very annoying, for example when you drive a
-[for-loop](/syntax/ccmd/classic_for) using the pathname expansion:
+[for-loop](/syntax/ccmd/classic_for.md) using the pathname expansion:
 
     for filename in *.txt; do
       echo "=== BEGIN: $filename ==="
@@ -106,8 +106,8 @@ followed by two numbers, followed by at least 3 more characters:
 
 ## See also
 
-- [Introduction to expansion and substitution](/syntax/expansion/intro)
-- [pattern matching syntax](/syntax/pattern)
-- [the set builtin command](/commands/builtin/set)
-- [the shopt builtin command](/commands/builtin/shopt)
-- [list of shell options](/internals/shell_options)
+- [Introduction to expansion and substitution](/syntax/expansion/intro.md)
+- [pattern matching syntax](/syntax/pattern.md)
+- [the set builtin command](/commands/builtin/set.md)
+- [the shopt builtin command](/commands/builtin/shopt.md)
+- [list of shell options](/internals/shell_options.md)

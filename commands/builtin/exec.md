@@ -28,7 +28,7 @@ shell without executing any program.
 - on redirection errors it returns 1, otherwise 0
 - on exec failures:
   - a non-interactive shell terminates; if the [shell option
-    execfail](/internals/shell_options#execfail) is set `exec` returns
+    execfail](/internals/shell_options.md#execfail) is set `exec` returns
     failure
   - in an interactive shell, `exec` returns failure
 
@@ -82,4 +82,4 @@ exec >/var/adm/my.log 2>&1
 
 ## See also
 
-- [redirection](/syntax/redirection)
+- [redirection](/syntax/redirection.md)

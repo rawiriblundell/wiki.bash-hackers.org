@@ -28,7 +28,7 @@ When you use `shift 1`, they will be changed to:
 | 2   | a    |
 | 3   | test |
 
-The [special parameter](/syntax/shellvars#special_parameters) `$#` will
+The [special parameter](/syntax/shellvars.md#special_parameters) `$#` will
 reflect the final number of positional parameters.
 
 If the number given is 0, no changes are made to the positional

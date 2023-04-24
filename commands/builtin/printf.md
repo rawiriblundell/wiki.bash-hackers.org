@@ -93,9 +93,9 @@ the format string is re-used until the last argument is interpreted. If
 fewer format specifiers than arguments are present, then number-formats
 are set to zero, while string-formats are set to null (empty).
 
-Take care to avoid [word splitting](/syntax/expansion/wordsplit), as
+Take care to avoid [word splitting](/syntax/expansion/wordsplit.md), as
 accidentally passing the wrong number of arguments can produce wildly
-different and unexpected results. See [this article](/syntax/words).
+different and unexpected results. See [this article](/syntax/words.md).
 
 | :warning:  <u>**Again, attention:**</u> When a numerical format
 expects a number, the internal `printf`-command will use the common Bash
@@ -454,7 +454,7 @@ fmt++;
 
 - Assigning to variables: The `printf -v` way is slightly different to
   the way using command-substitution. [Command
-  substitution](/syntax/expansion/cmdsubst) removes trailing newlines
+  substitution](/syntax/expansion/cmdsubst.md) removes trailing newlines
   before substituting the text, `printf -v` preserves all output.
 
 ## See also

@@ -8,7 +8,7 @@ syntax, with some extensions and derivations.
 If scripts need to be portable, some of the BASH-specific syntax
 elements should be avoided. Others should be avoided for all scripts,
 e.g. if there is a corresponding POSIX(r)-compatible syntax (see
-[obsolete](/scripting/obsolete)).
+[obsolete](/scripting/obsolete.md)).
 
 Some syntax elements have a BASH-specific, and a portable[^1]) pendant.
 In these cases the portable syntax should be preferred.
@@ -72,7 +72,7 @@ or<br />
 <code>test EXPRESSION</code></td>
 <td style="text-align: center;">The Bashish test keyword is reserved by
 POSIX(r), but not defined. Use the old fashioned way with the
-<code>test</code> command. See <a href="/commands/classictest">the
+<code>test</code> command. See <a href="/commands/classictest.md">the
 classic test command</a></td>
 <td style="text-align: center;">POSIX(r) and others</td>
 </tr>
@@ -159,7 +159,7 @@ Why? (list of known behaviours)
   variables or the build options, especially KSH93 and Bash)
 
 For these, and possibly other, reasons, POSIX (SUS) standardized the
-existance of [the `printf` command](/commands/builtin/printf).
+existance of [the `printf` command](/commands/builtin/printf.md).
 
 ### Parameter expansions
 
@@ -173,7 +173,7 @@ existance of [the `printf` command](/commands/builtin/printf).
 
 #### PWD
 
-[PWD](/syntax/shellvars#PWD) is POSIX but not Bourne. Most shells are
+[PWD](/syntax/shellvars.md#PWD) is POSIX but not Bourne. Most shells are
 *not POSIX* in that they don't ignore the value of the `PWD` environment
 variable. Workaround to fix the value of `PWD` at the start of your
 script:
@@ -182,7 +182,7 @@ script:
 
 #### RANDOM
 
-[RANDOM](/syntax/shellvars#RANDOM) is Bash/KSH/ZSH specific variable
+[RANDOM](/syntax/shellvars.md#RANDOM) is Bash/KSH/ZSH specific variable
 that will give you a random number up to 32767 (2^15-1). Among many
 other available external options, you can use awk to generate a random
 number. There are multiple implementations of awk and which version your
@@ -208,12 +208,12 @@ complaining about possible stupid code!*
 
 #### SECONDS
 
-[SECONDS](/syntax/shellvars#SECONDS) is KSH/ZSH/Bash specific. Avoid it.
+[SECONDS](/syntax/shellvars.md#SECONDS) is KSH/ZSH/Bash specific. Avoid it.
 Find another method.
 
 ### Check for a command in PATH
 
-The [PATH](/syntax/shellvars#PATH) variable is a colon-delimited list of
+The [PATH](/syntax/shellvars.md#PATH) variable is a colon-delimited list of
 directory names, so it's basically possible to run a loop and check
 every `PATH` component for the command you're looking for and for
 executability.

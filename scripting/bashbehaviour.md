@@ -67,7 +67,7 @@ conforming to the POSIX(r) standard as well. The profile files read are
 `/etc/profile` and `~/.profile`, if it's a login shell.
 
 If it's not a login shell, the environment variable
-[ENV](/syntax/shellvars#ENV) is evaluated and the resulting filename is
+[ENV](/syntax/shellvars.md#ENV) is evaluated and the resulting filename is
 used as the name of the startup file.
 
 After the startup files are read, Bash enters the [POSIX(r) compatiblity
@@ -83,7 +83,7 @@ mode (for running, not for starting!)](#posix_run_mode).
 
 When Bash is started in POSIX(r) mode, it follows the POSIX(r) standard
 for startup files. In this mode, **interactive shells** expand the
-[ENV](/syntax/shellvars#ENV) variable and commands are read and executed
+[ENV](/syntax/shellvars.md#ENV) variable and commands are read and executed
 from the file whose name is the expanded value.  
 No other startup files are read. Hence, a non-interactive shell doesn't
 read any startup files in POSIX(r) mode.
@@ -92,7 +92,7 @@ read any startup files in POSIX(r) mode.
 
 - the commandline option `--posix` is specified
 - the environment variable
-  [POSIXLY_CORRECT](/syntax/shellvars#POSIXLY_CORRECT) is set
+  [POSIXLY_CORRECT](/syntax/shellvars.md#POSIXLY_CORRECT) is set
 
 ### Quick startup file reference
 
@@ -301,12 +301,12 @@ FIXME help me to find out what breaks in POSIX(r) mode!
 - Bash starting as `sh` (the basename of `argv[0]` is `sh`)
 - starting Bash with the commandline option `--posix`
 - on startup, the environment variable
-  [POSIXLY_CORRECT](/syntax/shellvars#POSIXLY_CORRECT) is set
+  [POSIXLY_CORRECT](/syntax/shellvars.md#POSIXLY_CORRECT) is set
 - the command `set -o posix`
 
 <u>**Tests for the POSIX(r) mode:**</u>
 
-- the variable [SHELLOPTS](/syntax/shellvars#SHELLOPTS) contains `posix`
+- the variable [SHELLOPTS](/syntax/shellvars.md#SHELLOPTS) contains `posix`
   in its list
 
 ### Restricted shell
@@ -316,9 +316,9 @@ far more controlled and limited than the standard shell mode. It acts
 like normal Bash with the following restrictions:
 
 - the `cd` command can't be used to change directories
-- the variables [SHELL](/syntax/shellvars#SHELL),
-  [PATH](/syntax/shellvars#PATH), [ENV](/syntax/shellvars#ENV) and
-  [BASH_ENV](/syntax/shellvars#BASH_ENV) can't be set or unset
+- the variables [SHELL](/syntax/shellvars.md#SHELL),
+  [PATH](/syntax/shellvars.md#PATH), [ENV](/syntax/shellvars.md#ENV) and
+  [BASH_ENV](/syntax/shellvars.md#BASH_ENV) can't be set or unset
 - command names that contain a `/` (slash) can't be called (hence you're
   limited to `PATH`)
 - filenames containing a `/` (slash) can't be specified as argument to
@@ -327,7 +327,7 @@ like normal Bash with the following restrictions:
   the `-p` option of the `hash` builtin command
 - function definitions are not inherited from the environment at shell
   startup
-- the environment variable [SHELLOPTS](/syntax/shellvars#SHELLOPTS) is
+- the environment variable [SHELLOPTS](/syntax/shellvars.md#SHELLOPTS) is
   ignored at startup
 - redirecting output using the `>`, `>|`, `<>`, `>&`, `&>`, and `>>`
   redirection operators isn't allowed

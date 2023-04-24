@@ -4,7 +4,7 @@
 
     $[ <EXPRESSION> ]
 
-The [arithmetic expression](/syntax/arith_expr) `<EXPRESSION>` is
+The [arithmetic expression](/syntax/arith_expr.md) `<EXPRESSION>` is
 evaluated and expands to the result. The output of the arithmetic
 expansion is guaranteed to be one word and a digit in Bash.
 
@@ -29,7 +29,7 @@ function printSum {
 **Note** that in Bash you don't need the arithmetic expansion to check
 for the boolean value of an arithmetic expression. This can be done
 using the [arithmetic evaluation compound
-command](/syntax/ccmd/arithmetic_eval):
+command](/syntax/ccmd/arithmetic_eval.md):
 
 ``` bash
 printf %s 'Enter a number: ' >&2
@@ -66,8 +66,8 @@ echo $(($x[0]))   # Error. This expands to $((1[0])), an invalid expression.
 
 ## See also
 
-- [arithmetic expressions](/syntax/arith_expr)
-- [arithmetic evaluation compound command](/syntax/ccmd/arithmetic_eval)
-- [Introduction to expansion and substitution](/syntax/expansion/intro)
+- [arithmetic expressions](/syntax/arith_expr.md)
+- [arithmetic evaluation compound command](/syntax/ccmd/arithmetic_eval.md)
+- [Introduction to expansion and substitution](/syntax/expansion/intro.md)
 - [POSIX
   definition](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_06_04)

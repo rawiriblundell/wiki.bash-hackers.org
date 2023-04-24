@@ -1,6 +1,6 @@
 # The shopt builtin command
 
-The `shopt` builtin manages [shell options](/internals/shell_options), a
+The `shopt` builtin manages [shell options](/internals/shell_options.md), a
 set of boolean (`on`/`off`) configuration variables that control the
 behaviour of the shell.
 
@@ -11,13 +11,13 @@ behaviour of the shell.
 ## Description
 
 Note: Some of these options and other shell options can also be set with
-[the set builtin](/commands/builtin/set).
+[the set builtin](/commands/builtin/set.md).
 
 ### Options
 
 | Option | Description                                                                                                              |
 |--------|--------------------------------------------------------------------------------------------------------------------------|
-| `-o`   | Restrict the values of `<OPTNAME...>` to only those also known by [the set builtin](/commands/builtin/set)               |
+| `-o`   | Restrict the values of `<OPTNAME...>` to only those also known by [the set builtin](/commands/builtin/set.md)               |
 | `-p`   | Print all shell options and their current value. **Default**.                                                            |
 | `-q`   | Quiet mode. Set exit code if named option is set. For multiple options: `TRUE` if all options are set, `FALSE` otherwise |
 | `-s`   | Enable (<u>s</u>et) the shell options named by `<OPTNAME...>` or list all *enabled* options if no names are given        |
@@ -47,5 +47,5 @@ The `shopt` command is not portable accross different shells.
 
 ## See also
 
-- Internal: [The set builtin command](/commands/builtin/set)
-- Internal: [List of shell options](/internals/shell_options)
+- Internal: [The set builtin command](/commands/builtin/set.md)
+- Internal: [List of shell options](/internals/shell_options.md)

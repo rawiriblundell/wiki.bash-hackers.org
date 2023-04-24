@@ -55,13 +55,13 @@ Insert **echos** everywhere you can, and print to `stderr`:
     echo "DEBUG: current i=$i" >&2
 
 If you read input from **anywhere**, such as a file or [command
-substitution](/syntax/expansion/cmdsubst), print the debug output with
+substitution](/syntax/expansion/cmdsubst.md), print the debug output with
 literal quotes, to see leading and trailing spaces!
 
     pid=$(< fooservice.pid)
     echo "DEBUG: read from file: pid=\"$pid\"" >&2
 
-Bash's [printf](/commands/builtin/printf) command has the `%q` format,
+Bash's [printf](/commands/builtin/printf.md) command has the `%q` format,
 which is handy for verifying whether strings are what they appear to be.
 
     foo=$(< inputfile)
@@ -77,17 +77,17 @@ There are two useful debug outputs for that task (both are written to
   - print commands to be executed to `stderr` as if they were read from
     input (script file or keyboard)
   - print everything **before** any ([substitution and
-    expansion](/syntax/expansion/intro), ...) is applied
+    expansion](/syntax/expansion/intro.md), ...) is applied
 - `set -x` mode (`set -o xtrace`)
   - print everything as if it were executed, after [substitution and
-    expansion](/syntax/expansion/intro) is applied
+    expansion](/syntax/expansion/intro.md) is applied
   - indicate the depth-level of the subshell (by default by prefixing a
     `+` (plus) sign to the displayed command)
   - indicate the recognized words after [word
-    splitting](/syntax/expansion/wordsplit) by marking them like `'x y'`
+    splitting](/syntax/expansion/wordsplit.md) by marking them like `'x y'`
   - in shell version 4.1, this debug output can be printed to a
     configurable file descriptor, rather than sdtout by setting the
-    [BASH_XTRACEFD](/syntax/shellvars#BASH_XTRACEFD) variable.
+    [BASH_XTRACEFD](/syntax/shellvars.md#BASH_XTRACEFD) variable.
 
 **<u>Hint:</u>** These modes can be entered when calling Bash:
 
@@ -97,7 +97,7 @@ There are two useful debug outputs for that task (both are written to
 ### Simple example of how to interpret xtrace output
 
 Here's a simple command (a string comparison using the [classic test
-command](/commands/classictest)) executed while in `set -x` mode:
+command](/commands/classictest.md)) executed while in `set -x` mode:
 
     set -x
     foo="bar baz"
@@ -125,7 +125,7 @@ words (which you would have realized if you READ THE ERROR MESSAGES ;)
 (by AnMaster)
 
 `xtrace` output would be more useful if it contained source file and
-line number. Add this assignment [PS4](/syntax/shellvars#PS4) at the
+line number. Add this assignment [PS4](/syntax/shellvars.md#PS4) at the
 beginning of your script to enable the inclusion of that information:
 
     export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
@@ -219,7 +219,7 @@ This can be wrapped in a shell function for more readable code.
 
 Usually indicates exactly what it says: An unexpected end of file. It's
 unexpected because Bash waits for the closing of a [compound
-command](/syntax/ccmd/intro):
+command](/syntax/ccmd/intro.md):
 
 - did you close your `do` with a `done`?
 - did you close your `if` with a `fi`?
@@ -230,7 +230,7 @@ command](/syntax/ccmd/intro):
 **<u>Note:</u>** It seems that here-documents (tested on versions
 `1.14.7`, `2.05b`, `3.1.17` and `4.0`) are correctly terminated when
 there is an EOF before the end-of-here-document tag (see
-[redirection](/syntax/redirection)). The reason is unknown, but it seems
+[redirection](/syntax/redirection.md)). The reason is unknown, but it seems
 to be deliberate. Bash 4.0 added an extra message for this:
 `` warning: here-document at line <N> delimited by end-of-file (wanted `<MARKER>') ``
 
@@ -246,7 +246,7 @@ These *unmatched errors* occur with:
 
 - double-quote pairs
 - single-quote pairs (also `$'string'`!)
-- missing a closing `}` with [parameter expansion syntax](/syntax/pe)
+- missing a closing `}` with [parameter expansion syntax](/syntax/pe.md)
 
 ### Too many arguments
 
@@ -365,7 +365,7 @@ the possibility that`^M` is involved. Find and eliminate it!  |
 
 ## See also
 
-- [the set builtin command](/commands/builtin/set) (for `-v` and `-x`)
+- [the set builtin command](/commands/builtin/set.md) (for `-v` and `-x`)
 
 FIXME
 

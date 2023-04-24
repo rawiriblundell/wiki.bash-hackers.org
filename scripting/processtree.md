@@ -25,8 +25,8 @@ into the environment with the bash builtin command `export`:
 
     export MYVAR
 
-Common system variables like [PATH](/syntax/shellvars#PATH) or
-[HOME](/syntax/shellvars#HOME) are usually part of the environment (as
+Common system variables like [PATH](/syntax/shellvars.md#PATH) or
+[HOME](/syntax/shellvars.md#HOME) are usually part of the environment (as
 set by login scripts or programs).
 
 ## Executing programs
@@ -161,7 +161,7 @@ are run inside a subshell:
 
 ### Command substitution
 
-With [command substitution](/syntax/expansion/cmdsubst) you re-use the
+With [command substitution](/syntax/expansion/cmdsubst.md) you re-use the
 output of another command as text in your command line, for example to
 set a variable. The other command is run in a subshell:
 

@@ -71,14 +71,14 @@ below).
 Inside a weak-quoted string there's **no special interpretion of**:
 
 - spaces as word-separators (on inital command line splitting and on
-  [word splitting](/syntax/expansion/wordsplit)!)
+  [word splitting](/syntax/expansion/wordsplit.md)!)
 - single-quotes to introduce strong-quoting (see below)
 - characters for pattern matching
 - tilde expansion
 - pathname expansion
 - process substitution
 
-Everything else, especially [parameter expansion](/syntax/pe), is
+Everything else, especially [parameter expansion](/syntax/pe.md), is
 performed!
 
     ls -l "*"
@@ -197,7 +197,7 @@ documentation](http://www.gnu.org/software/gettext/manual/html_node/bash.html)
 
 ### String lists in for-loops
 
-The [classic for loop](/syntax/ccmd/classic_for) uses a list of words to
+The [classic for loop](/syntax/ccmd/classic_for.md) uses a list of words to
 iterate through. The list can also be in a variable:
 
     mylist="DOG CAT BIRD HORSE"
@@ -221,7 +221,7 @@ is seen as **one word**. The for loop iterates exactly one time, with
 ### Working out the test-command
 
 The command `test` or `[ ... ]` ([the classic test
-command](/commands/classictest)) is an ordinary command, so ordinary
+command](/commands/classictest.md)) is an ordinary command, so ordinary
 syntax rules apply. Let's take string comparison as an example:
 
     [ WORD = WORD ]
@@ -259,13 +259,13 @@ Now the command has three parameters, which makes sense for a binary
 (two argument) operator.
 
 **<u>Hint:</u>** Inside the [conditional
-expression](/syntax/ccmd/conditional_expression) (`[[ ]]`) Bash doesn't
+expression](/syntax/ccmd/conditional_expression.md) (`[[ ]]`) Bash doesn't
 perform word splitting, and thus you don't need to quote your variable
 references - they are always seen as "one word".
 
 ## See also
 
-- Internal: [Some words about words...](/syntax/words)
-- Internal: [Word splitting](/syntax/expansion/wordsplit)
+- Internal: [Some words about words...](/syntax/words.md)
+- Internal: [Word splitting](/syntax/expansion/wordsplit.md)
 - Internal: [Introduction to expansions and
-  substitutions](/syntax/expansion/intro)
+  substitutions](/syntax/expansion/intro.md)

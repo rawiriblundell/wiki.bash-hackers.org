@@ -4,13 +4,13 @@
 
 Arithmetic expressions are used in several situations:
 
-- [arithmetic evaluation command](/syntax/ccmd/arithmetic_eval)
-- [arithmetic expansion](/syntax/expansion/arith)
-- [substring parameter expansion](/syntax/pe#substring_expansion)
-- [the `let` builtin command](/commands/builtin/let)
-- [C-style for loop](/syntax/ccmd/c_for)
-- [array indexing](/syntax/arrays)
-- [conditional expressions](/syntax/ccmd/conditional_expression)
+- [arithmetic evaluation command](/syntax/ccmd/arithmetic_eval.md)
+- [arithmetic expansion](/syntax/expansion/arith.md)
+- [substring parameter expansion](/syntax/pe.md#substring_expansion)
+- [the `let` builtin command](/commands/builtin/let.md)
+- [C-style for loop](/syntax/ccmd/c_for.md)
+- [array indexing](/syntax/arrays.md)
+- [conditional expressions](/syntax/ccmd/conditional_expression.md)
 - Assignment statements, and arguments to declaration commands of
   variables with the integer attribute.
 
@@ -95,7 +95,7 @@ and what numbers are and how they are built, then you don't need
 different bases.
 
 If you want to convert between the usual bases (octal, decimal, hex),
-use [the printf command](/commands/builtin/printf) and its format
+use [the printf command](/commands/builtin/printf.md) and its format
 strings.
 
 ## Shell variables
@@ -121,7 +121,7 @@ When variables are referenced, the notation `1 + $X` is equivalent to
 the notation `1 + X`, both are allowed.
 
 When variables are referenced like `$X`, the rules of [parameter
-expansion](/syntax/pe) apply and are performed **before** the expression
+expansion](/syntax/pe.md) apply and are performed **before** the expression
 is evaluated. Thus, a construct like `${MYSTRING:4:3}` is valid inside
 an arithmetic expression.
 
@@ -130,7 +130,7 @@ an arithmetic expression.
 Unlike command exit and return codes, arithmetic expressions evaluate to
 logical "true" when they are not 0. When they are 0, they evaluate to
 "false". The [arithmetic evaluation compound
-command](/syntax/ccmd/arithmetic_eval) reverses the "truth" of an
+command](/syntax/ccmd/arithmetic_eval.md) reverses the "truth" of an
 arithmetic expression to match the "truth" of command exit codes:
 
 - if the arithmetic expression brings up a value not 0 (arithmetic
@@ -153,16 +153,16 @@ That means, the following `if`-clause will execute the `else`-thread:
 | Operator            | Description                                                                                        |
 |---------------------|----------------------------------------------------------------------------------------------------|
 | `<ID> = <EXPR>`     | normal assignment                                                                                  |
-| `<ID> *= <EXPR>`    | equivalent to `<ID> = <ID> * <EXPR>`, see [calculation operators](/syntax/arith_expr#calculations) |
-| `<ID> /= <EXPR>`    | equivalent to `<ID> = <ID> / <EXPR>`, see [calculation operators](/syntax/arith_expr#calculations) |
-| `<ID> %= <EXPR>`    | equivalent to `<ID> = <ID> % <EXPR>`, see [calculation operators](/syntax/arith_expr#calculations) |
-| `<ID> += <EXPR>`    | equivalent to `<ID> = <ID> + <EXPR>`, see [calculation operators](/syntax/arith_expr#calculations) |
-| `<ID> -= <EXPR>`    | equivalent to `<ID> = <ID> - <EXPR>`, see [calculation operators](/syntax/arith_expr#calculations) |
-| `<ID> <<= <NUMBER>` | equivalent to `<ID> = <ID> << <NUMBER>`, see [bit operations](/syntax/arith_expr#bit_operations)   |
-| `<ID> >>= <NUMBER>` | equivalent to `<ID> = <ID> >> <NUMBER>`, see [bit operations](/syntax/arith_expr#bit_operations)   |
-| `<ID> &= <EXPR>`    | equivalent to `<ID> = <ID> & <EXPR>`, see [bit operations](/syntax/arith_expr#bit_operations)      |
-| `<ID> ^= <EXPR>`    | equivalent to `<ID> = <ID> ^ <EXPR>`, see [bit operations](/syntax/arith_expr#bit_operations)      |
-| `<ID> |= <EXPR>`    | equivalent to `<ID> = <ID> | <EXPR>`, see [bit operations](/syntax/arith_expr#bit_operations)      |
+| `<ID> *= <EXPR>`    | equivalent to `<ID> = <ID> * <EXPR>`, see [calculation operators](/syntax/arith_expr.md#calculations) |
+| `<ID> /= <EXPR>`    | equivalent to `<ID> = <ID> / <EXPR>`, see [calculation operators](/syntax/arith_expr.md#calculations) |
+| `<ID> %= <EXPR>`    | equivalent to `<ID> = <ID> % <EXPR>`, see [calculation operators](/syntax/arith_expr.md#calculations) |
+| `<ID> += <EXPR>`    | equivalent to `<ID> = <ID> + <EXPR>`, see [calculation operators](/syntax/arith_expr.md#calculations) |
+| `<ID> -= <EXPR>`    | equivalent to `<ID> = <ID> - <EXPR>`, see [calculation operators](/syntax/arith_expr.md#calculations) |
+| `<ID> <<= <NUMBER>` | equivalent to `<ID> = <ID> << <NUMBER>`, see [bit operations](/syntax/arith_expr.md#bit_operations)   |
+| `<ID> >>= <NUMBER>` | equivalent to `<ID> = <ID> >> <NUMBER>`, see [bit operations](/syntax/arith_expr.md#bit_operations)   |
+| `<ID> &= <EXPR>`    | equivalent to `<ID> = <ID> & <EXPR>`, see [bit operations](/syntax/arith_expr.md#bit_operations)      |
+| `<ID> ^= <EXPR>`    | equivalent to `<ID> = <ID> ^ <EXPR>`, see [bit operations](/syntax/arith_expr.md#bit_operations)      |
+| `<ID> |= <EXPR>`    | equivalent to `<ID> = <ID> | <EXPR>`, see [bit operations](/syntax/arith_expr.md#bit_operations)      |
 
 ### Calculations
 
@@ -368,7 +368,7 @@ under set -e. \</WRAP\>
 
 ## Arithmetic expressions in Bash
 
-- [The C-style for-loop](/syntax/ccmd/c_for)
-- [Arithmetic expansion](/syntax/expansion/arith)
-- [Arithmetic evaluation compound command](/syntax/ccmd/arithmetic_eval)
-- [The "let" builtin command](/commands/builtin/let)
+- [The C-style for-loop](/syntax/ccmd/c_for.md)
+- [Arithmetic expansion](/syntax/expansion/arith.md)
+- [Arithmetic evaluation compound command](/syntax/ccmd/arithmetic_eval.md)
+- [The "let" builtin command](/commands/builtin/let.md)

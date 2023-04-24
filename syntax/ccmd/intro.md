@@ -2,8 +2,8 @@
 
 The main part of Bash's syntax are the so-called **compound commands**.
 They're called like that because they use "real" commands ([simple
-commands](/syntax/basicgrammar#simple_commands) or
-[lists](/syntax/basicgrammar#lists)) and knit some intelligence around
+commands](/syntax/basicgrammar.md#simple_commands) or
+[lists](/syntax/basicgrammar.md#lists)) and knit some intelligence around
 them. That is what the essential "Bash language" is made of.
 
 ## Command grouping
@@ -14,7 +14,7 @@ them. That is what the essential "Bash language" is made of.
 ## Conditional reactions
 
 Note that conditionals can also be scripted using
-[list](/syntax/basicgrammar#lists), which are syntax elements, not
+[list](/syntax/basicgrammar.md#lists), which are syntax elements, not
 commands.
 
 - the "new" test command: [conditional

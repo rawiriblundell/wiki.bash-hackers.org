@@ -10,14 +10,14 @@
 
 ## Description
 
-The [list](/syntax/basicgrammar#lists) `<LIST>` is simply executed in
+The [list](/syntax/basicgrammar.md#lists) `<LIST>` is simply executed in
 the **current** shell environment. The list must be terminated with a
 **newline** or **semicolon**. For parsing reasons, the curly braces must
 be separated from `<LIST>` by a **semicolon** and **blanks** if they're
 in the same line! [^1][^2]
 
 This is known as a **group command**. The return status is the [exit
-status (exit code)](/scripting/basics#exit_codes) of the list.
+status (exit code)](/scripting/basics.md#exit_codes) of the list.
 
 The input and output **filedescriptors** are cumulative:
 
@@ -30,7 +30,7 @@ The input and output **filedescriptors** are cumulative:
     } >output.txt
 
 This compound command also usually is the body of a [function
-definition](/syntax/basicgrammar#shell_function_definitions), though not
+definition](/syntax/basicgrammar.md#shell_function_definitions), though not
 the only compound command that's valid there:
 
     print_help() {

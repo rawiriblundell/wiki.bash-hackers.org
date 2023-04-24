@@ -18,7 +18,7 @@ process.
 ## Examples
 
 In this example, the literal text within the
-[here-document](/syntax/redirection#here_documents) is executed as Bash
+[here-document](/syntax/redirection.md#here_documents) is executed as Bash
 code exactly as though it were to appear within the script in place of
 the `eval` command below it.
 

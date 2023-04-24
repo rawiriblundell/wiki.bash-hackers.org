@@ -29,7 +29,7 @@ mechanisms available in the language.
 The `((;;))` syntax at the top of the loop is not an ordinary
 [arithmetic compound command](syntax/ccmd/arithmetic_eval), but is part
 of the C-style for-loop's own syntax. The three sections separated by
-semicolons are [arithmetic expression](/syntax/arith_expr) contexts.
+semicolons are [arithmetic expression](/syntax/arith_expr.md) contexts.
 Each time one of the sections is to be evaluated, the section is first
 processed for: brace, parameter, command, arithmetic, and process
 substitution/expansion as usual for arithmetic contexts. When the loop
@@ -60,7 +60,7 @@ loop can be:
 
 The equivalent construct using a [while loop](syntax/ccmd/while_loop)
 and the [arithmetic expression compound
-command](/syntax/ccmd/arithmetic_eval) would be structured as:
+command](/syntax/ccmd/arithmetic_eval.md) would be structured as:
 
     (( <EXPR1> ))
     while (( <EXPR2> )); do
@@ -135,7 +135,7 @@ ending at 1. If that bit is set in the `testbyte`, it prints "`1`", else
 bits).
 
     #!/usr/bin/env bash
-    # Example written for http://wiki.bash-hackers.org/syntax/ccmd/c_for#bits_analyzer
+    # Example written for http://wiki.bash-hackers.org/syntax/ccmd/c_for.md#bits_analyzer
     # Based on TheBonsai's original.
 
     function toBin {
@@ -231,6 +231,6 @@ variables.
 
 ## See also
 
-- Internal: [Arithmetic expressions](/syntax/arith_expr)
-- Internal: [The classic for-loop](/syntax/ccmd/classic_for)
-- Internal: [The while-loop](/syntax/ccmd/while_loop)
+- Internal: [Arithmetic expressions](/syntax/arith_expr.md)
+- Internal: [The classic for-loop](/syntax/ccmd/classic_for.md)
+- Internal: [The while-loop](/syntax/ccmd/while_loop.md)

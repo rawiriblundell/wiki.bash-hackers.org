@@ -175,5 +175,5 @@ using `unset`. Also, I prefer it as a matter of style.
 
 ## See also
 
-- [declare](/commands/builtin/declare)
-- [unset](/commands/builtin/unset)
+- [declare](/commands/builtin/declare.md)
+- [unset](/commands/builtin/unset.md)

@@ -214,7 +214,7 @@ each subsequent 2 iterations. The RETURN trap is unimportant.
 
 ## See also
 
-- [arrays](/syntax/arrays)
-- [read](/commands/builtin/read) - If you don't know about this yet, why
+- [arrays](/syntax/arrays.md)
+- [read](/commands/builtin/read.md) - If you don't know about this yet, why
   are you reading this page?
 - <http://mywiki.wooledge.org/BashFAQ/001> - It's FAQ 1 for a reason.

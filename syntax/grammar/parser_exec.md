@@ -4,7 +4,7 @@ FIXME work in progress...
 
 ![](keywords>bash shell scripting syntax language behaviour executing execution)
 
-Nearly everything in [Bash grammar](/syntax/basicgrammar) can be broken
+Nearly everything in [Bash grammar](/syntax/basicgrammar.md) can be broken
 down to a "simple command". The only thing Bash has to expand, evaluate
 and execute is the simple command.
 
@@ -27,16 +27,16 @@ the simple command **from left to right**):
     - variable assignments precede the command name and have the form
       `WORD=WORD`
     - redirections can appear anywhere in the simple command
-2.  The rest of the words are [expanded](/syntax/expansion/intro). If
+2.  The rest of the words are [expanded](/syntax/expansion/intro.md). If
     any words remain after expansion, the first word is taken to be the
     **name of the command** and the remaining words are the
     **arguments**.
-3.  [Redirections](/syntax/redirection) are performed.
+3.  [Redirections](/syntax/redirection.md) are performed.
 4.  The text after the `=` in each variable assignment undergoes [tilde
-    expansion](/syntax/expansion/tilde), [parameter
-    expansion](/syntax/pe), [command
-    substitution](/syntax/expansion/cmdsubst), [arithmetic
-    expansion](/syntax/expansion/arith), and quote removal before being
+    expansion](/syntax/expansion/tilde.md), [parameter
+    expansion](/syntax/pe.md), [command
+    substitution](/syntax/expansion/cmdsubst.md), [arithmetic
+    expansion](/syntax/expansion/arith.md), and quote removal before being
     assigned to the variable.
 
 If **no command name** results after expansion:
@@ -119,6 +119,6 @@ FIXME to be continued
 
 ## See also
 
-- Internal: [Redirection](/syntax/redirection)
+- Internal: [Redirection](/syntax/redirection.md)
 - Internal: [Introduction to expansions and
-  substitutions](/syntax/expansion/intro)
+  substitutions](/syntax/expansion/intro.md)

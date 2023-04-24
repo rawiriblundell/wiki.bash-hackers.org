@@ -13,9 +13,9 @@
 ## Description
 
 The `case`-statement can execute commands based on a [pattern
-matching](/syntax/pattern) decision. The word `<WORD>` is matched
+matching](/syntax/pattern.md) decision. The word `<WORD>` is matched
 against every pattern `<PATTERNn>` and on a match, the associated
-[list](/syntax/basicgrammar#lists) `<LISTn>` is executed. Every
+[list](/syntax/basicgrammar.md#lists) `<LISTn>` is executed. Every
 commandlist is terminated by `;;`. This rule is optional for the very
 last commandlist (i.e., you can omit the `;;` before the `esac`). Every
 `<PATTERNn>` is separated from it's associated `<LISTn>` by a `)`, and
@@ -43,7 +43,7 @@ done**, which means you can leave expansions unquoted without problems:
     esac
 
 This is similar to the behavior of the [conditional expression command
-("new test command")](/syntax/ccmd/conditional_expression) (also no word
+("new test command")](/syntax/ccmd/conditional_expression.md) (also no word
 splitting for expansions).
 
 Unlike the C-case-statement, only the matching list and nothing else is

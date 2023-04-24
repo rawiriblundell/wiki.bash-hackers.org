@@ -12,7 +12,7 @@ tutorial.
 
 ## List of snippets
 
-[reset filter](/snipplets/start)
+[reset filter](/snipplets/start.md)
 
 ---- datacloud snippet ---- field: snipplet_tags
 

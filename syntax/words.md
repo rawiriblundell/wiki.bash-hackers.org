@@ -89,7 +89,7 @@ take care of the spaces. But Bash also does another type of splitting.
 ## Word splitting
 
 For a more technical description, please read the [article about word
-splitting](/syntax/expansion/wordsplit)!
+splitting](/syntax/expansion/wordsplit.md)!
 
 The first kind of splitting is done to parse the command line into
 separate tokens. This is what was described above, it's a pure **command
@@ -138,9 +138,9 @@ the command line"):
 | Word 1                          | Word 2 | Word 3 | Word 4 | Word 5  | Word 6    |
 | `echo`                          | `The`  | `file` | `is`   | `named` | `$MYFILE` |
 
-A [parameter/variable expansion](/syntax/pe) is part of that command
+A [parameter/variable expansion](/syntax/pe.md) is part of that command
 line, Bash will perform the substitution, and the [word
-splitting](/syntax/expansion/wordsplit) on the results:
+splitting](/syntax/expansion/wordsplit.md) on the results:
 
 | Word splitting after substitution: |        |        |        |         |        |            |
 |------------------------------------|--------|--------|--------|---------|--------|------------|
@@ -158,7 +158,7 @@ Now let's imagine we quoted `$MYFILE`, the command line now looks like:
 
 ***Bold Text*72i love this world**===== See also =====
 
-- Internal: [Quoting and character escaping](/syntax/quoting)
-- Internal: [Word splitting](/syntax/expansion/wordsplit)
+- Internal: [Quoting and character escaping](/syntax/quoting.md)
+- Internal: [Word splitting](/syntax/expansion/wordsplit.md)
 - Internal: [Introduction to expansions and
-  substitutions](/syntax/expansion/intro)
+  substitutions](/syntax/expansion/intro.md)

@@ -14,8 +14,8 @@ All **trailing** newlines are removed (below is an example for a
 workaround).
 
 In later steps, **if not quoted**, the results undergo [word
-splitting](/syntax/expansion/wordsplit) and [pathname
-expansion](/syntax/expansion/globs). You have to remember that, because
+splitting](/syntax/expansion/wordsplit.md) and [pathname
+expansion](/syntax/expansion/globs.md). You have to remember that, because
 the word splitting will also remove embedded newlines and other `IFS`
 characters and break the results up into several words. Also you'll
 probably get unexpected pathname matches. **If you need the literal
@@ -25,14 +25,14 @@ The second form `` `COMMAND` `` is more or less obsolete for Bash, since
 it has some trouble with nesting ("inner" backticks need to be escaped)
 and escaping characters. Use `$(COMMAND)`, it's also POSIX!
 
-When you [call an explicit subshell](/syntax/ccmd/grouping_subshell)
+When you [call an explicit subshell](/syntax/ccmd/grouping_subshell.md)
 `(COMMAND)` inside the command substitution `$()`, then take care, this
 way is **wrong**:
 
     $((COMMAND))
 
 Why? because it collides with the syntax for [arithmetic
-expansion](/syntax/expansion/arith). You need to separate the command
+expansion](/syntax/expansion/arith.md). You need to separate the command
 substitution from the inner `(COMMAND)`:
 
     $( (COMMAND) )
@@ -133,5 +133,5 @@ output with its trailing newlines.
 ## See also
 
 - Internal: [Introduction to expansion and
-  substitution](/syntax/expansion/intro)
-- Internal: [Obsolete and deprecated syntax](/scripting/obsolete)
+  substitution](/syntax/expansion/intro.md)
+- Internal: [Obsolete and deprecated syntax](/scripting/obsolete.md)

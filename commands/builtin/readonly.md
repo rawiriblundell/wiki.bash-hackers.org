@@ -41,4 +41,4 @@ An argument of `--` disables further option processing.
 
 ## See also
 
-- [declare](/commands/builtin/declare)
+- [declare](/commands/builtin/declare.md)

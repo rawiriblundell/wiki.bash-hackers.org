@@ -1,11 +1,11 @@
 # Bash 4 - a rough overview
 
-| :shell: Attention: Since Bash 4 has been around for quite some time now (4.3 will come soon), I consider it to be "standard". This page is not maintained anymore and is left here to keep your links working. See the [bashchanges](/scripting/bashchanges) page for new stuff introduced. |
+| :shell: Attention: Since Bash 4 has been around for quite some time now (4.3 will come soon), I consider it to be "standard". This page is not maintained anymore and is left here to keep your links working. See the [bashchanges](/scripting/bashchanges.md) page for new stuff introduced. |
 | --- |
 
 Besides many bugfixes since Bash 3.2, Bash 4 will bring some interesting
 new features for shell users and scripters. See also
-[bashchanges](/scripting/bashchanges) for a small general overview with
+[bashchanges](/scripting/bashchanges.md) for a small general overview with
 more details.
 
 Not all of the changes and news are included here, just the biggest or
@@ -33,7 +33,7 @@ files that represent the filedescriptors of the started process.
 In other words: It lets you start a process in background and
 communicate with its input and output data streams.
 
-See [The coproc keyword](/syntax/keywords/coproc)
+See [The coproc keyword](/syntax/keywords/coproc.md)
 
 ### The new "mapfile" builtin
 
@@ -42,7 +42,7 @@ an array. This avoids having to fill an array yourself using a loop. It
 enables you to define the range of lines to read, and optionally call a
 callback, for example to display a progress bar.
 
-See: [mapfile](/commands/builtin/mapfile)
+See: [mapfile](/commands/builtin/mapfile.md)
 
 ### Changes to the "case" keyword
 
@@ -54,7 +54,7 @@ list (rather than terminate the `case` construct).
 The `;;&` terminator causes the `case` construct to test the next given
 pattern instead of terminating the whole execution.
 
-See [case](/syntax/ccmd/case)
+See [case](/syntax/ccmd/case.md)
 
 ### Changes to the "declare" builtin
 
@@ -85,7 +85,7 @@ A new option, `-i`, was introduced to be able to preload the input
 buffer with some text (when Readline is used, with `-e`). The user is
 able to change the text, or press return to accept it.
 
-See [read](/commands/builtin/read)
+See [read](/commands/builtin/read.md)
 
 ### Changes to the "help" builtin
 
@@ -109,7 +109,7 @@ Besides the use of the 512 bytes blocksize everywhere in POSIX mode,
 The brace expansion was tuned to provide expansion results with leading
 zeros when requesting a row of numbers.
 
-See [brace](/syntax/expansion/brace)
+See [brace](/syntax/expansion/brace.md)
 
 ### Parameter Expansion
 
@@ -119,7 +119,7 @@ On expansion time you can modify the syntax by adding operators to the
 parameter name.
 
 See [Case modification on parameter
-expansion](/syntax/pe#case_modification)
+expansion](/syntax/pe.md#case_modification)
 
 ### Substring expansion
 
@@ -140,7 +140,7 @@ current level.
 The new shell option `dirspell` enables spelling corrections on
 directory names during globbing.
 
-See [globs](/syntax/expansion/globs)
+See [globs](/syntax/expansion/globs.md)
 
 ## Associative Arrays
 
@@ -156,7 +156,7 @@ something like
     ASSOC[Hello]="second element"
     ASSOC[Peter Pan]="A weird guy"
 
-See [arrays](/syntax/arrays)
+See [arrays](/syntax/arrays.md)
 
 ## Redirection
 
@@ -167,17 +167,17 @@ good old `>>FILE 2>&1` notation.
 The parser now understands `|&` as a synonym for `2>&1 |`, which
 redirects the standard error for a command through a pipe.
 
-See [redirection](/syntax/redirection)
+See [redirection](/syntax/redirection.md)
 
 ## Interesting new shell variables
 
 | Variable                                           | Description                                                                    |
 |----------------------------------------------------|--------------------------------------------------------------------------------|
-| [BASHPID](/syntax/shellvars#BASHPID)               | contains the PID of the current shell (this is different than what `$$` does!) |
-| [PROMPT_DIRTRIM](/syntax/shellvars#PROMPT_DIRTRIM) | specifies the max. level of unshortened pathname elements in the prompt        |
-| [FUNCNEST](/syntax/shellvars#FUNCNEST)             | control the maximum number of shell function recursions                        |
+| [BASHPID](/syntax/shellvars.md#BASHPID)               | contains the PID of the current shell (this is different than what `$$` does!) |
+| [PROMPT_DIRTRIM](/syntax/shellvars.md#PROMPT_DIRTRIM) | specifies the max. level of unshortened pathname elements in the prompt        |
+| [FUNCNEST](/syntax/shellvars.md#FUNCNEST)             | control the maximum number of shell function recursions                        |
 
-See [shellvars](/syntax/shellvars)
+See [shellvars](/syntax/shellvars.md)
 
 ## Interesting new Shell Options
 
@@ -192,7 +192,7 @@ mentioned.
 | `globstar`  | enables recursive globbing with `**`                                                                   |
 | `lastpipe`  | (4.2) to execute the last command in a pipeline in the current environment                             |
 
-See [shell_options](/internals/shell_options)
+See [shell_options](/internals/shell_options.md)
 
 ## Misc
 
@@ -205,7 +205,7 @@ See [shell_options](/internals/shell_options)
 - The output target for the `xtrace` (`set -x`/`set +x`) feature is
   configurable **since Bash 4.1** (previously, it was fixed to
   `stderr`): a variable named
-  [BASH_XTRACEFD](/syntax/shellvars#BASH_XTRACEFD) can be set to the
+  [BASH_XTRACEFD](/syntax/shellvars.md#BASH_XTRACEFD) can be set to the
   filedescriptor that should get the output
 - Bash 4.1 is able to log the history to syslog (only to be enabled at
   compile time in `config-top.h`)
