@@ -36,7 +36,7 @@ Whenever you **reference** a descriptor, to point to its current target
 file, then you use a "`&`" followed by a the descriptor number:
 
     # this executes the echo-command and redirects its normal output (stdout) to the standard error target
-    echo &quot;There was an error&quot; 1>&2
+    echo "There was an error" 1>&2
 
 The redirection operation can be **anywhere** in a simple command, so
 these examples are equivalent:
@@ -166,7 +166,7 @@ substitutions and expansions are performed in the here-document data:
 
 You can avoid that by quoting the tag:
 
-    cat <<&quot;EOF&quot;
+    cat <<"EOF"
     This won't be expanded: $PATH
     EOF
 
@@ -191,7 +191,7 @@ end-of-file is seen before the tag is reached.\</wrap\>
 The here-strings are a variation of the here-documents. The word `WORD`
 is taken for the input redirection:
 
-    cat <<< &quot;Hello world... $NAME is here...&quot;
+    cat <<< "Hello world... $NAME is here..."
 
 Just beware to quote the `WORD` if it contains spaces. Otherwise the
 rest will be given as normal parameters.

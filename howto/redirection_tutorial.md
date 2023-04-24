@@ -359,12 +359,12 @@ the beginning of your script.
 Let's see another use case. We want to read a file line by line, this is
 easy, we just do:
 
-     while read -r line;do echo &quot;$line&quot;;done < file
+     while read -r line;do echo "$line";done < file
 
 Now, we want, after printing each line, to do a pause, waiting for the
 user to press a key:
 
-     while read -r line;do echo &quot;$line&quot;; read -p &quot;Press any key&quot; -n 1;done < file
+     while read -r line;do echo "$line"; read -p "Press any key" -n 1;done < file
 
 And, surprise this doesn't work. Why? because the shell descriptor of
 the while loop looks like:
@@ -390,7 +390,7 @@ descriptor from which `read` should read. Cool. Now let's use `exec` to
 get another descriptor:
 
      exec 3<file
-     while read -u 3 line;do echo &quot;$line&quot;; read -p &quot;Press any key&quot; -n 1;done
+     while read -u 3 line;do echo "$line"; read -p "Press any key" -n 1;done
 
 Now the file descriptors look like:
 
@@ -656,7 +656,7 @@ recommendations:
     # Good!
     { cmd1 <<<'my input'; cmd2; } >someFile
 
-    # Bad. Is the &quot;1&quot; a file descriptor or an argument to cmd? (answer: it's the FD). Is the space after the herestring part of the input data? (answer: No).
+    # Bad. Is the "1" a file descriptor or an argument to cmd? (answer: it's the FD). Is the space after the herestring part of the input data? (answer: No).
     # The redirects are also not delimited in any obvious way.
     cmd 2>& 1 <<< stuff
 

@@ -152,9 +152,9 @@ something like
 
     declare -A ASSOC
 
-    ASSOC[First]=&quot;first element&quot;
-    ASSOC[Hello]=&quot;second element&quot;
-    ASSOC[Peter Pan]=&quot;A weird guy&quot;
+    ASSOC[First]="first element"
+    ASSOC[Hello]="second element"
+    ASSOC[Peter Pan]="A weird guy"
 
 See [arrays](/syntax/arrays)
 

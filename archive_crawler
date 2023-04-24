@@ -107,7 +107,12 @@ scrape_targets() {
 # This should remove everything above and below our desired Dokuwiki Markup
 # We also take the opportunity to convert some HTML chars
 extract_markup() {
-    sed -e '1,/name="sectok"/d' -e '/<\/textarea>/,$d' -e 's/&gt;/>/g' -e 's/&lt;/</g' -e 's/&amp;/\&/g' "${1:-/dev/stdin}"
+    sed -e '1,/name="sectok"/d' \
+        -e '/<\/textarea>/,$d' \
+        -e 's/&gt;/>/g' \
+        -e 's/&lt;/</g' \
+        -e 's/&amp;/\&/g' \
+        -e 's/&quot;/"/g' "${1:-/dev/stdin}"
 }
 
 ###### Beyond this point things get a little wishy-washy ######

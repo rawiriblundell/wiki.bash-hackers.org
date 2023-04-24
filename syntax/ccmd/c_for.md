@@ -114,7 +114,7 @@ current value.
 <!-- -->
 
     for ((x = 0 ; x <= 100 ; x++)); do
-      echo &quot;Counter: $x&quot;
+      echo "Counter: $x"
     done
 
 ### Stepping counter
@@ -124,7 +124,7 @@ above), but the **change** that is made is a `x += 10`. That means, it
 will count from 0 to 100, but with a **step of 10**.
 
     for ((x = 0 ; x <= 100 ; x += 10)); do
-      echo &quot;Counter: $x&quot;
+      echo "Counter: $x"
     done
 
 ### Bits analyzer
@@ -148,15 +148,15 @@ bits).
     function main {
         [[ $1 == +([0-9]) ]] || return
         typeset result
-        if (( $(ksh -c 'printf %..2d $1' _ &quot;$1&quot;) == ( result = $(toBin &quot;$1&quot;) ) )); then
-            printf '%s is %s in base 2!\n' &quot;$1&quot; &quot;$result&quot;
+        if (( $(ksh -c 'printf %..2d $1' _ "$1") == ( result = $(toBin "$1") ) )); then
+            printf '%s is %s in base 2!\n' "$1" "$result"
         else
             echo 'Oops, something went wrong with our calculation.' >&2
             exit 1
         fi
     }
 
-    main &quot;${1:-123}&quot;
+    main "${1:-123}"
 
     # vim: set fenc=utf-8 ff=unix ft=sh :
 
@@ -191,7 +191,7 @@ demonstrating more complicated arithmetic expressions with multiple
 variables.
 
     for (( incr = 1, n=0, times = ${2:-4}, step = ${1:-5}; (n += incr) % step || (incr *= -1, --times);)); do
-        printf '%*s\n' &quot;$((n+1))&quot; &quot;$n&quot;
+        printf '%*s\n' "$((n+1))" "$n"
     done
 
 \<code\> ~ \$ bash \<(xclip -o) 1

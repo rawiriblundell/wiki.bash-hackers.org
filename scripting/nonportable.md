@@ -134,7 +134,7 @@ exit code, a 100% equivalent construct would be:
     ...
 
     # portable equivalent command
-    if [ &quot;$((MATH))&quot; -ne 0 ]; then
+    if [ "$((MATH))" -ne 0 ]; then
     ...
 
 Quotes around the arithmetic expansion `$((MATH))` should not be
@@ -191,10 +191,10 @@ awk) or 'nawk'. 'oawk' (i.e. Original/Old awk) does not have the rand()
 or srand() functions, so is best avoided.
 
     # 'gawk' can produce random numbers using srand().  In this example, 10 integers between 1 and 500:
-    randpm=$(gawk -v min=1 -v max=500 -v nNum=10 'BEGIN { srand(systime() + PROCINFO[&quot;pid&quot;]); for (i = 0; i < nNum; ++i) {print int(min + rand() * (max - min)} }')
+    randpm=$(gawk -v min=1 -v max=500 -v nNum=10 'BEGIN { srand(systime() + PROCINFO["pid"]); for (i = 0; i < nNum; ++i) {print int(min + rand() * (max - min)} }')
 
     # 'nawk' and 'mawk' does the same, but needs a seed to be provided for its rand() function.  In this example we use $(date)
-    randpm=$(mawk -v min=1 -v max=500 -v nNum=10 -v seed=&quot;$(date +%Y%M%d%H%M%S)&quot; 'BEGIN { srand(seed); for (i = 0; i < nNum; ++i) {print int(min + rand() * (max - min)} }')
+    randpm=$(mawk -v min=1 -v max=500 -v nNum=10 -v seed="$(date +%Y%M%d%H%M%S)" 'BEGIN { srand(seed); for (i = 0; i < nNum; ++i) {print int(min + rand() * (max - min)} }')
 
 *Yes, I'm not an `awk` expert, so please correct it, rather than
 complaining about possible stupid code!*
@@ -232,14 +232,14 @@ For example, to check if the command `ls` is available in a location
 accessible by `PATH`:
 
     if hash ls >/dev/null 2>&1; then
-      echo &quot;ls is available&quot;
+      echo "ls is available"
     fi
 
 Somewhat of a mass-check:
 
     for name in ls grep sed awk; do
-      if ! hash &quot;$name&quot; >/dev/null 2>&1; then
-        echo &quot;FAIL: Missing command '$name'&quot;
+      if ! hash "$name" >/dev/null 2>&1; then
+        echo "FAIL: Missing command '$name'"
         exit 1
       fi
     done
@@ -257,7 +257,7 @@ For example, to check if the command `sed` is available in a location
 accessible by `PATH`:
 
     if command -v sed >/dev/null 2>&1; then
-      echo &quot;sed is available&quot;
+      echo "sed is available"
     fi
 
 [^1]: "portable" doesn't necessarily mean it's POSIX, it can also mean

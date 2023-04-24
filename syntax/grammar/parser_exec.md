@@ -93,7 +93,7 @@ The behavior regarding the variable assignment errors can be tested:
     echo PRE
 
     # The following is an assignment error!
-    # The &quot;echo TEST&quot; won't be executed, since the { ...; } is terminated
+    # The "echo TEST" won't be executed, since the { ...; } is terminated
     { foo=$((8#9)); echo TEST; }
 
     echo POST

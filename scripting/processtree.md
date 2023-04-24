@@ -96,7 +96,7 @@ into a variable. We run it in a loop here to count input lines:
     counter=0
 
     cat /etc/passwd | while read; do ((counter++)); done
-    echo &quot;Lines: $counter&quot;
+    echo "Lines: $counter"
 
 What? It's 0? Yes! The number of lines might not be 0, but the variable
 `$counter` still is 0. Why? Remember the diagram from above? Rewriting
@@ -119,7 +119,7 @@ counter must be the "main shell". For example:
     counter=0
 
     while read; do ((counter++)); done </etc/passwd
-    echo &quot;Lines: $counter&quot;
+    echo "Lines: $counter"
 
 It's nearly self-explanatory. The `while` loop runs in the **current
 shell**, the counter is incremented in the **current shell**, everything

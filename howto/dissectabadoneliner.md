@@ -41,7 +41,7 @@ let's use the more readable, [modern](/syntax/expansion/cmdsubst) `$()`
 construct instead of the old style backticks:
 
 ``` bash
-sh $ for i in *.zip; do j=$(basename &quot;$i&quot; &quot;.zip&quot;); mkdir $j; cd $j; unzip ../$i; cd ..; done
+sh $ for i in *.zip; do j=$(basename "$i" ".zip"); mkdir $j; cd $j; unzip ../$i; cd ..; done
 ```
 
 In Bash we don't need the subshell or the external basename command. See
@@ -49,7 +49,7 @@ In Bash we don't need the subshell or the external basename command. See
 expansion](/syntax/pe#substring_removal):
 
 ``` bash
-bash $ for i in *.zip; do j=&quot;${i%.zip}&quot;; mkdir $j; cd $j; unzip ../$i; cd ..; done
+bash $ for i in *.zip; do j="${i%.zip}"; mkdir $j; cd $j; unzip ../$i; cd ..; done
 ```
 
 Let's keep going:
@@ -69,7 +69,7 @@ in the previous step? Well, if you don't quote `$j`, wordsplitting can
 happen again.
 
 ``` bash
-$ mkdir &quot;$j&quot; && cd &quot;$j&quot; && ... && cd ..
+$ mkdir "$j" && cd "$j" && ... && cd ..
 ```
 
 That's almost right, but there's one problem -- what happens if `$j`
@@ -78,7 +78,7 @@ directory. That's wrong! `cd -` causes cd to return to the previous
 working directory, so it's a much better choice:
 
 ``` bash
-$ mkdir &quot;$j&quot; && cd &quot;$j&quot; && ... && cd -
+$ mkdir "$j" && cd "$j" && ... && cd -
 ```
 
 (If it occurred to you that I forgot to check for success after cd -,
@@ -90,17 +90,17 @@ problem.)
 So now we have:
 
 ``` bash
-sh $ for i in *.zip; do j=$(basename &quot;$i&quot; &quot;.zip&quot;); mkdir &quot;$j&quot; && cd &quot;$j&quot; && unzip ../$i && cd -; done
+sh $ for i in *.zip; do j=$(basename "$i" ".zip"); mkdir "$j" && cd "$j" && unzip ../$i && cd -; done
 ```
 
 ``` bash
-bash $ for i in *.zip; do j=&quot;${i%.zip}&quot;; mkdir &quot;$j&quot; && cd &quot;$j&quot; && unzip ../$i && cd -; done
+bash $ for i in *.zip; do j="${i%.zip}"; mkdir "$j" && cd "$j" && unzip ../$i && cd -; done
 ```
 
 Let's throw the `unzip` command back in the mix:
 
 ``` bash
-mkdir &quot;$j&quot; && cd &quot;$j&quot; && unzip ../$i && cd -
+mkdir "$j" && cd "$j" && unzip ../$i && cd -
 ```
 
 Well, besides word splitting, there's nothing terribly wrong with this.
@@ -110,15 +110,15 @@ implementations I've seen can do it with the -d flag. So we can drop the
 cd commands entirely:
 
 ``` bash
-$ mkdir &quot;$j&quot; && unzip -d &quot;$j&quot; &quot;$i&quot;
+$ mkdir "$j" && unzip -d "$j" "$i"
 ```
 
 ``` bash
-sh $ for i in *.zip; do j=$(basename &quot;$i&quot; &quot;.zip&quot;); mkdir &quot;$j&quot; && unzip -d &quot;$j&quot; &quot;$i&quot;; done
+sh $ for i in *.zip; do j=$(basename "$i" ".zip"); mkdir "$j" && unzip -d "$j" "$i"; done
 ```
 
 ``` bash
-bash $ for i in *.zip; do j=&quot;${i%.zip}&quot;; mkdir &quot;$j&quot; && unzip -d &quot;$j&quot; &quot;$i&quot;; done
+bash $ for i in *.zip; do j="${i%.zip}"; mkdir "$j" && unzip -d "$j" "$i"; done
 ```
 
 There! That's as good as it gets.

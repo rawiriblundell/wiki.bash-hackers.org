@@ -59,7 +59,7 @@ context of command-splitting, which this section is about, it doesn't
 matter which kind of quoting you use: weak quoting or strong quoting,
 both cause Bash to not treat spaces as special characters:
 
-    $ echo &quot;Hello                little                  world&quot;
+    $ echo "Hello                little                  world"
     Hello                little                  world
 
     $ echo 'Hello                little                  world'
@@ -80,7 +80,7 @@ spaces in them:
     $ cat test\ file
     m00!
 
-    $ cat &quot;test file&quot;
+    $ cat "test file"
     m00!
 
 If you enter that on the command line with Tab completion, that will
@@ -103,7 +103,7 @@ second type of word splitting comes in - several expansions undergo
 
 Imagine you have a filename stored in a variable:
 
-    MYFILE=&quot;test file&quot;
+    MYFILE="test file"
 
 When this variable is used, its occurance will be replaced by its
 content.
@@ -116,7 +116,7 @@ Though this is another step where spaces make things difficult,
 **quoting** is used to work around the difficulty. Quotes also affect
 word splitting:
 
-    $ cat &quot;$MYFILE&quot;
+    $ cat "$MYFILE"
     m00!
 
 ## Example
@@ -124,7 +124,7 @@ word splitting:
 Let's follow an unquoted command through these steps, assuming that the
 variable is set:
 
-    MYFILE=&quot;THE FILE.TXT&quot;
+    MYFILE="THE FILE.TXT"
 
 and the first review is:
 
@@ -149,7 +149,7 @@ splitting](/syntax/expansion/wordsplit) on the results:
 
 Now let's imagine we quoted `$MYFILE`, the command line now looks like:
 
-    echo The file is named &quot;$MYFILE&quot;
+    echo The file is named "$MYFILE"
 
 | Word splitting after substitution (quoted!): |        |        |        |         |                |
 |----------------------------------------------|--------|--------|--------|---------|----------------|

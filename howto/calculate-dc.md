@@ -63,7 +63,7 @@ The **output** is converted to **base 10** by default
 ## Scale And Base
 
 `dc` is a calulator with abitrary precision, by default this precision
-is 0. thus `dc <<< &quot;5 4/p&quot;` prints "1".
+is 0. thus `dc <<< "5 4/p"` prints "1".
 
 We can increase the precision using the `k` command. It pops the value
 at the top of the stack and uses it as the precision argument:
@@ -198,7 +198,7 @@ times, or use a macro.
     [dd**] # push a string
     sa # save it in register a
     3 # push 3 on the stack
-    lax # push the string &quot;dd**&quot; on the stack and execute it
+    lax # push the string "dd**" on the stack and execute it
     p # print the result
     4laxp # same operation for 4, in one line
     EOF
@@ -221,7 +221,7 @@ we are used to reading:
 Some `dc` have `>R <R =R`, GNU `dc` had some more, check your manual.
 Note that the test "consumes" its operands: the 2 first elements are
 popped off the stack (you can verify that
-`dc <<< &quot;[f]sR 2 1 >R 1 2 >R f&quot;` doesn't print anything)
+`dc <<< "[f]sR 2 1 >R 1 2 >R f"` doesn't print anything)
 
 Have you noticed how we can *include* a macro (string) in a macro? and
 as `dc` relies on a stack we can, in fact, use the macro recursively

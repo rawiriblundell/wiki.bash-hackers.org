@@ -35,7 +35,7 @@ An argument of `--` disables further option processing.
 Set the display to use when launching a GUI application (useful during
 SSH sessions):
 
-    export DISPLAY=&quot;:0&quot;
+    export DISPLAY=":0"
 
 Set your default text editor (e.g. SublimeText):
 

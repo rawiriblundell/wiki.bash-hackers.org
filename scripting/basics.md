@@ -27,7 +27,7 @@ The in-file specification of the interpreter of that file, for example:
 
 ``` bash
 #!/bin/bash
-echo &quot;Hello world...&quot;
+echo "Hello world..."
 ```
 
 This is interpreted by the kernel [^1] of your system. In general, if a
@@ -164,9 +164,9 @@ specific user is present in /etc/passwd:
 
 ``` bash
 if grep ^root /etc/passwd; then
-   echo &quot;The user root was found&quot;
+   echo "The user root was found"
 else
-   echo &quot;The user root was not found&quot;
+   echo "The user root was not found"
 fi
 ```
 
@@ -176,10 +176,10 @@ brackets are not part of the shell syntax, the left bracket **is** the
 test command!
 
 ``` bash
-if [ &quot;$mystring&quot; = &quot;Hello world&quot; ]; then
-   echo &quot;Yeah dude, you entered the right words...&quot;
+if [ "$mystring" = "Hello world" ]; then
+   echo "Yeah dude, you entered the right words..."
 else
-   echo &quot;Eeeek - go away...&quot;
+   echo "Eeeek - go away..."
 fi
 ```
 
@@ -190,8 +190,8 @@ This lets you execute a command based on whether or not the previous
 command completed successfully:
 
 ``` bash
-grep ^root: /etc/passwd >/dev/null || echo &quot;root was not found - check the pub at the corner.&quot;
-which vi && echo &quot;Your favourite editor is installed.&quot;
+grep ^root: /etc/passwd >/dev/null || echo "root was not found - check the pub at the corner."
+which vi && echo "Your favourite editor is installed."
 ```
 
 Please, when your script exits on errors, provide a "FALSE" exit code,
@@ -206,7 +206,7 @@ can help with debugging or tests. Comments start with the \# character
 ``` bash
 #!/bin/bash
 # This is a small script to say something.
-echo &quot;Be liberal in what you accept, and conservative in what you send&quot; # say something
+echo "Be liberal in what you accept, and conservative in what you send" # say something
 ```
 
 The first thing was already explained, it's the so-called shebang, for
@@ -227,14 +227,14 @@ a shutdown:
 ``` bash
 #!/bin/bash
 # Write info mails, do some tasks and bring down the system in a safe way
-echo &quot;System halt requested&quot; | mail -s &quot;System halt&quot; netadmin@example.com
-logger -t SYSHALT &quot;System halt requested&quot;
+echo "System halt requested" | mail -s "System halt" netadmin@example.com
+logger -t SYSHALT "System halt requested"
 
-##### The following &quot;code block&quot; is effectively ignored
-: <<&quot;SOMEWORD&quot;
+##### The following "code block" is effectively ignored
+: <<"SOMEWORD"
 /etc/init.d/mydatabase clean_stop
 mydatabase_dump /var/db/db1 /mnt/fsrv0/backups/db1
-logger -t SYSHALT &quot;System halt: pre-shutdown actions done, now shutting down the system&quot;
+logger -t SYSHALT "System halt: pre-shutdown actions done, now shutting down the system"
 shutdown -h NOW
 SOMEWORD
 ##### The ignored codeblock ends here
@@ -312,13 +312,13 @@ echo $foo
 }
 
 
-# this will print &quot;external&quot;
+# this will print "external"
 echo $foo
 
-# this will print &quot;internal&quot;
+# this will print "internal"
 printvalue
 
-# this will print - again - &quot;external&quot;
+# this will print - again - "external"
 echo $foo
 ```
 
@@ -341,10 +341,10 @@ A variable can be tagged to be part of the environment using the
 ``` bash
 # create a new variable and set it:
 # -> This is a normal shell variable, not an environment variable!
-myvariable=&quot;Hello world.&quot;
+myvariable="Hello world."
 
 # make the variable visible to all child processes:
-# -> Make it an environment variable: &quot;export&quot; it
+# -> Make it an environment variable: "export" it
 export myvariable
 ```
 

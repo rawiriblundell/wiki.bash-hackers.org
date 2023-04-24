@@ -114,16 +114,16 @@ In general, every new "layer" gets a new indentation level:
 
     case $input in
       hello)
-        echo &quot;You said hello&quot;
+        echo "You said hello"
       ;;
       bye)
-        echo &quot;You said bye&quot;
+        echo "You said bye"
         if foo; then
           bar
         fi
       ;;
       *)
-        echo &quot;You said something weird...&quot;
+        echo "You said something weird..."
       ;;
     esac
 
@@ -172,8 +172,8 @@ loop counting variables, etc., ... (in the example: `file`)
     # the prefix 'MY_'
     MY_LOG_DIRECTORY=/var/adm/
 
-    for file in &quot;$MY_LOG_DIRECTORY&quot;/*; do
-      echo &quot;Found Logfile: $file&quot;
+    for file in "$MY_LOG_DIRECTORY"/*; do
+      echo "Found Logfile: $file"
     done
 
 ### Variable initialization
@@ -190,7 +190,7 @@ via the environment.
 
 The solution is simple and effective: **Initialize them**
 
-    my_input=&quot;&quot;
+    my_input=""
     my_array=()
     my_number=0
 
@@ -216,7 +216,7 @@ expansion, you'll be safe.
 If you need to parse a parameter as a list of words, you can't quote, of
 course, e.g.
 
-    list=&quot;one two three&quot;
+    list="one two three"
 
     # you MUST NOT quote $list here
     for word in $list; do
@@ -340,18 +340,18 @@ missing.
 
 Example:
 
-    my_needed_commands=&quot;sed awk lsof who&quot;
+    my_needed_commands="sed awk lsof who"
 
     missing_counter=0
     for needed_command in $my_needed_commands; do
-      if ! hash &quot;$needed_command&quot; >/dev/null 2>&1; then
-        printf &quot;Command not found in PATH: %s\n&quot; &quot;$needed_command&quot; >&2
+      if ! hash "$needed_command" >/dev/null 2>&1; then
+        printf "Command not found in PATH: %s\n" "$needed_command" >&2
         ((missing_counter++))
       fi
     done
 
     if ((missing_counter > 0)); then
-      printf &quot;Minimum %d commands are missing in PATH, aborting\n&quot; &quot;$missing_counter&quot; >&2
+      printf "Minimum %d commands are missing in PATH, aborting\n" "$missing_counter" >&2
       exit 1
     fi
 

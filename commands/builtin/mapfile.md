@@ -56,7 +56,7 @@ arguments are guaranteed to be passed to a single invocation of the
 command with no wordsplitting, pathname expansion, or other monkey
 business.
 
-    # eix --only-names -IC x11-drivers | { mapfile -t args; emerge -av1 &quot;${args[@]}&quot; <&1; }
+    # eix --only-names -IC x11-drivers | { mapfile -t args; emerge -av1 "${args[@]}" <&1; }
 
 Note the use of command grouping to keep the emerge command inside the
 pipe's subshell and within the scope of "args". Also note the unusual
@@ -94,7 +94,7 @@ of a function, with the extra words passed to it as arguments. If you're
 going to use callbacks at all, this is probably the best way because it
 allows for easy access to the arguments with no ugly "code in a string".
 
-    $ foo() { echo &quot;|$1|&quot;; }; mapfile -n 11 -c 2 -C 'foo' <file
+    $ foo() { echo "|$1|"; }; mapfile -n 11 -c 2 -C 'foo' <file
     |2|
     |4|
     etc..
@@ -105,7 +105,7 @@ every line of some input, and then output even and odd lines to separate
 files. This is far from the best possible answer, but hopefully
 illustrates the callback behavior:
 
-    $ { printf 'input%s\n' {1..10} | mapfile -c 1 -C '>&$(( (${#x[@]} % 2) + 3 )) printf -- &quot;%.sprefix %s&quot;' x; } 3>outfile0 4>outfile1
+    $ { printf 'input%s\n' {1..10} | mapfile -c 1 -C '>&$(( (${#x[@]} % 2) + 3 )) printf -- "%.sprefix %s"' x; } 3>outfile0 4>outfile1
     $ cat outfile{0,1}
     prefix input1
     prefix input3
@@ -131,7 +131,7 @@ reader. This is quite the hack but illustrates some interesting
 properties of printf -v and mapfile -C (which you should probably never
 use in real code).
 
-    $ y=( 'odd[j]' 'even[j++]' ); printf 'input%s\n' {1..10} | { mapfile -tc 1 -C 'printf -v &quot;${y[${#x[@]} % 2]}&quot; -- &quot;%.sprefix %s&quot;' x; printf '%s\n' &quot;${odd[@]}&quot; '' &quot;${even[@]}&quot;; }
+    $ y=( 'odd[j]' 'even[j++]' ); printf 'input%s\n' {1..10} | { mapfile -tc 1 -C 'printf -v "${y[${#x[@]} % 2]}" -- "%.sprefix %s"' x; printf '%s\n' "${odd[@]}" '' "${even[@]}"; }
     prefix input1
     prefix input3
     prefix input5
@@ -154,7 +154,7 @@ and returns the record.
     #!/usr/bin/env bash
 
     showRecord() {
-        printf 'key[%d] = %d, %d\n' &quot;$1&quot; &quot;${vals[@]:keys[$1]*2:2}&quot;
+        printf 'key[%d] = %d, %d\n' "$1" "${vals[@]:keys[$1]*2:2}"
     }
 
     parseRecords() {
@@ -167,17 +167,17 @@ and returns the record.
         local n
 
         _f
-        mapfile -tc2 -C _f &quot;$1&quot;
-        eval &quot;$1&quot;'=(&quot;${'&quot;$1&quot;'[@]##*:}&quot;)' # Return the array with some modification
+        mapfile -tc2 -C _f "$1"
+        eval "$1"'=("${'"$1"'[@]##*:}")' # Return the array with some modification
     }
 
     main() {
         local -a keys vals
         parseRecords vals
-        showRecord &quot;$1&quot;
+        showRecord "$1"
     }
 
-    main &quot;$1&quot; <<-&quot;EOF&quot;
+    main "$1" <<-"EOF"
     fabric.domain:123
     routex:1
     routey:2

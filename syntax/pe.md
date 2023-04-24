@@ -91,8 +91,8 @@ be interpreted as part of the parameter name otherwise. Compare these
 two expressions (`WORD="car"` for example), where we want to print a
 word with a trailing "s":
 
-    echo &quot;The plural of $WORD is most likely $WORDs&quot;
-    echo &quot;The plural of $WORD is most likely ${WORD}s&quot;
+    echo "The plural of $WORD is most likely $WORDs"
+    echo "The plural of $WORD is most likely ${WORD}s"
 
 <u>Why does the first one fail?</u> It prints nothing, because a
 parameter (variable) named "`WORDs`" is undefined and thus printed as ""
@@ -108,8 +108,8 @@ everything in UNIX(r)) **case sensitive!**
 The second form with the curly braces is also needed to access
 positional parameters (arguments to a script) beyond `$9`:
 
-    echo &quot;Argument  1 is: $1&quot;
-    echo &quot;Argument 10 is: ${10}&quot;
+    echo "Argument  1 is: $1"
+    echo "Argument 10 is: ${10}"
 
 ### Simple usage: Arrays
 
@@ -146,23 +146,23 @@ then `${!PARAMETER}` will expand to the value of the parameter named
 
     read -rep 'Which variable do you want to inspect? ' look_var
 
-    printf 'The value of &quot;%s&quot; is: &quot;%s&quot;\n' &quot;$look_var&quot; &quot;${!look_var}&quot; 
+    printf 'The value of "%s" is: "%s"\n' "$look_var" "${!look_var}" 
 
 Of course the indirection also works with special variables:
 
     # set some fake positional parameters
     set one two three four
 
-    # get the LAST argument (&quot;#&quot; stores the number of arguments, so &quot;!#&quot; will reference the LAST argument)
+    # get the LAST argument ("#" stores the number of arguments, so "!#" will reference the LAST argument)
     echo ${!#}
 
 You can think of this mechanism as being roughly equivalent to taking
 any parameter expansion that begins with the parameter name, and
 substituting the `!PARAMETER` part with the value of PARAMETER.
 
-    echo &quot;${!var^^}&quot;
+    echo "${!var^^}"
     # ...is equivalent to
-    eval 'echo &quot;${'&quot;$var&quot;'^^}&quot;'
+    eval 'echo "${'"$var"'^^}"'
 
 It was an unfortunate design decision to use the `!` prefix for
 indirection, as it introduces parsing ambiguity with other parameter
@@ -220,7 +220,7 @@ of words in the variable while `~~` reverses case for all. Thanks to
 <u>**Example: Rename all `*.txt` filenames to lowercase**</u>
 
     for file in *.txt; do
-      mv &quot;$file&quot; &quot;${file,,}&quot;
+      mv "$file" "${file,,}"
     done
 
 <u>**Note:**</u> Case modification is a handy feature you can apply to a
@@ -255,7 +255,7 @@ Assume: `array=(This is some Text)`
 
 <!-- -->
 
-     * ''echo &quot;${array[2]^^}&quot;''
+     * ''echo "${array[2]^^}"''
        * => ''SOME''
 
 ## Variable name expansion
@@ -293,7 +293,7 @@ interpreted just like a pattern to describe a filename to match
 
 Example string (*just a quote from a big man*):
 
-    MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
+    MYSTRING="Be liberal in what you accept, and conservative in what you send"
 
 ### From the beginning
 
@@ -381,7 +381,7 @@ pattern](/syntax/pattern), on expansion time. The matched substring will
 be entirely removed and the given string will be inserted. Again some
 example string for the tests:
 
-    MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
+    MYSTRING="Be liberal in what you accept, and conservative in what you send"
 
 The two main forms only differ in **the number of slashes** after the
 parameter name: `${PARAMETER/PATTERN/STRING}` and
@@ -457,7 +457,7 @@ Assume: `array=(This is a text)`
 When you use this form, the length of the parameter's value is expanded.
 Again, a quote from a big man, to have a test text:
 
-    MYSTRING=&quot;Be liberal in what you accept, and conservative in what you send&quot;
+    MYSTRING="Be liberal in what you accept, and conservative in what you send"
 
 Using echo `${#MYSTRING}`...
 
@@ -551,7 +551,7 @@ If the `LENGTH` value is negative, it's used as offset from the end of
 the string. The expansion happens from the first to the second offset
 then:
 
-    echo &quot;${MYSTRING:11:-17}&quot;
+    echo "${MYSTRING:11:-17}"
 
 =\>
 `<del>Be liberal </del>in what you accept, and conservative<del> in what you send</del>`
@@ -591,16 +591,16 @@ of `PARAMETER`, as if it just was `${PARAMETER}`. If you omit the `:`
 (colon), like shown in the second form, the default value is only used
 when the parameter was **unset**, not when it was empty.
 
-    echo &quot;Your home directory is: ${HOME:-/home/$USER}.&quot;
-    echo &quot;${HOME:-/home/$USER} will be used to store your personal data.&quot;
+    echo "Your home directory is: ${HOME:-/home/$USER}."
+    echo "${HOME:-/home/$USER} will be used to store your personal data."
 
 If `HOME` is unset or empty, everytime you want to print something
 useful, you need to put that parameter syntax in.
 
     #!/bin/bash
 
-    read -p &quot;Enter your gender (just press ENTER to not tell us): &quot; GENDER
-    echo &quot;Your gender is ${GENDER:-a secret}.&quot;
+    read -p "Enter your gender (just press ENTER to not tell us): " GENDER
+    echo "Your gender is ${GENDER:-a secret}."
 
 It will print "Your gender is a secret." when you don't enter the
 gender. Note that the default value is **used on expansion time**, it is
@@ -650,14 +650,14 @@ Example code (please try the example cases yourself):
 
 
     ### CASE 3: An array with only one element, a nullstring
-    array=(&quot;&quot;)
+    array=("")
 
     echo ${array[@]:-This array is NULL or unset}
     echo ${array[@]-This array is NULL or unset}
 
 
     ### CASE 4: An array with only two elements, a nullstring and a normal word
-    array=(&quot;&quot; word)
+    array=("" word)
 
     echo ${array[@]:-This array is NULL or unset}
     echo ${array[@]-This array is NULL or unset}
@@ -675,8 +675,8 @@ unset or null. Equivalent to using a default value, when you omit the
 `:` (colon), as shown in the second form, the default value will only be
 assigned when the parameter was **unset**.
 
-    echo &quot;Your home directory is: ${HOME:=/home/$USER}.&quot;
-    echo &quot;$HOME will be used to store your personal data.&quot;
+    echo "Your home directory is: ${HOME:=/home/$USER}."
+    echo "$HOME will be used to store your personal data."
 
 After the first expansion here (`${HOME:=/home/$USER}`), `HOME` is set
 and usable.
@@ -685,9 +685,9 @@ Let's change our code example from above:
 
     #!/bin/bash
 
-    read -p &quot;Enter your gender (just press ENTER to not tell us): &quot; GENDER
-    echo &quot;Your gender is ${GENDER:=a secret}.&quot;
-    echo &quot;Ah, in case you forgot, your gender is really: $GENDER&quot;
+    read -p "Enter your gender (just press ENTER to not tell us): " GENDER
+    echo "Your gender is ${GENDER:=a secret}."
+    echo "Ah, in case you forgot, your gender is really: $GENDER"
 
 ### Assign a default value: Arrays
 
@@ -707,7 +707,7 @@ This form expands to nothing if the parameter is unset or empty. If it
 is set, it does not expand to the parameter's value, **but to some text
 you can specify**:
 
-    echo &quot;The Java application was installed and can be started.${JAVAPATH:+ NOTE: JAVAPATH seems to be set}&quot;
+    echo "The Java application was installed and can be started.${JAVAPATH:+ NOTE: JAVAPATH seems to be set}"
 
 The above code will simply add a warning if `JAVAPATH` is set (because
 it could influence the startup behaviour of that imaginary application).
@@ -718,8 +718,8 @@ flags:
 
     #!/bin/bash
 
-    read -p &quot;If you want to use special flags, enter them now: &quot; SPECIAL_FLAGS
-    echo &quot;The installation of the application is finished${SPECIAL_FLAGS:+ (NOTE: there are special flags set: $SPECIAL_FLAGS)}.&quot;
+    read -p "If you want to use special flags, enter them now: " SPECIAL_FLAGS
+    echo "The installation of the application is finished${SPECIAL_FLAGS:+ (NOTE: there are special flags set: $SPECIAL_FLAGS)}."
 
 If you omit the colon, as shown in the second form
 (`${PARAMETER+WORD}`), the alternate value will be used if the parameter
@@ -729,13 +729,13 @@ if variables you need (and that can be empty) are undefined:
     # test that with the three stages:
 
     # unset foo
-    # foo=&quot;&quot;
-    # foo=&quot;something&quot;
+    # foo=""
+    # foo="something"
 
     if [[ ${foo+isset} = isset ]]; then
-      echo &quot;foo is set...&quot;
+      echo "foo is set..."
     else
-      echo &quot;foo is not set...&quot;
+      echo "foo is not set..."
     fi
 
 ### Use an alternate value: Arrays
@@ -763,7 +763,7 @@ If the parameter `PARAMETER` is set/non-null, this form will simply
 expand it. Otherwise, the expansion of `WORD` will be used as appendix
 for an error message:
 
-    $ echo &quot;The unset parameter is: ${p_unset?not set}&quot;
+    $ echo "The unset parameter is: ${p_unset?not set}"
     bash: p_unset: not set
 
 After printing this message,
@@ -785,13 +785,13 @@ are taken into account.
 
 Removing the first 6 characters from a text string:
 
-    STRING=&quot;Hello world&quot;
+    STRING="Hello world"
 
     # only print 'Hello'
-    echo &quot;${STRING%??????}&quot;
+    echo "${STRING%??????}"
 
     # only print 'world'
-    echo &quot;${STRING#??????}&quot;
+    echo "${STRING#??????}"
 
     # store it into the same variable
     STRING=${STRING#??????}
@@ -806,7 +806,7 @@ Removing the first 6 characters from a text string:
   parameters plus the adjacent expansion are concatenated into a single
   argument. As a workaround, each expansion needs to be quoted
   separately. Unfortunately, this bug took a very long time to
-  notice.`~ $ set -- a b c; x=foo; printf '<%s> ' &quot;$@$x&quot; &quot;$*&quot;&quot;$x&quot; &quot;$@&quot;&quot;$x&quot;
+  notice.`~ $ set -- a b c; x=foo; printf '<%s> ' "$@$x" "$*""$x" "$@""$x"
   <a b cfoo> <a b cfoo> <a> <b> <cfoo>
   `
 
@@ -823,14 +823,14 @@ Removing the first 6 characters from a text string:
   unquoted, this should be a rare issue. **Always quote
   them**!`touch x 'y z'
   for sh in bb {{d,b}a,{m,}k,z}sh; do
-      echo &quot;$sh&quot;
-      &quot;$sh&quot; -s a 'b c' d \* </dev/fd/0
+      echo "$sh"
+      "$sh" -s a 'b c' d \* </dev/fd/0
   done <<\EOF
   ${ZSH_VERSION+:} false && emulate sh
   IFS=
   printf '<%s> ' $*
   echo
-  printf &quot;<%s> &quot; $@
+  printf "<%s> " $@
   echo
   EOF
   ``bb
@@ -863,13 +863,13 @@ Removing the first 6 characters from a text string:
   the way adjacent arguments are concatenated, when IFS is modified in
   the middle of expansion through
   side-effects.`for sh in bb {{d,b}a,po,{m,}k,z}sh; do
-      printf '%-4s: ' &quot;$sh&quot;
-      &quot;$sh&quot; </dev/fd/0
+      printf '%-4s: ' "$sh"
+      "$sh" </dev/fd/0
   done <<\EOF
   ${ZSH_VERSION+:} false && emulate sh
   set -f -- a b c
   unset -v IFS
-  printf '<%s> ' ${*}${IFS=}${*}${IFS:=-}&quot;${*}&quot;
+  printf '<%s> ' ${*}${IFS=}${*}${IFS:=-}"${*}"
   echo
   EOF
   ``bb  : <a b cabc> <a-b-c>
@@ -913,14 +913,14 @@ Removing the first 6 characters from a text string:
   For ranges, Bash evaluates as little as possible, i.e., if the first
   part is out of range, the second won't be evaluated. ksh93 and mksh
   always evaluate the subscript parts even if the parameter is unset.
-  ` $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=(); echo &quot;${x[@]:n,6:m}&quot;' # No output
-   $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=([5]=hi); echo &quot;${x[@]:n,6:m}&quot;'
+  ` $ bash -c 'n="y[\$(printf yo >&2)1]" m="y[\$(printf jo >&2)1]"; x=(); echo "${x[@]:n,6:m}"' # No output
+   $ bash -c 'n="y[\$(printf yo >&2)1]" m="y[\$(printf jo >&2)1]"; x=([5]=hi); echo "${x[@]:n,6:m}"'
   yo
-   $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=([6]=hi); echo &quot;${x[@]:n,6:m}&quot;'
+   $ bash -c 'n="y[\$(printf yo >&2)1]" m="y[\$(printf jo >&2)1]"; x=([6]=hi); echo "${x[@]:n,6:m}"'
   yojo
-   $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=12345; echo &quot;${x:n,5:m}&quot;'
+   $ bash -c 'n="y[\$(printf yo >&2)1]" m="y[\$(printf jo >&2)1]"; x=12345; echo "${x:n,5:m}"'
   yojo
-   $ bash -c 'n=&quot;y[\$(printf yo >&2)1]&quot; m=&quot;y[\$(printf jo >&2)1]&quot;; x=12345; echo &quot;${x:n,6:m}&quot;'
+   $ bash -c 'n="y[\$(printf yo >&2)1]" m="y[\$(printf jo >&2)1]"; x=12345; echo "${x:n,6:m}"'
   yo
   `
 
@@ -935,12 +935,12 @@ Removing the first 6 characters from a text string:
     # Bash
      $ typeset -a a=(meh bleh blerg) b
      $ IFS=e
-     $ printf &quot;<%s> &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot;; echo # The entire PE is quoted so Bash considers the inner quotes redundant.
+     $ printf "<%s> " "${b[@]-"${a[@]}" "${a[@]}"}"; echo # The entire PE is quoted so Bash considers the inner quotes redundant.
     <meh> <bleh> <blerg meh> <bleh> <blerg>
-     $ printf &quot;<%s> &quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # The outer quotes cause the inner expansions to be considered quoted.
+     $ printf "<%s> " "${b[@]-${a[@]} ${a[@]}}"; echo # The outer quotes cause the inner expansions to be considered quoted.
     <meh> <bleh> <blerg meh> <bleh> <blerg>
      $ b=(meep beep)
-     $ printf &quot;<%s> &quot; &quot;${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}&quot; &quot;${b[@]-${a[@]} ${a[@]}}&quot;; echo # Again no surprises. Outer quotes quote everything recursively.
+     $ printf "<%s> " "${b[@]-"${a[@]}" "${a[@]}"}" "${b[@]-${a[@]} ${a[@]}}"; echo # Again no surprises. Outer quotes quote everything recursively.
     <meep> <beep> <meep> <beep>
 
 Now lets see what can happen if we leave the outside unquoted.
@@ -948,9 +948,9 @@ Now lets see what can happen if we leave the outside unquoted.
     # Bash
      $ typeset -a a=(meh bleh blerg) b
      $ IFS=e
-     $ printf &quot;<%s> &quot; ${b[@]-&quot;${a[@]}&quot; &quot;${a[@]}&quot;}; echo # Inner quotes make inner expansions quoted.
+     $ printf "<%s> " ${b[@]-"${a[@]}" "${a[@]}"}; echo # Inner quotes make inner expansions quoted.
     <meh> <bleh> <blerg meh> <bleh> <blerg>
-     $ printf &quot;<%s> &quot; ${b[@]-${a[@]} ${a[@]}}; echo' # No quotes at all wordsplits / globs, like you'd expect.
+     $ printf "<%s> " ${b[@]-${a[@]} ${a[@]}}; echo' # No quotes at all wordsplits / globs, like you'd expect.
     <m> <h> <bl> <h> <bl> <rg m> <h> <bl> <h> <bl> <rg>
 
 This all might be intuitive, and is the most common implementation, but
@@ -976,7 +976,7 @@ Consider the following (only slightly far-fetched) code:
     # What do you think the programmer expected to happen here?
     # What do you think will actually happen...
 
-    &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5
+    "${someCmd[@]-"$someOtherCmd" arg2 "${otherArgs[@]}"}" arg5
 
 This final line is perhaps not the most obvious, but I've run into cases
 were this type of logic can be desirable and realistic. We can deduce
@@ -996,20 +996,20 @@ outer expansion correctly without word-splitting or globbing is to quote
 it. Bash will actually expand the command as one of these:
 
     # The quoted PE produces a correct result here...
-     $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
+     $ bash -c 'typeset -a someCmd=(myCmd arg1 "arg2 yay!" "third*arg*" 4); printf "<%s> " "${someCmd[@]-"$someOtherCmd" arg2 "${otherArgs[@]}"}" arg5; echo'
     <myCmd> <arg1> <arg2 yay!> <third*arg*> <4> <arg5>
 
     # ...but in the opposite case the first 3 arguments are glued together. There are no workarounds.
-     $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;}&quot; arg5; echo'
+     $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf "<%s> " "${someCmd[@]-"$someOtherCmd" arg2 "${otherArgs[@]}"}" arg5; echo'
     <mycommand arg2 arg3> <arg4> <arg5>
 
     # UNLESS! we unquote the outer expansion allowing the inner quotes to
     # affect the necessary parts while allowing word-splitting to split the literals:
-     $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf &quot;<%s> &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
+     $ bash -c 'typeset -a otherArgs=(arg3 arg4); someOtherCmd=mycommand; printf "<%s> " ${someCmd[@]-"$someOtherCmd" arg2 "${otherArgs[@]}"} arg5; echo'
     <mycommand> <arg2> <arg3> <arg4> <arg5>
 
     # Success!!!
-     $ bash -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;<%s> &quot; ${someCmd[@]-&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;} arg5; echo'
+     $ bash -c 'typeset -a someCmd=(myCmd arg1 "arg2 yay!" "third*arg*" 4); printf "<%s> " ${someCmd[@]-"$someOtherCmd" arg2 "${otherArgs[@]}"} arg5; echo'
     <myCmd> <arg1> <arg2> <yay!> <third*arg*> <4> <arg5>
 
     # ...Ah f^^k. (again, no workaround possible.)
@@ -1027,10 +1027,10 @@ All we need to do is add two extra double-quotes:
 
     # ksh93 passing the two failed tests from above:
 
-     $ ksh -c 'otherArgs=(arg3 arg4); someOtherCmd=&quot;mycommand&quot;; printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
+     $ ksh -c 'otherArgs=(arg3 arg4); someOtherCmd="mycommand"; printf "<%s> " "${someCmd[@]-""$someOtherCmd" arg2 "${otherArgs[@]}""}" arg5; echo'
     <mycommand> <arg2> <arg3> <arg4> <arg5>
 
-     $ ksh -c 'typeset -a someCmd=(myCmd arg1 &quot;arg2 yay!&quot; &quot;third*arg*&quot; 4); printf &quot;<%s> &quot; &quot;${someCmd[@]-&quot;&quot;$someOtherCmd&quot; arg2 &quot;${otherArgs[@]}&quot;&quot;}&quot; arg5; echo'
+     $ ksh -c 'typeset -a someCmd=(myCmd arg1 "arg2 yay!" "third*arg*" 4); printf "<%s> " "${someCmd[@]-""$someOtherCmd" arg2 "${otherArgs[@]}""}" arg5; echo'
     <myCmd> <arg1> <arg2 yay!> <third*arg*> <4> <arg5>
 
 This can be used to control the quote state of any part of any expansion

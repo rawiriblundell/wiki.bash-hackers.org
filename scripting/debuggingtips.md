@@ -52,20 +52,20 @@ manpage](http://unixhelp.ed.ac.uk/CGI/man-cgi?logger+1)).
 
 Insert **echos** everywhere you can, and print to `stderr`:
 
-    echo &quot;DEBUG: current i=$i&quot; >&2
+    echo "DEBUG: current i=$i" >&2
 
 If you read input from **anywhere**, such as a file or [command
 substitution](/syntax/expansion/cmdsubst), print the debug output with
 literal quotes, to see leading and trailing spaces!
 
     pid=$(< fooservice.pid)
-    echo &quot;DEBUG: read from file: pid=\&quot;$pid\&quot;&quot; >&2
+    echo "DEBUG: read from file: pid=\"$pid\"" >&2
 
 Bash's [printf](/commands/builtin/printf) command has the `%q` format,
 which is handy for verifying whether strings are what they appear to be.
 
     foo=$(< inputfile)
-    printf &quot;DEBUG: foo is |%q|\n&quot; &quot;$foo&quot; >&2
+    printf "DEBUG: foo is |%q|\n" "$foo" >&2
     # exposes whitespace (such as CRs, see below) and non-printing characters
 
 ## Use shell debug output
@@ -100,7 +100,7 @@ Here's a simple command (a string comparison using the [classic test
 command](/commands/classictest)) executed while in `set -x` mode:
 
     set -x
-    foo=&quot;bar baz&quot;
+    foo="bar baz"
     [ $foo = test ]
 
 That fails. Why? Let's see the `xtrace` output:
@@ -112,7 +112,7 @@ words (which you would have realized if you READ THE ERROR MESSAGES ;)
 ). Let's check it...
 
     # next try
-    [ &quot;$foo&quot; = test ]
+    [ "$foo" = test ]
 
 `xtrace` now gives
 
@@ -157,10 +157,10 @@ For general debugging purposes you can also define a function and a
 variable to use:
 
     debugme() {
-     [[ $script_debug = 1 ]] && &quot;$@&quot; || :
+     [[ $script_debug = 1 ]] && "$@" || :
      # be sure to append || : or || true here or use return 0, since the return code
      # of this function should always be 0 to not influence anything else with an unwanted
-     # &quot;false&quot; return code (for example the script's exit code if this function is used
+     # "false" return code (for example the script's exit code if this function is used
      # as the very last command in the script)
     }
 
@@ -171,9 +171,9 @@ Use it like this:
     script_debug=1
     # to turn it off, set script_debug=0
 
-    debugme logger &quot;Sorting the database&quot;
+    debugme logger "Sorting the database"
     database_sort
-    debugme logger &quot;Finished sorting the database, exit code $?&quot;
+    debugme logger "Finished sorting the database, exit code $?"
 
 Of course this can be used to execute something other than echo during
 debugging:
@@ -236,7 +236,7 @@ to be deliberate. Bash 4.0 added an extra message for this:
 
 ### Unexpected end of file while looking for matching ...
 
-    script.sh: line 50: unexpected EOF while looking for matching `&quot;'
+    script.sh: line 50: unexpected EOF while looking for matching `"'
     script.sh: line 100: syntax error: unexpected end of file
 
 This one indicates the double-quote opened in line 50 does not have a
@@ -259,8 +259,8 @@ test-command that yielded the error.
 
 ### !": event not found
 
-    $ echo &quot;Hello world!&quot;
-    bash: !&quot;: event not found
+    $ echo "Hello world!"
+    bash: !": event not found
 
 This is not an error per se. It happens in interactive shells, when the
 C-Shell-styled history expansion ("`!searchword`") is enabled. This is
@@ -275,7 +275,7 @@ the default. Disable it like this:
 When this happens during a script **function definition** or on the
 commandline, e.g.
 
-    $ foo () { echo &quot;Hello world&quot;; }
+    $ foo () { echo "Hello world"; }
     bash: syntax error near unexpected token `('
 
 you most likely have an alias defined with the same name as the function
@@ -323,7 +323,7 @@ carriage return character!):
 
     #!/bin/bash^M
     ^M
-    echo &quot;Hello world&quot;^M
+    echo "Hello world"^M
     ...
 
 Here's what happens because of the `#!/bin/bash^M` in our shebang:

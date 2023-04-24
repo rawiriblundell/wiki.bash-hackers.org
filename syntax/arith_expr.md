@@ -48,7 +48,7 @@ as a decimal value, you need to expand the parameter and specify base
     # this is interpreted as an octal:
     echo $(( x ))
 
-    # this is an invalid digit for base 10 (the &quot;x&quot;)...:
+    # this is an invalid digit for base 10 (the "x")...:
     echo $(( 10#x ))
 
 ## Different bases
@@ -88,7 +88,7 @@ mean:
     42
 
     $ echo $((43#H))
-    bash: 43#H: value too great for base (error token is &quot;43#H&quot;)
+    bash: 43#H: value too great for base (error token is "43#H")
 
 If you have no clue what a base is and why there might be other bases,
 and what numbers are and how they are built, then you don't need
@@ -111,7 +111,7 @@ named parameters, e.g.:
     string=3
 
     echo $((test))
-    # will output &quot;3&quot;!
+    # will output "3"!
 
 Of course, in the end, when it finally evaluates to something that is
 **not** a valid arithmetic expression (newlines, ordinary text, ...)
@@ -141,9 +141,9 @@ arithmetic expression to match the "truth" of command exit codes:
 That means, the following `if`-clause will execute the `else`-thread:
 
     if ((0)); then
-      echo &quot;true&quot;
+      echo "true"
     else
-      echo &quot;false&quot;
+      echo "false"
     fi
 
 ## Operators
@@ -318,9 +318,9 @@ and all the others, including `set -e` for autoexit on error:
 MY_TEST_FLAG=0
 
 if ((MY_TEST_FLAG)); then
-  echo &quot;MY_TEST_FLAG is ON&quot;
+  echo "MY_TEST_FLAG is ON"
 else
-  echo &quot;MY_TEST_FLAG is OFF&quot;
+  echo "MY_TEST_FLAG is OFF"
 fi
 ```
 

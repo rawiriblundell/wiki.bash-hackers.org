@@ -35,7 +35,7 @@ shell initialization:
 <u>Testscript</u> - it just echos `$0`:
 
     #!/bin/bash
-    echo &quot;$0&quot;
+    echo "$0"
 
 You see, `$0` is always set to the name the script is called with (`>`
 is the prompt...):
@@ -48,7 +48,7 @@ is the prompt...):
 
 However, this isn't true for login shells:
 
-    > echo &quot;$0&quot;
+    > echo "$0"
     -bash
 
 In other terms, `$0` is not a positional parameter, it's a special
@@ -85,12 +85,12 @@ go.
 One way is to access specific parameters:
 
     #!/bin/bash
-    echo &quot;Total number of arguments: $#&quot;
-    echo &quot;Argument 1: $1&quot;
-    echo &quot;Argument 2: $2&quot;
-    echo &quot;Argument 3: $3&quot;
-    echo &quot;Argument 4: $4&quot;
-    echo &quot;Argument 5: $5&quot;
+    echo "Total number of arguments: $#"
+    echo "Argument 1: $1"
+    echo "Argument 2: $2"
+    echo "Argument 3: $3"
+    echo "Argument 4: $4"
+    echo "Argument 5: $5"
 
 While useful in another situation, this way is lacks flexibility. The
 maximum number of arguments is a fixedvalue - which is a bad idea if you
@@ -111,7 +111,7 @@ argument list:
     numargs=$#
     for ((i=1 ; i <= numargs ; i++))
     do
-        echo &quot;$1&quot;
+        echo "$1"
         shift
     done
 
@@ -126,7 +126,7 @@ a given wordlist. The loop uses the positional parameters as a wordlist:
 
     for arg
     do
-        echo &quot;$arg&quot;
+        echo "$arg"
     done
 
 <u>Advantage:</u> The positional parameters will be preserved
@@ -137,9 +137,9 @@ The next method is similar to the first example (the `for` loop), but it
 doesn't test for reaching `$#`. It shifts and checks if `$1` still
 expands to something, using the [test command](/commands/classictest):
 
-    while [ &quot;$1&quot; ]
+    while [ "$1" ]
     do
-        echo &quot;$1&quot;
+        echo "$1"
         shift
     done
 
@@ -148,8 +148,8 @@ Looks nice, but has the disadvantage of stopping when `$1` is empty
 may be null), using [parameter expansion for an alternate
 value](/syntax/pe#use_an_alternate_value):
 
-    while [ &quot;${1+defined}&quot; ]; do
-      echo &quot;$1&quot;
+    while [ "${1+defined}" ]; do
+      echo "$1"
       shift
     done
 
@@ -226,7 +226,7 @@ decremented.
 
 <u>**Example:**</u> START at the last positional parameter:
 
-    echo &quot;${@: -1}&quot;
+    echo "${@: -1}"
 
 <u>**Attention**</u>: As of Bash 4, a `START` of `0` includes the
 special parameter `$0`, i.e. the shell name or whatever \$0 is set to,
@@ -240,7 +240,7 @@ only way to set them. The [builtin command, set](/commands/builtin/set)
 may be used to "artificially" change the positional parameters from
 inside the script or function:
 
-    set &quot;This is&quot; my new &quot;set of&quot; positional parameters
+    set "This is" my new "set of" positional parameters
 
     # RESULTS IN
     # $1: This is
@@ -282,9 +282,9 @@ rudimentary way to parse your arguments.
 
     while :
     do
-        case &quot;$1&quot; in
+        case "$1" in
           -f | --file)
-          file=&quot;$2&quot;   # You may want to check validity of $2
+          file="$2"   # You may want to check validity of $2
           shift 2
           ;;
           -h | --help)
@@ -293,31 +293,31 @@ rudimentary way to parse your arguments.
           exit 0
           ;;
           -u | --user)
-          username=&quot;$2&quot; # You may want to check validity of $2
+          username="$2" # You may want to check validity of $2
           shift 2
           ;;
           -v | --verbose)
-              #  It's better to assign a string, than a number like &quot;verbose=1&quot;
-          #  because if you're debugging the script with &quot;bash -x&quot; code like this:
+              #  It's better to assign a string, than a number like "verbose=1"
+          #  because if you're debugging the script with "bash -x" code like this:
           #
-          #    if [ &quot;$verbose&quot; ] ...
+          #    if [ "$verbose" ] ...
           #
           #  You will see:
           #
-          #    if [ &quot;verbose&quot; ] ...
+          #    if [ "verbose" ] ...
           #
               #  Instead of cryptic
           #
-          #    if [ &quot;1&quot; ] ...
+          #    if [ "1" ] ...
           #
-          verbose=&quot;verbose&quot;
+          verbose="verbose"
           shift
           ;;
           --) # End of all options
           shift
           break;
           -*)
-          echo &quot;Error: Unknown option: $1&quot; >&2
+          echo "Error: Unknown option: $1" >&2
           exit 1
           ;;
           *)  # No more options
@@ -346,7 +346,7 @@ options" for `ls` and doesn't change anything after it:
     while [[ $1 ]]
     do
         if ! ((eoo)); then
-        case &quot;$1&quot; in
+        case "$1" in
           -a)
               shift
               ;;
@@ -354,29 +354,29 @@ options" for `ls` and doesn't change anything after it:
               shift
               ;;
           -[^-]*a*|-a?*)
-              options+=(&quot;${1//a}&quot;)
+              options+=("${1//a}")
               shift
               ;;
           --)
               eoo=1
-              options+=(&quot;$1&quot;)
+              options+=("$1")
               shift
               ;;
           *)
-              options+=(&quot;$1&quot;)
+              options+=("$1")
               shift
               ;;
         esac
         else
-        options+=(&quot;$1&quot;)
+        options+=("$1")
 
         # Another (worse) way of doing the same thing:
-        # options=(&quot;${options[@]}&quot; &quot;$1&quot;)
+        # options=("${options[@]}" "$1")
         shift
         fi
     done
 
-    /bin/ls &quot;${options[@]}&quot;
+    /bin/ls "${options[@]}"
 
 ### Using getopts
 

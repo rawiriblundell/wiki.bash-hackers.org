@@ -41,7 +41,7 @@ requires that the entire command be properly escaped to avoid unexpected
 expansions. If the sequence expansion is to be assigned to an array,
 another method is possible using [declaration
 commands](/commands/builtin/declare):
-`declare -a 'pics=(img{'&quot;$a..$b&quot;'}.png)'; mv &quot;${pics[@]}&quot; ../imgs`
+`declare -a 'pics=(img{'"$a..$b"'}.png)'; mv "${pics[@]}" ../imgs`
 This is significantly safer, but one must still be careful to control
 the values of \$a and \$b. Both the exact quoting, and explicitly
 including "-a" are important.
@@ -181,18 +181,18 @@ for.
 
 <!-- -->
 
-    for i in 0{1..9} 10; do printf &quot;%s\n&quot; &quot;$i&quot;;done
+    for i in 0{1..9} 10; do printf "%s\n" "$i";done
 
 If you need to create words with the number embedded, you can use nested
 brace:
 
-    printf &quot;%s\n&quot; img{00{1..9},0{10..99},{100..999}}.png
+    printf "%s\n" img{00{1..9},0{10..99},{100..999}}.png
 
 - Formatting the numbers with printf:
 
 <!-- -->
 
-    echo $(printf &quot;img%02d.png &quot; {1..99})
+    echo $(printf "img%02d.png " {1..99})
 
 See the [text below](#news_in_bash_4.0) for a new Bash 4 method.
 
@@ -218,18 +218,18 @@ any number of arguments.
     function braceify {
         [[ $1 == +([[:digit:]]) ]] || return
         typeset -a a
-        read -ra a < <(factor &quot;$1&quot;)
-        eval &quot;echo $(printf '{$(printf ,%%.s {1..%s})}' &quot;${a[@]:1}&quot;)&quot;
+        read -ra a < <(factor "$1")
+        eval "echo $(printf '{$(printf ,%%.s {1..%s})}' "${a[@]:1}")"
     }
 
-    printf 'eval printf &quot;$arg&quot;%s' &quot;$(braceify 1000000)&quot;
+    printf 'eval printf "$arg"%s' "$(braceify 1000000)"
 
 "Braceify" generates the expansion code itself. In this example we
 inject that output into a template which displays the most terse brace
 expansion code that would expand `"$arg"` 1,000,000 times if evaluated.
 In this case, the output is:
 
-    eval printf &quot;$arg&quot;{,,}{,,}{,,}{,,}{,,}{,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}
+    eval printf "$arg"{,,}{,,}{,,}{,,}{,,}{,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}{,,,,,}
 
 \</div\>
 

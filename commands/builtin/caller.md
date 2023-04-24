@@ -38,11 +38,11 @@ die() {
   while caller $frame; do
     ((++frame));
   done
-  echo &quot;$*&quot;
+  echo "$*"
   exit 1
 }
 
-f1() { die &quot;*** an error occured ***&quot;; }
+f1() { die "*** an error occured ***"; }
 f2() { f1; }
 f3() { f2; }
 

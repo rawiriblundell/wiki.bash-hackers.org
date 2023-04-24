@@ -17,7 +17,7 @@ From `builtins/read.def`:
 ``` C
  /* If there are no variables, save the text of the line read to the
      variable $REPLY.  ksh93 strips leading and trailing IFS whitespace,
-     so that `read x ; echo &quot;$x&quot;' and `read ; echo &quot;$REPLY&quot;' behave the
+     so that `read x ; echo "$x"' and `read ; echo "$REPLY"' behave the
      same way, but I believe that the difference in behaviors is useful
      enough to not do it.  Without the bash behavior, there is no way
      to read a line completely without interpretation or modification

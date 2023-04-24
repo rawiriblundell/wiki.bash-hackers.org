@@ -63,12 +63,12 @@ Here's a demonstration of this behavior.
     # Direct recursion depth.
     # Search up the stack for the first non-FUNCNAME[1] and count how deep we are.
     callDepth() {
-        # Strip &quot;main&quot; off the end of FUNCNAME[@] if current function is named &quot;main&quot; and
-        # Bash added an extra &quot;main&quot; for non-interactive scripts.
-        if [[ main == !(!(&quot;${FUNCNAME[1]}&quot;)|!(&quot;${FUNCNAME[-1]}&quot;)) && $- != *i* ]]; then
-            local -a 'fnames=(&quot;${FUNCNAME[@]:1:${#FUNCNAME[@]}-2}&quot;)'
+        # Strip "main" off the end of FUNCNAME[@] if current function is named "main" and
+        # Bash added an extra "main" for non-interactive scripts.
+        if [[ main == !(!("${FUNCNAME[1]}")|!("${FUNCNAME[-1]}")) && $- != *i* ]]; then
+            local -a 'fnames=("${FUNCNAME[@]:1:${#FUNCNAME[@]}-2}")'
         else
-            local -a 'fnames=(&quot;${FUNCNAME[@]:1}&quot;)'
+            local -a 'fnames=("${FUNCNAME[@]:1}")'
         fi
 
         if (( ! ${#fnames[@]} )); then 
@@ -86,7 +86,7 @@ Here's a demonstration of this behavior.
 
     # This function is the magic stack walker.
     unset2() {
-        unset -v -- &quot;$@&quot;
+        unset -v -- "$@"
     }
 
     f() {
@@ -97,11 +97,11 @@ Here's a demonstration of this behavior.
             f
         else
             trap 'declare -p a' DEBUG
-            unset2 a   # declare -- a=&quot;5&quot;
-            unset a a  # declare -- a=&quot;4&quot;
-            unset a    # declare -- a=&quot;2&quot;
+            unset2 a   # declare -- a="5"
+            unset a a  # declare -- a="4"
+            unset a    # declare -- a="2"
             unset a    # ./unset-tests: line 44: declare: a: not found
-            :          # declare -- a=&quot;global scope yo&quot;
+            :          # declare -- a="global scope yo"
         fi
     }
 
@@ -112,11 +112,11 @@ Here's a demonstration of this behavior.
 
 output:
 
-    declare -- a=&quot;5&quot;
-    declare -- a=&quot;4&quot;
-    declare -- a=&quot;2&quot;
+    declare -- a="5"
+    declare -- a="4"
+    declare -- a="2"
     ./unset-tests: line 44: declare: a: not found
-    declare -- a=&quot;global scope yo&quot;
+    declare -- a="global scope yo"
 
 Some things to observe:
 
@@ -143,15 +143,15 @@ Like several other Bash builtins that take parameter names, unset
 expands its arguments.
 
      ~ $ ( a=({a..d}); unset 'a[2]'; declare -p a )
-    declare -a a='([0]=&quot;a&quot; [1]=&quot;b&quot; [3]=&quot;d&quot;)'
+    declare -a a='([0]="a" [1]="b" [3]="d")'
 
 As usual in such cases, it's important to quote the args to avoid
 accidental results such as globbing.
 
-     ~ $ ( a=({a..d}) b=a c=d d=1; set -x; unset &quot;${b}[&quot;{2..3}-c\]; declare -p a )
+     ~ $ ( a=({a..d}) b=a c=d d=1; set -x; unset "${b}["{2..3}-c\]; declare -p a )
     + unset 'a[2-1]' 'a[3-1]'
     + declare -p a
-    declare -a a='([0]=&quot;a&quot; [3]=&quot;d&quot;)'
+    declare -a a='([0]="a" [3]="d")'
 
 Of course hard to follow indirection is still possible whenever
 arithmetic is involved, also as shown above, even without extra

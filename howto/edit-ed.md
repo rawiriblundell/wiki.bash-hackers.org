@@ -38,10 +38,10 @@ command, `printf` ("help printf"). Shown here as an example Bash
 function to prefix text to file content:
 
 
-    # insertHead &quot;$text&quot; &quot;$file&quot;
+    # insertHead "$text" "$file"
 
     insertHead() {
-      printf '%s\n' H 1i &quot;$1&quot; . w | ed -s &quot;$2&quot;
+      printf '%s\n' H 1i "$1" . w | ed -s "$2"
     }
 
 **<u>Here-strings</u>**
@@ -221,9 +221,9 @@ prints the result to stdout - `,p`):
 To compare, here's a possible `sed` solution which must use Bash
 arithmetic and the external program `wc`:
 
-    sed &quot;$(($(wc -l < FILE1)-1))r FILE2&quot; FILE1
+    sed "$(($(wc -l < FILE1)-1))r FILE2" FILE1
 
-    # UPDATE here's one which uses GNU sed's &quot;e&quot; parameter for the s-command
+    # UPDATE here's one which uses GNU sed's "e" parameter for the s-command
     #   it executes the commands found in pattern space. I'll take that as a
     #   security risk, but well, sometimes GNU > security, you know...
     sed '${h;s/.*/cat FILE2/e;G}' FILE1
@@ -250,10 +250,10 @@ about it with the g (global) command:
 
     echo $'1\n1\n3' > file
 
-    #replace all lines matching 1 by &quot;replacement&quot;
+    #replace all lines matching 1 by "replacement"
     ed -s file <<< $'g/1/s/1/replacement/\n,p' 
 
-    #replace the first line matching 1 by &quot;replacement&quot;
+    #replace the first line matching 1 by "replacement"
     #(because it starts searching from the last line)
     ed -s file <<< $'s/1/replacement/\n,p'
 
@@ -276,7 +276,7 @@ If you want the same behaviour you can use g/foo/ to trick ed. g/foo/
 will apply the command on all lines matching foo, thus the substitution
 will succeed and ed will not produce an error when foo is not found:
 
-    #Second version will add the line with &quot;something&quot; even if foo is not found
+    #Second version will add the line with "something" even if foo is not found
     ed -s file <<< $'H\n1g/foo/s/foo/bar/\na\nsomething\n.\nw'
 
 In fact, even a substitution that fails after a g/ / command does not

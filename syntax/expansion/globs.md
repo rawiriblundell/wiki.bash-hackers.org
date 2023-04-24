@@ -8,7 +8,7 @@ A called program will never see the glob itself; it will only see the
 expanded filenames as its arguments (here, all filenames matching
 `*.log`):
 
-    grep &quot;changes:&quot; *.log
+    grep "changes:" *.log
 
 The base syntax for the pathname expansion is the [pattern
 matching](/syntax/pattern) syntax. The pattern you describe is matched
@@ -59,7 +59,7 @@ Normally, when no glob specified matches an existing filename, no
 pathname expansion is performed, and the globs are <u>**not**</u>
 removed:
 
-    $ echo &quot;Textfiles here:&quot; *.txt
+    $ echo "Textfiles here:" *.txt
     Textfiles here: *.txt
 
 In this example, no files matched the pattern, so the glob was left
@@ -69,9 +69,9 @@ This can be very annoying, for example when you drive a
 [for-loop](/syntax/ccmd/classic_for) using the pathname expansion:
 
     for filename in *.txt; do
-      echo &quot;=== BEGIN: $filename ===&quot;
-      cat &quot;$filename&quot;
-      echo &quot;=== END: $filename ===&quot;
+      echo "=== BEGIN: $filename ==="
+      cat "$filename"
+      echo "=== END: $filename ==="
     done
 
 When no file name matches the glob, the loop will not only output stupid
@@ -85,7 +85,7 @@ even one iteration will be done. It just won't run.
 So in our first example:
 
     $ shopt -s nullglob
-    $ echo &quot;Textfiles here:&quot; *.txt
+    $ echo "Textfiles here:" *.txt
     Textfiles here:
 
 and the glob is gone.

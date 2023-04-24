@@ -10,10 +10,10 @@ Bash source command. The file to be sourced should be formated in
 key="value" format, otherwise bash will try to interpret commands:
 
     #!/bin/bash
-    echo &quot;Reading config....&quot; >&2
+    echo "Reading config...." >&2
     source /etc/cool.cfg
-    echo &quot;Config for the username: $cool_username&quot; >&2
-    echo &quot;Config for the target host: $cool_host&quot; >&2
+    echo "Config for the username: $cool_username" >&2
+    echo "Config for the target host: $cool_host" >&2
 
 So, where do these variables come from? If everything works fine, they
 are defined in /etc/cool.cfg which is a file that's sourced into the
@@ -21,8 +21,8 @@ current script or shell. Note: this is **not** the same as executing
 this file as a script! The sourced file most likely contains something
 like:
 
-    cool_username=&quot;guest&quot;
-    cool_host=&quot;foo.example.com&quot;
+    cool_username="guest"
+    cool_host="foo.example.com"
 
 These are normal statements understood by Bash, nothing special. Of
 course (and, a big disadvantage under normal circumstances) the sourced
@@ -33,10 +33,10 @@ The `source` command also is available under the name `.` (dot). The
 usage of the dot is identical:
 
     #!/bin/bash
-    echo &quot;Reading config....&quot; >&2
+    echo "Reading config...." >&2
     . /etc/cool.cfg #note the space between the dot and the leading slash of /etc.cfg
-    echo &quot;Config for the username: $cool_username&quot; >&2
-    echo &quot;Config for the target host: $cool_host&quot; >&2
+    echo "Config for the username: $cool_username" >&2
+    echo "Config for the target host: $cool_host" >&2
 
 ## Per-user configs
 
@@ -46,10 +46,10 @@ the following example, the if/then construct is used to check for the
 existance of a user-specific config:
 
     #!/bin/bash
-    echo &quot;Reading system-wide config....&quot; >&2
+    echo "Reading system-wide config...." >&2
     . /etc/cool.cfg
     if [ -r ~/.coolrc ]; then
-      echo &quot;Reading user config....&quot; >&2
+      echo "Reading user config...." >&2
       . ~/.coolrc
     fi
 
@@ -68,9 +68,9 @@ malicious code:
     username=god_only_knows
     hostname=www.example.com
     password=secret ; echo rm -rf ~/*
-    parameter=foobar && echo &quot;You've bene pwned!&quot;;
+    parameter=foobar && echo "You've bene pwned!";
     # hey look, weird code follows...
-    echo &quot;I am the skull virus...&quot;
+    echo "I am the skull virus..."
     echo rm -fr ~/*
     mailto=netadmin@example.com
 
@@ -88,15 +88,15 @@ filters by description:
     configfile_secured='/tmp/cool.cfg'
 
     # check if the file contains something we don't want
-    if egrep -q -v '^#|^[^ ]*=[^;]*' &quot;$configfile&quot;; then
-      echo &quot;Config file is unclean, cleaning it...&quot; >&2
+    if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
+      echo "Config file is unclean, cleaning it..." >&2
       # filter the original to a new file
-      egrep '^#|^[^ ]*=[^;&]*'  &quot;$configfile&quot; > &quot;$configfile_secured&quot;
-      configfile=&quot;$configfile_secured&quot;
+      egrep '^#|^[^ ]*=[^;&]*'  "$configfile" > "$configfile_secured"
+      configfile="$configfile_secured"
     fi
 
     # now source it, either the original or the filtered variant
-    source &quot;$configfile&quot;
+    source "$configfile"
 
 **<u>To make clear what it does:</u>** egrep checks if the file contains
 something we don't want, if yes, egrep filters the file and writes the

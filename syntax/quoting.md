@@ -21,18 +21,18 @@ related to the quote characters passed as text to the command line! The
 syntax quotes are removed before the command is called! Example:
 
     ### NO NO NO: this passes three strings:
-    ###      (1)  &quot;my
+    ###      (1)  "my
     ###      (2)  multiword
-    ###      (3)  argument&quot;
-    MYARG=&quot;\&quot;my multiword argument\&quot;&quot;
+    ###      (3)  argument"
+    MYARG="\"my multiword argument\""
     somecommand $MYARG
 
     ### THIS IS NOT (!) THE SAME AS ###
-    command &quot;my multiword argument&quot;
+    command "my multiword argument"
 
     ### YOU NEED ###
-    MYARG=&quot;my multiword argument&quot;
-    command &quot;$MYARG&quot;
+    MYARG="my multiword argument"
+    command "$MYARG"
 
 ## Per-character escaping
 
@@ -41,7 +41,7 @@ general, a character that has a special meaning to Bash, like the
 dollar-sign (`$`) can be masked to not have a special meaning using the
 backslash:
 
-    echo \$HOME is set to \&quot;$HOME\&quot;
+    echo \$HOME is set to \"$HOME\"
 
 - `\$HOME` won't expand because it's not in variable-expansion syntax
   anymore
@@ -81,12 +81,12 @@ Inside a weak-quoted string there's **no special interpretion of**:
 Everything else, especially [parameter expansion](/syntax/pe), is
 performed!
 
-    ls -l &quot;*&quot;
+    ls -l "*"
 
 Will not be expanded. `ls` gets the literal `*` as argument. It will,
 unless you have a file named `*`, spit out an error.
 
-    echo &quot;Your PATH is: $PATH&quot;
+    echo "Your PATH is: $PATH"
 
 Will work as expected. `$PATH` is expanded, because it's double (weak)
 quoted.
@@ -126,7 +126,7 @@ to get the character "`'`" as literal text:
     echo 'Here'\''s my test...'
 
     # ALTERNATIVE: It's also possible to mix-and-match quotes for readability:
-    echo &quot;Here's my test&quot;
+    echo "Here's my test"
 
 ## ANSI C like strings
 
@@ -174,7 +174,7 @@ compatibility" features).
 
 A dollar-sign followed by a double-quoted string, for example
 
-    echo $&quot;generating database...&quot;
+    echo $"generating database..."
 
 means I18N. If there is a translation available for that string, it is
 used instead of the given text. If not, or if the locale is `C`/`POSIX`,
@@ -200,11 +200,11 @@ documentation](http://www.gnu.org/software/gettext/manual/html_node/bash.html)
 The [classic for loop](/syntax/ccmd/classic_for) uses a list of words to
 iterate through. The list can also be in a variable:
 
-    mylist=&quot;DOG CAT BIRD HORSE&quot;
+    mylist="DOG CAT BIRD HORSE"
 
 **<u>WRONG</u>** way to iterate through this list:
 
-    for animal in &quot;$mylist&quot;; do
+    for animal in "$mylist"; do
         echo $animal
     done
 
@@ -235,7 +235,7 @@ writing this as a test command it would be:
 When you compare variables, it's wise to quote them. Let's create a test
 string with spaces:
 
-    mystring=&quot;my string&quot;
+    mystring="my string"
 
 And now check that string against the word "testword":
 
@@ -251,7 +251,7 @@ Which is wrong, because `my` and `string` are two separate arguments.
 
 So what you really want to do is:
 
-    [ &quot;$mystring&quot; = testword ] # RIGHT!
+    [ "$mystring" = testword ] # RIGHT!
 
     test 'my string' = testword
 

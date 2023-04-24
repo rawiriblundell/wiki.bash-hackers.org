@@ -183,7 +183,7 @@ give the `-v` option:
 You can extract all files, or files (not) matching specific patterns
 from an archive using constructs like:
 
-    # &quot;normal&quot; extraction
+    # "normal" extraction
     pax -rf myarchive.tar '*.txt'
 
     # with inverted pattern
@@ -201,8 +201,8 @@ command, use:
 
 To copy directory contents to another directory on a remote system, use:
 
-    pax -w localdir | ssh user@host &quot;cd distantdest && pax -r -v&quot;
-    pax -w localdir | gzip | ssh user@host &quot;cd distantdir && gunzip | pax -r -v&quot; #compress the sent data
+    pax -w localdir | ssh user@host "cd distantdest && pax -r -v"
+    pax -w localdir | gzip | ssh user@host "cd distantdir && gunzip | pax -r -v" #compress the sent data
 
 These commands create a copy of localdir in distandir (distantdir/dir)
 on the remote machine.

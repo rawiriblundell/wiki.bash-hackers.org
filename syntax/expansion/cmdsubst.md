@@ -73,7 +73,7 @@ substitution, while every `$()`-construct opens an own, subsequent
 parsing step. Everything inside `$()` is interpreted as if written
 normal on a commandline. No special escaping of **nothing** is needed:
 
-    echo &quot;$(echo &quot;$(ls)&quot;)&quot; # nested double-quotes - no problem
+    echo "$(echo "$(ls)")" # nested double-quotes - no problem
 
 **<u>Constructs you should avoid</u>**
 
@@ -91,10 +91,10 @@ substitution step and echo prints "ls" and ")":
 It seems that every closing ")" confuses this construct. Also a (very
 uncommon ;-)) construct like:
 
-    echo $(read VAR; case &quot;$var&quot; in foo) blah ;; esac) # spits out some error, when it sees the &quot;;;&quot;
+    echo $(read VAR; case "$var" in foo) blah ;; esac) # spits out some error, when it sees the ";;"
 
     # fixes it:
-    echo $(read VAR; case &quot;$var&quot; in (foo) blah ;; esac) # will work, but just let it be, please ;-)
+    echo $(read VAR; case "$var" in (foo) blah ;; esac) # will work, but just let it be, please ;-)
 
 **<u>Conclusion:</u>**
 
@@ -110,19 +110,19 @@ In general, the `$()` should be the preferred method:
 
 **To get the date:**
 
-    DATE=&quot;$(date)&quot;
+    DATE="$(date)"
 
 **To copy a file and get `cp` error output:**
 
-    COPY_OUTPUT=&quot;$(cp file.txt /some/where 2>&1)&quot;
+    COPY_OUTPUT="$(cp file.txt /some/where 2>&1)"
 
 Attention: Here, you need to redirect `cp` `STDERR` to its `STDOUT`
 target, because command substitution only catches `STDOUT`!
 
 **Catch stdout and preserve trailing newlines:**
 
-    var=$(echo -n $'\n'); echo -n &quot;$var&quot;; # $var == &quot;&quot;
-    var=$(echo -n $'\n'; echo -n x); var=&quot;${var%x}&quot;; echo -n &quot;$var&quot; # $var == &quot;\n&quot;
+    var=$(echo -n $'\n'); echo -n "$var"; # $var == ""
+    var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
 
 This adds "x" to the output, which prevents the trailing newlines of the
 previous commands' output from being deleted by \$().

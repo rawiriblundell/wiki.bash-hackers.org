@@ -15,9 +15,9 @@ etc...) are reflected in the "main shell".
 Execute a command in a different directory.
 
 ``` bash
-echo &quot;$PWD&quot;
-( cd /usr; echo &quot;$PWD&quot; )
-echo &quot;$PWD&quot; # Still in the original directory.
+echo "$PWD"
+( cd /usr; echo "$PWD" )
+echo "$PWD" # Still in the original directory.
 ```
 
 ## Portability considerations

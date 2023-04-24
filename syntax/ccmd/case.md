@@ -36,7 +36,7 @@ expansion*; *arithmetic*, *command* and *process substitution*; and
 *quote removal*. **No word splitting, brace, or pathname expansion is
 done**, which means you can leave expansions unquoted without problems:
 
-    var=&quot;test word&quot;
+    var="test word"
 
     case $var in
       ...
@@ -78,7 +78,7 @@ Another one of my stupid examples...
             exit 1
             ;;
         *)
-            echo &quot;Unknown fruit - sure it isn't toxic?&quot;
+            echo "Unknown fruit - sure it isn't toxic?"
     esac
 
 Here's a practical example showing a common pattern involving a `case`
@@ -95,13 +95,13 @@ function clk {
 
     case $1 in
         low|high|default)
-            printf '%s\n' &quot;temp: $(<${base}/hwmon/hwmon0/temp1_input)C&quot; &quot;old profile: $(<${base}/power_profile)&quot;
-            echo &quot;$1&quot; >${base}/power_profile
-            echo &quot;new profile: $(<${base}/power_profile)&quot;
+            printf '%s\n' "temp: $(<${base}/hwmon/hwmon0/temp1_input)C" "old profile: $(<${base}/power_profile)"
+            echo "$1" >${base}/power_profile
+            echo "new profile: $(<${base}/power_profile)"
             ;;
         *)
-            echo &quot;Usage: $FUNCNAME [ low | high | default ]&quot;
-            printf '%s\n' &quot;temp: $(<${base}/hwmon/hwmon0/temp1_input)C&quot; &quot;current profile: $(<${base}/power_profile)&quot;
+            echo "Usage: $FUNCNAME [ low | high | default ]"
+            printf '%s\n' "temp: $(<${base}/hwmon/hwmon0/temp1_input)C" "current profile: $(<${base}/power_profile)"
     esac
 }
 ```
@@ -113,25 +113,25 @@ between blocks using `;&`, and the non-short-circuiting `;;&` operator:
 #!/usr/bin/env bash
 
 f() {
-    local -a &quot;$@&quot;
+    local -a "$@"
     local x
 
     for x; do
         case $x in
             $1)
-                local &quot;$x&quot;'+=(1)' ;;&
+                local "$x"'+=(1)' ;;&
             $2)
-                local &quot;$x&quot;'+=(2)' ;&
+                local "$x"'+=(2)' ;&
             $3)
-                local &quot;$x&quot;'+=(3)' ;;
+                local "$x"'+=(3)' ;;
             $1|$2)
-                local &quot;$x&quot;'+=(4)'
+                local "$x"'+=(4)'
         esac
-        IFS=, local -a &quot;$x&quot;'=(&quot;${x}: ${'&quot;$x&quot;'[*]}&quot;)'
+        IFS=, local -a "$x"'=("${x}: ${'"$x"'[*]}")'
     done
 
     for x; do
-        echo &quot;${!x}&quot;
+        echo "${!x}"
     done
 }
 

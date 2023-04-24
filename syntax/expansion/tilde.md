@@ -49,7 +49,7 @@ This way you can correctly use the tilde expansion in your
 
 **Spaces in the referenced pathes?** A construct like...
 
-    ~/&quot;my directory&quot;
+    ~/"my directory"
 
 ...is perfectly valid and works!
 
@@ -83,11 +83,11 @@ at least regarding tilde expansion.
 This expands to the value of the [PWD](/syntax/shellvars#PWD) variable,
 which holds the currect working directory:
 
-    echo &quot;CWD is $PWD&quot;
+    echo "CWD is $PWD"
 
 is equivalent to (note it **must** be a separate word!):
 
-    echo &quot;CWD is&quot; ~+
+    echo "CWD is" ~+
 
 ## Previous working directory
 

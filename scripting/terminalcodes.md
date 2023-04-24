@@ -218,9 +218,9 @@ done by the following commands:
     tput smcup
     clear
 
-    # example &quot;application&quot; follows...
-    read -n1 -p &quot;Press any key to continue...&quot;
-    # example &quot;application&quot; ends here
+    # example "application" follows...
+    read -n1 -p "Press any key to continue..."
+    # example "application" ends here
 
     # restore
     tput rmcup
@@ -281,14 +281,14 @@ switch to, to get the other 8 colors.
 
 <u>Directly inside the echo:</u>
 
-    echo &quot;TPUT is a $(tput setaf 2)nice$(tput setaf 9) and $(tput setaf 5)user friendly$(tput setaf 9) terminal capability database.&quot;
+    echo "TPUT is a $(tput setaf 2)nice$(tput setaf 9) and $(tput setaf 5)user friendly$(tput setaf 9) terminal capability database."
 
 <u>With preset variables:</u>
 
-    COL_NORM=&quot;$(tput setaf 9)&quot;
-    COL_RED=&quot;$(tput setaf 1)&quot;
-    COL_GREEN=&quot;$(tput setaf 2)&quot;
-    echo &quot;It's ${COL_RED}red${COL_NORM} and ${COL_GREEN}green${COL_NORM} - have you seen?&quot;
+    COL_NORM="$(tput setaf 9)"
+    COL_RED="$(tput setaf 1)"
+    COL_GREEN="$(tput setaf 2)"
+    echo "It's ${COL_RED}red${COL_NORM} and ${COL_GREEN}green${COL_NORM} - have you seen?"
 
 ### Misc
 
@@ -303,11 +303,11 @@ switch to, to get the other 8 colors.
 
     #!/bin/bash
 
-    DATA[0]=&quot;     _/  _/    _/                            _/    &quot;
-    DATA[1]=&quot;  _/_/_/_/_/  _/_/_/      _/_/_/    _/_/_/  _/_/_/ &quot;
-    DATA[2]=&quot;   _/  _/    _/    _/  _/    _/  _/_/      _/    _/&quot;
-    DATA[3]=&quot;_/_/_/_/_/  _/    _/  _/    _/      _/_/  _/    _/ &quot;
-    DATA[4]=&quot; _/  _/    _/_/_/      _/_/_/  _/_/_/    _/    _/  &quot;
+    DATA[0]="     _/  _/    _/                            _/    "
+    DATA[1]="  _/_/_/_/_/  _/_/_/      _/_/_/    _/_/_/  _/_/_/ "
+    DATA[2]="   _/  _/    _/    _/  _/    _/  _/_/      _/    _/"
+    DATA[3]="_/_/_/_/_/  _/    _/  _/    _/      _/_/  _/    _/ "
+    DATA[4]=" _/  _/    _/_/_/      _/_/_/  _/_/_/    _/    _/  "
 
     # virtual coordinate system is X*Y ${#DATA} * 5
 
@@ -392,7 +392,7 @@ default), but uses only features that don't make the Bash parser crash.
     }
 
     function colorBox {
-        (($1==lastclr)) || printf %s &quot;${colrs[lastclr=$1]:=$(tput setaf &quot;$1&quot;)}&quot;
+        (($1==lastclr)) || printf %s "${colrs[lastclr=$1]:=$(tput setaf "$1")}"
         printf '\u2588'
     }
 

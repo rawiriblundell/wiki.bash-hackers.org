@@ -9,18 +9,18 @@ We have a simple **stat.sh** script:
 
     #!/usr/bin/env bash
 
-    if [ -z &quot;$1&quot; ]
+    if [ -z "$1" ]
     then
         DIR=./
     else
         DIR=$1
     fi
 
-    echo &quot;Evaluate *.py statistics&quot;
+    echo "Evaluate *.py statistics"
     FILES=$(find $DIR -name '*.py' | wc -l)
     LINES=$((find $DIR -name '*.py' -print0 | xargs -0 cat) | wc -l)
-    echo &quot;PYTHON FILES: $FILES&quot;
-    echo &quot;PYTHON LINES: $LINES&quot;
+    echo "PYTHON FILES: $FILES"
+    echo "PYTHON LINES: $LINES"
 
 This script evaluate the number of python files and the number of python
 code lines in the files. We can use it like **./stat.sh \<dir\>**

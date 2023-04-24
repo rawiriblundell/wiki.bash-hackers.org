@@ -27,8 +27,8 @@ the line as it was read, without stripping pre- and postfix spaces and
 other things!
 
     while read -r; do
-      printf '&quot;%s&quot;\n' &quot;$REPLY&quot;
-    done <<<&quot;  a line with prefix and postfix space  &quot;
+      printf '"%s"\n' "$REPLY"
+    done <<<"  a line with prefix and postfix space  "
 
 \</WRAP\>
 
@@ -108,13 +108,13 @@ spec.
     2012-05-23 13:49:00 ormaaj  so that's what read without -r does?
     2012-05-23 13:49:16 geirha  no, -r doesn't remove the backslashes
     2012-05-23 13:49:34 ormaaj  I thought read <<<'str' was equivalent to read -r <<<$'str'
-    2012-05-23 13:49:38 geirha  # read x y <<< 'foo\ bar baz'; echo &quot;<$x><$y>&quot;
+    2012-05-23 13:49:38 geirha  # read x y <<< 'foo\ bar baz'; echo "<$x><$y>"
     2012-05-23 13:49:40 shbot   geirha: <foo bar><baz>
     2012-05-23 13:50:32 geirha  no, read without -r is mostly pointless. Damn bourne
     2012-05-23 13:51:08 ormaaj  So it's mostly (entirely) used to escape spaces
     2012-05-23 13:51:24 ormaaj  and insert newlines
     2012-05-23 13:51:47 geirha  ormaaj: you mostly get the same effect as using \ at the prompt
-    2012-05-23 13:52:04 geirha  echo \&quot;  outputs a &quot; ,  read x <<< '\&quot;'  reads a &quot;
+    2012-05-23 13:52:04 geirha  echo \"  outputs a " ,  read x <<< '\"'  reads a "
     2012-05-23 13:52:32 ormaaj  oh weird
     2012-05-23 13:52:46  *  ormaaj struggles to think of a point to that...
     2012-05-23 13:53:01 geirha  ormaaj: ask Bourne :P
@@ -130,8 +130,8 @@ from a file and print them on the terminal.
 
     opossum() {
       while read -r; do
-        printf &quot;%s\n&quot; &quot;$REPLY&quot;
-      done <&quot;$1&quot;
+        printf "%s\n" "$REPLY"
+      done <"$1"
     }
 
 <u>**Note:**</u> Here, `read -r` and the default `REPLY` is used,
@@ -145,7 +145,7 @@ Remember the MSDOS `pause` command? Here's something similar:
 
     pause() {
       local dummy
-      read -s -r -p &quot;Press any key to continue...&quot; -n 1 dummy
+      read -s -r -p "Press any key to continue..." -n 1 dummy
     }
 
 Notes:
@@ -160,14 +160,14 @@ Notes:
 
 Read can be used to split a string:
 
-    var=&quot;one two three&quot;
-    read -r col1 col2 col3 <<< &quot;$var&quot;
-    printf &quot;col1: %s col2: %s col3 %s\n&quot; &quot;$col1&quot; &quot;$col2&quot; &quot;$col3&quot;
+    var="one two three"
+    read -r col1 col2 col3 <<< "$var"
+    printf "col1: %s col2: %s col3 %s\n" "$col1" "$col2" "$col3"
 
 Take care that you cannot use a pipe:
 
-    echo &quot;$var&quot; | read col1 col2 col3 # does not work!
-    printf &quot;col1: %s col2: %s col3 %s\n&quot; &quot;$col1&quot; &quot;$col2&quot; &quot;$col3&quot;
+    echo "$var" | read col1 col2 col3 # does not work!
+    printf "col1: %s col2: %s col3 %s\n" "$col1" "$col2" "$col3"
 
 Why? because the commands of the pipe run in subshells that cannot
 modify the parent shell. As a result, the variables `col1`, `col2` and
@@ -177,8 +177,8 @@ modify the parent shell. As a result, the variables `col1`, `col2` and
 If the variable has more fields than there are variables, the last
 variable get the remaining of the line:
 
-    read col1 col2 col3 <<< &quot;one two three four&quot;
-    printf &quot;%s\n&quot; &quot;$col3&quot; #prints three four
+    read col1 col2 col3 <<< "one two three four"
+    printf "%s\n" "$col3" #prints three four
 
 #### Changing The Separator
 
@@ -186,8 +186,8 @@ By default reads separates the line in fields using spaces or tabs. You
 can modify this using the *special variable*
 [IFS](/syntax/shellvars#IFS), the Internal Field Separator.
 
-    IFS=&quot;:&quot; read -r col1 col2 <<< &quot;hello:world&quot;
-    printf &quot;col1: %s col2: %s\n&quot; &quot;$col1&quot; &quot;$col2&quot;
+    IFS=":" read -r col1 col2 <<< "hello:world"
+    printf "col1: %s col2: %s\n" "$col1" "$col2"
 
 Here we use the `var=value command` syntax to set the environment of
 `read` temporarily. We could have set `IFS` normally, but then we would
@@ -198,8 +198,8 @@ The default `IFS` is special in that 2 fields can be separated by one or
 more space or tab. When you set `IFS` to something besides whitespace
 (space or tab), the fields are separated by **exactly** one character:
 
-    IFS=&quot;:&quot; read -r col1 col2 col3 <<< &quot;hello::world&quot;
-    printf &quot;col1: %s col2: %s col3 %s\n&quot; &quot;$col1&quot; &quot;$col2&quot; &quot;$col3&quot;
+    IFS=":" read -r col1 col2 col3 <<< "hello::world"
+    printf "col1: %s col2: %s col3 %s\n" "$col1" "$col2" "$col3"
 
 See how the `::` in the middle infact defines an additional *empty
 field*.
@@ -207,13 +207,13 @@ field*.
 The fields are separated by exactly one character, but the character can
 be different between each field:
 
-    IFS=&quot;:|@&quot; read -r col1 col2 col3 col4 <<< &quot;hello:world|in@bash&quot;
-    printf &quot;col1: %s col2: %s col3 %s col4 %s\n&quot; &quot;$col1&quot; &quot;$col2&quot; &quot;$col3&quot; &quot;$col4&quot;
+    IFS=":|@" read -r col1 col2 col3 col4 <<< "hello:world|in@bash"
+    printf "col1: %s col2: %s col3 %s col4 %s\n" "$col1" "$col2" "$col3" "$col4"
 
 ### Are you sure?
 
     asksure() {
-    echo -n &quot;Are you sure (Y/N)? &quot;
+    echo -n "Are you sure (Y/N)? "
     while read -r -n 1 -s answer; do
       if [[ $answer = [YyNn] ]]; then
         [[ $answer = [Yy] ]] && retval=0
@@ -229,16 +229,16 @@ be different between each field:
 
     ### using it
     if asksure; then
-      echo &quot;Okay, performing rm -rf / then, master....&quot;
+      echo "Okay, performing rm -rf / then, master...."
     else
-      echo &quot;Pfff...&quot;
+      echo "Pfff..."
     fi
 
 ### Ask for a path with a default value
 
 <u>**Note:**</u> The `-i` option was introduced with Bash 4
 
-    read -e -p &quot;Enter the path to the file: &quot; -i &quot;/usr/local/etc/&quot; FILEPATH
+    read -e -p "Enter the path to the file: " -i "/usr/local/etc/" FILEPATH
 
 The user will be prompted, he can just accept the default, or edit it.
 
@@ -247,8 +247,8 @@ The user will be prompted, he can just accept the default, or edit it.
 Here, `IFS` contains both, a colon and a space. The fields of the
 date/time string are recognized correctly.
 
-    datetime=&quot;2008:07:04 00:34:45&quot;
-    IFS=&quot;: &quot; read -r year month day hour minute second <<< &quot;$datetime&quot;
+    datetime="2008:07:04 00:34:45"
+    IFS=": " read -r year month day hour minute second <<< "$datetime"
 
 ## Portability considerations
 

@@ -1238,7 +1238,7 @@ current mailfile.
 
 Example content:
 
-    /var/mail/bfox?&quot;You have mail&quot;:~/shell-mail?&quot;$_ has mail!&quot;
+    /var/mail/bfox?"You have mail":~/shell-mail?"$_ has mail!"
 
 ### OPTERR
 

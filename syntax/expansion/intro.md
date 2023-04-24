@@ -11,8 +11,8 @@ a changed command line: the elements are said to be **expanded** to or
 
 The most simple example of this behaviour is a referenced variable:
 
-    mystring=&quot;Hello world&quot;
-    echo &quot;$mystring&quot;
+    mystring="Hello world"
+    echo "$mystring"
 
 The `echo` program definitely doesn't care about what a shell variable
 is. It is Bash's job to deal with the variable. Bash **expands** the

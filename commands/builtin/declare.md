@@ -79,11 +79,11 @@ assignment.
     $ declare -f
     foo () 
     { 
-        echo &quot;FOO is BAR&quot;
+        echo "FOO is BAR"
     }
     world () 
     { 
-        echo &quot;Hello World!&quot;
+        echo "Hello World!"
     }
 
 ...or just a specific defined function.
@@ -91,7 +91,7 @@ assignment.
     $ declare -f foo
     foo () 
     { 
-        echo &quot;FOO is BAR&quot;
+        echo "FOO is BAR"
     }
 
 ### Nameref
@@ -107,15 +107,15 @@ variable whose name is expanded on the RHS.
         typeset -n _result=$1 _arr
         typeset IFS=+
         _result=0
-        for _arr in &quot;${@:2}&quot;; do                        # Demonstrate the special property of &quot;for&quot; on a nameref.
+        for _arr in "${@:2}"; do                        # Demonstrate the special property of "for" on a nameref.
             (( _result += ${_arr[*]} ))
-            printf '%s = %d\n' &quot;${!_result}&quot; &quot;$_result&quot; # Demonstrate the special property of ${!ref} on a nameref.
+            printf '%s = %d\n' "${!_result}" "$_result" # Demonstrate the special property of ${!ref} on a nameref.
         done
     }
 
     a=(1 2 3) b=(6 5 4) c=(2 4 6)
     sum total a b c
-    printf 'Final value of &quot;total&quot; is: %d\n' &quot;$total&quot;
+    printf 'Final value of "total" is: %d\n' "$total"
 
 \<div hide\> function sum {
 
@@ -123,10 +123,10 @@ variable whose name is expanded on the RHS.
       shift
       typeset IFS=+ _arrx
       _result=0
-      for _arrx in &quot;$@&quot;; do                        # Demonstrate the special property of &quot;for&quot; on a nameref.
+      for _arrx in "$@"; do                        # Demonstrate the special property of "for" on a nameref.
           typeset -n _arr=$_arrx
           (( _result += ${_arr[*]} ))
-          printf '%s = %d\n' &quot;${!_result}&quot; &quot;$_result&quot; # Demonstrate the special property of ${!ref} on a nameref.
+          printf '%s = %d\n' "${!_result}" "$_result" # Demonstrate the special property of ${!ref} on a nameref.
       done
 
 }

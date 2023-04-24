@@ -22,9 +22,9 @@ common example is a script that gives the user the option of having
     chatter() {
       if [[ $verbose ]]; then
         chatter() {
-          echo &quot;$@&quot;
+          echo "$@"
         }
-        chatter &quot;$@&quot;
+        chatter "$@"
       else
         chatter() {
           :
@@ -32,9 +32,9 @@ common example is a script that gives the user the option of having
       fi
     }
 
-    echo &quot;Waiting for 10 seconds.&quot;
+    echo "Waiting for 10 seconds."
     for i in {1..10}; do
-      chatter &quot;$i&quot;
+      chatter "$i"
       sleep 1
     done
 
@@ -56,35 +56,35 @@ FIXME Add more examples!
     # various versions of -perm /+ blah blah and hacks
     find() {
       hash find || { echo 'find not found!'; exit 1; }
-      # We can be pretty sure &quot;$0&quot; should be executable.
-      if [[ $(command find &quot;$0&quot; -executable 2> /dev/null) ]]; then
+      # We can be pretty sure "$0" should be executable.
+      if [[ $(command find "$0" -executable 2> /dev/null) ]]; then
         unset -f find # We can just use the command find
-      elif [[ $(command find &quot;$0&quot; -perm /u+x 2> /dev/null) ]]; then
+      elif [[ $(command find "$0" -perm /u+x 2> /dev/null) ]]; then
         find() {
           typeset arg args
           for arg do
-            [[ $arg = -executable ]] && args+=(-perm /u+x) || args+=(&quot;$arg&quot;)
+            [[ $arg = -executable ]] && args+=(-perm /u+x) || args+=("$arg")
           done
-          command find &quot;${args[@]}&quot;
+          command find "${args[@]}"
         }
-      elif [[ $(command find &quot;$0&quot; -perm +u+x 2> /dev/null) ]]; then
+      elif [[ $(command find "$0" -perm +u+x 2> /dev/null) ]]; then
         find() {
           typeset arg args
           for arg do
-            [[ $arg = -executable ]] && args+=(-perm +u+x) || args+=(&quot;$arg&quot;)
+            [[ $arg = -executable ]] && args+=(-perm +u+x) || args+=("$arg")
           done
-          command find &quot;${args[@]}&quot;
+          command find "${args[@]}"
         }
       else # Last resort
         find() {
           typeset arg args
           for arg do
-            [[ $arg = -executable ]] && args+=(-exec test -x {} \; -print) || args+=(&quot;$arg&quot;)
+            [[ $arg = -executable ]] && args+=(-exec test -x {} \; -print) || args+=("$arg")
           done
-          command find &quot;${args[@]}&quot;
+          command find "${args[@]}"
         }
       fi
-      find &quot;$@&quot;
+      find "$@"
     }
 
 \<code\> \#!/bin/bash \# Using collapsing functions to turn debug

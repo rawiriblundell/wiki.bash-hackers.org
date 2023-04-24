@@ -41,7 +41,7 @@ formatstring may point to are given after that, here, indicated by
 
 Thus, a typical `printf`-call looks like:
 
-    printf &quot;Surname: %s\nName: %s\n&quot; &quot;$SURNAME&quot; &quot;$FIRSTNAME&quot;
+    printf "Surname: %s\nName: %s\n" "$SURNAME" "$FIRSTNAME"
 
 where `"Surname: %s\nName: %s\n"` is the format specification, and the
 two variables are passed as arguments, the `%s` in the formatstring
@@ -61,9 +61,9 @@ older than Bash 4.1.
 performing expansions into the first non-option argument of printf as
 this opens up the possibility of an easy code injection vulnerability.
 
-    $ var='-vx[$(echo hi >&2)]'; printf &quot;$var&quot; hi; declare -p x
+    $ var='-vx[$(echo hi >&2)]'; printf "$var" hi; declare -p x
     hi
-    declare -a x='([0]=&quot;hi&quot;)'
+    declare -a x='([0]="hi")'
 
 ...where the echo can of course be replaced with any arbitrary command.
 If you must, either specify a hard-coded format string or use -- to
@@ -159,7 +159,7 @@ To be more flexible in the output of numbers and strings, the `printf`
 command allows format modifiers. These are specified **between** the
 introductory `%` and the character that specifies the format:
 
-    printf &quot;%50s\n&quot; &quot;This field is 50 characters wide...&quot;
+    printf "%50s\n" "This field is 50 characters wide..."
 
 #### Field and printing modifiers
 
@@ -191,7 +191,7 @@ The precision for a floating- or double-number can be specified by using
 `<DIGITS>` is an asterisk (`*`), the precision is read from the argument
 that precedes the number to print, like (prints 4,3000000000):
 
-    printf &quot;%.*f\n&quot; 10 4,3
+    printf "%.*f\n" 10 4,3
 
 The format `.*N` to specify the N'th argument for precision does not
 work in Bash.
@@ -271,7 +271,7 @@ This small loop prints all numbers from 0 to 127 in
 <!-- -->
 
     for ((x=0; x <= 127; x++)); do
-      printf '%3d | %04o | 0x%02x\n' &quot;$x&quot; &quot;$x&quot; &quot;$x&quot;
+      printf '%3d | %04o | 0x%02x\n' "$x" "$x" "$x"
     done
 
 ### Ensure well-formatted MAC address
@@ -280,13 +280,13 @@ This code here will take a common MAC address and rewrite it into a
 well-known format (regarding leading zeros or upper/lowercase of the hex
 digits, ...):
 
-    the_mac=&quot;0:13:ce:7:7a:ad&quot;
+    the_mac="0:13:ce:7:7a:ad"
 
     # lowercase hex digits
-    the_mac=&quot;$(printf &quot;%02x:%02x:%02x:%02x:%02x:%02x&quot; 0x${the_mac//:/ 0x})&quot;
+    the_mac="$(printf "%02x:%02x:%02x:%02x:%02x:%02x" 0x${the_mac//:/ 0x})"
 
     # or the uppercase-digits variant
-    the_mac=&quot;$(printf &quot;%02X:%02X:%02X:%02X:%02X:%02X&quot; 0x${the_mac//:/ 0x})&quot;
+    the_mac="$(printf "%02X:%02X:%02X:%02X:%02X:%02X" 0x${the_mac//:/ 0x})"
 
 ### Replacement echo
 
@@ -294,16 +294,16 @@ This code was found in Solaris manpage for echo(1).
 
 Solaris version of `/usr/bin/echo` is equivalent to:
 
-    printf &quot;%b\n&quot; &quot;$*&quot;
+    printf "%b\n" "$*"
 
 Solaris `/usr/ucb/echo` is equivalent to:
 
-    if [ &quot;X$1&quot; = &quot;X-n&quot; ]
+    if [ "X$1" = "X-n" ]
     then
          shift
-         printf &quot;%s&quot; &quot;$*&quot;
+         printf "%s" "$*"
     else
-         printf &quot;%s\n&quot; &quot;$*&quot;
+         printf "%s\n" "$*"
     fi
 
 ### prargs Implementation
@@ -311,14 +311,14 @@ Solaris `/usr/ucb/echo` is equivalent to:
 Working off the replacement echo, here is a terse implementation of
 prargs:
 
-    printf '&quot;%b&quot;\n' &quot;$0&quot; &quot;$@&quot; | nl -v0 -s&quot;: &quot;
+    printf '"%b"\n' "$0" "$@" | nl -v0 -s": "
 
 ### repeating a character (for example to print a line)
 
 A small trick: Combining printf and parameter expansion to draw a line
 
     length=40
-    printf -v line '%*s' &quot;$length&quot;
+    printf -v line '%*s' "$length"
     echo ${line// /-}
 
 or:
@@ -350,7 +350,7 @@ In the following example, the two strings are concatenated by the
 intervening space so that no argument remains to fill the format.
 
 
-    $ echo &quot;Foo&quot; | awk '{ printf &quot;%s\n&quot; $1 }'
+    $ echo "Foo" | awk '{ printf "%s\n" $1 }'
     awk: (FILENAME=- FNR=1) fatal: not enough arguments to satisfy format string
         `%s
     Foo'
@@ -359,7 +359,7 @@ intervening space so that no argument remains to fill the format.
 Simply replacing the space with a comma and adding parentheses yields
 correct awk syntax.
 
-    $ echo &quot;Foo&quot; | awk '{ printf( &quot;%s\n&quot;, $1 ) }'
+    $ echo "Foo" | awk '{ printf( "%s\n", $1 ) }'
     Foo
 
 With appropriate metacharacter escaping the bash printf can be called
@@ -367,7 +367,7 @@ from inside awk (as from perl and other languages that support shell
 callout) as long as you don't care about program efficiency or
 readability.
 
-    echo &quot;Foo&quot; | awk '{ system( &quot;printf \&quot;%s\\n \&quot; \&quot;&quot; $1 &quot;\&quot;&quot;  ) }'
+    echo "Foo" | awk '{ system( "printf \"%s\\n \" \"" $1 "\""  ) }'
     Foo
 
 ## Differences from C, and portability considerations
@@ -395,7 +395,7 @@ readability.
   modifiers specified by POSIX during format string parsing.
 
 ``` c|builtins/printf.def
-#define LENMODS &quot;hjlLtz&quot;
+#define LENMODS "hjlLtz"
 ...
 /* skip possible format modifiers */
 modstart = fmt;
@@ -427,15 +427,15 @@ fmt++;
                 shift
                 nameref x=$1
                 shift
-                x=$(command printf &quot;$@&quot;)
+                x=$(command printf "$@")
                 ;;
             *)
-                command printf &quot;$@&quot;
+                command printf "$@"
         esac
     }
     builtin cut
     print $$
-    printf -v 'foo[2]' '%d\n' &quot;$(cut -d ' ' -f 1 /proc/self/stat)&quot;
+    printf -v 'foo[2]' '%d\n' "$(cut -d ' ' -f 1 /proc/self/stat)"
     typeset -p foo
     # 22461
     # typeset -a foo=([2]=22461)

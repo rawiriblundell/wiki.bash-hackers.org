@@ -71,7 +71,7 @@ and vice versa. In this example, the commands in the if stanza will be
 executed if the pattern "^root:" is **not** found in `/etc/passwd`:
 
     if ! grep '^root:' /etc/passwd; then
-      echo &quot;No root user defined... eh?&quot;
+      echo "No root user defined... eh?"
     fi
 
 Yes, this is also a pipeline (although there is no pipe!), because the
@@ -179,7 +179,7 @@ The definition is easy (one of many possibilities):
 which is usually used with the `{...; }` compound command, and thus
 looks like:
 
-    print_help() { echo &quot;Sorry, no help available&quot;; }
+    print_help() { echo "Sorry, no help available"; }
 
 As above, a function definition can have any [compound
 command](basicgrammar#compound_commands) as a body. Structures like
@@ -223,11 +223,11 @@ like this:
     mycmd()
     {
       # this $1 belongs to the function!
-      find / -iname &quot;$1&quot;
+      find / -iname "$1"
     }
 
     # this $1 belongs the script itself!
-    mycmd &quot;$1&quot; # Execute command immediately after defining function 
+    mycmd "$1" # Execute command immediately after defining function 
 
     exit 0
 
@@ -239,7 +239,7 @@ variables. Variables with the content "*() ....*".
 Something similar to the following works without "officially" declaring
 a function:
 
-    $ export testfn=&quot;() { echo test; }&quot;
+    $ export testfn="() { echo test; }"
     $ bash -c testfn
     test
     $
@@ -284,7 +284,7 @@ FIXME more...
 
 <u>A (very) simple command</u>
 
-    echo &quot;Hello world...&quot;
+    echo "Hello world..."
 
 <u>All of the following are simple commands</u>
 
@@ -292,7 +292,7 @@ FIXME more...
 
     >tmpfile
 
-    {x}<&quot;$x&quot; _=${x=<(echo moo)} <&0$(cat <&&quot;$x&quot; >&2)
+    {x}<"$x" _=${x=<(echo moo)} <&0$(cat <&"$x" >&2)
 
 ------------------------------------------------------------------------
 

@@ -85,13 +85,13 @@ There is no `$` (dollar-sign) when you reference the **name** of a
 variable! Bash is not PHP!
 
     # THIS IS WRONG!
-    $myvar=&quot;Hello world!&quot;
+    $myvar="Hello world!"
 
 A variable name preceeded with a dollar-sign always means that the
 variable gets **expanded**. In the example above, it might expand to
 nothing (because it wasn't set), effectively resulting in...
 
-    =&quot;Hello world!&quot;
+    ="Hello world!"
 
 ...which **definitely is wrong**!
 
@@ -129,7 +129,7 @@ assigned value**:
     example=Hello
 
     # CORRECT 2
-    example=&quot; Hello&quot;
+    example=" Hello"
 
 ### Expanding (using) variables
 
@@ -142,7 +142,7 @@ result isn't always the same.
 
 Let's define an example variable containing text with spaces:
 
-    example=&quot;Hello world&quot;
+    example="Hello world"
 
 | Used form    | result        | number of words |
 |--------------|---------------|-----------------|
@@ -155,10 +155,10 @@ If you use parameter expansion, you **must** use the **name** (`PATH`)
 of the referenced variables/parameters. i.e. **not** (`$PATH`):
 
     # WRONG!
-    echo &quot;The first character of PATH is ${$PATH:0:1}&quot;
+    echo "The first character of PATH is ${$PATH:0:1}"
 
     # CORRECT
-    echo &quot;The first character of PATH is ${PATH:0:1}&quot;
+    echo "The first character of PATH is ${PATH:0:1}"
 
 Note that if you are using variables in [arithmetic
 expressions](/syntax/arith_expr), then the bare **name** is allowed:
@@ -217,7 +217,7 @@ value, you **don't need** to use `$?` in a test command like this:
 grep ^root: /etc/passwd >/dev/null 2>&1
 
 if [ $? -ne 0 ]; then
-  echo &quot;root was not found - check the pub at the corner&quot;
+  echo "root was not found - check the pub at the corner"
 fi
 ```
 
@@ -225,14 +225,14 @@ This can be simplified to:
 
 ``` bash
 if ! grep ^root: /etc/passwd >/dev/null 2>&1; then
-  echo &quot;root was not found - check the pub at the corner&quot;
+  echo "root was not found - check the pub at the corner"
 fi
 ```
 
 Or, simpler yet:
 
 ``` bash
-grep ^root: /etc/passwd >/dev/null 2>&1 || echo &quot;root was not found - check the pub at the corner&quot;
+grep ^root: /etc/passwd >/dev/null 2>&1 || echo "root was not found - check the pub at the corner"
 ```
 
 If you need the specific value of `$?`, there's no other choice. But if
@@ -252,7 +252,7 @@ When you want to run a command (or a pipeline) and save (or print) the
 syntax:
 
     $(ls -l /tmp)
-    newvariable=$(printf &quot;foo&quot;)
+    newvariable=$(printf "foo")
 
 When you want to use the **return value** of a command, just use the
 command, or add ( ) to run a command or pipeline in a subshell:

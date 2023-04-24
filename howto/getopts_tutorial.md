@@ -143,14 +143,14 @@ doesn't try to parse the positional parameters, but these given words.
 This way, you are able to parse any option set you like, here for
 example from an array:
 
-    while getopts :f:h opt &quot;${MY_OWN_SET[@]}&quot;; do
+    while getopts :f:h opt "${MY_OWN_SET[@]}"; do
       ...
     done
 
 A call to `getopts` **without** these additional arguments is
 **equivalent** to explicitly calling it with `"$@"`:
 
-    getopts ... &quot;$@&quot;
+    getopts ... "$@"
 
 ### Error Reporting
 
@@ -189,13 +189,13 @@ preceding the whole option string with a colon (`:`):
 ``` bash
 #!/bin/bash
 
-while getopts &quot;:a&quot; opt; do
+while getopts ":a" opt; do
   case $opt in
     a)
-      echo &quot;-a was triggered!&quot; >&2
+      echo "-a was triggered!" >&2
       ;;
     \?)
-      echo &quot;Invalid option: -$OPTARG&quot; >&2
+      echo "Invalid option: -$OPTARG" >&2
       ;;
   esac
 done
@@ -285,17 +285,17 @@ Let's extend our example from above. Just a little bit:
 ``` bash
 #!/bin/bash
 
-while getopts &quot;:a:&quot; opt; do
+while getopts ":a:" opt; do
   case $opt in
     a)
-      echo &quot;-a was triggered, Parameter: $OPTARG&quot; >&2
+      echo "-a was triggered, Parameter: $OPTARG" >&2
       ;;
     \?)
-      echo &quot;Invalid option: -$OPTARG&quot; >&2
+      echo "Invalid option: -$OPTARG" >&2
       exit 1
       ;;
     :)
-      echo &quot;Option -$OPTARG requires an argument.&quot; >&2
+      echo "Option -$OPTARG requires an argument." >&2
       exit 1
       ;;
   esac

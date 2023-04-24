@@ -51,15 +51,15 @@ commands of the condition that succeeded.
 **Check if a specific user exists in /etc/passwd :-)**
 
     if grep ^myuser: /etc/passwd >/dev/null 2>&1; then
-      echo &quot;Yes, it seems I'm real&quot;
+      echo "Yes, it seems I'm real"
     else
-      echo &quot;Uh - am I a ghost?&quot;
+      echo "Uh - am I a ghost?"
     fi
 
 **Mount with check**
 
     if ! mount /mnt/backup >/dev/null 2>&1; then
-      echo &quot;FATAL: backup mount failed&quot; >&2
+      echo "FATAL: backup mount failed" >&2
       exit 1
     fi
 
@@ -67,7 +67,7 @@ commands of the condition that succeeded.
 
 It's perfectly valid to do:
 
-    if echo &quot;I'm testing!&quot;; [ -e /some/file ]; then
+    if echo "I'm testing!"; [ -e /some/file ]; then
       ...
     fi
 
@@ -80,8 +80,8 @@ the very last command executed in the condition-list (here: The
 A complete pipe can also be used as condition. It's very similar to the
 example above (multiple commands):
 
-    if echo &quot;Hello world!&quot; | grep -i hello >/dev/null 2>&1; then
-      echo &quot;You just said 'hello', yeah?&quot;
+    if echo "Hello world!" | grep -i hello >/dev/null 2>&1; then
+      echo "You just said 'hello', yeah?"
     fi
 
 ## Portability considerations

@@ -59,7 +59,7 @@ There are no options.
   [shift_verbose](internals/shell_options#shift_verbose)
   [shopt](commands/builtin/shopt) option is enabled. Ksh93, pdksh, posh,
   mksh, and dash, all throw useless fatal shell
-  errors.`$ dash -c 'f() { if shift; then echo &quot;$1&quot;; else echo &quot;no args&quot;; fi; }; f'
+  errors.`$ dash -c 'f() { if shift; then echo "$1"; else echo "no args"; fi; }; f'
   dash: 1: shift: can't shift that many
   ` In most shells, you can work around this problem using the
   [command](/commands/builtin/command) builtin to suppress fatal errors

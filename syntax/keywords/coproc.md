@@ -35,13 +35,13 @@ Some examples:
 # redirecting stderr in the pipe
 $ coproc { ls thisfiledoesntexist; read; } 2>&1
 [2] 23084
-$ IFS= read -ru ${COPROC[0]} x; printf '%s\n' &quot;$x&quot;
+$ IFS= read -ru ${COPROC[0]} x; printf '%s\n' "$x"
 ls: cannot access thisfiledoesntexist: No such file or directory
 ```
 
 ``` bash
 #let the output of the coprocess go to stdout
-$ { coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}'; } >&3; } 3>&1
+$ { coproc mycoproc { awk '{print "foo" $0;fflush()}'; } >&3; } 3>&1
 [2] 23092
 $ echo bar >&${mycoproc[1]}
 $ foobar
@@ -64,7 +64,7 @@ In Ksh you would do:
 ``` bash
 # ksh93 or mksh/pdksh derivatives
 ls |& # start a coprocess
-while IFS= read -rp file; do print -r -- &quot;$file&quot;; done # read its output
+while IFS= read -rp file; do print -r -- "$file"; done # read its output
 ```
 
 In bash:
@@ -73,7 +73,7 @@ In bash:
 #DOESN'T WORK
 $ coproc ls
 [1] 23232
-$ while IFS= read -ru ${COPROC[0]} line; do printf '%s\n' &quot;$line&quot;; done
+$ while IFS= read -ru ${COPROC[0]} line; do printf '%s\n' "$line"; done
 bash: read: line: invalid file descriptor specification
 [1]+  Done                    coproc COPROC ls
 ```
@@ -95,7 +95,7 @@ with `sed`:
 $ coproc sed s/^/foo/
 [1] 22981
 $ echo bar >&${COPROC[1]}
-$ read -t 3 -ru ${COPROC[0]} _; (( $? > 127 )) && echo &quot;nothing read&quot;
+$ read -t 3 -ru ${COPROC[0]} _; (( $? > 127 )) && echo "nothing read"
 nothing read
 ```
 
@@ -116,9 +116,9 @@ continuously read the output of a coprocess and `echo` the result:
 
 ``` bash
 #NOT WORKING
-$ coproc awk '{print &quot;foo&quot; $0;fflush()}'
+$ coproc awk '{print "foo" $0;fflush()}'
 [2] 23100
-$ while IFS= read -ru ${COPROC[0]} x; do printf '%s\n' &quot;$x&quot;; done &
+$ while IFS= read -ru ${COPROC[0]} x; do printf '%s\n' "$x"; done &
 [3] 23104
 bash: line 243: read: 61: invalid file descriptor: Bad file descriptor
 ```
@@ -132,10 +132,10 @@ A possible workaround:
 #WARNING: for illustration purpose ONLY
 # this is not the way to make the coprocess print its output
 # to stdout, see the redirections above.
-$ coproc awk '{print &quot;foo&quot; $0;fflush()}'
+$ coproc awk '{print "foo" $0;fflush()}'
 [2] 23109
 $ exec 3<&${COPROC[0]}
-$ while IFS= read -ru 3 x; do printf '%s\n' &quot;$x&quot;; done &
+$ while IFS= read -ru 3 x; do printf '%s\n' "$x"; done &
 [3] 23110
 $ echo bar >&${COPROC[1]}
 $ foobar
@@ -152,7 +152,7 @@ assigns FDs to a default array named `COPROC` if no `NAME` is supplied.
 Here's an example:
 
 ``` bash
-$ coproc awk '{print &quot;foo&quot; $0;fflush()}'
+$ coproc awk '{print "foo" $0;fflush()}'
 [1] 22978
 ```
 
@@ -167,7 +167,7 @@ $ echo bar >&${COPROC[1]}
 And then read its output:
 
 ``` bash
-$ IFS= read -ru ${COPROC[0]} x; printf '%s\n' &quot;$x&quot;
+$ IFS= read -ru ${COPROC[0]} x; printf '%s\n' "$x"
 foobar
 ```
 
@@ -175,7 +175,7 @@ When we don't need our command anymore, we can kill it via its pid:
 
     $ kill $COPROC_PID
     $
-    [1]+  Terminated              coproc COPROC awk '{print &quot;foo&quot; $0;fflush()}'
+    [1]+  Terminated              coproc COPROC awk '{print "foo" $0;fflush()}'
 
 ### Named Coprocess
 
@@ -184,14 +184,14 @@ when defining a function), and the resulting FDs will be assigned to the
 indexed array `NAME` we supply instead.
 
 ``` bash
-$ coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}' ;}
+$ coproc mycoproc { awk '{print "foo" $0;fflush()}' ;}
 [1] 23058
 $ echo bar >&${mycoproc[1]}
-$ IFS= read -ru ${mycoproc[0]} x; printf '%s\n' &quot;$x&quot;
+$ IFS= read -ru ${mycoproc[0]} x; printf '%s\n' "$x"
 foobar
 $ kill $mycoproc_PID
 $
-[1]+  Terminated              coproc mycoproc { awk '{print &quot;foo&quot; $0;fflush()}'; }
+[1]+  Terminated              coproc mycoproc { awk '{print "foo" $0;fflush()}'; }
 ```
 
 ### Redirecting the output of a script to a file and to the screen

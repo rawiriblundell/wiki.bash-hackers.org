@@ -67,9 +67,9 @@ With mkdir it seems, we have our two steps in one simple operation. A
 
 ``` bash
 if mkdir /var/lock/mylock; then
-  echo &quot;Locking succeeded&quot; >&2
+  echo "Locking succeeded" >&2
 else
-  echo &quot;Lock failed - exit&quot; >&2
+  echo "Lock failed - exit" >&2
   exit 1
 fi
 ```
@@ -103,12 +103,12 @@ Need to write a code example here.
 
 ``` bash
 
-if ( set -o noclobber; echo &quot;locked&quot; > &quot;$lockfile&quot;) 2> /dev/null; then
-  trap 'rm -f &quot;$lockfile&quot;; exit $?' INT TERM EXIT
-  echo &quot;Locking succeeded&quot; >&2
-  rm -f &quot;$lockfile&quot;
+if ( set -o noclobber; echo "locked" > "$lockfile") 2> /dev/null; then
+  trap 'rm -f "$lockfile"; exit $?' INT TERM EXIT
+  echo "Locking succeeded" >&2
+  rm -f "$lockfile"
 else
-  echo &quot;Lock failed - exit&quot; >&2
+  echo "Lock failed - exit" >&2
   exit 1
 fi
 
@@ -136,59 +136,59 @@ the locking process is shown:
 #!/bin/bash
 
 # lock dirs/files
-LOCKDIR=&quot;/tmp/statsgen-lock&quot;
-PIDFILE=&quot;${LOCKDIR}/PID&quot;
+LOCKDIR="/tmp/statsgen-lock"
+PIDFILE="${LOCKDIR}/PID"
 
 # exit codes and text
-ENO_SUCCESS=0; ETXT[0]=&quot;ENO_SUCCESS&quot;
-ENO_GENERAL=1; ETXT[1]=&quot;ENO_GENERAL&quot;
-ENO_LOCKFAIL=2; ETXT[2]=&quot;ENO_LOCKFAIL&quot;
-ENO_RECVSIG=3; ETXT[3]=&quot;ENO_RECVSIG&quot;
+ENO_SUCCESS=0; ETXT[0]="ENO_SUCCESS"
+ENO_GENERAL=1; ETXT[1]="ENO_GENERAL"
+ENO_LOCKFAIL=2; ETXT[2]="ENO_LOCKFAIL"
+ENO_RECVSIG=3; ETXT[3]="ENO_RECVSIG"
 
 ###
 ### start locking attempt
 ###
 
-trap 'ECODE=$?; echo &quot;[statsgen] Exit: ${ETXT[ECODE]}($ECODE)&quot; >&2' 0
-echo -n &quot;[statsgen] Locking: &quot; >&2
+trap 'ECODE=$?; echo "[statsgen] Exit: ${ETXT[ECODE]}($ECODE)" >&2' 0
+echo -n "[statsgen] Locking: " >&2
 
-if mkdir &quot;${LOCKDIR}&quot; &>/dev/null; then
+if mkdir "${LOCKDIR}" &>/dev/null; then
 
     # lock succeeded, install signal handlers before storing the PID just in case 
     # storing the PID fails
     trap 'ECODE=$?;
-          echo &quot;[statsgen] Removing lock. Exit: ${ETXT[ECODE]}($ECODE)&quot; >&2
-          rm -rf &quot;${LOCKDIR}&quot;' 0
-    echo &quot;$$&quot; >&quot;${PIDFILE}&quot; 
+          echo "[statsgen] Removing lock. Exit: ${ETXT[ECODE]}($ECODE)" >&2
+          rm -rf "${LOCKDIR}"' 0
+    echo "$$" >"${PIDFILE}" 
     # the following handler will exit the script upon receiving these signals
-    # the trap on &quot;0&quot; (EXIT) from above will be triggered by this trap's &quot;exit&quot; command!
-    trap 'echo &quot;[statsgen] Killed by a signal.&quot; >&2
+    # the trap on "0" (EXIT) from above will be triggered by this trap's "exit" command!
+    trap 'echo "[statsgen] Killed by a signal." >&2
           exit ${ENO_RECVSIG}' 1 2 3 15
-    echo &quot;success, installed signal handlers&quot;
+    echo "success, installed signal handlers"
 
 else
 
     # lock failed, check if the other PID is alive
-    OTHERPID=&quot;$(cat &quot;${PIDFILE}&quot;)&quot;
+    OTHERPID="$(cat "${PIDFILE}")"
 
     # if cat isn't able to read the file, another instance is probably
     # about to remove the lock -- exit, we're *still* locked
     #  Thanks to Grzegorz Wierzowiecki for pointing out this race condition on
     #  http://wiki.grzegorz.wierzowiecki.pl/code:mutex-in-bash
     if [ $? != 0 ]; then
-      echo &quot;lock failed, PID ${OTHERPID} is active&quot; >&2
+      echo "lock failed, PID ${OTHERPID} is active" >&2
       exit ${ENO_LOCKFAIL}
     fi
 
     if ! kill -0 $OTHERPID &>/dev/null; then
         # lock is stale, remove it and restart
-        echo &quot;removing stale lock of nonexistant PID ${OTHERPID}&quot; >&2
-        rm -rf &quot;${LOCKDIR}&quot;
-        echo &quot;[statsgen] restarting myself&quot; >&2
-        exec &quot;$0&quot; &quot;$@&quot;
+        echo "removing stale lock of nonexistant PID ${OTHERPID}" >&2
+        rm -rf "${LOCKDIR}"
+        echo "[statsgen] restarting myself" >&2
+        exec "$0" "$@"
     else
         # lock is valid and OTHERPID is active - exit, we're locked!
-        echo &quot;lock failed, PID ${OTHERPID} is active&quot; >&2
+        echo "lock failed, PID ${OTHERPID} is active" >&2
         exit ${ENO_LOCKFAIL}
     fi
 

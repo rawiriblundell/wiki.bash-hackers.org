@@ -71,7 +71,7 @@ file `/dev/fd/63`.
 Consider the following:
 
 ``` bash
-diff <(ls &quot;$first_directory&quot;) <(ls &quot;$second_directory&quot;)
+diff <(ls "$first_directory") <(ls "$second_directory")
 ```
 
 This will compare the contents of each directory. In this command, each
@@ -102,7 +102,7 @@ find /etc -print0 | while IFS= read -rd '' _; do
     ((counter++))
 done
 
-echo &quot;$counter files&quot; # prints &quot;0 files&quot;
+echo "$counter files" # prints "0 files"
 ```
 
 Due to the pipe, the `while read; do ... done` part is executed in a
@@ -121,7 +121,7 @@ while IFS= read -rN1 _; do
     ((counter++))
 done < <(find /etc -printf ' ')
 
-echo &quot;$counter files&quot;
+echo "$counter files"
 ```
 
 This is the normal input file redirection `< FILE`, just that the `FILE`
@@ -143,7 +143,7 @@ resemble "passable" objects. This results in converting the output of
 
 ``` bash
 f() {
-    cat &quot;$1&quot; >&quot;$x&quot;
+    cat "$1" >"$x"
 }
 
 x=>(tr '[:lower:]' '[:upper:]') f <(echo 'hi there')
@@ -167,7 +167,7 @@ See the above section on [\#scope](#scope)
   other arithmetic contexts. Ksh and Zsh do not. (Possible Bug)
 
 ``` bash
-# print &quot;moo&quot;
+# print "moo"
 dev=fd=1 _[1<(echo moo >&2)]=
 # fork bomb
 ${dev[${dev='dev[1>(${dev[dev]})]'}]}

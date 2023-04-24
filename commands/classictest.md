@@ -15,9 +15,9 @@ here by using the command in an if-statement:
     # test if /etc/passwd exists
 
     if test -e /etc/passwd; then
-      echo &quot;Alright man...&quot; >&2
+      echo "Alright man..." >&2
     else
-      echo &quot;Yuck! Where is it??&quot; >&2
+      echo "Yuck! Where is it??" >&2
       exit 1
     fi
 
@@ -37,9 +37,9 @@ Let's rewrite the above example to use it:
     # test if /etc/passwd exists
 
     if [ -e /etc/passwd ]; then
-      echo &quot;Alright man...&quot; >&2
+      echo "Alright man..." >&2
     else
-      echo &quot;Yuck! Where is it??&quot; >&2
+      echo "Yuck! Where is it??" >&2
       exit 1
     fi
 
@@ -53,12 +53,12 @@ some of your music files:
 
     #!/bin/bash
 
-    mymusic=&quot;/data/music/Van Halen/Van Halen - Right Now.mp3&quot;
+    mymusic="/data/music/Van Halen/Van Halen - Right Now.mp3"
 
-    if [ -e &quot;$mymusic&quot; ]; then
-      echo &quot;Let's rock&quot; >&2
+    if [ -e "$mymusic" ]; then
+      echo "Let's rock" >&2
     else
-      echo &quot;No music today, sorry...&quot; >&2
+      echo "No music today, sorry..." >&2
       exit 1
     fi
 
@@ -75,7 +75,7 @@ filenames =\> **too many arguments!**
 
 <u>**Another common mistake**</u> is to provide too **few** arguments:
 
-    [ &quot;$mystring&quot;!=&quot;test&quot; ]
+    [ "$mystring"!="test" ]
 
 This provides exactly **one** test-argument to the command. With one
 parameter, it defaults to the `-n` test: It tests if a provided string
@@ -201,8 +201,8 @@ These rules may seem complex, but it's not so bad in practice. Knowing
 them might help you to explain some of the "unexplicable" behaviours you
 might encounter:
 
-    var=&quot;&quot;
-    if [ -n $var ]; then echo &quot;var is not empty&quot;; fi
+    var=""
+    if [ -n $var ]; then echo "var is not empty"; fi
 
 This code prints "var is not empty", even though `-n something` is
 supposed to be true if `$var` is not empty - **why?**
@@ -228,8 +228,8 @@ them with the shell `&&` and `||` **list control operators**.
 
 See this:
 
-    if [ -n &quot;$var&quot;] && [ -e &quot;$var&quot;]; then
-       echo &quot;\$var is not null and a file named $var exists!&quot;
+    if [ -n "$var"] && [ -e "$var"]; then
+       echo "\$var is not null and a file named $var exists!"
     fi
 
 The return status of AND and OR lists is the exit status of the last
@@ -245,13 +245,13 @@ command executed in the list
 The logical operators AND and OR for the test-command itself are `-a`
 and `-o`, thus:
 
-    if [ -n &quot;$var&quot; -a -e &quot;$var&quot; ] ; then
-       echo &quot;\$var is not null and a file named $var exists&quot;
+    if [ -n "$var" -a -e "$var" ] ; then
+       echo "\$var is not null and a file named $var exists"
     fi
 
 They are **not** `&&` or `||`:
 
-    $ if [ -n &quot;/tmp&quot; && -d &quot;/tmp&quot;]; then echo true; fi # DOES NOT WORK
+    $ if [ -n "/tmp" && -d "/tmp"]; then echo true; fi # DOES NOT WORK
     bash: [: missing `]'
 
 You might find the error message confusing, `[` does not find the
@@ -280,12 +280,12 @@ Let's say, we want to check the following two things (AND):
 
 Let's see:
 
-    if [ -z &quot;false&quot; -a -z &quot;$(echo I am executed >&2)&quot; ] ; then ... 
+    if [ -z "false" -a -z "$(echo I am executed >&2)" ] ; then ... 
 
 =\> The arguments are all expanded **before** `test` runs, thus the
 echo-command **is executed**.
 
-    if [ -z &quot;false&quot; ] && [ -z &quot;$(echo I am not executed >&2)&quot; ]; then... 
+    if [ -z "false" ] && [ -z "$(echo I am not executed >&2)" ]; then... 
 
 =\> Due to the nature of the `&&` list operator, the second test-command
 runs only if the first test-command returns true, our echo-command **is
@@ -305,10 +305,10 @@ the list way (`&&` and `||`):
 That means, **you can get different results**, depending on the manner
 of use:
 
-    $ if [ &quot;true&quot; ] || [ -e /does/not/exist ] && [ -e /does/not/exist ]; then echo true; else echo false; fi
+    $ if [ "true" ] || [ -e /does/not/exist ] && [ -e /does/not/exist ]; then echo true; else echo false; fi
     false
 
-    $ if [ &quot;true&quot; -o -e /does/not/exist -a -e /does/not/exist ]; then  echo true; else echo false;fi
+    $ if [ "true" -o -e /does/not/exist -a -e /does/not/exist ]; then  echo true; else echo false;fi
     true
 
 As a result you have to think about it a little or add precedence
@@ -317,18 +317,18 @@ control (parenthesis).
 For `&&` and `||` parenthesis means (shell-ly) grouping the commands,
 and since `( ... )` introduces a subshell we will use `{ ... }` instead:
 
-    $ if  [ &quot;true&quot; ] || { [ -e /does/not/exist ]  && [ -e /does/not/exist ] ;} ; then echo true; else echo false; fi
+    $ if  [ "true" ] || { [ -e /does/not/exist ]  && [ -e /does/not/exist ] ;} ; then echo true; else echo false; fi
     true
 
 For the test command, the precedence parenthesis are, as well, `( )`,
 but you need to escape or quote them, so that the shell doesn't try to
 interpret them:
 
-    $ if [ \( &quot;true&quot; -o -e /does/not/exist \) -a -e /does/not/exist ]; then  echo true; else echo false; fi
+    $ if [ \( "true" -o -e /does/not/exist \) -a -e /does/not/exist ]; then  echo true; else echo false; fi
     false
 
     # equivalent, but less readable IMHO:
-    $ if [ '(' &quot;true&quot; -o -e /does/not/exist ')' -a -e /does/not/exist ]; then  echo true; else echo false; fi
+    $ if [ '(' "true" -o -e /does/not/exist ')' -a -e /does/not/exist ]; then  echo true; else echo false; fi
     false
 
 ## NOT
@@ -339,12 +339,12 @@ keyword `!` or passing `!` as an argument to `test`.
 Here `!` negates the exit status of the command `test` which is 0
 (true), and the else part is executed:
 
-    if ! [ -d '/tmp' ]; then echo &quot;/tmp doesn't exists&quot;; else echo &quot;/tmp exists&quot;; fi
+    if ! [ -d '/tmp' ]; then echo "/tmp doesn't exists"; else echo "/tmp exists"; fi
 
 Here the `test` command itself exits with status 1 (false) and the else
 is also executed:
 
-    if  [ ! -d '/tmp' ]; then echo &quot;/tmp doesn't exists&quot;; else echo &quot;/tmp exists&quot;; fi
+    if  [ ! -d '/tmp' ]; then echo "/tmp doesn't exists"; else echo "/tmp exists"; fi
 
 Unlike for AND and OR, both methods for NOT have an identical behaviour,
 at least for doing one single test.
@@ -368,7 +368,7 @@ which you may have already had yourself**:
     Hi All,
 
     I've got a script that I'm trying to set up, but it keeps telling me  
-    that  &quot;[-d command not found&quot;.  Can someone please explain what is  
+    that  "[-d command not found".  Can someone please explain what is  
     wrong with this?:
 
 
@@ -381,9 +381,9 @@ which you may have already had yourself**:
     {
         if  [-d $i]
         then
-            echo &quot;$i is a directory! Yay!&quot;
+            echo "$i is a directory! Yay!"
         else
-            echo &quot;$i is not a directory!&quot;
+            echo "$i is not a directory!"
         fi
     }
     done
@@ -410,7 +410,7 @@ test command:
     > (QUOTED TEXT WAS REMOVED)
 
     The shell is first and foremost a way to launch other commands.  The
-    syntax is simply &quot;if&quot; followed by a command-list, (e.g. if /some/foo;
+    syntax is simply "if" followed by a command-list, (e.g. if /some/foo;
     or even if cmd1; cmd2; cmd3; then).  Plus the '( ... )' syntax is
     already taken by the use of starting a subshell.
 
@@ -468,28 +468,28 @@ test command:
     the shell before passing them to the (possibly external) command and
     disappear entirely.  This is why test arguments should always be quoted.
 
-      if test -d &quot;$file&quot;
-      if [ -d &quot;$file&quot; ]
+      if test -d "$file"
+      if [ -d "$file" ]
 
     Actually today test is defined that if only one argument is given as
-    in this case &quot;test FOO&quot; then then test returns true if the argument is
-    non-zero in text length.  Because &quot;-d&quot; is non-zero length &quot;test -d&quot; is
+    in this case "test FOO" then then test returns true if the argument is
+    non-zero in text length.  Because "-d" is non-zero length "test -d" is
     true.  The number of arguments affects how test parses the args.  This
     avoids a case where depending upon the data may look like a test
     operator.
 
-      DATA=&quot;something&quot;
-      if test &quot;$DATA&quot;         # true, $DATA is non-zero length
+      DATA="something"
+      if test "$DATA"         # true, $DATA is non-zero length
 
-      DATA=&quot;&quot;
-      if test &quot;$DATA&quot;         # false, $DATA is zero length
+      DATA=""
+      if test "$DATA"         # false, $DATA is zero length
 
     But the problem case is how should test handle an argument that looks
     like an operator?  This used to generate errors but now because it is
     only one argument is defined to be the same as test -n $DATA.
 
-      DATA=&quot;-d&quot;
-      if test &quot;$DATA&quot;         # true, $DATA is non-zero length
+      DATA="-d"
+      if test "$DATA"         # true, $DATA is non-zero length
       if test -d              # true, same as previous case.
 
     Because test and [ are possibly external commands all of the parts of
@@ -500,7 +500,7 @@ test command:
 
     Incorrect use generating unlikely to be intended results:
 
-      if test 5 > 2    # true, &quot;5&quot; is non-zero length, creates file named &quot;2&quot;
+      if test 5 > 2    # true, "5" is non-zero length, creates file named "2"
 
     Intended use:
 
@@ -556,7 +556,7 @@ entries of a directory, if an entry is a directory (`[ -d "$fn" ]`),
 print its name:
 
     for fn in *; do
-      [ -d &quot;$fn&quot; ] && echo &quot;$fn&quot;
+      [ -d "$fn" ] && echo "$fn"
     done
 
 ## See also

@@ -83,8 +83,8 @@ positional) parameter may be validly referenced using a subscript,
 because in most contexts, referring to the zeroth element of an array is
 synonymous with referring to the array name without a subscript.
 
-    # &quot;x&quot; is an ordinary non-array parameter.
-    $ x=hi; printf '%s ' &quot;$x&quot; &quot;${x[0]}&quot;; echo &quot;${_[0]}&quot;
+    # "x" is an ordinary non-array parameter.
+    $ x=hi; printf '%s ' "$x" "${x[0]}"; echo "${_[0]}"
     hi hi hi
 
 The only exceptions to this rule are in a few cases where the array
@@ -270,7 +270,7 @@ Yes, 12. Fine. You can take this number to walk through the array. Just
     ((n_elements=${#sentence[@]}, max_index=n_elements - 1))
 
     for ((i = 0; i <= max_index; i++)); do
-      echo &quot;Element $i: '${sentence[i]}'&quot;
+      echo "Element $i: '${sentence[i]}'"
     done
 
 You always have to remember that, it seems newbies have problems
@@ -291,7 +291,7 @@ think you could just do
     $ echo ${#sentence[@]}
     1
     # omit calculating max_index as above, and iterate as one-liner
-    $ for ((i = 0; i < ${#sentence[@]}; i++)); do  echo &quot;Element $i: '${sentence[i]}'&quot; ; done
+    $ for ((i = 0; i < ${#sentence[@]}; i++)); do  echo "Element $i: '${sentence[i]}'" ; done
     Element 0: 'NAMES'
 
 Obviously that's wrong. What about
@@ -302,16 +302,16 @@ Obviously that's wrong. What about
 
     $ echo ${#sentence[*]}
     1
-    $ for ((i = 0; i < ${#sentence[@]}; i++)); do  echo &quot;Element $i: '${sentence[i]}'&quot; ; done
+    $ for ((i = 0; i < ${#sentence[@]}; i++)); do  echo "Element $i: '${sentence[i]}'" ; done
     Element 0: 'Peter'
 
 So what's the **right** way? The (slightly ugly) answer is, reuse the
 enumeration syntax:
 
-    $ unset sentence ; declare -a sentence=(&quot;${NAMES[@]}&quot;)
+    $ unset sentence ; declare -a sentence=("${NAMES[@]}")
     $ echo ${#sentence[@]}
     4
-    $ for ((i = 0; i < ${#sentence[@]}; i++)); do  echo &quot;Element $i: '${sentence[i]}'&quot; ; done
+    $ for ((i = 0; i < ${#sentence[@]}; i++)); do  echo "Element $i: '${sentence[i]}'" ; done
     Element 0: 'Peter'
     Element 1: 'Anna'
     Element 2: 'Greg'
@@ -335,7 +335,7 @@ starting at zero) just is replaced with an arbitrary string:
 in memory like they were declared, it could look like this:
 
     # output from 'set' command
-    sentence=([End]=&quot;in what you send&quot; [Middle]=&quot;you accept, and conservative &quot; [Begin]=&quot;Be liberal in what &quot; [&quot;Very end&quot;]=&quot;...&quot;)
+    sentence=([End]="in what you send" [Middle]="you accept, and conservative " [Begin]="Be liberal in what " ["Very end"]="...")
 
 This effectively means, you can get the data back with
 `"${sentence[@]}"`, of course (just like with numerical indexing), but
@@ -343,10 +343,10 @@ you can't rely on a specific order. If you want to store ordered data,
 or re-order data, go with numerical indexes. For associative arrays, you
 usually query known index values:
 
-    for element in Begin Middle End &quot;Very end&quot;; do
-        printf &quot;%s&quot; &quot;${sentence[$element]}&quot;
+    for element in Begin Middle End "Very end"; do
+        printf "%s" "${sentence[$element]}"
     done
-    printf &quot;\n&quot;
+    printf "\n"
 
 **A nice code example:** Checking for duplicate files using an
 associative array indexed with the SHA sum of the files:
@@ -356,9 +356,9 @@ associative array indexed with the SHA sum of the files:
     unset flist; declare -A flist;
     while read -r sum fname; do 
         if [[ ${flist[$sum]} ]]; then
-            printf 'rm -- &quot;%s&quot; # Same as >%s<\n' &quot;$fname&quot; &quot;${flist[$sum]}&quot; 
+            printf 'rm -- "%s" # Same as >%s<\n' "$fname" "${flist[$sum]}" 
         else
-            flist[$sum]=&quot;$fname&quot;
+            flist[$sum]="$fname"
         fi
     done <  <(find . -type f -exec sha256sum {} +)  >rmdups
 
@@ -370,8 +370,8 @@ arrays, then values are considered as arithmetic for both compound and
 ordinary assignment, and the += operator is modified in the same way as
 for ordinary integer variables.
 
-     ~ $ ( declare -ia 'a=(2+4 [2]=2+2 [a[2]]=&quot;a[2]&quot;)' 'a+=(42 [a[4]]+=3)'; declare -p a )
-    declare -ai a='([0]=&quot;6&quot; [2]=&quot;4&quot; [4]=&quot;7&quot; [5]=&quot;42&quot;)'
+     ~ $ ( declare -ia 'a=(2+4 [2]=2+2 [a[2]]="a[2]")' 'a+=(42 [a[4]]+=3)'; declare -p a )
+    declare -ai a='([0]="6" [2]="4" [4]="7" [5]="42")'
 
 `a[0]` is assigned to the result of `2+4`. `a[2]` gets the result of
 `2+2`. The last index in the first assignment is the result of `a[2]`,
@@ -428,29 +428,29 @@ without eval using the aforementioned special compound assignment
 expansion.
 
     isSubset() {
-        local -a 'xkeys=(&quot;${!'&quot;$1&quot;'[@]}&quot;)' 'ykeys=(&quot;${!'&quot;$2&quot;'[@]}&quot;)'
-        set -- &quot;${@/%/[key]}&quot;
+        local -a 'xkeys=("${!'"$1"'[@]}")' 'ykeys=("${!'"$2"'[@]}")'
+        set -- "${@/%/[key]}"
 
         (( ${#xkeys[@]} <= ${#ykeys[@]} )) || return 1
 
         local key
-        for key in &quot;${xkeys[@]}&quot;; do
+        for key in "${xkeys[@]}"; do
             [[ ${!2+_} && ${!1} == ${!2} ]] || return 1
         done
     }
 
     main() {
-        # &quot;a&quot; is a subset of &quot;b&quot;
+        # "a" is a subset of "b"
         local -a 'a=({0..5})' 'b=({0..10})'
         isSubset a b
         echo $? # true
 
-        # &quot;a&quot; contains a key not in &quot;b&quot;
+        # "a" contains a key not in "b"
         local -a 'a=([5]=5 {6..11})' 'b=({0..10})'
         isSubset a b
         echo $? # false
 
-        # &quot;a&quot; contains an element whose value != the corresponding member of &quot;b&quot;
+        # "a" contains an element whose value != the corresponding member of "b"
         local -a 'a=([5]=5 6 8 9 10)' 'b=({0..10})'
         isSubset a b
         echo $? # false
@@ -465,7 +465,7 @@ dynamically calls a function whose name is resolved from the array.
 
     callFuncs() {
         # Set up indirect references as positional parameters to minimize local name collisions.
-        set -- &quot;${@:1:3}&quot; ${2+'a[&quot;$1&quot;]' &quot;$1&quot;'[&quot;$2&quot;]'}
+        set -- "${@:1:3}" ${2+'a["$1"]' "$1"'["$2"]'}
 
         # The only way to test for set but null parameters is unfortunately to test each individually.
         local x
@@ -477,23 +477,23 @@ dynamically calls a function whose name is resolved from the array.
             [foo]='([r]=f [s]=g [t]=h)'
             [bar]='([u]=i [v]=j [w]=k)'
             [baz]='([x]=l [y]=m [z]=n)'
-            ) ${4+${a[&quot;$1&quot;]+&quot;${1}=${!3}&quot;}} # For example, if &quot;$1&quot; is &quot;bar&quot; then define a new array: bar=([u]=i [v]=j [w]=k)
+            ) ${4+${a["$1"]+"${1}=${!3}"}} # For example, if "$1" is "bar" then define a new array: bar=([u]=i [v]=j [w]=k)
 
-        ${4+${a[&quot;$1&quot;]+&quot;${!4-:}&quot;}} # Now just lookup the new array. for inputs: &quot;bar&quot; &quot;v&quot;, the function named &quot;j&quot; will be called, which prints &quot;j&quot; to stdout.
+        ${4+${a["$1"]+"${!4-:}"}} # Now just lookup the new array. for inputs: "bar" "v", the function named "j" will be called, which prints "j" to stdout.
     }
 
     main() {
         # Define functions named {f..n} which just print their own names.
-        local fun='() { echo &quot;$FUNCNAME&quot;; }' x
+        local fun='() { echo "$FUNCNAME"; }' x
 
         for x in {f..n}; do
-            eval &quot;${x}${fun}&quot;
+            eval "${x}${fun}"
         done
 
-        callFuncs &quot;$@&quot;
+        callFuncs "$@"
     }
 
-    main &quot;$@&quot;
+    main "$@"
 
 ## Bugs and Portability Considerations
 
@@ -537,7 +537,7 @@ dynamically calls a function whose name is resolved from the array.
   ` $ ksh -c 'function f { typeset -a a; a+=(foo bar baz); a+=([3]=blah [0]=bork [1]=blarg [2]=zooj); typeset -p a; }; f' # ksh93 forces appending to the array, disregarding subscripts
   typeset -a a=(foo bar baz '[3]=blah' '[0]=bork' '[1]=blarg' '[2]=zooj')
    $ bash -c 'function f { typeset -a a; a+=(foo bar baz); a+=(blah [0]=bork blarg zooj); typeset -p a; }; f' # Bash applies += to every individual subscript.
-  declare -a a='([0]=&quot;foobork&quot; [1]=&quot;barblarg&quot; [2]=&quot;bazzooj&quot; [3]=&quot;blah&quot;)'
+  declare -a a='([0]="foobork" [1]="barblarg" [2]="bazzooj" [3]="blah")'
    $ mksh -c 'function f { typeset -a a; a+=(foo bar baz); a+=(blah [0]=bork blarg zooj); typeset -p a; }; f' # Mksh does like Bash, but clobbers previous values rather than appending.
   set -A a
   typeset a[0]=bork
@@ -570,7 +570,7 @@ dynamically calls a function whose name is resolved from the array.
   typeset -a arr=(foo bar bork baz)
    $ ksh -c 'set -sA arr -- foo bar bork baz; typeset -p arr' # Native sorting!
   typeset -a arr=(bar baz bork foo)
-   $ mksh -c 'set -sA arr -- foo &quot;[3]=bar&quot; &quot;[2]=baz&quot; &quot;[7]=bork&quot;; typeset -p arr' # Probably a bug. I think the maintainer is aware of it.
+   $ mksh -c 'set -sA arr -- foo "[3]=bar" "[2]=baz" "[7]=bork"; typeset -p arr' # Probably a bug. I think the maintainer is aware of it.
   set -A arr
   typeset arr[2]=baz
   typeset arr[3]=bar
@@ -610,11 +610,11 @@ dynamically calls a function whose name is resolved from the array.
   the right of the `=` sign. This is fixed in 4.3, so that each
   subscript assignment statement is expanded following the same rules as
   an ordinary assignment. This also works correctly in ksh93.
-  `$ touch '[1]=a'; bash -c 'a=([1]=*); echo &quot;${a[@]}&quot;'
+  `$ touch '[1]=a'; bash -c 'a=([1]=*); echo "${a[@]}"'
   [1]=a
   ` mksh has a similar but even worse problem in that the entire
   subscript is considered a glob.
-  `$ touch 1=a; mksh -c 'a=([123]=*); print -r -- &quot;${a[@]}&quot;'
+  `$ touch 1=a; mksh -c 'a=([123]=*); print -r -- "${a[@]}"'
   1=a
   `
 - **Fixed in 4.3** In addition to the above globbing issue, assignments
@@ -635,13 +635,13 @@ dynamically calls a function whose name is resolved from the array.
   `let`, `eval`, other declaration commands, and maybe more.
 - **Fixed in 4.3** Indirection combined with another modifier expands
   arrays to a single word.
-  `$ a=({a..c}) b=a[@]; printf '<%s> ' &quot;${!b}&quot;; echo; printf '<%s> ' &quot;${!b/%/foo}&quot;; echo
+  `$ a=({a..c}) b=a[@]; printf '<%s> ' "${!b}"; echo; printf '<%s> ' "${!b/%/foo}"; echo
   <a> <b> <c>
   <a b cfoo>
   `
 - **Fixed in 4.3** Process substitutions are evaluated within array
   indexes. Zsh and ksh don't do this in any arithmetic context.
-  `# print &quot;moo&quot;
+  `# print "moo"
   dev=fd=1 _[1<(echo moo >&2)]=
 
   # Fork bomb

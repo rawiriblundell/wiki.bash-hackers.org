@@ -30,15 +30,15 @@ for arithmetic). For this reason, **the [arithmetic compound
 command](/syntax/ccmd/arithmetic_eval) should generally be preferred
 over `let`**.
 
-    $ let 'b = a' &quot;(a += 3) + $((a = 1)), b++&quot;
-    $ echo &quot;$a - $b - $?&quot;
+    $ let 'b = a' "(a += 3) + $((a = 1)), b++"
+    $ echo "$a - $b - $?"
     4 - 2 - 0
 
 Is equivalent to the [arithmetic evaluation compound
 command](/syntax/ccmd/arithmetic_eval):
 
     $ (( b = a, (a += 3) + $((a = 1)), b++ ))
-    $ echo &quot;$a - $b - $?&quot;
+    $ echo "$a - $b - $?"
     4 - 2 - 0
 
 \<WRAP info\> Remember that inside arithmetic evaluation contexts, all
@@ -57,12 +57,12 @@ assignments to regular builtins are always local even if the variable is
 modified by the builtin.
 
      ~ $ ( y=1+1 let x=y; declare -p x y )
-    declare -- x=&quot;2&quot;
+    declare -- x="2"
     bash: declare: y: not found
 
      ~ $ ( y=1+1 let x=y++; declare -p x y )
-    declare -- x=&quot;2&quot;
-    declare -- y=&quot;3&quot;
+    declare -- x="2"
+    declare -- y="3"
 
 This can be useful in certain situations where a temporary variable is
 needed.
@@ -70,7 +70,7 @@ needed.
 ## Portability considerations
 
 - the `let` command is not specified by POSIX(r). The portable
-  alternative is: `[ &quot;$(( <EXPRESSION> ))&quot; -ne 0 ]`. To make
+  alternative is: `[ "$(( <EXPRESSION> ))" -ne 0 ]`. To make
   portable scripts simpler and cleaner, `let` can be defined as:
   `# POSIX
   let() {

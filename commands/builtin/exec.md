@@ -38,12 +38,12 @@ shell without executing any program.
 
 ``` bash
 myprog=/bin/ls
-echo &quot;This is the wrapper script, it will exec $myprog&quot;
+echo "This is the wrapper script, it will exec $myprog"
 
 # do some vodoo here, probably change the arguments etc.
 # well, stuff a wrapper is there for
 
-exec &quot;$myprog&quot; &quot;$@&quot;
+exec "$myprog" "$@"
 ```
 
 ### Open a file as input for the script

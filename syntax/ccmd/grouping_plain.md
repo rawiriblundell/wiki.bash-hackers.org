@@ -22,10 +22,10 @@ status (exit code)](/scripting/basics#exit_codes) of the list.
 The input and output **filedescriptors** are cumulative:
 
     {
-      echo &quot;PASSWD follows&quot;
+      echo "PASSWD follows"
       cat /etc/passwd
       echo
-      echo &quot;GROUPS follows&quot;
+      echo "GROUPS follows"
       cat /etc/group
     } >output.txt
 
@@ -34,10 +34,10 @@ definition](/syntax/basicgrammar#shell_function_definitions), though not
 the only compound command that's valid there:
 
     print_help() {
-      echo &quot;Options:&quot;
-      echo &quot;-h           This help text&quot;
-      echo &quot;-f FILE      Use config file FILE&quot;
-      echo &quot;-u USER      Run as user USER&quot;
+      echo "Options:"
+      echo "-h           This help text"
+      echo "-f FILE      Use config file FILE"
+      echo "-u USER      Run as user USER"
     }
 
 ## Examples
@@ -46,10 +46,10 @@ the only compound command that's valid there:
 
       try_catch() {
           { # Try-block:
-              eval &quot;$@&quot;
+              eval "$@"
           } ||
           { # Catch-block:
-              echo &quot;An error occurred&quot;
+              echo "An error occurred"
               return -1
           }
       }

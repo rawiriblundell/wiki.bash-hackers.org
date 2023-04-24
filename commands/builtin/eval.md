@@ -27,7 +27,7 @@ the `eval` command below it.
     ... arbitrary bash code here ...
     EOF
 
-    eval &quot;$myCode&quot;
+    eval "$myCode"
 
 ### Expansion side-effects
 
@@ -41,16 +41,16 @@ This code defines a set of identical functions using the supplied names.
 `eval` is the only way to achieve this effect.
 
     main() {
-        local fun='() { echo &quot;$FUNCNAME&quot;; }' x
+        local fun='() { echo "$FUNCNAME"; }' x
 
         for x in {f..n}; do
-            eval &quot;${x}${fun}&quot;
+            eval "${x}${fun}"
         done
 
-        &quot;$@&quot;
+        "$@"
     }
 
-    main &quot;$@&quot;
+    main "$@"
 
 ### Using printf %q
 
@@ -58,8 +58,8 @@ The `printf %q` format string performs shell escaping on its arguments.
 This makes `printf %q` the "anti-eval" - with each pass of a string
 through printf requiring another `eval` to peel off the escaping again.
 
-    while (( ++n <= 5 )) || ! evalBall=&quot;eval $evalBall&quot;; do
-        printf -v evalBall 'eval %q' &quot;printf $n;${evalBall-printf '0\n'}&quot;
+    while (( ++n <= 5 )) || ! evalBall="eval $evalBall"; do
+        printf -v evalBall 'eval %q' "printf $n;${evalBall-printf '0\n'}"
     done
     $evalBall
 
@@ -78,19 +78,19 @@ application](http://en.wikipedia.org/wiki/Partial_application) using
 `eval`.
 
     function partial {
-        eval shift 2 \; function &quot;$1&quot; \{ &quot;$2&quot; &quot;$(printf '%q ' &quot;${@:3}&quot;)&quot; '&quot;$@&quot;; }'
+        eval shift 2 \; function "$1" \{ "$2" "$(printf '%q ' "${@:3}")" '"$@"; }'
     }
 
     function repeat {
         [[ $1 == +([0-9]) ]] || return
         typeset n
         while ((n++ < $1)); do
-            &quot;${@:2}&quot;
+            "${@:2}"
         done
     }
 
     partial print3 repeat 3 printf '%s ' # Create a new function named print3
-    print3 hi                            # Print &quot;hi&quot; 3 times
+    print3 hi                            # Print "hi" 3 times
     echo
 
 This is very easy to do incorrectly and not usually considered idiomatic
@@ -120,11 +120,11 @@ controlled carefully by the caller is a good way to use it.
 
 <!-- -->
 
-     $ ( eval a=( a b\\ c d ); printf '<%s> ' &quot;${a[@]}&quot;; echo ) # Only works in Bash.
+     $ ( eval a=( a b\\ c d ); printf '<%s> ' "${a[@]}"; echo ) # Only works in Bash.
     <a> <b c> <d>
-     $ ( x=a; eval &quot;$x&quot;=( a b\\ c d ); printf '<%s> ' &quot;${a[@]}&quot;; echo ) # Argument is no longer in the form of a valid assignment, therefore ordinary parsing rules apply.
+     $ ( x=a; eval "$x"=( a b\\ c d ); printf '<%s> ' "${a[@]}"; echo ) # Argument is no longer in the form of a valid assignment, therefore ordinary parsing rules apply.
     -bash: syntax error near unexpected token `('
-     $ ( x=a; eval &quot;$x&quot;'=( a b\ c d )'; printf '<%s> ' &quot;${a[@]}&quot;; echo ) # Proper quoting then gives us the expected results.
+     $ ( x=a; eval "$x"'=( a b\ c d )'; printf '<%s> ' "${a[@]}"; echo ) # Proper quoting then gives us the expected results.
     <a> <b c> <d>
 
 We don't know why Bash does this. Since parentheses are metacharacters,
@@ -138,7 +138,7 @@ is still subject to all expansions including
 [word-splitting](syntax/expansion/wordsplit) and [pathname
 expansion](syntax/expansion/glob).
 
-     $ ( set -x; touch 'x+=(\[[123]\]=*)' 'x+=([3]=yo)'; eval x+=(*); echo &quot;${x[@]}&quot; )
+     $ ( set -x; touch 'x+=(\[[123]\]=*)' 'x+=([3]=yo)'; eval x+=(*); echo "${x[@]}" )
     + touch 'x+=(\[[123]\]=*)' 'x+=([3]=yo)'
     + eval 'x+=(\[[123]\]=*)' 'x+=([3]=yo)'
     ++ x+=(\[[123]\]=*)

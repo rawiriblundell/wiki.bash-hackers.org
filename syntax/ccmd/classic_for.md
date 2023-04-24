@@ -71,8 +71,8 @@ With some array syntax (see [arrays](/syntax/arrays)) you can easily
 mass-expanding all elements):
 
 ``` bash
-for element in &quot;${myarray[@]}&quot;; do
-  echo &quot;Element: $element&quot;
+for element in "${myarray[@]}"; do
+  echo "Element: $element"
 done
 ```
 
@@ -80,8 +80,8 @@ Another way is to mass-expand all used indexes and access the array by
 index:
 
 ``` bash
-for index in &quot;${!myarray[@]}&quot;; do
-  echo &quot;Element[$index]: ${myarray[$index]}&quot;
+for index in "${!myarray[@]}"; do
+  echo "Element[$index]: ${myarray[$index]}"
 done
 ```
 
@@ -95,7 +95,7 @@ arguments to a command will be interpreted and parsed, and finally used:
 argtest() {
   n=1
   for arg; do
-    echo &quot;Argument $((n++)): \&quot;$arg\&quot;&quot;
+    echo "Argument $((n++)): \"$arg\""
   done
 }
 ```
@@ -108,16 +108,16 @@ filenames in a directory:
 
 ``` bash
 for fn in *; do
-  if [ -h &quot;$fn&quot; ]; then
-    echo -n &quot;Symlink: &quot;
-  elif [ -d &quot;$fn&quot; ]; then
-    echo -n &quot;Dir: &quot;
-  elif [ -f &quot;$fn&quot; ]; then
-    echo -n &quot;File: &quot;
+  if [ -h "$fn" ]; then
+    echo -n "Symlink: "
+  elif [ -d "$fn" ]; then
+    echo -n "Dir: "
+  elif [ -f "$fn" ]; then
+    echo -n "File: "
   else
-    echo -n &quot;Unknown: &quot;
+    echo -n "Unknown: "
   fi
-  echo &quot;$fn&quot;
+  echo "$fn"
 done
 ```
 

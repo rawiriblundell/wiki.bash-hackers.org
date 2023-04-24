@@ -18,8 +18,8 @@ function printSum {
     typeset -A args
     typeset name
     for name in first second; do
-        [[ -t 0 ]] && printf 'Enter %s positive integer: ' &quot;$name&quot; >&2
-        read -r ${BASH_VERSION+-e} &quot;args[$name]&quot;
+        [[ -t 0 ]] && printf 'Enter %s positive integer: ' "$name" >&2
+        read -r ${BASH_VERSION+-e} "args[$name]"
         [[ ${args[$name]} == +([[:digit:]]) ]] || return 1 # Validation is extremely important whenever user input is used in arithmetic.
     done
     printf 'The sum is %d.' $((${args[first]} + ${args[second]}))
@@ -49,7 +49,7 @@ x=1
 
 echo $((x))       # Good.
 echo $(($x))      # Ok. Avoid expansions within arithmetic. Use variables directly.
-echo $((&quot;$x&quot;))    # Error. There is no quote-removal in arithmetic contexts. It expands to $((&quot;1&quot;)), which is an invalid arithmetic expression.
+echo $(("$x"))    # Error. There is no quote-removal in arithmetic contexts. It expands to $(("1")), which is an invalid arithmetic expression.
 echo $((x[0]))    # Good.
 echo $((${x[0]})) # Ok. Nested expansion again.
 echo $((${x[$((${x[!$x]}-$x))]})) # Same as above but more ridiculous.
