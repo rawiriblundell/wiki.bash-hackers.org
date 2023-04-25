@@ -190,6 +190,8 @@ sed -i -e 's/\\<\/note\\>/ |\n| --- |/' ./**/*.md
 # Let's correct any internal links so that they point to their new .md homes
 mapfile -t mdlist < <(grep -o "\[.*\]\(.*\)" start.md | grep -v http | cut -d '(' -f2 | cut -d ')' -f1 | grep '/' | sort | uniq)
 
-for target in "${mdlist[@]}"; do
-    sed -i -e "s|${target}|${target}.md|g" start.md
-done
+while read -r; do
+    for target in "${mdlist[@]}"; do
+        sed -i -e "s|${target}|${target}.md|g" "${REPLY}"
+    done
+done < <(find . -name "*.md")

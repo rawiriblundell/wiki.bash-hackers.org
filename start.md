@@ -25,7 +25,7 @@ use the discussions)
 **Stranger!** [Feel free to
 register](http://wiki.bash-hackers.org/start&do=register) and comment or
 edit the contents. There is a [Bash Hackers Wiki needs love
-page](/meta/need_love) that lists some things to do. The registration is
+page](need_love.md) that lists some things to do. The registration is
 only there to prevent SPAM.
 
 ## Scripting and general information
