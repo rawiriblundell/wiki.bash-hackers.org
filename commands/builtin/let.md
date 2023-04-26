@@ -107,4 +107,3 @@ needed.
 - Internal: [arithmetic expansion](/syntax/expansion/arith.md)
 - Internal: [arithmetic expressions](/syntax/arith_expr.md)
 
-[^1]: ...
