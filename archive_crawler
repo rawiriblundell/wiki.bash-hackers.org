@@ -9,7 +9,7 @@
 
 # Ensure we have our required commands, otherwise fail early
 cmd_err=0
-for cmd in grep sed tr sort uniq mkdir curl jq pandoc; do
+for cmd in grep sed tr sort uniq mkdir curl jq pandoc git; do
     if ! command -v "${cmd}" >/dev/null 2>&1; then
         printf -- '%s\n' "This script requires ${cmd} but it was not found in PATH." >&2
         (( cmd_err++ ))
@@ -18,7 +18,7 @@ done
 (( cmd_err > 0 )) && exit 1
 
 # Where are we playing on the local file system?
-basedir="${HOME}/git/wiki.bash-hackers.org"
+basedir="$(git rev-parse --show-toplevel)"
 
 # Prepend a string e.g.
 # cmd: prepend foo bar
