@@ -7,13 +7,13 @@
 ## Description
 
 The conditional expression is meant as the modern variant of the
-[classic test command](/commands/classictest). Since it is **not** a
+[classic test command](/commands/classictest.md). Since it is **not** a
 normal command, Bash doesn't need to apply the normal commandline
 parsing rules like recognizing `&&` as [command
-list](/syntax/basicgrammar#lists) operator.
+list](/syntax/basicgrammar.md#lists) operator.
 
 The testing features basically are the same (see the lists for [classic
-test command](/commands/classictest)), with some additions and
+test command](/commands/classictest.md)), with some additions and
 extensions.
 
 <table>
@@ -77,17 +77,17 @@ match</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">See the <a
-href="/commands/classictest#file_tests">classic test operators</a></td>
+href="/commands/classictest.md#file_tests">classic test operators</a></td>
 <td style="text-align: left;">Do <strong>not</strong> use the
 <code>test</code>-typical operators <code>-a</code> and <code>-o</code>
 for AND and OR.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">See also <a
-href="/syntax/arith_expr#comparisons">arithmetic comparisons</a></td>
+href="/syntax/arith_expr#comparisons.md">arithmetic comparisons</a></td>
 <td style="text-align: left;">Using
 <code>(( &lt;EXPRESSION&gt; ))</code>, the <a
-href="/syntax/ccmd/arithmetic_eval">arithmetic expression compound
+href="/syntax/ccmd/arithmetic_eval.md">arithmetic expression compound
 command</a></td>
 </tr>
 </tbody>
@@ -95,7 +95,7 @@ command</a></td>
 
 When the `==` and `!=` operators are used, the string to the right of
 the operator is considered a pattern and matched according to the rules
-of [Pattern Matching](/syntax/pattern). If the shell option
+of [Pattern Matching](/syntax/pattern.md). If the shell option
 `nocasematch` is enabled, the match is performed without regard to the
 case of alphabetic characters.
 
@@ -119,8 +119,8 @@ operators `&&` and `||`.
 
 ### Word splitting
 
-[Word splitting](/syntax/expansion/wordsplit) and [pathname
-expansion](/syntax/expansion/globs) are not performed in the expression
+[Word splitting](/syntax/expansion/wordsplit.md) and [pathname
+expansion](/syntax/expansion/globs.md) are not performed in the expression
 you give. That means, a variable containing spaces can be used without
 quoting:
 
@@ -132,7 +132,7 @@ quoting:
       echo "Sorry, no match :-("
     fi
 
-Compare that to the [classic test command](/commands/classictest), where
+Compare that to the [classic test command](/commands/classictest.md), where
 word splitting is done (because it's a normal command, not something
 special):
 
@@ -182,7 +182,7 @@ regular expressions.
 
 The interpretation of quoted regular expression special characters can
 be influenced by setting the `compat31` and `compat32` shell options
-(`compat*` in general). See [shell_options](/internals/shell_options).
+(`compat*` in general). See [shell_options](/internals/shell_options.md).
 
 #### The special BASH_REMATCH array variable
 
@@ -193,7 +193,7 @@ The element with index 0 is the portion of the string matching the
 entire regular expression. The element with index n is the portion of
 the string matching the nth parenthesized subexpression.
 
-See [BASH_REMATCH](syntax/shellvars#bash_rematch).
+See [BASH_REMATCH](/syntax/shellvars.md#bash_rematch).
 
 Example:
 
@@ -257,8 +257,8 @@ both contains whitespace and is not the result of an expansion.
 
 ## See also
 
-- Internal: [pattern matching language](/syntax/pattern)
-- Internal: [the classic test command](/commands/classictest)
-- Internal: [the if-clause](/syntax/ccmd/if_clause)
+- Internal: [pattern matching language](/syntax/pattern.md)
+- Internal: [the classic test command](/commands/classictest.md)
+- Internal: [the if-clause](/syntax/ccmd/if_clause.md)
 - [What is the difference between test, \[ and \[\[
   ?](http://mywiki.wooledge.org/BashFAQ/031) - BashFAQ 31 - Greg's wiki.
