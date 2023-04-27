@@ -145,7 +145,7 @@ attributes.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/export">export</a></td>
+href="/commands/builtin/export.md">export</a></td>
 <td>Display or set shell variables, also giving them the export
 attribute.</td>
 <td style="text-align: center;"><code>typeset -x</code></td>
@@ -153,21 +153,21 @@ attribute.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/eval">eval</a></td>
+href="/commands/builtin/eval.md">eval</a></td>
 <td>Evaluate arguments as shell code.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/local">local</a></td>
+href="/commands/builtin/local.md">local</a></td>
 <td>Declare variables as having function local scope.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/read.mdonly">readonly</a></td>
+href="/commands/builtin/readonly.md">readonly</a></td>
 <td>Mark variables or functions as read-only.</td>
 <td style="text-align: center;"><code>typeset -r</code></td>
 <td style="text-align: center;">special builtin</td>
@@ -181,7 +181,7 @@ href="/commands/builtin/unset.md">unset</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/shift">shift</a></td>
+href="/commands/builtin/shift.md">shift</a></td>
 <td>Shift positional parameters</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
@@ -205,7 +205,7 @@ href="/syntax/keywords/coproc.md">coproc</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/echo">echo</a></td>
+href="/commands/builtin/echo.md">echo</a></td>
 <td>Create output from arguments.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
@@ -277,28 +277,28 @@ Commands that operate on data and/or affect control flow.</th>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/true">colon</a></td>
+href="/commands/builtin/true.md">colon</a></td>
 <td>"true" null command.</td>
 <td style="text-align: center;">true</td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/source">dot</a></td>
+href="/commands/builtin/source.md">dot</a></td>
 <td>Source external files.</td>
 <td style="text-align: center;">source</td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/false">false</a></td>
+href="/commands/builtin/false.md">false</a></td>
 <td>Fail at doing nothing.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/continueBreak">continue / break</a></td>
+href="/commands/builtin/continueBreak.md">continue / break</a></td>
 <td>continue with or break out of loops.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
@@ -312,7 +312,7 @@ href="/commands/builtin/let.md">let</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/return">return</a></td>
+href="/commands/builtin/return.md">return</a></td>
 <td>Return from a function with a specified exit status.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
@@ -341,35 +341,35 @@ href="/commands/builtin/exec.md">exec</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/exit">exit</a></td>
+href="/commands/builtin/exit.md">exit</a></td>
 <td>Exit the shell.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/kill">kill</a></td>
+href="/commands/builtin/kill.md">kill</a></td>
 <td>Send a signal to specified process(es)</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/trap">trap</a></td>
+href="/commands/builtin/trap.md">trap</a></td>
 <td>Set signal handlers or output the current handlers.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a
-href="/commands/builtin/times">times</a></td>
+href="/commands/builtin/times.md">times</a></td>
 <td>Display process times.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">special builtin</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a
-href="/commands/builtin/wait">wait</a></td>
+href="/commands/builtin/wait.md">wait</a></td>
 <td>Wait for background jobs and asynchronous lists.</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">builtin</td>
