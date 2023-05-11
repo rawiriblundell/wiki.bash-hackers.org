@@ -3,13 +3,15 @@
 | :bulb: See [start.md](start.md) to get straight to business |
 | --- |
 
-Update: The web server behind wiki.bash-hackers.org is still running, for now, so we can use an entry in our `hosts` file (`/etc/hosts` on *nix, `c:\Windows\System32\Drivers\etc\hosts` on Windows) that reads:
+Update:
+
+The web server behind wiki.bash-hackers.org is still running, for now, so we can use an entry in our `hosts` file (`/etc/hosts` on *nix, `c:\Windows\System32\Drivers\etc\hosts` on Windows) that reads:
 
 ```bash
 83.243.40.67 wiki.bash-hackers.org
 ```
 
-There is also a pastebin.bash-hackers.org at the same site.
+There is also a pastebin.bash-hackers.org at the same IP address.
 
 In addition, it looks like the owner is [trying to sort it out](https://www.reddit.com/r/bash/comments/12klulf/bashhackersorg_is_now_a_parking_domain/jj6xx1s/)!  Stay tuned!
 
