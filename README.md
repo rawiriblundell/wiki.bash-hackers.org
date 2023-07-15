@@ -1,5 +1,12 @@
 # wiki.bash-hackers.org
 
+Update 2023/07/15:
+
+Check out the following forked resources, which takes the next step and presents this information extraction as GH pages:
+
+* https://flokoe.github.io/bash-hackers-wiki/
+* https://github.com/flokoe/bash-hackers-wiki
+
 | :bulb: See [start.md](start.md) to get straight to business |
 | --- |
 
