@@ -6,6 +6,7 @@ Check out the following forked resources, which takes the next step and presents
 
 * https://flokoe.github.io/bash-hackers-wiki/
 * https://github.com/flokoe/bash-hackers-wiki
+* https://bash-hackers.gabe565.com/
 
 | :bulb: See [start.md](start.md) to get straight to business |
 | --- |
